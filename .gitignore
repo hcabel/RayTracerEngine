@@ -1,0 +1,5 @@
+rt
+libftprintf.a
+*.o
+objects
+libft/objects
