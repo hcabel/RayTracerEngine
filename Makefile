@@ -6,79 +6,90 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/23 23:12:35 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/24 23:19:06 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DEBUG				=	yes
 
+NAME				=	rt
+LIB_NAME			=	ftprintf SDL2
+
+OBJECT_FOLDER		=	objects
+SOURCES_FOLDER		=	srcs
+INCLUDES_FOLDER		=	include
+
+SRCS				=	main.c		\
+						hook.c		\
+						viewport.c	\
+						free.c		\
+						exit.c		\
+
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
-	COLOR			=	\033[31m
 else
 	FLAGS			=	-Wall -Wextra -Werror
-	COLOR			=	\033[32m
 endif
 
-NAME				=	rt
+NL					=	$
 
-NAME_FOLDER_OBJECT 	= 	objects
+HEADER				=	$(shell find $(INCLUDES_FOLDER) -type f | grep "\.h$(NL)")									\
+						$(foreach libname, $(LIB_NAME), $(shell find $(libname)/include -type f | grep "\.h$(NL)"))
 
-PATH_SOURCES		=	./srcs/
-PATH_INCLUDES		=	./includes/
-PATH_OBJECT			=	$(NAME_FOLDER_OBJECT)/
+INC_PATH			=	$(shell find . -type d | grep "/include")
 
-LIST_INCLUDES		=	rt.h	\
-						types.h
+PATH_SOURCES		=	$(shell find $(SOURCES_FOLDER) -type d )
 
-LIST_BASIC			=	main.c
+SOURCES				=	$(addprefix $(PATH_SOURCES), $(LIST_BASIC))		\
+						$(addprefix $(PATH_PLAYER), $(LIST_PLAYER))
 
-SOURCES				=	$(addprefix $(PATH_SOURCES), $(LIST_BASIC))
-OBJECTS				=	$(addprefix $(PATH_OBJECT), $(LIST_BASIC:.c=.o))
+OBJECTS				=	$(addprefix $(OBJECT_FOLDER)/, $(SRCS:.c=.o))
 
-INCLUDES			=	$(PATH_INCLUDES) ./SDL2/include/ ./libft/includes/
-LIB					=	-L ./SDL2/build -lSDL2 ./libft/libftprintf.a
+LIBS				=	$(foreach lib, $(LIB_NAME), -L $(lib) -l$(lib))
 
-.PHONY:		re clean fclean all relibft refclean libft
-.SILENT:	re fclean clean all relibft refclean libft	\
-				$(NAME) $(OBJECTS) $(NAME_FOLDER_OBJECT)
+vpath %.c $(foreach dir, $(PATH_SOURCES), $(dir):)
 
-all: libft $(NAME)
+.PHONY:		re clean fclean all relib refclean lib
+.SILENT:	re fclean clean all relib refclean lib	\
+				$(NAME) $(OBJECTS) $(OBJECT_FOLDER)
 
-libft:
-	make -C libft/
+all: lib $(NAME)
+	echo "[Binary Updated]\n"
 
-$(NAME): $(NAME_FOLDER_OBJECT) $(OBJECTS)
+lib:
+	$(foreach lib, $(LIB_NAME), make -C $(lib);)
+
+$(NAME): $(OBJECT_FOLDER) $(OBJECTS)
 	echo "[Create] Binary"
-	gcc -o $(NAME) $(OBJECTS) $(LIB)
+	gcc -o $(NAME) $(OBJECTS) $(LIBS)
 
-$(PATH_OBJECT)%.o: $(PATH_SOURCES)%.c
+$(OBJECT_FOLDER)/%.o: %.c $(HEADER) Makefile
 	echo "	CC	$<"
-	gcc -o $@ $(FLAGS) $(addprefix -I, $(INCLUDES)) -c $<
+	gcc -o $@ $(FLAGS) -c $< $(addprefix -I, $(INC_PATH))
 
-$(NAME_FOLDER_OBJECT):
+$(OBJECT_FOLDER):
 	echo "[Create] Object folder"
-	mkdir -p $(NAME_FOLDER_OBJECT)
+	mkdir -p $(OBJECT_FOLDER)
 
 clean:
 	make -C libft/ clean
 	echo "[Remove] Object folder"
-	rm -rf $(NAME_FOLDER_OBJECT)
+	rm -rf $(OBJECT_FOLDER)
 
 fclean:
 	make -C libft/ fclean
 	echo "[Remove] Binary"
 	rm -f $(NAME)
 	echo "[Remove] Object folder"
-	rm -rf $(NAME_FOLDER_OBJECT)
+	rm -rf $(OBJECT_FOLDER)
 
-re: relibft refclean $(NAME)
+re: relib refclean $(NAME)
 
 refclean:
 	echo "[Remove] Binary"
 	rm -f $(NAME)
 	echo "[Remove] Object folder"
-	rm -rf $(NAME_FOLDER_OBJECT)
+	rm -rf $(OBJECT_FOLDER)
 
-relibft:
-	make -C libft/ re
+relib:
+	make -C ftprintf/ re

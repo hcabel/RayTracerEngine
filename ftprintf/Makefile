@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 18:27:31 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/24 11:37:53 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/24 17:27:23 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ NAME				=	libftprintf.a
 NAME_FOLDER_OBJECT 	= 	objects
 
 PATH_SOURCES		=	srcs/
-PATH_INCLUDE		=	includes/
+PATH_INCLUDE		=	include/
 
 PATH_OBJECT			=	$(NAME_FOLDER_OBJECT)/
 
