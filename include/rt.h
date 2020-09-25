@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/24 23:06:25 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/25 11:49:23 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,26 @@
 # define SDL_ERROR 3
 # define PARSING_ERROR 4
 
+# define UPDATE_VIEWPORT new_viewport_frame_render
+
+/*
+********************************************************************************
+**	frame file
+********************************************************************************
+*/
+
+/*
+**	loop.c
+*/
+int		loop(t_info *info);
+
+/*
+**	draw_call.c
+*/
+void	draw_calls_clear_list(t_info *info);
+void	draw_calls_add(t_info *info, void (*new)(t_info *info));
+void	draw_calls_execution(t_info *info);
+
 /*
 ********************************************************************************
 **	player file
@@ -49,7 +69,7 @@
 /*
 **	hook.c
 */
-void	hook_event(t_bool *quit, t_bool *update);
+void	hook_event(t_bool *quit, t_info *info);
 
 /*
 ********************************************************************************

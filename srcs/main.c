@@ -6,26 +6,11 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:14 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/24 23:07:36 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/25 11:53:39 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static int	loop(t_info *info)
-{
-	t_bool	quit;
-	t_bool	update;
-
-	quit.bool = 0;
-	while (quit.bool == 0)
-	{
-		update.bool = 0;
-		hook_event(&quit, &update);
-		new_viewport_frame_render(info);
-	}
-	return (GOOD);
-}
 
 static int	init_sdl(t_info *info)
 {

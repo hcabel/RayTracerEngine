@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/24 23:19:06 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/25 11:51:05 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRCS				=	main.c		\
 						viewport.c	\
 						free.c		\
 						exit.c		\
+						loop.c		\
+						draw_call.c	\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

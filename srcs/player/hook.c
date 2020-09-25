@@ -6,13 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 15:19:18 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/24 23:06:41 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/25 11:50:02 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	hook_event(t_bool *quit, t_bool *update)
+void	hook_event(t_bool *quit, t_info *info)
 {
 	SDL_Event	event;
 
@@ -23,6 +23,6 @@ void	hook_event(t_bool *quit, t_bool *update)
 	{
 		if (event.key.keysym.sym == SDLK_ESCAPE)
 			quit->bool = 1;
-		update->bool = 1;
+		draw_calls_add(info, UPDATE_VIEWPORT);
 	}
 }

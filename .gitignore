@@ -3,3 +3,4 @@ libftprintf.a
 *.o
 objects
 libft/objects
+.vscode
