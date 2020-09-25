@@ -1,0 +1,15 @@
+[Object:sphere]
+	location: 10,0,0
+	rotation: 0, 0
+	color: 255, 255,255
+	scale: 5
+[object:sphere]
+	location: -10,0,0
+	rotation: 0, 0
+	color: 0xffffff
+[light:Point]
+	location: 0,0,0
+	intensity:0.5
+[light:Point]
+	location: 0,0,0
+

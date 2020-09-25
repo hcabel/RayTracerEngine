@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:12:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 11:33:04 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/25 12:46:26 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	new_viewport_frame_render(t_info *info)
 {
 	int	i;
 
-	ft_printf("Update Viewport\n");
+	ft_printf("[DrawCall] Viewport\n");
 	SDL_RenderClear(info->renderer);
 	SDL_SetRenderDrawColor(info->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	i = 0;

@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/25 11:51:05 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/25 13:29:21 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,8 @@ SRCS				=	main.c		\
 						exit.c		\
 						loop.c		\
 						draw_call.c	\
+						vector.c	\
+						vector2d.c	\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
@@ -47,7 +49,7 @@ SOURCES				=	$(addprefix $(PATH_SOURCES), $(LIST_BASIC))		\
 
 OBJECTS				=	$(addprefix $(OBJECT_FOLDER)/, $(SRCS:.c=.o))
 
-LIBS				=	$(foreach lib, $(LIB_NAME), -L $(lib) -l$(lib))
+LIBS				=	$(foreach lib, $(LIB_NAME), -L $(lib) -l$(lib)) -lm
 
 vpath %.c $(foreach dir, $(PATH_SOURCES), $(dir):)
 
