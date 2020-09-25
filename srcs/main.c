@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:14 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 11:53:39 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/25 12:16:45 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	init_sdl(t_info *info)
 		return (SDL_ERROR);
 	if (!(info->renderer = SDL_CreateRenderer(info->window, 0, 0)))
 		return (SDL_ERROR);
+	info->update_function_list[0] = UPDATE_VIEWPORT;
 	return(GOOD);
 }
 
