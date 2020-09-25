@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/25 15:07:20 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/25 19:35:26 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS				=	main.c			\
 						init.c			\
 						init_scene.c	\
 						vector_utils.c	\
+						get_infos.c		\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

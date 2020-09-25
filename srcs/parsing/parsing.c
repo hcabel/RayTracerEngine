@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/23 22:46:14 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 16:29:02 by hcabel           ###   ########.fr       */
+/*   Created: 2020/09/25 14:38:32 by hcabel            #+#    #+#             */
+/*   Updated: 2020/09/25 19:56:07 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 
-int			main(int argc, char **argv)
+static int	parse_map(t_scene *scene, int fd)
 {
-	t_info	info;
-	int		code_error;
+	int	code_error;
+	if ((code_error = parse_component_amount(scene, fd)))
+		return (code_error);
+	return (GOOD);
+}
 
-	if ((code_error = init(&info, argv[1])) != GOOD)
-		return (program_exit(&info, code_error));
-	if ((code_error = loop(&info)) != GOOD)
-		return (program_exit(&info, code_error));
-	return (program_exit(&info, GOOD));
+int			parsing(t_scene *scene, char *path)
+{
+	int	fd;
+
+	initcam(&scene->cam);
+	fd = open(path, O_RDONLY);
+	if (fd != -1)
+		return (parse_map(scene, fd));
+	return (GOOD);
 }

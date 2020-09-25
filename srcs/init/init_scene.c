@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_scene.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/23 22:46:14 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 16:29:02 by hcabel           ###   ########.fr       */
+/*   Created: 2020/09/25 14:44:16 by hcabel            #+#    #+#             */
+/*   Updated: 2020/09/25 15:32:41 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int			main(int argc, char **argv)
+int		initcam(t_cam *cam)
 {
-	t_info	info;
-	int		code_error;
+	cam->location = newvector(0, 0, 0);
+	cam->rotation = newvector2d(0, 0);
+}
 
-	if ((code_error = init(&info, argv[1])) != GOOD)
-		return (program_exit(&info, code_error));
-	if ((code_error = loop(&info)) != GOOD)
-		return (program_exit(&info, code_error));
-	return (program_exit(&info, GOOD));
+int		initlight(t_light *light)
+{
+	light->location = newvector(0, 0, 0);
+	light->rotation = newvector2d(0, 0);
+	light->intensity = 1;
+}
+
+int		initobject(t_object *obj)
+{
+	obj->location = newvector(0, 0, 0);
+	obj->rotation = newvector2d(0, 0);
+	obj->scale = newvector(1, 1, 1);
+	//obj->sdffunction = sdf_shere;
 }
