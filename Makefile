@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/25 13:29:21 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/25 15:07:20 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,15 +19,19 @@ OBJECT_FOLDER		=	objects
 SOURCES_FOLDER		=	srcs
 INCLUDES_FOLDER		=	include
 
-SRCS				=	main.c		\
-						hook.c		\
-						viewport.c	\
-						free.c		\
-						exit.c		\
-						loop.c		\
-						draw_call.c	\
-						vector.c	\
-						vector2d.c	\
+SRCS				=	main.c			\
+						hook.c			\
+						viewport.c		\
+						free.c			\
+						exit.c			\
+						loop.c			\
+						draw_call.c		\
+						vector.c		\
+						vector2d.c		\
+						parsing.c		\
+						init.c			\
+						init_scene.c	\
+						vector_utils.c	\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 13:17:59 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 13:28:55 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/25 15:09:50 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct	s_vector
 
 /*
 ********************************************************************************
-**	math file
+**	math Directory
 ********************************************************************************
 */
 
@@ -52,6 +52,10 @@ t_vector2d	vector2dnormalize(t_vector2d a);
 t_vector2d	vector2dsubtract(t_vector2d a, t_vector2d b);
 float		vector2dlength(t_vector2d a);
 
-
+/*
+**	vector_utils.c
+*/
+t_vector	newvector(float x, float y, float z);
+t_vector2d	newvector2d(float x, float y);
 
 #endif
