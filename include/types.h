@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 16:30:19 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/27 11:47:32 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct			s_object
 	t_vector			location;
 	t_vector2d			rotation;
 	t_vector			scale;
+	t_vector			color;
 }						t_object;
 
 typedef struct			s_light
@@ -46,7 +47,7 @@ typedef struct			s_cam
 typedef struct			s_scene
 {
 	t_object			*shapes;
-	t_light				*light;
+	t_light				*lights;
 	t_cam				cam;
 	unsigned int		shapes_amount;
 	unsigned int		light_amount;
@@ -61,7 +62,13 @@ struct					s_info
 	void				(*update_function_list[UPGRADE_FUNCTION_AMOUNT])
 							(t_info *info);
 	t_scene				scene;
-	char				*error_info;
 };
+
+typedef struct			s_parsing
+{
+	unsigned int	line_amount;
+	unsigned int	object_index;
+	unsigned int	light_index;
+}						t_parsing;
 
 #endif

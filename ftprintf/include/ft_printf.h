@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 13:23:19 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/24 13:31:03 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/27 10:29:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,6 @@ char			*convert_to_char(void *arg, t_flags flags, t_newvalues *nv);
 */
 int				add_to_str(char *add, char **str_addr, int current, int end);
 int				fill(int size, char c, char **str_addr, int current);
-int				ft_ubaselen(unsigned long long nbr, int base);
-char			*ft_utoa_base(unsigned long long nbr, int base, char c);
-
-/*
-**	ft_ftoa.c
-*/
-char			*ft_ftoa(long double n, int precis);
 
 /*
 **	colour.c

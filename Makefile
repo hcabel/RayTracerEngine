@@ -6,11 +6,11 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/25 19:35:26 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/27 18:26:15 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DEBUG				=	yes
+DEBUG				=	no
 
 NAME				=	rt
 LIB_NAME			=	ftprintf SDL2
@@ -19,25 +19,31 @@ OBJECT_FOLDER		=	objects
 SOURCES_FOLDER		=	srcs
 INCLUDES_FOLDER		=	include
 
-SRCS				=	main.c			\
-						hook.c			\
-						viewport.c		\
-						free.c			\
-						exit.c			\
-						loop.c			\
-						draw_call.c		\
-						vector.c		\
-						vector2d.c		\
-						parsing.c		\
-						init.c			\
-						init_scene.c	\
-						vector_utils.c	\
-						get_infos.c		\
+# find srcs -type f | rev | cut -d '/' -f1 | rev | sort -d
+SRCS				=	main.c						\
+						hook.c						\
+						viewport.c					\
+						free.c						\
+						exit.c						\
+						loop.c						\
+						draw_call.c					\
+						vector.c					\
+						vector2d.c					\
+						parsing.c					\
+						init.c						\
+						init_components.c			\
+						vector_utils.c				\
+						parse_components.c			\
+						create_lists.c				\
+						parse_primary_infos.c		\
+						parse_objects_parameters.c	\
+						parse_parameter_values.c	\
+						parse_lights_parameters.c	\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
 else
-	FLAGS			=	-Wall -Wextra -Werror
+	FLAGS			=	-Wall -Wextra -Werror -g
 endif
 
 NL					=	$
@@ -48,9 +54,6 @@ HEADER				=	$(shell find $(INCLUDES_FOLDER) -type f | grep "\.h$(NL)")									\
 INC_PATH			=	$(shell find . -type d | grep "/include")
 
 PATH_SOURCES		=	$(shell find $(SOURCES_FOLDER) -type d )
-
-SOURCES				=	$(addprefix $(PATH_SOURCES), $(LIST_BASIC))		\
-						$(addprefix $(PATH_PLAYER), $(LIST_PLAYER))
 
 OBJECTS				=	$(addprefix $(OBJECT_FOLDER)/, $(SRCS:.c=.o))
 

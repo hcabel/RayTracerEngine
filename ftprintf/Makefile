@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 18:27:31 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/24 17:27:23 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/27 10:03:43 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,8 @@ LIST_STR			=	ft_strlen.c		\
 						ft_strjoin.c	\
 						ft_strtrim.c	\
 						ft_strsplit.c	\
-						ft_strndup.c
+						ft_strndup.c	\
+						ft_strtolower.c	\
 
 LIST_LST			=	ft_lstnew.c		\
 						ft_lstdelone.c	\

@@ -1,0 +1,28 @@
+[object:sphere]
+	location: {-12, -0, -12}
+	rotation: {0, 0}
+	color: {255, 255,255}
+	scale: {5}
+[object:sphere]
+	location: {-10,           -0, 2654654654621654}
+	rotation: {49654, -00000000000000000000000000000000000000000000000000}
+	color: 0x3239a1
+[object:sphere]
+	location: {-1, -110, -1}
+	color: 0xqwerqweeeeeeeeeefffffFFFFFFFFFFFF
+	scale: {1, 10, 1}
+[object:sphere]
+[object:sphere]
+	location: {-12, -0, -12}
+	rotation: {-415, 				-40}
+	color: {255, 255, 255}
+	scale: {5}
+[light:point]
+	location: {-10,         -2654654654621654,-10}
+	intensity: 2654654654621654
+[light:qweqwe]
+[light:point]
+	location: {-10,-0,-20}
+	intensity: -0
+[camera:basic]
+	location: {0,0,0}

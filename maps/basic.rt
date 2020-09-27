@@ -1,0 +1,10 @@
+[Object:sphere]
+	location: {10, 0, 0}
+	Color: {25, 50, 150}
+	Scale: {10}
+[Object:sphere]
+	Location: {-10, 0, 0}
+	Color: 0xFfeaf8
+	Scale: {10, 10, 10}
+[light:basic]
+	Location: {0, 0, 100}
