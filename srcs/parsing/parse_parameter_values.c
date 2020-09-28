@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 11:55:06 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/27 22:42:37 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/28 14:17:47 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_vector	parse_vector(char *line, unsigned int line_amount)
 		res.z = ft_atoi(line + index);
 		index += ft_nbrlen(res.z) + (res.z == 0 && line[index] == '-' ? 1 : 0);
 		if (!line[index] || line[index] != '}')
-			ft_printf("Parsing: %u: Value parsing failed\n", line_amount);
+			ft_printf("	%u: Value parsing failed\n", line_amount);
 		return (!line[index] || line[index] != '}' ? newvector(0, 0, 0) : res);
 	}
 	res.y = res.x;

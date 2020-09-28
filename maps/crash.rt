@@ -1,6 +1,6 @@
 	;
 []
-	location: {-12, -0, -12}
+	location: {-1562, -0, -12}
 [object:sphere]
 	location: {-12, -0, -12}
 	rotation: {0, 0}
@@ -12,6 +12,7 @@
 	color: 0x3239a1
 [object:sphere]
 	location: {-1, -110, -1}
+	qwerweu
 	color: 0xqwerqweeeeeeeeeefffffFFFFFFFFFFFF
 	scale: {1, 10, 1}
 [object:sphere]
@@ -19,13 +20,22 @@
 	location: {-12, -0, -12}
 	rotation: {-415, 				-40}
 	color: {255, 255, 255}
-	scale: {5}
+	scale: {}
 [light:point]
 	location: {-10,         -2654654654621654,-10}
 	intensity: 2654654654621654
 [light:qweqwe]
+
+hergoierpguibp
+
+00
+
+[light:point]
+[light:point]
 [light:point]
 	location: {-10,-0,-20}
 	intensity: -0
 [camera:basic]
 	location: {0,0,0}
+
+	00000000000
