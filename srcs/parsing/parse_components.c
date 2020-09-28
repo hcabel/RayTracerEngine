@@ -6,38 +6,45 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 18:22:52 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/27 22:38:00 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/28 14:10:58 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static char	*dispatch_component_to_parse_function(t_parsing *parse,
-	char *line, t_scene *scene, int fd)
+static int	set_component_infos(void **component, int component_type_index,
+				void *target)
 {
+	*component = target;
+	return (component_type_index);
+}
+
+static void	switch_to_parse_parameter_functions(char *line, int line_amount,
+				void *component, int *component_type_index)
+{
+	if (*component_type_index == 1)
+		parse_objects_parameters(component, line, line_amount);
+	else if (*component_type_index == 2)
+		parse_lights_parameters(component, line, line_amount);
+	else
+		ft_printf("	%u: Identification of target component failed\n",
+			line_amount);
+}
+
+static void	set_new_component(t_scene *scene, t_parsing *parse, char *line,
+				void **component, int *component_type_index)
+{
+	*component_type_index = 0;
 	if (ft_strncmp("[object:", line, 8) == GOOD
-		&& parse->object_index < scene->shapes_amount)
-	{
-		line = parse_objects_parameters(&scene->shapes[parse->object_index], fd,
-			&parse->line_amount, line);
-		parse->object_index++;
-	}
+		&& parse->shapes_index < scene->shapes_amount)
+		*component_type_index = set_component_infos(component, 1,
+			&scene->shapes[parse->shapes_index++]);
 	else if (ft_strncmp("[light:", line, 7) == GOOD
 		&& parse->light_index < scene->light_amount)
-	{
-		line = parse_lights_parameters(&scene->lights[parse->light_index], fd,
-			&parse->line_amount, line);
-		parse->light_index++;
-	}
+		*component_type_index = set_component_infos(component, 2,
+			&scene->lights[parse->light_index++]);
 	else
-	{
-		ft_memdel((void**)&line);
-		if (parse->light_index > scene->light_amount
-			|| parse->object_index > scene->shapes_amount)
-			ft_printf("{r}Parsing: %u: Not enough component allocated{y}\n",
-				parse->line_amount);
-	}
-	return (line);
+		ft_printf("	%u: Unknown type (can't be parsed)\n", parse->line_amount);
 }
 
 int			parse_components(t_scene *scene, int fd)
@@ -45,18 +52,23 @@ int			parse_components(t_scene *scene, int fd)
 	t_parsing	parse;
 	char		*line;
 	int			ret;
+	void		*component;
+	int			component_type_index;
 
 	parse.line_amount = 0;
-	parse.object_index = 0;
+	parse.shapes_index = 0;
 	parse.light_index = 0;
+	component_type_index = 0;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
+		line = ft_strtolower(line);
 		parse.line_amount++;
-		while (line && line[0] && line[0] == '[')
-		{
-			line = dispatch_component_to_parse_function(&parse, line,
-				scene, fd);
-		}
+		if (line && line[0] && line[0] == '[')
+			set_new_component(scene, &parse, line,
+				&component, &component_type_index);
+		else if (line && line[0] && line[0] == '\t')
+			switch_to_parse_parameter_functions(line, parse.line_amount,
+				component, &component_type_index);
 		ft_memdel((void**)&line);
 	}
 	return (ret == -1 ? FAILED : GOOD);

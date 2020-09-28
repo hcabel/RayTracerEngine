@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 16:22:48 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/27 22:09:08 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/28 12:19:09 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,14 @@ static void	check_component_format(t_scene *scene, char *line, int line_amount)
 	{
 		if (verif_object_type(line + 8) == GOOD)
 			scene->shapes_amount++;
-		else
-			ft_printf("Parsing: %d: object type doesn't exit\n",
-				line_amount);
 	}
 	else if (ft_strncmp("[light:", line, 7) == GOOD)
 	{
 		if (verif_light_type(line + 7) == GOOD)
 			scene->light_amount++;
-		else
-			ft_printf("Parsing: %u: Light type doesn't exit\n",
-				line_amount);
 	}
 	else
-		ft_printf("Parsing: %u: Type unkown\n", line_amount);
+		ft_printf("	%u: Type unkown\n", line_amount);
 }
 
 int			parse_component_amount(t_scene *scene, int fd)
@@ -57,10 +51,9 @@ int			parse_component_amount(t_scene *scene, int fd)
 	line_amount = 1;
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
+		line = ft_strtolower(line);
 		if (line[0] && line[0] == '[')
 			check_component_format(scene, line, line_amount);
-		else if (line[0] != '\t')
-			ft_printf("Parsing: %u: isn't readable\n", line_amount);
 		ft_memdel((void**)&line);
 		line_amount++;
 	}

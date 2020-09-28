@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/27 18:22:25 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/28 13:38:33 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,14 @@ int			parse_components(t_scene *scene, int fd);
 /*
 **	parse_objects_parameters.c
 */
-char		*parse_objects_parameters(t_object *obj, int fd,
-				unsigned int *line_amount, char *line);
+void		parse_objects_parameters(t_object *object, char *line,
+				unsigned int line_amount);
 
 /*
 **	parse_lights_parameters.c
 */
-char	*parse_lights_parameters(t_light *light, int fd,
-	unsigned int *line_amount, char *line);
+void		parse_lights_parameters(t_light *light, char *line,
+				unsigned int line_amount);
 
 /*
 **	parse_parameter_values.c

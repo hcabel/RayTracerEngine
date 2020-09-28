@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/27 11:47:32 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/28 10:45:21 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ struct					s_info
 typedef struct			s_parsing
 {
 	unsigned int	line_amount;
-	unsigned int	object_index;
+	unsigned int	shapes_index;
 	unsigned int	light_index;
 }						t_parsing;
 

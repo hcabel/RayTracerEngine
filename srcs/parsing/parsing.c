@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:38:32 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/27 13:31:15 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/28 12:03:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,25 @@ int			parsing(t_scene *scene, char *path)
 	int	fd;
 	int	code;
 
-	ft_printf("{y}");
+	ft_printf("{y}Parsing:\n");
 	initcam(&scene->cam);
 	fd = open(path, O_RDONLY);
 	if (fd != -1)
 	{
-		if ((code = parse_map(scene, fd, path) != GOOD))
+		if ((code = parse_map(scene, fd, path)) != GOOD)
 		{
 			if (code == FAILED)
-				ft_printf("Parsing: file reading failed\n");
+				ft_printf("	Error: file reading failed !\n");
 			else
+			{
+				close(fd);
 				return (code);
+			}
 		}
 	}
 	else if (path != NULL)
-		ft_printf("Parsing: file reading failed\n");
-	ft_printf("{/}");
+		ft_printf("	Error: file reading failed\n");
+	ft_printf("End\n{/}");
 	close(fd);
 	return (GOOD);
 }

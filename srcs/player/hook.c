@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 15:19:18 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 11:50:02 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/28 12:08:24 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	hook_event(t_bool *quit, t_info *info)
 {
 	SDL_Event	event;
 
+	quit->bool = 1;
 	SDL_PollEvent(&event);
 	if (event.type == SDL_QUIT)
 		quit->bool = 1;

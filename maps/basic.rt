@@ -6,5 +6,7 @@
 	Location: {-10, 0, 0}
 	Color: 0xFfeaf8
 	Scale: {10, 10, 10}
-[light:basic]
+[light:point]
 	Location: {0, 0, 100}
+[light:point]
+	Location: {0, -0, -100}
