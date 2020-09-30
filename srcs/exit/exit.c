@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:36:14 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/26 16:49:20 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/29 11:50:17 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			program_exit(t_info *info, int code)
 	else
 		ft_printf("{g}Thanks for using, have a good day !\n");
 	free_info_struct(info);
-
+	SDL_DestroyTexture(info->screen.tex);
 	SDL_DestroyRenderer(info->renderer);
 	SDL_DestroyWindow(info->window);
 	SDL_Quit();

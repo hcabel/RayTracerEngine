@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hook.c                                             :+:      :+:    :+:   */
+/*   vector_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/24 15:19:18 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/30 13:49:26 by hcabel           ###   ########.fr       */
+/*   Created: 2020/09/29 13:50:59 by hcabel            #+#    #+#             */
+/*   Updated: 2020/09/30 11:15:05 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	hook_event(t_bool *quit, t_info *info)
+t_vector	vectormult(t_vector v, float mult)
 {
-	SDL_Event	event;
-
-	SDL_PollEvent(&event);
-	if (event.type == SDL_QUIT)
-		quit->bool = 1;
-	else if (event.type == SDL_KEYDOWN)
-	{
-		if (event.key.keysym.sym == SDLK_ESCAPE)
-			quit->bool = 1;
-		else
-		{
-			info->screen.resolution = FIRST_RESOLUTION;
-			draw_calls_add(info, UPDATE_VIEWPORT);
-		}
-	}
+	v.x *= mult;
+	v.y *= mult;
+	v.z *= mult;
+	return (v);
 }

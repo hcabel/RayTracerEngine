@@ -6,11 +6,11 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/27 18:26:15 by hcabel           ###   ########.fr        #
+#    Updated: 2020/09/29 16:57:50 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-DEBUG				=	no
+DEBUG				=	yes
 
 NAME				=	rt
 LIB_NAME			=	ftprintf SDL2
@@ -39,6 +39,9 @@ SRCS				=	main.c						\
 						parse_objects_parameters.c	\
 						parse_parameter_values.c	\
 						parse_lights_parameters.c	\
+						hud.c						\
+						raymarching.c				\
+						vector_2.c					\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
@@ -57,7 +60,7 @@ PATH_SOURCES		=	$(shell find $(SOURCES_FOLDER) -type d )
 
 OBJECTS				=	$(addprefix $(OBJECT_FOLDER)/, $(SRCS:.c=.o))
 
-LIBS				=	$(foreach lib, $(LIB_NAME), -L $(lib) -l$(lib)) -lm
+LIBS				=	$(foreach lib, $(LIB_NAME), -L $(lib) -l$(lib)) -lm -pthread
 
 vpath %.c $(foreach dir, $(PATH_SOURCES), $(dir):)
 

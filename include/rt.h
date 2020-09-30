@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/28 13:38:33 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/30 13:58:00 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 /*
 **	Lib includes
 */
+# include <pthread.h>
+# include <stdlib.h>
 # include "SDL.h"
 # include "ft_printf.h"
 
@@ -26,24 +28,6 @@
 # include "types.h"
 
 /*
-**	Modifyable define
-*/
-# define WINDOW_NAME "RayTracer Engine"
-# define WIN_HEIGTH 700
-# define WIN_WIDTH 500
-
-/*
-**	Code understanding define
-*/
-# define FAILED -1
-# define GOOD 0
-# define UNKNOWN_ERROR 1
-# define MALLOC_ERROR 2
-# define SDL_ERROR 3
-
-# define UPDATE_VIEWPORT new_viewport_frame_render
-
-/*
 ********************************************************************************
 **	frame Directory
 ********************************************************************************
@@ -52,14 +36,14 @@
 /*
 **	loop.c
 */
-int			loop(t_info *info);
+int				loop(t_info *info);
 
 /*
 **	draw_call.c
 */
-void		draw_calls_clear_list(t_info *info);
-void		draw_calls_add(t_info *info, void (*new)(t_info *info));
-void		draw_calls_execution(t_info *info);
+void			draw_calls_clear_list(t_info *info);
+void			draw_calls_add(t_info *info, void (*new)(t_info *info));
+void			draw_calls_execution(t_info *info);
 
 /*
 ********************************************************************************
@@ -70,18 +54,23 @@ void		draw_calls_execution(t_info *info);
 /*
 **	hook.c
 */
-void		hook_event(t_bool *quit, t_info *info);
+void			hook_event(t_bool *quit, t_info *info);
 
 /*
 ********************************************************************************
-**	viewport Directory
+**	screen Directory
 ********************************************************************************
 */
 
 /*
 **	viewport.c
 */
-void		new_viewport_frame_render(t_info *info);
+void			viewport_frame_updates(t_info *info);
+
+/*
+**	hud.c
+*/
+void			new_hud_frame_render(t_info *info);
 
 /*
 ********************************************************************************
@@ -92,13 +81,13 @@ void		new_viewport_frame_render(t_info *info);
 /*
 **	error.c
 */
-int			program_exit(t_info *info, int code);
+int				program_exit(t_info *info, int code);
 
 
 /*
 **	free.c
 */
-void		free_info_struct(t_info *info);
+void			free_info_struct(t_info *info);
 
 /*
 ********************************************************************************
@@ -109,36 +98,36 @@ void		free_info_struct(t_info *info);
 /*
 **	parsing.c
 */
-int			parsing(t_scene *scene, char *path);
+int				parsing(t_scene *scene, char *path);
 
 /*
 **	parse_primary_infos.c
 */
-int			parse_component_amount(t_scene *scene, int fd);
+int				parse_component_amount(t_scene *scene, int fd);
 
 /*
 **	parse_components.c.c
 */
-int			parse_components(t_scene *scene, int fd);
+int				parse_components(t_scene *scene, int fd);
 
 /*
 **	parse_objects_parameters.c
 */
-void		parse_objects_parameters(t_object *object, char *line,
-				unsigned int line_amount);
+void			parse_objects_parameters(t_object *object, char *line,
+					unsigned int line_amount);
 
 /*
 **	parse_lights_parameters.c
 */
-void		parse_lights_parameters(t_light *light, char *line,
-				unsigned int line_amount);
+void			parse_lights_parameters(t_light *light, char *line,
+					unsigned int line_amount);
 
 /*
 **	parse_parameter_values.c
 */
-t_vector	parse_vector(char *line, unsigned int line_amount);
-t_vector2d	parse_vector2d(char *line, unsigned int line_amount);
-t_vector	parse_color(char *line, unsigned int line_amount);
+t_vector		parse_vector(char *line, unsigned int line_amount);
+t_vector2d		parse_vector2d(char *line, unsigned int line_amount);
+t_vector		parse_color(char *line, unsigned int line_amount);
 
 /*
 ********************************************************************************
@@ -149,19 +138,30 @@ t_vector	parse_color(char *line, unsigned int line_amount);
 /*
 **	init.c
 */
-int			init(t_info *info, char *argv);
+int				init(t_info *info, char *argv);
 
 /*
 **	init_components.c
 */
-void		initcam(t_cam *cam);
-void		initlight(t_light *light);
-void		initobject(t_object *obj);
+void			initcam(t_cam *cam);
+void			initlight(t_light *light);
+void			initobject(t_object *obj);
 
 /*
 **	create_lists.c
 */
-int			create_light_list(t_scene *scene);
-int			create_object_list(t_scene *scene);
+int				create_light_list(t_scene *scene);
+int				create_object_list(t_scene *scene);
+
+/*
+********************************************************************************
+**	ray Directory
+********************************************************************************
+*/
+
+/*
+**	raymarching.c
+*/
+unsigned int	raymarching(t_scene *scene, t_vector dir);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 13:17:59 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 15:09:50 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/29 13:52:12 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ t_vector	vectoradd(t_vector a, t_vector b);
 t_vector	vectornormalize(t_vector a);
 t_vector	vectorsubtract(t_vector a, t_vector b);
 float		vectorlength(t_vector a);
+
+/*
+**	vector_2.c
+*/
+t_vector	vectormult(t_vector v, float mult);
 
 /*
 **	vector2d.c

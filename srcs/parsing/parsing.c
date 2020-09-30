@@ -6,14 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:38:32 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/28 12:03:27 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/29 20:05:10 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 static int	parse_map(t_scene *scene, int fd, char *path)
 {
