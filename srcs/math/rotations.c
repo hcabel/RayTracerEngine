@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/25 10:30:45 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 15:59:30 by hcabel           ###   ########.fr       */
+/*   Created: 2020/09/30 18:13:12 by hcabel            #+#    #+#             */
+/*   Updated: 2020/09/30 18:13:21 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		loop(t_info *info)
+t_vector	rotate_y(t_vector r, float v)
 {
-	t_bool	quit;
+	t_vector	result;
 
-	quit.bool = 0;
-	while (quit.bool == 0)
-	{
-		hook_event(&quit, info);
-		draw_calls_execution(info);
-	}
-	return (GOOD);
+	result.x = r.x * cos(v) + r.z * sin(v);
+	result.y = r.y;
+	result.z = r.z * cos(v) - r.x * sin(v);
+	return (result);
 }

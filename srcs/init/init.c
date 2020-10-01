@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/30 14:06:14 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 16:42:17 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	init_info_structure(t_info *info)
 {
 	info->scene.light_amount = 0;
 	info->scene.shapes_amount = 0;
+	draw_calls_clear_list(info);
 	info->update_function_list[1] = UPDATE_VIEWPORT;
 	info->update_function_list[0] = UPDATE_HUD;
 	info->screen.resolution = FIRST_RESOLUTION;

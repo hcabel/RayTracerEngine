@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 13:17:59 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/29 13:52:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/09/30 18:33:30 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,10 @@ float		vector2dlength(t_vector2d a);
 */
 t_vector	newvector(float x, float y, float z);
 t_vector2d	newvector2d(float x, float y);
+
+/*
+**	rotations.c
+*/
+t_vector	rotate_y(t_vector r, float v);
 
 #endif

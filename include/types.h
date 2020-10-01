@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/30 14:00:47 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 16:43:15 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@
 /*
 **	Code understanding define
 */
-# define WIN_AREAS 2
-# define RAYMARCHING_THREAD (CPU_THREAD - WIN_AREAS - 1)
+# define WIN_AREAS 5
+# define RAYMARCHING_THREAD (CPU_THREAD - 1)
 
-# define FAILED - 1
+# define FAILED -1
 # define GOOD 0
 # define UNKNOWN_ERROR 1
 # define MALLOC_ERROR 2
 # define SDL_ERROR 3
 
-# define UPDATE_VIEWPORT viewport_frame_updates
+# define UPDATE_VIEWPORT new_viewport_frame
 # define UPDATE_HUD new_hud_frame_render
 
 typedef struct			s_bool
@@ -83,6 +83,9 @@ typedef struct			s_screen
 	SDL_Rect			viewport_image;
 	SDL_Rect			hud;
 	unsigned int		resolution;
+	long long			threads_status;
+	unsigned int		threads_registered;
+	pthread_mutex_t		mutex;
 }						t_screen;
 
 typedef struct s_info	t_info;
@@ -95,7 +98,7 @@ struct					s_info
 							(t_info *info);
 	t_screen			screen;
 	t_scene				scene;
-	pthread_t			window_area_renderer;
+	pthread_t			hook;
 };
 
 typedef struct			s_parsing

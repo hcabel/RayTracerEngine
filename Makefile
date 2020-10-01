@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/09/29 16:57:50 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/01 11:28:12 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ SRCS				=	main.c						\
 						hud.c						\
 						raymarching.c				\
 						vector_2.c					\
+						rotations.c					\
+						raymarching_thread.c		\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

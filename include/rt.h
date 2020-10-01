@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/30 13:58:00 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 16:43:25 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ void			hook_event(t_bool *quit, t_info *info);
 /*
 **	viewport.c
 */
-void			viewport_frame_updates(t_info *info);
-
+void			new_viewport_frame(t_info *info);
 /*
 **	hud.c
 */
@@ -163,5 +162,16 @@ int				create_object_list(t_scene *scene);
 **	raymarching.c
 */
 unsigned int	raymarching(t_scene *scene, t_vector dir);
+
+/*
+********************************************************************************
+**	threads Directory
+********************************************************************************
+*/
+
+/*
+**	raymarching_thread.c
+*/
+void			*thread_calculs_functions(void *p);
 
 #endif
