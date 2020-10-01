@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 16:43:15 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 17:12:23 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define RAY_LOOP 500
 # define CPU_THREAD 24
 # define FIRST_RESOLUTION 32
+# define VIEW_DISTANCE 100
 
 /*
 **	Code understanding define
@@ -83,9 +84,6 @@ typedef struct			s_screen
 	SDL_Rect			viewport_image;
 	SDL_Rect			hud;
 	unsigned int		resolution;
-	long long			threads_status;
-	unsigned int		threads_registered;
-	pthread_mutex_t		mutex;
 }						t_screen;
 
 typedef struct s_info	t_info;

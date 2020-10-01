@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/30 11:18:26 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 17:11:43 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,11 @@ unsigned int	raymarching(t_scene *scene, t_vector dir)
 	g = 0;
 	b = 0;
 	a = 255;
-	depth = trace_ray(scene, newvector(50, 0, -30), dir);
-	r = (double)depth / 100.0 * -255;
-	g = (double)depth / 100.0 * -255;
-	b = (double)depth / 100.0 * -255;
+	depth = trace_ray(scene, scene->cam.location, dir);
+	depth = fminf(VIEW_DISTANCE, fmaxf(0, depth));
+	r = (double)depth / VIEW_DISTANCE * -255;
+	g = (double)depth / VIEW_DISTANCE * -255;
+	b = (double)depth / VIEW_DISTANCE * -255;
 	a = 255;
 	return ((r << 24) + (g << 16) + (b << 8) + a);
 }

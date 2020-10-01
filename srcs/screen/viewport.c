@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:12:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 16:44:25 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 17:02:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void			create_thread_to_calculate_new_frame(t_info *info)
 
 void				new_viewport_frame(t_info *info)
 {
+	Uint32 tick = SDL_GetTicks();
+	ft_printf("[DrawCall] Viewport...	");
 	info->screen.viewport_image.w = info->screen.viewport_area.w / info->screen.resolution;
 	info->screen.viewport_image.h = info->screen.viewport_area.h / info->screen.resolution;
 	SDL_LockTexture(info->screen.tex, &info->screen.viewport_image, &info->screen.pixels, &info->screen.pitch);
@@ -47,4 +49,5 @@ void				new_viewport_frame(t_info *info)
 	SDL_RenderCopy(info->renderer, info->screen.tex,
 		&info->screen.viewport_image, &info->screen.viewport_area);
 	SDL_RenderPresent(info->renderer);
+	printf("End (%.2f)\n", (double)(SDL_GetTicks() - tick) / 100);
 }
