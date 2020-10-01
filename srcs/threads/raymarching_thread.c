@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:12:01 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 16:42:56 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 17:59:08 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_vector		get_ray_direction_from_coordinate(t_vector2d coordinates,
 	coordinates.y = coordinates.y / height - 0.5;
 	dir.y = coordinates.y;
 	dir.x = coordinates.x * wid / height;
-	dir.z = 1;
+	dir.z = -1;
 	dir = vectornormalize(rotate_y(dir, 0));
 	return (dir);
 }

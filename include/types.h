@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 17:12:23 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 20:16:54 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 # define WIN_HEIGTH 720
 # define WIN_WIDTH 1080
 
-# define RAY_LOOP 500
+# define RAY_LOOP 100
 # define CPU_THREAD 24
 # define FIRST_RESOLUTION 32
-# define VIEW_DISTANCE 100
+# define VIEW_DISTANCE 150
+# define RAY_PRECIS 0.001
 
 /*
 **	Code understanding define
@@ -51,6 +52,7 @@ typedef struct			s_object
 	t_vector2d			rotation;
 	t_vector			scale;
 	t_vector			color;
+	float				(*sdf)(t_vector, t_vector);
 }						t_object;
 
 typedef struct			s_light
@@ -112,5 +114,14 @@ typedef struct			t_thread
 	t_screen			*screen;
 	t_scene				*scene;
 }						t_thread;
+
+typedef struct			s_ray_result
+{
+	t_bool				hit;
+	t_vector			location;
+	t_object			hit_object;
+	float				distance;
+}						t_ray_result;
+
 
 #endif

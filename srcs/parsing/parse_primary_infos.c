@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 16:22:48 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/28 12:19:09 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 17:32:52 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,15 @@ static int	verif_light_type(char *line)
 
 static int	verif_object_type(char *line)
 {
-	if (ft_strncmp("sphere]", line, 8) == GOOD)
+	if (ft_strncmp("sphere]", line, 7) == GOOD)
+		return (GOOD);
+	else if (ft_strncmp("cone]", line, 5) == GOOD)
+		return (GOOD);
+	else if (ft_strncmp("plane]", line, 6) == GOOD)
+		return (GOOD);
+	else if (ft_strncmp("cylinder]", line, 9) == GOOD)
+		return (GOOD);
+	else if (ft_strncmp("cube]", line, 5) == GOOD)
 		return (GOOD);
 	return (FAILED);
 }
@@ -38,8 +46,6 @@ static void	check_component_format(t_scene *scene, char *line, int line_amount)
 		if (verif_light_type(line + 7) == GOOD)
 			scene->light_amount++;
 	}
-	else
-		ft_printf("	%u: Type unkown\n", line_amount);
 }
 
 int			parse_component_amount(t_scene *scene, int fd)

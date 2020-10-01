@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/26 18:22:52 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/28 14:10:58 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 18:39:20 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	switch_to_parse_parameter_functions(char *line, int line_amount,
 		parse_objects_parameters(component, line, line_amount);
 	else if (*component_type_index == 2)
 		parse_lights_parameters(component, line, line_amount);
+	else if (*component_type_index == 3)
+		parse_camera_parameters(component, line, line_amount);
 	else
 		ft_printf("	%u: Identification of target component failed\n",
 			line_amount);
@@ -43,6 +45,8 @@ static void	set_new_component(t_scene *scene, t_parsing *parse, char *line,
 		&& parse->light_index < scene->light_amount)
 		*component_type_index = set_component_infos(component, 2,
 			&scene->lights[parse->light_index++]);
+	else if (ft_strncmp("[camera:", line, 7) == GOOD)
+		*component_type_index = set_component_infos(component, 3, &scene->cam);
 	else
 		ft_printf("	%u: Unknown type (can't be parsed)\n", parse->line_amount);
 }
@@ -66,7 +70,7 @@ int			parse_components(t_scene *scene, int fd)
 		if (line && line[0] && line[0] == '[')
 			set_new_component(scene, &parse, line,
 				&component, &component_type_index);
-		else if (line && line[0] && line[0] == '\t')
+		if (line && line[0] && (line[0] == '\t' || line[0] == '['))
 			switch_to_parse_parameter_functions(line, parse.line_amount,
 				component, &component_type_index);
 		ft_memdel((void**)&line);

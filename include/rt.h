@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 16:43:25 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/01 18:30:00 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,12 @@ void			parse_lights_parameters(t_light *light, char *line,
 					unsigned int line_amount);
 
 /*
+**	parse_camera_parameters.c
+*/
+void			parse_camera_parameters(t_cam *cam, char *line,
+					unsigned int line_amount);
+
+/*
 **	parse_parameter_values.c
 */
 t_vector		parse_vector(char *line, unsigned int line_amount);
@@ -174,4 +180,18 @@ unsigned int	raymarching(t_scene *scene, t_vector dir);
 */
 void			*thread_calculs_functions(void *p);
 
+/*
+********************************************************************************
+**	Signed_Distance_Functions Directory
+********************************************************************************
+*/
+
+/*
+**	sdf_1.c
+*/
+float			sdf_cube(t_vector p, t_vector obj_scale);
+float			sdf_plane(t_vector p, t_vector obj_scale);
+float			sdf_cylinder(t_vector p, t_vector obj_scale);
+float			sdf_sphere(t_vector p, t_vector obj_scale);
+float			sdf_cone(t_vector p, t_vector obj_scale);
 #endif

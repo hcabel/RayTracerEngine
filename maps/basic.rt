@@ -1,28 +1,72 @@
+[Object:cone]
+	Location: {0, 5, 0}
+	scale: {5}
+	Color: 0xfc9403
+[Object:cube]
+	Location: {0, -5, 0}
+	scale: {5}
+	Color: 0xfc9403
 [Object:sphere]
-	location: {50, 0, 0}
-	Color: {25, 50, 150}
-	Scale: {10}
+	Location: {20, 20, 25}
+	scale: {5}
+	Color: 0x990066
 [Object:sphere]
-	Location: {-50, 0, 0}
-	Color: 0xFfeaf8
-	Scale: {10, 10, 10}
+	Location: {-20, -20, 25}
+	scale: {5}
+	Color: 0x990066
 [Object:sphere]
-	Location: {0, 50, 0}
-	Color: 0xFfeaf8
-	Scale: {10, 10, 10}
+	Location: {20, -20, 25}
+	scale: {5}
+	Color: 0x990066
 [Object:sphere]
-	Location: {0, -50, 0}
-	Color: 0xFfeaf8
-	Scale: {10, 10, 10}
+	Location: {-20, 20, 25}
+	scale: {5}
+	Color: 0x990066
 [Object:sphere]
-	Location: {0, 0, 50}
-	Color: 0xFfeaf8
-	Scale: {10, 10, 10}
+	Location: {20, 20, -25}
+	scale: {5}
+	Color: 0x00FFaa
 [Object:sphere]
-	Location: {0, 0, -50}
-	Color: 0xFfeaf8
-	Scale: {10, 10, 10}
+	Location: {-20, -20, -25}
+	scale: {5}
+	Color: 0x00FFaa
+[Object:sphere]
+	Location: {20, -20, -25}
+	scale: {5}
+	Color: 0x00FFaa
+[Object:sphere]
+	Location: {-20, 20, -25}
+	scale: {5}
+	Color: 0x00FFaa
+[Object:cylinder]
+	Location: {20, 0, 25}
+	scale: {25}
+	Color: 0xFFFFFF
+[Object:cylinder]
+	Location: {-20, 0, 25}
+	scale: {25}
+	Color: 0xFFFFFF
+[Object:cylinder]
+	Location: {-20, 0, -25}
+	scale: {25}
+	Color: 0xFFFFFF
+[Object:cylinder]
+	Location: {20, 0, -25}
+	scale: {25}
+	Color: 0xFFFFFF
+[Object:plane]
+	Location: {0, -20, 0}
+	scale: {50}
+	Color: 0xFF0d35
+[Object:plane]
+	Location: {0, 20, 0}
+	scale: {50}
+	Color: 0xFF0d35
 [light:point]
+	Location: {-60, 0, 100}
+	Intensity: 100
+[light:point]
+	Location: {60, 0, 100}
+	Intensity: 100
+[camera:basic]
 	Location: {0, 0, 100}
-[light:point]
-	Location: {0, -0, -100}
