@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 15:19:18 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/02 22:26:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/03 13:00:04 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,16 @@ void	hook_event(t_bool *quit, t_info *info)
 			info->scene.cam.location.x += 0.5;
 		else if (event.key.keysym.sym == SDLK_SPACE)
 			info->scene.cam.location.y -= 0.5;
-		else if (event.key.keysym.sym == SDLK_LSHIFT)
+		else if (event.key.keysym.sym == SDLK_LCTRL)
 			info->scene.cam.location.y += 0.5;
+		else if (event.key.keysym.sym == SDLK_KP_4)
+			info->scene.cam.rotation.x += 0.1;
+		else if (event.key.keysym.sym == SDLK_KP_6)
+			info->scene.cam.rotation.x -= 0.1;
+		else if (event.key.keysym.sym == SDLK_KP_8)
+			info->scene.cam.rotation.y += 0.1;
+		else if (event.key.keysym.sym == SDLK_KP_2)
+			info->scene.cam.rotation.y -= 0.1;
 		else if (event.key.keysym.sym == SDLK_UP
 			&& info->screen.resolution > 1)
 			info->screen.resolution -= 1;

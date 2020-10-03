@@ -6,23 +6,55 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:12:01 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 17:59:08 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/03 12:59:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
+static double	deg2rad(double degrees)
+{
+	return (degrees * 4.0 * atan (1.0) / 180.0);
+}
+
+static t_vector	rotate(t_vector p, t_cam *cam)
+{
+	t_vector	v;
+	double		x;
+	double		y;
+	double		z;
+
+	x = p.x;
+	z = p.z;
+	v.x = cos(cam->rotation.y) * x + sin(cam->rotation.y) * z;
+	v.z = -sin(cam->rotation.y) * x + cos(cam->rotation.y) * z;
+	y = p.y;
+	z = v.z;
+	v.y = cos(cam->rotation.x) * y - sin(cam->rotation.x) * z;
+	v.z = sin(cam->rotation.x) * y + cos(cam->rotation.x) * z;
+	return (v);
+}
+
 static t_vector		get_ray_direction_from_coordinate(t_vector2d coordinates,
-						unsigned int wid, unsigned int height)
+						t_cam *cam, unsigned int wid, unsigned int height)
 {
 	t_vector	dir;
 
-	coordinates.x = coordinates.x / wid - 0.5;
-	coordinates.y = coordinates.y / height - 0.5;
-	dir.y = coordinates.y;
-	dir.x = coordinates.x * wid / height;
-	dir.z = -1;
-	dir = vectornormalize(rotate_y(dir, 0));
+	float scale = tan(deg2rad(90 * 0.5));
+	float	imageAspectRatio = wid / (float)height;
+
+	float x = (2 * (coordinates.x + 0.5) / (float)wid - 1) * imageAspectRatio * scale;
+	float y = (1 - 2 * (coordinates.y + 0.5) / (float)height) * scale;
+
+	t_vector t = newvector(x, y, 1);
+
+	/*dir.x = t.x * mat[0][0] + t.y * mat[1][0] + t.z * mat[2][0] + mat[3][0];
+	dir.y = t.x * mat[0][1] + t.y * mat[1][1] + t.z * mat[2][1] + mat[3][1];
+	dir.z = t.x * mat[0][2] + t.y * mat[1][2] + t.z * mat[2][2] + mat[3][2];*/
+
+	dir = rotate(t, cam);
+	dir = vectornormalize(dir);
+
 	return (dir);
 }
 
@@ -52,7 +84,7 @@ void				*thread_calculs_functions(void *p)
 	{
 		co = get_pixel_coordinates(i, screen->viewport_image.w);
 		((unsigned int*)screen->pixels)[(int)co.x + ((int)co.y * WIN_WIDTH)] =
-			raymarching(scene, get_ray_direction_from_coordinate(co,
+			raymarching(scene, get_ray_direction_from_coordinate(co, &scene->cam,
 			screen->viewport_image.w, screen->viewport_image.h));
 		i += RAYMARCHING_THREAD;
 	}
