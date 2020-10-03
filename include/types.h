@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 20:16:54 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/02 17:37:15 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 # define RAY_LOOP 100
 # define CPU_THREAD 24
-# define FIRST_RESOLUTION 32
-# define VIEW_DISTANCE 150
-# define RAY_PRECIS 0.001
+# define FIRST_RESOLUTION 5
+# define VIEW_DISTANCE 200
+# define RAY_PRECIS 0.0005
 
 /*
 **	Code understanding define
@@ -119,8 +119,9 @@ typedef struct			s_ray_result
 {
 	t_bool				hit;
 	t_vector			location;
-	t_object			hit_object;
+	t_object			*hit_object;
 	float				distance;
+	unsigned int		recursion;
 }						t_ray_result;
 
 

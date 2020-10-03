@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/01 20:17:21 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/02 23:07:25 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ SRCS				=	main.c						\
 						raymarching_thread.c		\
 						parse_camera_parameters.c	\
 						sdf_1.c						\
+						trace_ray.c					\
+						normal_map.c				\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

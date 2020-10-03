@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 11:55:06 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/28 14:17:47 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/02 22:45:08 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ t_vector	parse_color(char *line, unsigned int line_amount)
 	if (line[0] == '{')
 	{
 		result = parse_vector(line, line_amount);
-		result.x = fmaxf(result.x, 255);
-		result.y = fmaxf(result.y, 255);
-		result.z = fmaxf(result.z, 255);
+		result.x = fmaxf(fminf(result.x, 255), 0);
+		result.y = fmaxf(fminf(result.y, 255), 0);
+		result.z = fmaxf(fminf(result.z, 255), 0);
 	}
 	else if (line[0] == '0' && line[1] == 'x')
 	{

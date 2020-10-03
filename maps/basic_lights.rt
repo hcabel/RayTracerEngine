@@ -1,0 +1,17 @@
+[Object:Sphere]
+	Location: {0, -2, 0}
+	scale: {1}
+	Color: {100, 255, 50}
+[Object:Sphere]
+	Location: {0, 2, 0}
+	scale: {1}
+	Color: {255, 50, 100}
+[Object:plane]
+	Location: {0, 5, 0}
+	scale: {20}
+	Color: {255}
+[light:point]
+	Location: {-5, 0, 0}
+	Intensity: 1000
+[camera:basic]
+	Location: {0, 0, 10}

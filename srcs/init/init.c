@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 16:42:17 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/02 22:46:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	init_sdl(t_info *info)
 	if (SDL_Init(SDL_INIT_VIDEO) != GOOD )
 		return (SDL_ERROR);
 	if (!(info->window = SDL_CreateWindow(WINDOW_NAME,SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGTH, SDL_WINDOW_SHOWN)))
+		0, WIN_WIDTH, WIN_HEIGTH, SDL_WINDOW_SHOWN)))
 		return (SDL_ERROR);
 	if (!(info->renderer = SDL_CreateRenderer(info->window,
 		-1, SDL_RENDERER_ACCELERATED)))

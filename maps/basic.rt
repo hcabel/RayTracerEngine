@@ -1,9 +1,9 @@
 [Object:cone]
-	Location: {0, 5, 0}
+	Location: {0, 10, 0}
 	scale: {5}
 	Color: 0xfc9403
 [Object:cube]
-	Location: {0, -5, 0}
+	Location: {0, -10, 0}
 	scale: {5}
 	Color: 0xfc9403
 [Object:sphere]
@@ -60,7 +60,7 @@
 	Color: 0xFF0d35
 [Object:plane]
 	Location: {0, 20, 0}
-	scale: {50}
+	scale: {500}
 	Color: 0xFF0d35
 [light:point]
 	Location: {-60, 0, 100}

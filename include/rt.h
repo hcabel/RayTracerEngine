@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 18:30:00 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/02 23:08:05 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,12 @@ int				create_object_list(t_scene *scene);
 unsigned int	raymarching(t_scene *scene, t_vector dir);
 
 /*
+**	trace_ray.c
+*/
+t_ray_result	trace_ray(t_scene *scene, t_vector start_location,
+					t_vector dir, float max_distance);
+
+/*
 ********************************************************************************
 **	threads Directory
 ********************************************************************************
@@ -194,4 +200,18 @@ float			sdf_plane(t_vector p, t_vector obj_scale);
 float			sdf_cylinder(t_vector p, t_vector obj_scale);
 float			sdf_sphere(t_vector p, t_vector obj_scale);
 float			sdf_cone(t_vector p, t_vector obj_scale);
+
+/*
+********************************************************************************
+**	effects Directory
+********************************************************************************
+*/
+
+/*
+**	normal_map.c
+*/
+t_vector	get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj);
+t_vector	normal_map_to_rgb(t_vector normal);
+
+
 #endif
