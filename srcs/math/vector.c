@@ -6,18 +6,18 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 13:21:03 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 13:25:58 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/05 18:38:54 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-float		vectorlength(t_vector a)
+float		vector_length(t_vector a)
 {
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
 
-t_vector	vectorsubtract(t_vector a, t_vector b)
+t_vector	vector_subtract(t_vector a, t_vector b)
 {
 	a.x -= b.x;
 	a.y -= b.y;
@@ -25,18 +25,18 @@ t_vector	vectorsubtract(t_vector a, t_vector b)
 	return (a);
 }
 
-t_vector	vectornormalize(t_vector a)
+t_vector	vector_normalize(t_vector a)
 {
 	float	length;
 
-	length = vectorlength(a);
+	length = vector_length(a);
 	a.x = a.x / length;
 	a.y = a.y / length;
 	a.z = a.z / length;
 	return (a);
 }
 
-t_vector	vectoradd(t_vector a, t_vector b)
+t_vector	vector_add(t_vector a, t_vector b)
 {
 	a.x += b.x;
 	a.y += b.y;
@@ -44,7 +44,7 @@ t_vector	vectoradd(t_vector a, t_vector b)
 	return (a);
 }
 
-float		vectordot(t_vector a, t_vector b)
+float		vector_dot(t_vector a, t_vector b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }

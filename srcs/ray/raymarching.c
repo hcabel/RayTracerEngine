@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/03 11:24:22 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/05 18:43:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static double	get_nearest_surface_distance(t_scene *scene, t_vector p,
 	i = 0;
 	while (i < scene->shapes_amount)
 	{
-		tmp = scene->shapes[i].sdf(vectorsubtract(p, scene->shapes[i].location),
+		tmp = scene->shapes[i].sdf(vector_subtract(p, scene->shapes[i].location),
 			scene->shapes[i].scale);
 		if (distance == -1 || distance > tmp)
 		{
@@ -44,14 +44,14 @@ static float	get_light_intensity(t_scene *scene, t_vector hit_location,
 	t_vector		normal;
 	t_vector		lightstart;
 
-	dir = vectornormalize(vectorsubtract(scene->lights[0].location,
+	dir = vector_normalize(vector_subtract(scene->lights[0].location,
 		hit_location));
 	normal = get_normal_map(hit_location, scene, hit_obj);
-	lightstart = vectoradd(hit_location,
-		vectormult(vectormult(normal, RAY_PRECIS), 4));
+	lightstart = vector_add(hit_location,
+		vector_mult(vector_mult(normal, RAY_PRECIS), 4));
 	ray_outuput = trace_ray(scene, lightstart, dir,
-		vectorlength(vectorsubtract(lightstart, scene->lights[0].location)));
-	intensity = vectordot(vectornormalize(vectorsubtract(
+		vector_length(vector_subtract(lightstart, scene->lights[0].location)));
+	intensity = vector_dot(vector_normalize(vector_subtract(
 		scene->lights[0].location, hit_location)), normal);
 	intensity = fminf(1, fmaxf(0, intensity));
 

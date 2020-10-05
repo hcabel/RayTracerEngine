@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 11:55:06 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/02 22:45:08 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/05 18:41:40 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_vector	parse_vector(char *line, unsigned int line_amount)
 	t_vector	res;
 	int			index;
 
-	res = newvector(0, 0, 0);
+	res = new_vector(0, 0, 0);
 	if (line[0] != '{')
 		return (res);
 	res.x = ft_atoi(line + 1);
@@ -34,7 +34,7 @@ t_vector	parse_vector(char *line, unsigned int line_amount)
 		index += ft_nbrlen(res.z) + (res.z == 0 && line[index] == '-' ? 1 : 0);
 		if (!line[index] || line[index] != '}')
 			ft_printf("	%u: Value parsing failed\n", line_amount);
-		return (!line[index] || line[index] != '}' ? newvector(0, 0, 0) : res);
+		return (!line[index] || line[index] != '}' ? new_vector(0, 0, 0) : res);
 	}
 	res.y = res.x;
 	res.z = res.x;
@@ -46,7 +46,7 @@ t_vector2d	parse_vector2d(char *line, unsigned int line_amount)
 	t_vector2d	result;
 	int			index;
 
-	result = newvector2d(0, 0);
+	result = new_vector2d(0, 0);
 	if (line[0] != '{')
 		return (result);
 	result.x = ft_atoi(line + 1);
@@ -60,7 +60,7 @@ t_vector2d	parse_vector2d(char *line, unsigned int line_amount)
 		if (!line[index] || line[index] != '}')
 		{
 			ft_printf("Parsing: %u: Value parsing failed\n", line_amount);
-			result = newvector2d(0, 0);
+			result = new_vector2d(0, 0);
 		}
 	}
 	else
@@ -73,7 +73,7 @@ t_vector	parse_color(char *line, unsigned int line_amount)
 	t_vector	result;
 	int			hexcolor;
 
-	result = newvector(0, 0, 0);
+	result = new_vector(0, 0, 0);
 	hexcolor = -1;
 	if (line[0] == '{')
 	{

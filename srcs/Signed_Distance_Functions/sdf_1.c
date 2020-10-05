@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 18:11:05 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/01 18:43:08 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/05 18:47:24 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ float	sdf_cube(t_vector p, t_vector obj_scale)
 	y.y = (fmaxf((q.y), 0.0));
 	y.z = (fmaxf((q.z), 0.0));
 	diff = fminf(fmaxf(q.x, fmaxf(q.y, q.z)), 0.0);
-	return (vectorlength(y) + diff);
+	return (vector_length(y) + diff);
 }
 
 float	sdf_plane(t_vector p, t_vector obj_scale)
@@ -41,7 +41,7 @@ float	sdf_plane(t_vector p, t_vector obj_scale)
 	y.y = (fmaxf((q.y), 0.0));
 	y.z = (fmaxf((q.z), 0.0));
 	diff = fminf(fmaxf(q.x, fmaxf(q.y, q.z)), 0.0);
-	return (vectorlength(y) + diff);
+	return (vector_length(y) + diff);
 }
 
 float	sdf_cylinder(t_vector p, t_vector obj_scale)
@@ -62,7 +62,7 @@ float	sdf_cylinder(t_vector p, t_vector obj_scale)
 
 float	sdf_sphere(t_vector p, t_vector obj_scale)
 {
-	return(vectorlength(p) - obj_scale.x);
+	return(vector_length(p) - obj_scale.x);
 }
 
 float	sdf_cone(t_vector p, t_vector obj_scale)
@@ -79,14 +79,14 @@ float	sdf_cone(t_vector p, t_vector obj_scale)
 	p.x = sqrt(p.x * p.x + p.z * p.z);
 	p.y = p.y;
 	p.z = 0;
-	a.x = p.x - q.x * fminf(1, fmaxf(0, vectordot(p, q) / vectordot(q, q)));
-	a.y = p.y - q.y * fminf(1, fmaxf(0, vectordot(p, q) / vectordot(q, q)));
+	a.x = p.x - q.x * fminf(1, fmaxf(0, vector_dot(p, q) / vector_dot(q, q)));
+	a.y = p.y - q.y * fminf(1, fmaxf(0, vector_dot(p, q) / vector_dot(q, q)));
 	a.z = 0;
 	b.x = p.x - q.x * fminf(1, fmaxf(0, p.x / q.x));
 	b.y = p.y - q.y * fminf(1, fmaxf(0, p.x / q.x));
 	b.z = 0;
 	s = (q.y < 0 ? -1.0 : 1.0);
-	d = fminf(vectordot(b, b), vectordot(a, a));
+	d = fminf(vector_dot(b, b), vector_dot(a, a));
 	s = fmaxf(s * (p.x * q.y - p.y * q.x), s * (p.y - q.y));
 	return (sqrt(d) * (s < 0 ? -1.0 : 1.0));
 }
