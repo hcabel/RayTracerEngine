@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 23:04:19 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/02 23:19:41 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/04 16:40:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_vector	get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj)
 
 	eps.x = 1.0 * 0.5773 * 0.0005;
 	eps.y = -1.0 * 0.5773 * 0.0005;
+	p = vectorsubtract(p, hit_obj->location);
 	tab[0] = hit_obj->sdf(vectorsubtract(p, newvector(eps.x, eps.y, eps.y)), hit_obj->location);
 	tab[1] = hit_obj->sdf(vectorsubtract(p, newvector(eps.y, eps.y, eps.x)), hit_obj->location);
 	tab[2] = hit_obj->sdf(vectorsubtract(p, newvector(eps.y, eps.x, eps.y)), hit_obj->location);

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/02 22:46:27 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/04 14:27:22 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ static int	init_info_structure(t_info *info)
 	info->update_function_list[1] = UPDATE_VIEWPORT;
 	info->update_function_list[0] = UPDATE_HUD;
 	info->screen.resolution = FIRST_RESOLUTION;
+	info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) * cos(info->scene.cam.rotation.y);
+	info->scene.cam.forward.y = cos(info->scene.cam.rotation.x) * sin(info->scene.cam.rotation.y);
+	info->scene.cam.forward.z = sin(info->scene.cam.rotation.x);
 	return (GOOD);
 }
 

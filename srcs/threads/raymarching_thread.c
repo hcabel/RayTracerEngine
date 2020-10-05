@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:12:01 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/03 12:59:29 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/05 16:50:57 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,61 @@
 
 static double	deg2rad(double degrees)
 {
-	return (degrees * 4.0 * atan (1.0) / 180.0);
+	return (degrees * M_PI / 180);
 }
 
-static t_vector	rotate(t_vector p, t_cam *cam)
+static t_vector	multVecMatrix(t_vector src, t_vector2d f)
 {
-	t_vector	v;
-	double		x;
-	double		y;
-	double		z;
+	t_matrix44f	rot_x;
+	t_matrix44f	rot_y;
+	t_matrix44f	r;
+	t_vector	dst;
+	float		a;
+	float		b;
+	float		c;
+	float		w;
 
-	x = p.x;
-	z = p.z;
-	v.x = cos(cam->rotation.y) * x + sin(cam->rotation.y) * z;
-	v.z = -sin(cam->rotation.y) * x + cos(cam->rotation.y) * z;
-	y = p.y;
-	z = v.z;
-	v.y = cos(cam->rotation.x) * y - sin(cam->rotation.x) * z;
-	v.z = sin(cam->rotation.x) * y + cos(cam->rotation.x) * z;
-	return (v);
+	rot_x = newmatrix44f(newvector4d(1, 0, 0, 0),
+		newvector4d(0, cos(f.x), -sin(f.x), 0),
+		newvector4d(0, sin(f.x), cos(f.x), 0), newvector4d(0, 0, 0, 1));
+	rot_y = newmatrix44f(newvector4d(cos(f.y), 0, -sin(f.y), 0),
+		newvector4d(0, 1, 0, 0),
+		newvector4d(sin(f.y), 0, cos(f.y), 0), newvector4d(0, 0, 0, 1));
+	r = matrix_mult(rot_x, rot_y);
+
+	a = src.x * rot_y.m[0][0] + src.y * rot_y.m[1][0] + src.z * rot_y.m[2][0] + rot_y.m[3][0];
+	b = src.x * rot_y.m[0][1] + src.y * rot_y.m[1][1] + src.z * rot_y.m[2][1] + rot_y.m[3][1];
+	c = src.x * rot_y.m[0][2] + src.y * rot_y.m[1][2] + src.z * rot_y.m[2][2] + rot_y.m[3][2];
+	w = src.x * rot_y.m[0][3] + src.y * rot_y.m[1][3] + src.z * rot_y.m[2][3] + rot_y.m[3][3];
+
+	dst.x = a / w;
+	dst.y = b / w;
+	dst.z = c / w;
+
+	a = dst.x * rot_x.m[0][0] + dst.y * rot_x.m[1][0] + dst.z * rot_x.m[2][0] + rot_x.m[3][0];
+	b = dst.x * rot_x.m[0][1] + dst.y * rot_x.m[1][1] + dst.z * rot_x.m[2][1] + rot_x.m[3][1];
+	c = dst.x * rot_x.m[0][2] + dst.y * rot_x.m[1][2] + dst.z * rot_x.m[2][2] + rot_x.m[3][2];
+	w = dst.x * rot_x.m[0][3] + dst.y * rot_x.m[1][3] + dst.z * rot_x.m[2][3] + rot_x.m[3][3];
+
+	dst.x = a / w;
+	dst.y = b / w;
+	dst.z = c / w;
+	return (dst);
 }
 
 static t_vector		get_ray_direction_from_coordinate(t_vector2d coordinates,
 						t_cam *cam, unsigned int wid, unsigned int height)
 {
 	t_vector	dir;
+	t_vector2d	pixel;
+	float		scale = tan(deg2rad(90 * 0.5));
+	float		imageAspectRatio = wid / (float)height;
 
-	float scale = tan(deg2rad(90 * 0.5));
-	float	imageAspectRatio = wid / (float)height;
+	pixel.x = (2 * ((coordinates.x + 0.5) / wid) - 1) * scale * imageAspectRatio;
+	pixel.y = (1 - 2 * ((coordinates.y + 0.5) / height)) * scale;
 
-	float x = (2 * (coordinates.x + 0.5) / (float)wid - 1) * imageAspectRatio * scale;
-	float y = (1 - 2 * (coordinates.y + 0.5) / (float)height) * scale;
-
-	t_vector t = newvector(x, y, 1);
-
-	/*dir.x = t.x * mat[0][0] + t.y * mat[1][0] + t.z * mat[2][0] + mat[3][0];
-	dir.y = t.x * mat[0][1] + t.y * mat[1][1] + t.z * mat[2][1] + mat[3][1];
-	dir.z = t.x * mat[0][2] + t.y * mat[1][2] + t.z * mat[2][2] + mat[3][2];*/
-
-	dir = rotate(t, cam);
-	dir = vectornormalize(dir);
-
-	return (dir);
+	dir = multVecMatrix(newvector(pixel.x, pixel.y, 1), cam->rotation);
+	return (vectornormalize(dir));
 }
 
 static t_vector2d	get_pixel_coordinates(unsigned int i, unsigned int width)

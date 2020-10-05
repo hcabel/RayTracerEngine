@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/02 17:37:15 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/03 13:13:53 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct			s_cam
 {
 	t_vector			location;
 	t_vector2d			rotation;
+	t_vector			forward;
 }						t_cam;
 
 typedef struct			s_scene

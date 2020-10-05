@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/02 23:07:25 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/05 14:02:08 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS				=	main.c						\
 						parsing.c					\
 						init.c						\
 						init_components.c			\
-						vector_utils.c				\
+						vector_init.c				\
 						parse_components.c			\
 						create_lists.c				\
 						parse_primary_infos.c		\
@@ -48,6 +48,8 @@ SRCS				=	main.c						\
 						sdf_1.c						\
 						trace_ray.c					\
 						normal_map.c				\
+						vector4d.c					\
+						matrix44.c					\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

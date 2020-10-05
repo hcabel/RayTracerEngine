@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_utils.c                                     :+:      :+:    :+:   */
+/*   vector_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 15:07:59 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/25 15:09:15 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/05 14:01:41 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,16 @@ t_vector2d	newvector2d(float x, float y)
 
 	a.x = x;
 	a.y = y;
+	return (a);
+}
+
+t_vector4d	newvector4d(float x, float y, float z, float w)
+{
+	t_vector4d	a;
+
+	a.x = x;
+	a.y = y;
+	a.z = z;
+	a.w = w;
 	return (a);
 }
