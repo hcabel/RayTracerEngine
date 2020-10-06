@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:12:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 15:00:48 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 17:43:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,22 @@ static void			create_thread_to_calculate_new_frame(t_info *info)
 
 void				new_viewport_frame(t_info *info)
 {
-	while (pthread_mutex_trylock(&info->sampling.mutex))
-		;
-	if (info->sampling.threads_status == powf(2, RAYMARCHING_THREAD) - 1)
-		info->sampling.threads_status = 0;
-	else
+	if (all_threads_are_done(&info->sampling) == GOOD)
 	{
-		pthread_mutex_unlock(&info->sampling.mutex);
-		draw_calls_add(info, UPDATE_VIEWPORT);
-		return ;
+		ft_printf("[DrawCall] Viewport (sampling %3d)\n",
+			info->screen.resolution);
+		info->sampling.threads_status = 0;
+		info->screen.viewport_image.w = info->screen.viewport_area.w
+			/ info->screen.resolution;
+		info->screen.viewport_image.h = info->screen.viewport_area.h
+			/ info->screen.resolution;
+		SDL_LockTexture(info->screen.tex, &info->screen.viewport_image,
+			&info->screen.pixels, &info->screen.pitch);
+		create_thread_to_calculate_new_frame(info);
+		draw_calls_add(info, DRAWCALL_CHECK_VIEWPORT);
 	}
-	pthread_mutex_unlock(&info->sampling.mutex);
-	info->screen.viewport_image.w = info->screen.viewport_area.w
-		/ info->screen.resolution;
-	info->screen.viewport_image.h = info->screen.viewport_area.h
-		/ info->screen.resolution;
-	SDL_LockTexture(info->screen.tex, &info->screen.viewport_image,
-		&info->screen.pixels, &info->screen.pitch);
-	create_thread_to_calculate_new_frame(info);
-	draw_calls_add(info, check_viewport_render);
+	else
+		draw_calls_add(info, DRAWCALL_VIEWPORT);
 }
 
 void				check_viewport_render(t_info *info)
@@ -66,10 +63,10 @@ void				check_viewport_render(t_info *info)
 				info->screen.resolution -= 2;
 			else
 				info->screen.resolution -= 1;
-			draw_calls_add(info, UPDATE_VIEWPORT);
+			draw_calls_add(info, DRAWCALL_VIEWPORT);
 		}
 	}
 	else
-		draw_calls_add(info, check_viewport_render);
+		draw_calls_add(info, DRAWCALL_CHECK_VIEWPORT);
 	pthread_mutex_unlock(&info->sampling.mutex);
 }

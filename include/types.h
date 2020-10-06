@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 12:49:48 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 16:44:12 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@
 */
 # define WINDOW_NAME "RayTracer Engine"
 # define WIN_HEIGTH 800
-# define WIN_WIDTH 1280
+# define WIN_WIDTH 1180
 
 # define RAY_LOOP 100
 # define CPU_THREAD 20
 # define FIRST_RESOLUTION 16
 # define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
+
+# define DETAILS_PANEL_SIZE 200
+# define VIEW_MODE_PANEL_SIZE 50
 
 /*
 **	Code understanding define
@@ -37,9 +40,12 @@
 # define UNKNOWN_ERROR 1
 # define MALLOC_ERROR 2
 # define SDL_ERROR 3
+# define O_THREAD_ERROR 4
 
-# define UPDATE_VIEWPORT new_viewport_frame
-# define UPDATE_HUD new_hud_frame_render
+# define DRAWCALL_CHECK_VIEWPORT check_viewport_render
+# define DRAWCALL_VIEWPORT new_viewport_frame
+# define DRAWCALL_DETAILS_PANEL new_hud_frame_render
+# define DRAWCALL_VIEW_MODE_PANEL new_hud_frame_render
 
 typedef struct			s_bool
 {
@@ -85,7 +91,8 @@ typedef struct			s_screen
 	int					pitch;
 	SDL_Rect			viewport_area;
 	SDL_Rect			viewport_image;
-	SDL_Rect			hud;
+	SDL_Rect			details_panel;
+	SDL_Rect			view_mode_panel;
 	unsigned int		resolution;
 }						t_screen;
 
@@ -93,7 +100,7 @@ typedef struct s_info	t_info;
 
 typedef struct			s_thread
 {
-	int					start_index;
+	unsigned int		start_index;
 	t_info				*info;
 }						t_thread;
 

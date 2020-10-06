@@ -63,10 +63,10 @@
 	scale: {50}
 	Color: 0xFF0d35
 [light:point]
-	Location: {-60, 0, 100}
+	Location: {-60, 0, -50}
 	Intensity: 100
 [light:point]
-	Location: {60, 0, 100}
+	Location: {60, 0, -50}
 	Intensity: 100
 [camera:basic]
-	Location: {0, 0, 100}
+	Location: {0, 0, -50}

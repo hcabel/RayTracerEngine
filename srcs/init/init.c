@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 12:14:00 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 16:38:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static int	init_sdl(t_info *info)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != GOOD )
 		return (SDL_ERROR);
-	if (!(info->window = SDL_CreateWindow(WINDOW_NAME,SDL_WINDOWPOS_CENTERED,
-		0, WIN_WIDTH, WIN_HEIGTH, SDL_WINDOW_SHOWN)))
+	if (!(info->window = SDL_CreateWindow(WINDOW_NAME, 0, 0, WIN_WIDTH,
+		WIN_HEIGTH, SDL_WINDOW_SHOWN)))
 		return (SDL_ERROR);
 	if (!(info->renderer = SDL_CreateRenderer(info->window,
 		-1, SDL_RENDERER_ACCELERATED)))
@@ -26,16 +26,23 @@ static int	init_sdl(t_info *info)
 		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
 		WIN_WIDTH, WIN_HEIGTH)))
 		return (SDL_ERROR);
-	info->screen.viewport_area.x = 200;
-	info->screen.viewport_area.y = 0;
+	info->screen.viewport_area.x = DETAILS_PANEL_SIZE;
+	info->screen.viewport_area.y = VIEW_MODE_PANEL_SIZE;
 	info->screen.viewport_area.w = WIN_WIDTH - info->screen.viewport_area.x;
-	info->screen.viewport_area.h = WIN_HEIGTH;
+	info->screen.viewport_area.h = WIN_HEIGTH - info->screen.viewport_area.y;
+
 	info->screen.viewport_image.x = info->screen.viewport_area.x;
 	info->screen.viewport_image.y = info->screen.viewport_area.y;
-	info->screen.hud.x = 0;
-	info->screen.hud.y = 0;
-	info->screen.hud.w = info->screen.viewport_area.x;
-	info->screen.hud.h = WIN_HEIGTH;
+
+	info->screen.details_panel.x = 0;
+	info->screen.details_panel.y = 0;
+	info->screen.details_panel.w = DETAILS_PANEL_SIZE;
+	info->screen.details_panel.h = WIN_HEIGTH;
+
+	info->screen.view_mode_panel.x = DETAILS_PANEL_SIZE;
+	info->screen.view_mode_panel.y = 0;
+	info->screen.view_mode_panel.w = WIN_WIDTH - DETAILS_PANEL_SIZE;
+	info->screen.view_mode_panel.h = VIEW_MODE_PANEL_SIZE;
 	return(GOOD);
 }
 
@@ -44,8 +51,9 @@ static int	init_info_structure(t_info *info)
 	info->scene.light_amount = 0;
 	info->scene.shapes_amount = 0;
 	draw_calls_clear_list(info);
-	info->update_function_list[1] = UPDATE_VIEWPORT;
-	info->update_function_list[0] = UPDATE_HUD;
+	info->update_function_list[0] = DRAWCALL_VIEWPORT;
+	info->update_function_list[1] = DRAWCALL_DETAILS_PANEL;
+	info->update_function_list[2] = DRAWCALL_VIEW_MODE_PANEL;
 	pthread_mutex_init(&info->sampling.mutex, NULL);
 	info->sampling.threads_status = powf(2, RAYMARCHING_THREAD) - 1;
 	info->screen.resolution = FIRST_RESOLUTION;

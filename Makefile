@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/05 14:02:08 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/06 16:02:23 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS				=	main.c						\
 						normal_map.c				\
 						vector4d.c					\
 						matrix44.c					\
+						thread_utils.c				\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
