@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 11:47:20 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/30 19:59:43 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 12:18:24 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,12 @@ void	draw_calls_add(t_info *info, void (*new)(t_info *info))
 	i = 0;
 	while (i < WIN_AREAS)
 	{
-		if (info->update_function_list[i] == NULL)
+		if (info->update_function_list[i] == NULL
+			|| info->update_function_list[i] == new)
 			break ;
 		else
 			i++;
 	}
-	info->update_function_list[i] = new;
+	if (info->update_function_list[i] == NULL)
+		info->update_function_list[i] = new;
 }

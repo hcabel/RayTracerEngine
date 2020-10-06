@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/04 14:27:22 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 12:14:00 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static int	init_info_structure(t_info *info)
 	draw_calls_clear_list(info);
 	info->update_function_list[1] = UPDATE_VIEWPORT;
 	info->update_function_list[0] = UPDATE_HUD;
+	pthread_mutex_init(&info->sampling.mutex, NULL);
+	info->sampling.threads_status = powf(2, RAYMARCHING_THREAD) - 1;
 	info->screen.resolution = FIRST_RESOLUTION;
 	info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) * cos(info->scene.cam.rotation.y);
 	info->scene.cam.forward.y = cos(info->scene.cam.rotation.x) * sin(info->scene.cam.rotation.y);

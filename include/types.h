@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/03 13:13:53 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 12:23:06 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define WIN_WIDTH 1080
 
 # define RAY_LOOP 100
-# define CPU_THREAD 24
-# define FIRST_RESOLUTION 5
+# define CPU_THREAD 20
+# define FIRST_RESOLUTION 16
 # define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
 
@@ -91,6 +91,20 @@ typedef struct			s_screen
 
 typedef struct s_info	t_info;
 
+typedef struct			s_thread
+{
+	int					start_index;
+	t_info				*info;
+}						t_thread;
+
+typedef struct			s_sampling
+{
+	pthread_t			threads[RAYMARCHING_THREAD];
+	t_thread			threads_infos[RAYMARCHING_THREAD];
+	pthread_mutex_t		mutex;
+	long long			threads_status;
+}						t_sampling;
+
 struct					s_info
 {
 	SDL_Window			*window;
@@ -100,6 +114,7 @@ struct					s_info
 	t_screen			screen;
 	t_scene				scene;
 	pthread_t			hook;
+	t_sampling			sampling;
 };
 
 typedef struct			s_parsing
@@ -108,13 +123,6 @@ typedef struct			s_parsing
 	unsigned int	shapes_index;
 	unsigned int	light_index;
 }						t_parsing;
-
-typedef struct			t_thread
-{
-	int					start_index;
-	t_screen			*screen;
-	t_scene				*scene;
-}						t_thread;
 
 typedef struct			s_ray_result
 {

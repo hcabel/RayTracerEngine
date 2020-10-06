@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/05 18:43:37 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 11:55:20 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,29 @@ static float	get_light_intensity(t_scene *scene, t_vector hit_location,
 	t_ray_result	ray_outuput;
 	t_vector		normal;
 	t_vector		lightstart;
+	t_vector		light_local_location;
 
-	dir = vector_normalize(vector_subtract(scene->lights[0].location,
-		hit_location));
 	normal = get_normal_map(hit_location, scene, hit_obj);
-	lightstart = vector_add(hit_location,
-		vector_mult(vector_mult(normal, RAY_PRECIS), 4));
-	ray_outuput = trace_ray(scene, lightstart, dir,
-		vector_length(vector_subtract(lightstart, scene->lights[0].location)));
-	intensity = vector_dot(vector_normalize(vector_subtract(
-		scene->lights[0].location, hit_location)), normal);
-	intensity = fminf(1, fmaxf(0, intensity));
 
-	//intensity = fminf(1, fmaxf(0, (intensity * -1 + 1) / 2 /
-	//	(100 / scene->lights[0].intensity)));
+	lightstart = vector_add(hit_location, vector_mult(normal, RAY_PRECIS));
+	light_local_location = vector_subtract(scene->lights[0].location,
+		lightstart);
+	dir = vector_normalize(light_local_location);
+
+	ray_outuput = trace_ray(scene, lightstart, dir,
+		vector_length(light_local_location));
+
+	/*intensity = vector_dot(vector_normalize(vector_subtract(
+		scene->lights[0].location, hit_location)), normal);*/
+
+	//intensity = fminf(1, fmaxf(0, intensity));
+	/*intensity = fminf(1, fmaxf(0, (intensity * -1 + 1) / 2 /
+		(100 / scene->lights[0].intensity)));*/
+
 	if (ray_outuput.hit.bool == 1)
-		intensity *= 0.3;
+		intensity = 0.3;
+	else
+		intensity = 1;
 	return (intensity);
 }
 
@@ -73,7 +80,7 @@ unsigned int	raymarching(t_scene *scene, t_vector dir)
 	pixel_color = 0;
 	ray_outuput = trace_ray(scene, scene->cam.location, dir, VIEW_DISTANCE);
 	ray_outuput.distance = fminf(VIEW_DISTANCE, fmaxf(0, ray_outuput.distance));
-	if (ray_outuput.hit.bool)
+	/*if (ray_outuput.hit.bool)
 	{
 		intensity = get_light_intensity(scene, ray_outuput.location,
 			ray_outuput.hit_object);
@@ -88,8 +95,12 @@ unsigned int	raymarching(t_scene *scene, t_vector dir)
 		color.y = normal.y;
 		color.z = normal.z;
 
-		pixel_color = ((int)color.x << 24) + ((int)color.y << 16)
-			+ ((int)color.z << 8) + 0xFF;
-	}
+
+	}*/
+	color.x = ray_outuput.recursion / (float)RAY_LOOP * (float)255;
+	color.y = ray_outuput.recursion / (float)RAY_LOOP * (float)255;
+	color.z = ray_outuput.recursion / (float)RAY_LOOP * (float)255;
+	pixel_color = ((int)color.x << 24) + ((int)color.y << 16)
+		+ ((int)color.z << 8) + 0xFF;
 	return (pixel_color);
 }

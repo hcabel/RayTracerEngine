@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/02 23:08:05 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 11:38:15 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void			hook_event(t_bool *quit, t_info *info);
 **	viewport.c
 */
 void			new_viewport_frame(t_info *info);
+void			check_viewport_render(t_info *info);
+
 /*
 **	hud.c
 */

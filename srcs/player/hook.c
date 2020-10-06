@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 15:19:18 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/05 18:40:18 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 11:59:32 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	hook_event(t_bool *quit, t_info *info)
 		info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) * sin(info->scene.cam.rotation.y);
 		info->scene.cam.forward.y = -sin(info->scene.cam.rotation.x);
 
-		info->scene.shapes[0].location = vector_add(info->scene.cam.location, vector_mult(info->scene.cam.forward, 10));
-		info->scene.shapes[0].scale = new_vector(.1,.1,.1);
 		if (event.key.keysym.sym == SDLK_ESCAPE)
 			quit->bool = 1;
 		else if (event.key.keysym.sym == SDLK_w)
@@ -61,7 +59,7 @@ void	hook_event(t_bool *quit, t_info *info)
 		printf("	Cam rotation : {%.2f %.2f}\n",
 			info->scene.cam.rotation.x, info->scene.cam.rotation.y);*/
 
-		//info->screen.resolution = FIRST_RESOLUTION;
+		info->screen.resolution = FIRST_RESOLUTION;
 		draw_calls_add(info, UPDATE_VIEWPORT);
 	}
 }
