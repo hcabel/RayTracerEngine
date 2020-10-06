@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 15:19:18 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 11:59:32 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 12:37:42 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ void	hook_event(t_bool *quit, t_info *info)
 			info->scene.cam.rotation.x += 0.1;
 		else if (event.key.keysym.sym == SDLK_KP_2)
 			info->scene.cam.rotation.x -= 0.1;
-		else if (event.key.keysym.sym == SDLK_UP
-			&& info->screen.resolution > 1)
-			info->screen.resolution -= 1;
-		else if (event.key.keysym.sym == SDLK_DOWN)
-			info->screen.resolution += 1;
 		/*printf("	Cam location : {%.2f %.2f %.2f}\n",
 			info->scene.cam.location.x, info->scene.cam.location.y, info->scene.cam.location.z);
 		printf("	Cam forward : {%.2f %.2f %.2f}\n",

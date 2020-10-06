@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 12:23:06 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/06 12:49:48 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 **	Modifyable define
 */
 # define WINDOW_NAME "RayTracer Engine"
-# define WIN_HEIGTH 720
-# define WIN_WIDTH 1080
+# define WIN_HEIGTH 800
+# define WIN_WIDTH 1280
 
 # define RAY_LOOP 100
 # define CPU_THREAD 20
@@ -29,7 +29,7 @@
 /*
 **	Code understanding define
 */
-# define WIN_AREAS 5
+# define MAX_DRAWCALL 5
 # define RAYMARCHING_THREAD (CPU_THREAD - 1)
 
 # define FAILED -1
@@ -109,7 +109,7 @@ struct					s_info
 {
 	SDL_Window			*window;
 	SDL_Renderer		*renderer;
-	void				(*update_function_list[WIN_AREAS])
+	void				(*update_function_list[MAX_DRAWCALL])
 							(t_info *info);
 	t_screen			screen;
 	t_scene				scene;

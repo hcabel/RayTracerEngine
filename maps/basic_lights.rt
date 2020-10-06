@@ -3,7 +3,11 @@
 	scale: {1}
 	Color: {100, 255, 50}
 [Object:Sphere]
-	Location: {0, 2, 0}
+	Location: {-5, 2, 0}
+	scale: {1}
+	Color: {255, 50, 100}
+[Object:cylinder]
+	Location: {5, 2, 0}
 	scale: {1}
 	Color: {255, 50, 100}
 [Object:plane]
