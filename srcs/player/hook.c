@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 15:19:18 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 12:37:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/07 16:57:39 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,20 @@ void	hook_event(t_bool *quit, t_info *info)
 		quit->bool = 1;
 	else if (event.type == SDL_KEYDOWN)
 	{
-		info->scene.cam.forward.z = cos(info->scene.cam.rotation.x) * cos(info->scene.cam.rotation.y);
-		info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) * sin(info->scene.cam.rotation.y);
+		info->scene.cam.forward.z = cos(info->scene.cam.rotation.x) *
+			cos(info->scene.cam.rotation.y);
+		info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) *
+			sin(info->scene.cam.rotation.y);
 		info->scene.cam.forward.y = -sin(info->scene.cam.rotation.x);
 
 		if (event.key.keysym.sym == SDLK_ESCAPE)
 			quit->bool = 1;
 		else if (event.key.keysym.sym == SDLK_w)
-			info->scene.cam.location = vector_add(info->scene.cam.location, vector_mult(info->scene.cam.forward, 1));
+			info->scene.cam.location = vector_add(info->scene.cam.location,
+				vector_mult(info->scene.cam.forward, 1));
 		else if (event.key.keysym.sym == SDLK_s)
-			info->scene.cam.location = vector_add(info->scene.cam.location, vector_mult(info->scene.cam.forward, -1));
+			info->scene.cam.location = vector_add(info->scene.cam.location,
+				vector_mult(info->scene.cam.forward, -1));
 		else if (event.key.keysym.sym == SDLK_a)
 			info->scene.cam.location.x -= 0.5;
 		else if (event.key.keysym.sym == SDLK_d)
@@ -47,14 +51,19 @@ void	hook_event(t_bool *quit, t_info *info)
 			info->scene.cam.rotation.x += 0.1;
 		else if (event.key.keysym.sym == SDLK_KP_2)
 			info->scene.cam.rotation.x -= 0.1;
-		/*printf("	Cam location : {%.2f %.2f %.2f}\n",
+		else if (event.key.keysym.sym == SDLK_p)
+			info->scene.cam.viewmode++;
+		else if (event.key.keysym.sym == SDLK_o)
+			info->scene.cam.viewmode--;
+
+		printf("	Cam location : {%.2f %.2f %.2f}\n",
 			info->scene.cam.location.x, info->scene.cam.location.y, info->scene.cam.location.z);
 		printf("	Cam forward : {%.2f %.2f %.2f}\n",
 			info->scene.cam.forward.x, info->scene.cam.forward.y, info->scene.cam.forward.z);
 		printf("	Cam rotation : {%.2f %.2f}\n",
-			info->scene.cam.rotation.x, info->scene.cam.rotation.y);*/
+			info->scene.cam.rotation.x, info->scene.cam.rotation.y);
 
 		info->screen.resolution = FIRST_RESOLUTION;
-		draw_calls_add(info, UPDATE_VIEWPORT);
+		draw_calls_add(info, DRAWCALL_VIEWPORT);
 	}
 }

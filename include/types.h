@@ -6,12 +6,14 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 16:44:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/07 16:40:21 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
+
+# include "interfaces.h"
 
 /*
 **	Modifyable define
@@ -27,7 +29,7 @@
 # define RAY_PRECIS 0.0005
 
 # define DETAILS_PANEL_SIZE 200
-# define VIEW_MODE_PANEL_SIZE 50
+# define VIEWMODE_PANEL_SIZE 50
 
 /*
 **	Code understanding define
@@ -44,8 +46,8 @@
 
 # define DRAWCALL_CHECK_VIEWPORT check_viewport_render
 # define DRAWCALL_VIEWPORT new_viewport_frame
-# define DRAWCALL_DETAILS_PANEL new_hud_frame_render
-# define DRAWCALL_VIEW_MODE_PANEL new_hud_frame_render
+# define DRAWCALL_DETAILS_PANEL new_details_panel_frame
+# define DRAWCALL_VIEWMODE_PANEL new_viewmode_panel_frame
 
 typedef struct			s_bool
 {
@@ -73,6 +75,7 @@ typedef struct			s_cam
 	t_vector			location;
 	t_vector2d			rotation;
 	t_vector			forward;
+	unsigned int		viewmode;
 }						t_cam;
 
 typedef struct			s_scene
@@ -92,11 +95,10 @@ typedef struct			s_screen
 	SDL_Rect			viewport_area;
 	SDL_Rect			viewport_image;
 	SDL_Rect			details_panel;
-	SDL_Rect			view_mode_panel;
+	SDL_Rect			viewmode_panel;
+	t_scrollbox			viewmode_content;
 	unsigned int		resolution;
 }						t_screen;
-
-typedef struct s_info	t_info;
 
 typedef struct			s_thread
 {
@@ -112,7 +114,7 @@ typedef struct			s_sampling
 	long long			threads_status;
 }						t_sampling;
 
-struct					s_info
+typedef struct			s_info
 {
 	SDL_Window			*window;
 	SDL_Renderer		*renderer;
@@ -122,13 +124,13 @@ struct					s_info
 	t_scene				scene;
 	pthread_t			hook;
 	t_sampling			sampling;
-};
+}						t_info;
 
 typedef struct			s_parsing
 {
-	unsigned int	line_amount;
-	unsigned int	shapes_index;
-	unsigned int	light_index;
+	unsigned int		line_amount;
+	unsigned int		shapes_index;
+	unsigned int		light_index;
 }						t_parsing;
 
 typedef struct			s_ray_result
@@ -139,6 +141,5 @@ typedef struct			s_ray_result
 	float				distance;
 	unsigned int		recursion;
 }						t_ray_result;
-
 
 #endif

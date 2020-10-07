@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 16:03:36 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/07 14:09:12 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 */
 # include "mathematical.h"
 # include "types.h"
+# include "interfaces.h"
 
 /*
 ********************************************************************************
@@ -69,9 +70,14 @@ void			new_viewport_frame(t_info *info);
 void			check_viewport_render(t_info *info);
 
 /*
-**	hud.c
+**	details_panel.c
 */
-void			new_hud_frame_render(t_info *info);
+void			new_details_panel_frame(t_info *info);
+
+/*
+**	view_mode_panel.c
+*/
+void			new_viewmode_panel_frame(t_info *info);
 
 /*
 ********************************************************************************
@@ -159,6 +165,16 @@ void			initobject(t_object *obj);
 */
 int				create_light_list(t_scene *scene);
 int				create_object_list(t_scene *scene);
+
+/*
+**	init_interfaces.c
+*/
+int				init_interfaces(t_screen *screen);
+
+/*
+**	viewmode_init_buttons.c
+*/
+int		viewmode_init_buttons(t_scrollbox *viewmode);
 
 /*
 ********************************************************************************

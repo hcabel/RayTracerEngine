@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:12:01 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 12:17:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/07 14:13:35 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,6 @@ static t_vector		get_ray_direction_from_coordinate(t_vector2d coordinates,
 
 	dir = rotation(new_vector(pixel.x, pixel.y, 1), cam->rotation);
 	return (vector_normalize(dir));
-}
-
-static t_vector2d	get_pixel_coordinates(unsigned int i, unsigned int width)
-{
-	t_vector2d	result;
-
-	result.x = i % width;
-	result.y = i / width;
-	return (result);
 }
 
 void				*thread_calculs_functions(void *p)

@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/06 16:02:23 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/07 16:58:48 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRCS				=	main.c						\
 						parse_objects_parameters.c	\
 						parse_parameter_values.c	\
 						parse_lights_parameters.c	\
-						hud.c						\
+						details_panel.c				\
+						view_mode_panel.c			\
 						raymarching.c				\
 						vector_2.c					\
 						rotations.c					\
@@ -51,6 +52,11 @@ SRCS				=	main.c						\
 						vector4d.c					\
 						matrix44.c					\
 						thread_utils.c				\
+						button_actions.c			\
+						init_interfaces.c			\
+						viewmode_init_buttons.c		\
+						coordinates_utils.c			\
+						aabb_algo.c					\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

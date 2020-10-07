@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 13:17:59 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/05 18:39:30 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/07 14:24:01 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,15 @@ t_vector4d	new_vector4d(float x, float y, float z, float w);
 **	rotations.c
 */
 t_vector	rotate_y(t_vector r, float v);
+
+/*
+**	coordinates_utils.c
+*/
+t_vector2d	get_pixel_coordinates(unsigned int i, unsigned int width);
+
+/*
+**	aabb_algo.c
+*/
+int			aabb(SDL_Rect r, t_vector2d pixel_location);
 
 #endif
