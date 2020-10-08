@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/07 14:09:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/08 17:11:34 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,19 @@ void			draw_calls_execution(t_info *info);
 */
 
 /*
-**	hook.c
+**	input.c
 */
 void			hook_event(t_bool *quit, t_info *info);
+
+/*
+**	keyboard_input.c
+*/
+void			keyboard_input(t_bool *quit, t_info *info, SDL_Event *event);
+
+/*
+**	mouse_input.c
+*/
+void			mouse_input(t_bool *quit, t_info *info, SDL_Event *event);
 
 /*
 ********************************************************************************
@@ -174,7 +184,12 @@ int				init_interfaces(t_screen *screen);
 /*
 **	viewmode_init_buttons.c
 */
-int		viewmode_init_buttons(t_scrollbox *viewmode);
+int				viewmode_init_buttons(t_scrollbox *viewmode);
+
+/*
+**	init_viewmode_scrollbox.c
+*/
+int				init_viewmode_scrollboxs(t_scrollbox *scrollbox);
 
 /*
 ********************************************************************************

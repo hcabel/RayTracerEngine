@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/07 17:15:11 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/08 12:10:47 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,28 +92,31 @@ static unsigned int	get_color_from_viewmode(t_scene *scene,
 	color.x = 0;
 	color.y = 0;
 	color.z = 0;
-	if (scene->cam.viewmode == 1)
+	if (scene->cam.viewmode == 1 && ray_output->hit.bool == 1)
+	{
+		color.x = (ray_output->hit_object->color.x);
+		color.y = (ray_output->hit_object->color.y);
+		color.z = (ray_output->hit_object->color.z);
+	}
+	else if (scene->cam.viewmode == 2 && ray_output->hit.bool == 1)
+		color = normal_map_to_rgb(get_normal_map(ray_output->location, scene,
+			ray_output->hit_object));
+	else if (scene->cam.viewmode == 3)
 	{
 		color.x = ray_output->recursion / (float)RAY_LOOP * (float)255;
 		color.y = ray_output->recursion / (float)RAY_LOOP * (float)255;
 		color.z = ray_output->recursion / (float)RAY_LOOP * (float)255;
 	}
-	else if (scene->cam.viewmode == 2 && ray_output->hit.bool == 1)
-		color = normal_map_to_rgb(get_normal_map(ray_output->location, scene,
-			ray_output->hit_object));
-	else
+	else if (ray_output->hit.bool == 1)
 	{
-		if (ray_output->hit.bool == 1)
-		{
-			intensity = get_light_intensity(scene, ray_output->location,
-				ray_output->hit_object);
-			intensity *= fabs(fmaxf(ray_output->distance / VIEW_DISTANCE, 0.5)
-				- 1) * (1 / (1 - 0.5));
-			color.x = (ray_output->hit_object->color.x * intensity);
-			color.y = (ray_output->hit_object->color.y * intensity);
-			color.z = (ray_output->hit_object->color.z * intensity);
-		}
-	}
+		intensity = get_light_intensity(scene, ray_output->location,
+			ray_output->hit_object);
+		intensity *= fabs(fmaxf(ray_output->distance / VIEW_DISTANCE, 0.5)
+			- 1) * (1 / (1 - 0.5));
+		color.x = (ray_output->hit_object->color.x * intensity);
+		color.y = (ray_output->hit_object->color.y * intensity);
+		color.z = (ray_output->hit_object->color.z * intensity);
+}
 	return (((int)color.x << 24) + ((int)color.y << 16)
 		+ ((int)color.z << 8) + 0xFF);
 }

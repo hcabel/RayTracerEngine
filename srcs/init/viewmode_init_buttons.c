@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:01:00 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/07 15:30:34 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/08 17:01:32 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		viewmode_init_buttons(t_scrollbox *viewmode)
 	unsigned int	button_size;
 	t_vector		color_tmp;
 
-	button_size = VIEWMODE_PANEL_SIZE - VIEWMODE_BUTTONS_MARGIN * 2 -
+	button_size = VIEWMODE_AREA_SIZE - VIEWMODE_BUTTONS_MARGIN * 2 -
 		SCROLLBAR_SIZE;
 	i = 0;
 	while (i < viewmode->amount)
@@ -26,7 +26,7 @@ int		viewmode_init_buttons(t_scrollbox *viewmode)
 		viewmode->list[i].area.w = button_size;
 		viewmode->list[i].area.h = button_size;
 		viewmode->list[i].area.x = i * (button_size + VIEWMODE_BUTTONS_MARGIN)
-			 + VIEWMODE_BUTTONS_MARGIN + viewmode->area.x;
+			+ viewmode->area.x;
 		viewmode->list[i].area.y = VIEWMODE_BUTTONS_MARGIN;
 		color_tmp.x = rand() % 155 + 100;
 		color_tmp.y = rand() % 155 + 100;

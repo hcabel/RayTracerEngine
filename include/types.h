@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/07 16:40:21 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/08 17:13:28 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@
 
 # define RAY_LOOP 100
 # define CPU_THREAD 20
-# define FIRST_RESOLUTION 16
+# define FIRST_RESOLUTION 24
 # define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
 
-# define DETAILS_PANEL_SIZE 200
-# define VIEWMODE_PANEL_SIZE 50
+# define DETAILS_AREA_SIZE 200
+# define VIEWMODE_AREA_SIZE 50
 
 /*
 **	Code understanding define
@@ -94,8 +94,8 @@ typedef struct			s_screen
 	int					pitch;
 	SDL_Rect			viewport_area;
 	SDL_Rect			viewport_image;
-	SDL_Rect			details_panel;
-	SDL_Rect			viewmode_panel;
+	SDL_Rect			details_area;
+	SDL_Rect			viewmode_area;
 	t_scrollbox			viewmode_content;
 	unsigned int		resolution;
 }						t_screen;

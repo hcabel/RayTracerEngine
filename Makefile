@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/07 16:58:48 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/08 17:07:56 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,43 +20,46 @@ SOURCES_FOLDER		=	srcs
 INCLUDES_FOLDER		=	include
 
 # find srcs -type f | rev | cut -d '/' -f1 | rev | sort -d
-SRCS				=	main.c						\
-						hook.c						\
-						viewport.c					\
-						free.c						\
-						exit.c						\
-						loop.c						\
+SRCS				=	aabb_algo.c					\
+						coordinates_utils.c			\
+						create_lists.c				\
+						details_panel.c				\
 						draw_call.c					\
-						vector.c					\
-						vector2d.c					\
-						parsing.c					\
+						exit.c						\
+						free.c						\
 						init.c						\
 						init_components.c			\
-						vector_init.c				\
+						init_interfaces.c			\
+						init_viewmode_scrollbox.c	\
+						input.c						\
+						keyboard_input.c			\
+						loop.c						\
+						main.c						\
+						matrix44.c					\
+						mouse_input.c				\
+						normal_map.c				\
+						parse_camera_parameters.c	\
 						parse_components.c			\
-						create_lists.c				\
-						parse_primary_infos.c		\
+						parse_lights_parameters.c	\
 						parse_objects_parameters.c	\
 						parse_parameter_values.c	\
-						parse_lights_parameters.c	\
-						details_panel.c				\
-						view_mode_panel.c			\
+						parse_primary_infos.c		\
+						parsing.c					\
 						raymarching.c				\
-						vector_2.c					\
-						rotations.c					\
 						raymarching_thread.c		\
-						parse_camera_parameters.c	\
+						rotations.c					\
 						sdf_1.c						\
-						trace_ray.c					\
-						normal_map.c				\
-						vector4d.c					\
-						matrix44.c					\
 						thread_utils.c				\
-						button_actions.c			\
-						init_interfaces.c			\
+						trace_ray.c					\
+						vector_2.c					\
+						vector2d.c					\
+						vector4d.c					\
+						vector.c					\
+						vector_init.c				\
+						viewmode_button_clicked.c	\
 						viewmode_init_buttons.c		\
-						coordinates_utils.c			\
-						aabb_algo.c					\
+						view_mode_panel.c			\
+						viewport.c					\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
