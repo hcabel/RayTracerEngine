@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 10:40:45 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 11:44:00 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ static unsigned int	get_color_from_viewmode(t_scene *scene, t_ray_hit *ray)
 	color.x = 0;
 	color.y = 0;
 	color.z = 0;
-	if (scene->cam.viewmode == 1 && ray->hit.bool == 1)
+	if (ray->hit.bool == 1 && ray->hit_object->istarget.bool == 1)
+		return (0xff5733ff);
+	else if (scene->cam.viewmode == 1 && ray->hit.bool == 1)
 	{
 		color.x = (ray->hit_object->color.x);
 		color.y = (ray->hit_object->color.y);

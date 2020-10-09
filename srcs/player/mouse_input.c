@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 10:36:06 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 12:11:17 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,28 @@ static int	witch_viewmode_button_clicked(t_vector2d loc, t_info *info)
 static int	viewport_clicked(t_vector2d loc, t_info *info)
 {
 	unsigned int	i;
+	t_vector		dir;
+	t_ray_hit		ray;
 
-	loc.x -= info->screen.viewmode_area.x;
-	loc.y -= info->screen.viewmode_area.y;
-	return (FAILED);
-	/*i = 0;
-	while (i < info->screen.viewmode_content.amount)
+	loc.x -= info->screen.viewport_image.x;
+	loc.y -= info->screen.viewport_image.y;
+	dir = get_ray_direction_from_coordinate(loc, &info->scene.cam,
+		info->screen.viewport_image.w, info->screen.viewport_image.h);
+	ray = trace_ray(&info->scene, info->scene.cam.location, dir, VIEW_DISTANCE);
+	if (ray.hit.bool == 1)
 	{
-		if (aabb(info->screen.viewmode_content.list[i].area, loc) == GOOD)
-		{
-			info->screen.viewmode_content.list[i].clicked(info);
-		}
-		else
-		{
-			i++;
-		}
-	}*/
+		if (info->scene.target != NULL)
+			((t_object*)info->scene.target)->istarget.bool = 0;
+		ray.hit_object->istarget.bool = 1;
+		info->scene.target = ray.hit_object;
+		info->scene.target_type = 1;
+		return (GOOD);
+	}
+	if (info->scene.target != NULL && info->scene.target_type == 1)
+		((t_object*)info->scene.target)->istarget.bool = 0;
+	info->scene.target = NULL;
+	info->scene.target_type = 0;
+	return (GOOD);
 }
 
 static int	witch_panel_clicked(t_vector2d loc, t_info *info)

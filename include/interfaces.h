@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 10:32:22 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 11:04:48 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,5 @@ typedef struct			s_detail_panel
 {
 
 }						t_detail_panel;
-
-/*
-********************************************************************************
-**	Interfaces directory
-********************************************************************************
-*/
-
-/*
-**	viewmode_button_clicked.c
-*/
-int		set_lit_viewmode(t_info *info);
-int		set_unlit_viewmode(t_info *info);
-int		set_iteration_viewmode(t_info *info);
-int		set_normalmap_viewmode(t_info *info);
 
 #endif

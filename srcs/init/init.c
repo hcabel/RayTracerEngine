@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/08 17:09:47 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 11:54:18 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static int	init_info_structure(t_info *info)
 		sin(info->scene.cam.rotation.y);
 	info->scene.cam.forward.z = sin(info->scene.cam.rotation.x);
 	info->scene.cam.viewmode = 0;
+	info->scene.target = NULL;
+	info->scene.target_type = 0;
 	return (GOOD);
 }
 

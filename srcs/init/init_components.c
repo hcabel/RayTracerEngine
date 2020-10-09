@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:44:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/05 18:40:40 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 10:56:38 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	initobject(t_object *obj)
 	obj->rotation = new_vector2d(0, 0);
 	obj->scale = new_vector(1, 1, 1);
 	obj->color = new_vector(255, 255, 255);
-	//obj->sdffunction = sdf_shere;
+	obj->istarget.bool = 0;
+	obj->sdf = sdf_sphere;
 }

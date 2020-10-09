@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 10:38:44 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 11:08:48 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct			s_object
 	t_vector			scale;
 	t_vector			color;
 	float				(*sdf)(t_vector, t_vector);
+	t_bool				istarget;
 }						t_object;
 
 typedef struct			s_light
@@ -85,6 +86,8 @@ typedef struct			s_scene
 	t_cam				cam;
 	unsigned int		shapes_amount;
 	unsigned int		light_amount;
+	void				*target;
+	int					target_type;
 }						t_scene;
 
 typedef struct			s_screen
