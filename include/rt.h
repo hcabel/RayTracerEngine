@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/08 17:11:34 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 10:39:08 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ unsigned int	raymarching(t_scene *scene, t_vector dir);
 /*
 **	trace_ray.c
 */
-t_ray_result	trace_ray(t_scene *scene, t_vector start_location,
+t_ray_hit		trace_ray(t_scene *scene, t_vector start_location,
 					t_vector dir, float max_distance);
 
 /*

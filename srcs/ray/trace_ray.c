@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 11:42:28 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/05 18:45:24 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 10:43:13 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static double	get_nearest_surface_distance(t_scene *scene, t_vector p,
 	return (distance);
 }
 
-t_ray_result	trace_ray(t_scene *scene, t_vector start_location,
+t_ray_hit	trace_ray(t_scene *scene, t_vector start_location,
 					t_vector dir, float max_distance)
 {
-	t_ray_result	hitinfos;
+	t_ray_hit		hitinfos;
 	unsigned int	loop_index;
 	double			depth;
 	double			nearest_surface;

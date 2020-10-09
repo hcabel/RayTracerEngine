@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/08 17:13:28 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 10:38:44 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,13 +133,13 @@ typedef struct			s_parsing
 	unsigned int		light_index;
 }						t_parsing;
 
-typedef struct			s_ray_result
+typedef struct			s_ray_hit
 {
 	t_bool				hit;
 	t_vector			location;
 	t_object			*hit_object;
 	float				distance;
 	unsigned int		recursion;
-}						t_ray_result;
+}						t_ray_hit;
 
 #endif
