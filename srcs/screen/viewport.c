@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:12:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 17:43:29 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 13:17:06 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void				new_viewport_frame(t_info *info)
 		ft_printf("[DrawCall] Viewport (sampling %3d)\n",
 			info->screen.resolution);
 		info->sampling.threads_status = 0;
-		info->screen.viewport_image.w = info->screen.viewport_area.w
+		info->screen.viewport.image.w = info->screen.viewport.area.w
 			/ info->screen.resolution;
-		info->screen.viewport_image.h = info->screen.viewport_area.h
+		info->screen.viewport.image.h = info->screen.viewport.area.h
 			/ info->screen.resolution;
-		SDL_LockTexture(info->screen.tex, &info->screen.viewport_image,
+		SDL_LockTexture(info->screen.tex, &info->screen.viewport.image,
 			&info->screen.pixels, &info->screen.pitch);
 		create_thread_to_calculate_new_frame(info);
 		draw_calls_add(info, DRAWCALL_CHECK_VIEWPORT);
@@ -55,7 +55,7 @@ void				check_viewport_render(t_info *info)
 	{
 		SDL_UnlockTexture(info->screen.tex);
 		SDL_RenderCopy(info->renderer, info->screen.tex,
-			&info->screen.viewport_image, &info->screen.viewport_area);
+			&info->screen.viewport.image, &info->screen.viewport.area);
 		SDL_RenderPresent(info->renderer);
 		if (info->screen.resolution > 1)
 		{

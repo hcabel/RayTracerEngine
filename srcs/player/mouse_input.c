@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 12:11:17 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 13:15:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static int	witch_viewmode_button_clicked(t_vector2d loc, t_info *info)
 {
 	unsigned int	i;
 
-	loc.x -= info->screen.viewmode_area.x;
-	loc.y -= info->screen.viewmode_area.y;
+	loc.x -= info->screen.viewmode.area.x;
+	loc.y -= info->screen.viewmode.area.y;
 	i = 0;
-	while (i < info->screen.viewmode_content.amount)
+	while (i < info->screen.viewmode.scrollbox.amount)
 	{
-		if (aabb(info->screen.viewmode_content.list[i].area, loc) == GOOD)
-			return (info->screen.viewmode_content.list[i].clicked(info));
+		if (aabb(info->screen.viewmode.scrollbox.list[i].area, loc) == GOOD)
+			return (info->screen.viewmode.scrollbox.list[i].clicked(info));
 		else
 			i++;
 	}
@@ -35,10 +35,10 @@ static int	viewport_clicked(t_vector2d loc, t_info *info)
 	t_vector		dir;
 	t_ray_hit		ray;
 
-	loc.x -= info->screen.viewport_image.x;
-	loc.y -= info->screen.viewport_image.y;
+	loc.x -= info->screen.viewport.image.x;
+	loc.y -= info->screen.viewport.image.y;
 	dir = get_ray_direction_from_coordinate(loc, &info->scene.cam,
-		info->screen.viewport_image.w, info->screen.viewport_image.h);
+		info->screen.viewport.image.w, info->screen.viewport.image.h);
 	ray = trace_ray(&info->scene, info->scene.cam.location, dir, VIEW_DISTANCE);
 	if (ray.hit.bool == 1)
 	{
@@ -61,9 +61,9 @@ static int	witch_panel_clicked(t_vector2d loc, t_info *info)
 	int	updateviewport;
 
 	updateviewport = FAILED;
-	if (aabb(info->screen.viewmode_area, loc) == GOOD)
+	if (aabb(info->screen.viewmode.area, loc) == GOOD)
 		updateviewport = witch_viewmode_button_clicked(loc, info);
-	else if (aabb(info->screen.viewport_area, loc) == GOOD)
+	else if (aabb(info->screen.viewport.area, loc) == GOOD)
 		updateviewport = viewport_clicked(loc, info);
 	return (updateviewport);
 }

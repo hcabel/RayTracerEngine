@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   viewmode_init_buttons.c                            :+:      :+:    :+:   */
+/*   init_viewmode_buttons.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:01:00 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/08 17:01:32 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 12:55:47 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		viewmode_init_buttons(t_scrollbox *viewmode)
+static void	set_buttons_action_functions(t_button *list)
+{
+	list[0].clicked = set_lit_viewmode;
+	list[1].clicked = set_unlit_viewmode;
+	list[2].clicked = set_normalmap_viewmode;
+	list[3].clicked = set_iteration_viewmode;
+}
+
+int		viewmode_init_buttons(t_buttons_scrollbox *viewmode)
 {
 	unsigned int	i;
 	unsigned int	button_size;
@@ -35,5 +43,6 @@ int		viewmode_init_buttons(t_scrollbox *viewmode)
 			((int)color_tmp.y << 16) + ((int)color_tmp.z << 8) + 0xFF;
 		i++;
 	}
+	set_buttons_action_functions(viewmode->list);
 	return (GOOD);
 }

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 11:04:52 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 13:19:40 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,16 +180,22 @@ int				create_object_list(t_scene *scene);
 **	init_interfaces.c
 */
 int				init_interfaces(t_screen *screen);
+int				malloc_scrollbox(t_buttons_scrollbox *sb, unsigned int amount);
 
 /*
 **	viewmode_init_buttons.c
 */
-int				viewmode_init_buttons(t_scrollbox *viewmode);
+int				viewmode_init_buttons(t_buttons_scrollbox *viewmode);
 
 /*
-**	init_viewmode_scrollbox.c
+**	init_viewmode_panel.c
 */
-int				init_viewmode_scrollboxs(t_scrollbox *scrollbox);
+int				init_viewmode_panel(t_viewmode_panel *viewmode);
+
+/*
+**	init_details_panel.c
+*/
+int				init_details_panel(t_details_panel *scrollbox);
 
 /*
 ********************************************************************************

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   viewmode_area.c                                  :+:      :+:    :+:   */
+/*   viewmode.area.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "rt.h"
 
 static int	get_pixel_color_from_pixel_index(unsigned int i,
-	unsigned int width, t_scrollbox *scrollbox)
+	unsigned int width, t_buttons_scrollbox *scrollbox)
 {
 	unsigned int	button_index;
 	t_vector2d		coordinates;
@@ -41,15 +41,15 @@ void		new_viewmode_panel_frame(t_info *info)
 	unsigned int	i;
 
 	ft_printf("[DrawCall] ViewMode panel\n");
-	SDL_LockTexture(info->screen.tex, &info->screen.viewmode_area,
+	SDL_LockTexture(info->screen.tex, &info->screen.viewmode.area,
 		&info->screen.pixels, &info->screen.pitch);
 	i = 0;
-	while (i < info->screen.viewmode_area.w * info->screen.viewmode_area.h)
+	while (i < info->screen.viewmode.area.w * info->screen.viewmode.area.h)
 	{
 		color = get_pixel_color_from_pixel_index(i,
-			info->screen.viewmode_area.w, &info->screen.viewmode_content);
-		((unsigned int*)info->screen.pixels)[i % info->screen.viewmode_area.w
-			+ (i / info->screen.viewmode_area.w * WIN_WIDTH)] = color;
+			info->screen.viewmode.area.w, &info->screen.viewmode.scrollbox);
+		((unsigned int*)info->screen.pixels)[i % info->screen.viewmode.area.w
+			+ (i / info->screen.viewmode.area.w * WIN_WIDTH)] = color;
 		i++;
 	}
 	SDL_UnlockTexture(info->screen.tex);

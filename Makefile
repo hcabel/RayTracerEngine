@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/08 17:07:56 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/09 12:53:54 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS				=	aabb_algo.c					\
 						init.c						\
 						init_components.c			\
 						init_interfaces.c			\
-						init_viewmode_scrollbox.c	\
+						init_details_panel.c		\
+						init_viewmode_panel.c		\
 						input.c						\
 						keyboard_input.c			\
 						loop.c						\
@@ -57,7 +58,7 @@ SRCS				=	aabb_algo.c					\
 						vector.c					\
 						vector_init.c				\
 						viewmode_button_clicked.c	\
-						viewmode_init_buttons.c		\
+						init_viewmode_buttons.c		\
 						view_mode_panel.c			\
 						viewport.c					\
 

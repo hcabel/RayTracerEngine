@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:12:01 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 11:03:31 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 13:15:48 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void				*thread_calculs_functions(void *p)
 	info = thread_info->info;
 	i = thread_info->start_index;
 
-	while (i < (unsigned int)info->screen.viewport_image.w *
-		(unsigned int)info->screen.viewport_image.h)
+	while (i < (unsigned int)info->screen.viewport.image.w *
+		(unsigned int)info->screen.viewport.image.h)
 	{
-		co = get_pixel_coordinates(i, info->screen.viewport_image.w);
+		co = get_pixel_coordinates(i, info->screen.viewport.image.w);
 		((unsigned int*)info->screen.pixels)[(int)co.x +
 			((int)co.y * WIN_WIDTH)] = raymarching(&info->scene,
 			get_ray_direction_from_coordinate(co, &info->scene.cam,
-			info->screen.viewport_image.w, info->screen.viewport_image.h));
+			info->screen.viewport.image.w, info->screen.viewport.image.h));
 		i += RAYMARCHING_THREAD;
 	}
 	while (pthread_mutex_trylock(&info->sampling.mutex))

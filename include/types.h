@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 11:08:48 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 13:10:45 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,9 @@ typedef struct			s_screen
 	SDL_Texture			*tex;
 	void				*pixels;
 	int					pitch;
-	SDL_Rect			viewport_area;
-	SDL_Rect			viewport_image;
-	SDL_Rect			details_area;
-	SDL_Rect			viewmode_area;
-	t_scrollbox			viewmode_content;
+	t_viewport_panel	viewport;
+	t_details_panel		details;
+	t_viewmode_panel	viewmode;
 	unsigned int		resolution;
 }						t_screen;
 
