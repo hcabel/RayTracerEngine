@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/08 14:41:34 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 10:32:22 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct			s_button
 {
 	SDL_Rect			area;
 	unsigned			color;
-	void				(*clicked)(t_info*);
+	int					(*clicked)(t_info*);
 }						t_button;
 
 typedef struct			s_scrollbox
@@ -57,9 +57,9 @@ typedef struct			s_detail_panel
 /*
 **	viewmode_button_clicked.c
 */
-void	set_lit_viewmode(t_info *info);
-void	set_unlit_viewmode(t_info *info);
-void	set_iteration_viewmode(t_info *info);
-void	set_normalmap_viewmode(t_info *info);
+int		set_lit_viewmode(t_info *info);
+int		set_unlit_viewmode(t_info *info);
+int		set_iteration_viewmode(t_info *info);
+int		set_normalmap_viewmode(t_info *info);
 
 #endif
