@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 13:09:51 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 17:37:43 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,26 @@
 # include "SDL.h"
 
 # define SCROLLBAR_SIZE 5;
+# define SCROLLBAR_COLOR 0x444444FF
+# define PANEL_BACKGROUND_COLOR 0x333333FF
+# define BUTTON_COLOR 0x222222FF
+# define BUTTON_HOVER_COLOR 0xeb374aFF
 
 # define VIEWMODE_SCROLLBOX_BUTTON_AMOUNT 4
 # define VIEWMODE_BUTTONS_MARGIN 7
-# define VIEWMODE_SCROLLBAR_COLOR 0x444444ff
-# define VIEWMODE_BACKGROUND_COLOR 0x333333ff
-# define VIEWMODE_SCROLLBAR_BUTTON_COLOR 0x222222ff
 
 # define DETAILS_SCROLLBOX_BUTTON_AMOUNT 4
-# define DETAILS_BUTTONS_MARGIN 7
-# define DETAILS_SCROLLBAR_COLOR 0x444444ff
-# define DETAILS_BACKGROUND_COLOR 0x333333ff
-# define DETAILS_SCROLLBAR_BUTTON_COLOR 0x222222ff
+# define DETAILS_BUTTONS_MARGIN 10
 
 typedef struct s_info	t_info;
 
 typedef struct			s_button
 {
 	SDL_Rect			area;
-	unsigned			color;
+	unsigned int		color;
+	unsigned int		hover_color;
+	int					ishover;
+	//t_bool				ishover;
 	int					(*clicked)(t_info*);
 }						t_button;
 
@@ -50,12 +51,36 @@ typedef struct			s_buttons_scrollbox
 	t_button			scrollbar_button;
 }						t_buttons_scrollbox;
 
-typedef struct			s_switch
+typedef struct			s_selector
 {
 	SDL_Rect			area;
-	unsigned			color;
+	unsigned int		max;
+	unsigned int		min;
+	SDL_Rect			preview_area;
+	t_button			b_left;
+	t_button			b_right;
+}						t_selector;
+
+
+typedef struct			s_vector_visualizer
+{
+	SDL_Rect			area;
+	SDL_Rect			areax;
+	SDL_Rect			areay;
+	SDL_Rect			areaz;
+	t_vector			*values;
+}						t_vector_visualizer;
+
+typedef struct			s_triple_switch
+{
+	SDL_Rect			area;
+	unsigned int		activate_color;
+	unsigned int		unactivate_color;
+	t_button			first;
+	t_button			second;
+	t_button			third;
 	int					(*clicked)(t_info*);
-}						t_switch;
+}						t_triple_switch;
 
 typedef struct			s_viewmode_panel
 {
@@ -66,6 +91,11 @@ typedef struct			s_viewmode_panel
 typedef struct			s_details_panel
 {
 	SDL_Rect			area;
+	t_selector			shape_selector;
+	t_triple_switch		axis;
+	/*t_vector_visualizer	location;
+	t_vector_visualizer	rotation;
+	t_vector_visualizer	scale;*/
 	t_button			addcomponent;
 }						t_details_panel;
 

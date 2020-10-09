@@ -6,13 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 20:06:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 13:12:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 14:43:53 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	set_interfaces_areas(t_screen *screen)
+static void	init_viewport_panel(t_screen *screen)
 {
 	screen->viewport.area.x = DETAILS_AREA_SIZE;
 	screen->viewport.area.y = VIEWMODE_AREA_SIZE;
@@ -20,21 +20,13 @@ static void	set_interfaces_areas(t_screen *screen)
 	screen->viewport.area.h = WIN_HEIGTH - screen->viewport.area.y;
 	screen->viewport.image.x = screen->viewport.area.x;
 	screen->viewport.image.y = screen->viewport.area.y;
-	screen->details.area.x = 0;
-	screen->details.area.y = 0;
-	screen->details.area.w = DETAILS_AREA_SIZE;
-	screen->details.area.h = WIN_HEIGTH;
-	screen->viewmode.area.x = DETAILS_AREA_SIZE;
-	screen->viewmode.area.y = 0;
-	screen->viewmode.area.w = WIN_WIDTH - DETAILS_AREA_SIZE;
-	screen->viewmode.area.h = VIEWMODE_AREA_SIZE;
 }
 
 int			init_interfaces(t_screen *screen)
 {
 	int	code_error;
 
-	set_interfaces_areas(screen);
+	init_viewport_panel(screen);
 	if ((code_error = init_viewmode_panel(&screen->viewmode)) != GOOD)
 		return (code_error);
 	if ((code_error = init_details_panel(&screen->details)) != GOOD)
