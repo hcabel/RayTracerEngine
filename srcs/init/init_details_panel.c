@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:12:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 12:24:10 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 18:02:02 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ static void	init_selector(t_selector *selector)
 {
 	selector->preview_area.w = DETAILS_AREA_SIZE / 3;
 	selector->preview_area.h = selector->preview_area.w;
-	selector->preview_area.x = (DETAILS_AREA_SIZE - selector->preview_area.w)
-		/ 3;
-	selector->preview_area.y = DETAILS_BUTTONS_MARGIN;
+	selector->preview_area.x = 20;
+	selector->preview_area.y = 0;
 	selector->area.w = selector->preview_area.w + 20 * 2;
 	selector->area.h = selector->preview_area.h;
 	selector->area.x = (DETAILS_AREA_SIZE - selector->area.w) / 2;
@@ -39,6 +38,7 @@ static void	init_selector(t_selector *selector)
 	selector->b_right.hover_color = BUTTON_HOVER_COLOR;
 	selector->b_right.ishover.bool = 0;
 	selector->b_right.clicked = NULL; // todo
+	selector->preview = shape_selector_display;
 	// draw preview function
 }
 

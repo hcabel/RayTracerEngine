@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 13:45:50 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 14:35:04 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,8 +162,8 @@ t_matrix44f	matrix_mult(t_matrix44f a, t_matrix44f b);
 */
 t_vector	rotate_y(t_vector r, float v);
 t_vector	rotation(t_vector src, t_vector2d f);
-t_vector	get_ray_direction_from_coordinate(t_vector2d coordinates,
-				t_cam *cam, unsigned int wid, unsigned int height);
+t_vector	get_ray_direction(t_vector2d coordinates, t_vector2d rot,
+				SDL_Rect area);
 
 /*
 **	vector_2.c
@@ -305,6 +305,32 @@ void			mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event);
 **	ray Directory
 ********************************************************************************
 */
+
+/*
+**	raymarching_simplified.c
+*/
+t_ray_hit		trace_ray_simplified(t_vector start, t_vector dir,
+					t_object *obj);
+
+
+
+
+
+
+
+
+unsigned int	shape_selector_display(t_vector2d loc, t_info *info);
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 **	raymarching.c

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 12:30:05 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 14:34:34 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct			s_selector
 	SDL_Rect			preview_area;
 	t_button			b_left;
 	t_button			b_right;
+	unsigned int		(*preview)(t_vector2d, t_info*);
 }						t_selector;
 
 

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/01 18:11:05 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/05 18:47:24 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 18:27:08 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ float	sdf_cylinder(t_vector p, t_vector obj_scale)
 	float	d;
 	float	e;
 
-	a = sqrt(p.x * p.x + p.z * p.z) - obj_scale.x / 10;
+	a = sqrt(p.x * p.x + p.z * p.z) - obj_scale.x;
 	b = fabs(p.y) - obj_scale.y;
 	c = fmaxf(a, 0.0);
 	d = fmaxf(b, 0.0);

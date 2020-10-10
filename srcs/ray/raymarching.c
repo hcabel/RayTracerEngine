@@ -6,34 +6,11 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 11:44:00 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 17:47:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static double		get_nearest_surface_distance(t_scene *scene, t_vector p,
-						t_object **nearest_obj)
-{
-	double			distance;
-	double			tmp;
-	unsigned int	i;
-
-	distance = -1;
-	i = 0;
-	while (i < scene->shapes_amount)
-	{
-		tmp = scene->shapes[i].sdf(vector_subtract(p,
-			scene->shapes[i].location), scene->shapes[i].scale);
-		if (distance == -1 || distance > tmp)
-		{
-			*nearest_obj = &scene->shapes[i];
-			distance = tmp;
-		}
-		i++;
-	}
-	return (distance);
-}
 
 static float		get_light_intensity(t_scene *scene, t_vector hit_location,
 						t_object *hit_obj)

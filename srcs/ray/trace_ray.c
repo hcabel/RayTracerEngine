@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 11:42:28 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 13:05:25 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 17:47:22 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,37 +35,39 @@ static double	get_nearest_surface_distance(t_scene *scene, t_vector p,
 	return (distance);
 }
 
-t_ray_hit	trace_ray(t_scene *scene, t_vector start_location,
-					t_vector dir, float max_distance)
+static t_ray_hit		ray_return(float depth, unsigned int loop_index,
+	t_object *obj, int b, t_vector loc)
 {
-	t_ray_hit		hitinfos;
+	t_ray_hit	hitinfos;
+
+	hitinfos.hit.bool = b;
+	hitinfos.distance = depth;
+	hitinfos.recursion = loop_index;
+	hitinfos.location = loc;
+	hitinfos.hit_object = obj;
+	return (hitinfos);
+}
+
+t_ray_hit			trace_ray(t_scene *scene, t_vector start_location,
+						t_vector dir, float max_distance)
+{
+	t_object		*obj;
 	unsigned int	loop_index;
 	double			depth;
 	double			nearest_surface;
 
 	loop_index = 0;
 	depth = 0;
-	hitinfos.hit_object = &scene->shapes[0];
 	while (loop_index < RAY_LOOP && depth < max_distance)
 	{
 		nearest_surface = get_nearest_surface_distance(scene,
-			vector_add(start_location, vector_mult(dir, depth)),
-			&hitinfos.hit_object);
+			vector_add(start_location, vector_mult(dir, depth)), &obj);
 		if (nearest_surface <= RAY_PRECIS)
-		{
-			hitinfos.hit.bool = 1;
-			hitinfos.distance = depth;
-			hitinfos.recursion = loop_index;
-			hitinfos.location = vector_add(start_location,
-				vector_mult(dir, depth));
-			return (hitinfos);
-		}
+			return (ray_return(depth, loop_index, obj, 1,
+				vector_add(start_location, vector_mult(dir, depth))));
 		depth += nearest_surface;
 		loop_index++;
 	}
-	hitinfos.hit.bool = (depth < max_distance ? 1 : 0);
-	hitinfos.distance = depth;
-	hitinfos.recursion = loop_index;
-	hitinfos.location = vector_add(start_location, vector_mult(dir, depth));
-	return (hitinfos);
+	return (ray_return(depth, loop_index, obj, (depth < max_distance ? 1 : 0),
+		vector_add(start_location, vector_mult(dir, depth))));
 }
