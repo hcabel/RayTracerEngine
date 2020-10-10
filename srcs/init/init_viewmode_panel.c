@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:12:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 17:24:45 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:04:11 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int			init_viewmode_panel(t_viewmode_panel *viewmode)
 	viewmode->scrollbox.area.w = viewmode->area.w;
 	viewmode->scrollbox.area.x = 0;
 	viewmode->scrollbox.area.y = 0;
-	viewmode->scrollbox.color = PANEL_BACKGROUND_COLOR;
 	viewmode->scrollbox.scrollbar_area.x = 0;
 	viewmode->scrollbox.scrollbar_area.y = VIEWMODE_AREA_SIZE - SCROLLBAR_SIZE;
 	viewmode->scrollbox.scrollbar_area.h = SCROLLBAR_SIZE;

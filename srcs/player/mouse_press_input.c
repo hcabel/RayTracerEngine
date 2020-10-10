@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 18:02:11 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:04:17 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event)
 		updateviewport = witch_panel_clicked(mouse_location, info);
 	if (updateviewport == GOOD)
 	{
-		info->screen.resolution = FIRST_RESOLUTION;
+		info->screen.viewport.resolution = FIRST_RESOLUTION;
 		draw_calls_add(info, DRAWCALL_VIEWPORT);
 	}
 }
