@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 11:09:27 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 11:53:38 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct			s_viewmode_panel
 {
 	SDL_Rect			area;
 	t_buttons_scrollbox	scrollbox;
+	void				*pixels;
 }						t_viewmode_panel;
 
 typedef struct			s_details_panel
@@ -97,13 +98,17 @@ typedef struct			s_details_panel
 	t_vector_visualizer	rotation;
 	t_vector_visualizer	scale;*/
 	t_button			addcomponent;
+	void				*pixels;
 }						t_details_panel;
 
 typedef struct			s_viewport_panel
 {
 	SDL_Rect			area;
-	t_buttons_scrollbox	scrollbox;
 	SDL_Rect			image;
+	SDL_Texture			*tex;
+	int					pitch;
+	void				*pixels;
+	unsigned int		resolution;
 }						t_viewport_panel;
 
 

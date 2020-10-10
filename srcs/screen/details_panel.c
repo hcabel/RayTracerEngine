@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 11:52:54 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 11:17:46 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 11:51:48 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,19 @@ void				new_details_panel_frame(t_info *info)
 
 	ft_printf("[DrawCall] Details panel\n");
 	SDL_LockTexture(info->screen.tex, &info->screen.details.area,
-		&info->screen.pixels, &info->screen.pitch);
+		&info->screen.details.pixels, &info->screen.pitch);
 	i = 0;
 	while (i < info->screen.details.area.w *
 		info->screen.details.area.h)
 	{
 		color = get_pixel_color(get_pixel_coordinates(i,
 			info->screen.details.area.w), &info->screen.details);
-		((unsigned int*)info->screen.pixels)[i % info->screen.details.area.w +
+		((unsigned int*)info->screen.details.pixels)[i % info->screen.details.area.w +
 			(i / info->screen.details.area.w * WIN_WIDTH)] = color;
 		i++;
 	}
 	SDL_UnlockTexture(info->screen.tex);
-	SDL_RenderCopy(info->renderer, info->screen.tex, NULL, NULL);
+	SDL_RenderCopy(info->renderer, info->screen.tex,
+		&info->screen.details.area, &info->screen.details.area);
 	SDL_RenderPresent(info->renderer);
 }

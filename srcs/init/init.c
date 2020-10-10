@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 13:07:16 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:01:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ static int	init_sdl(t_info *info)
 		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
 		WIN_WIDTH, WIN_HEIGTH)))
 		return (SDL_ERROR);
+	if (!(info->screen.viewport.tex = SDL_CreateTexture(info->renderer,
+		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
+		WIN_WIDTH, WIN_HEIGTH)))
+		return (SDL_ERROR);
 	return(GOOD);
 }
 
@@ -39,7 +43,7 @@ static int	init_info_structure(t_info *info)
 	info->update_function_list[2] = DRAWCALL_VIEWPORT;
 	pthread_mutex_init(&info->sampling.mutex, NULL);
 	info->sampling.threads_status = powf(2, RAYMARCHING_THREAD) - 1;
-	info->screen.resolution = FIRST_RESOLUTION;
+	info->screen.viewport.resolution = FIRST_RESOLUTION;
 	info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) *
 		cos(info->scene.cam.rotation.y);
 	info->scene.cam.forward.y = cos(info->scene.cam.rotation.x) *

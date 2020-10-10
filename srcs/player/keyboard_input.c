@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:30:09 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/08 12:37:59 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 11:52:17 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void	keyboard_input(t_bool *quit, t_info *info, SDL_Event *event)
 	printf("	Cam rotation : {%.2f %.2f}\n",
 		info->scene.cam.rotation.x, info->scene.cam.rotation.y);
 
-	info->screen.resolution = FIRST_RESOLUTION;
+	info->screen.viewport.resolution = FIRST_RESOLUTION;
 	draw_calls_add(info, DRAWCALL_VIEWPORT);
 }

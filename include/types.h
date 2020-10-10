@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 20:19:09 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 11:50:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,10 @@ typedef struct			s_scene
 typedef struct			s_screen
 {
 	SDL_Texture			*tex;
-	void				*pixels;
 	int					pitch;
 	t_viewport_panel	viewport;
 	t_details_panel		details;
 	t_viewmode_panel	viewmode;
-	unsigned int		resolution;
 }						t_screen;
 
 typedef struct			s_thread

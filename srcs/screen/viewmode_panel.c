@@ -46,17 +46,18 @@ void		new_viewmode_panel_frame(t_info *info)
 
 	ft_printf("[DrawCall] ViewMode panel\n");
 	SDL_LockTexture(info->screen.tex, &info->screen.viewmode.area,
-		&info->screen.pixels, &info->screen.pitch);
+		&info->screen.viewmode.pixels, &info->screen.pitch);
 	i = 0;
 	while (i < info->screen.viewmode.area.w * info->screen.viewmode.area.h)
 	{
 		color = get_pixel_color_from_pixel_index(i,
 			info->screen.viewmode.area.w, &info->screen.viewmode.scrollbox);
-		((unsigned int*)info->screen.pixels)[i % info->screen.viewmode.area.w
+		((unsigned int*)info->screen.viewmode.pixels)[i % info->screen.viewmode.area.w
 			+ (i / info->screen.viewmode.area.w * WIN_WIDTH)] = color;
 		i++;
 	}
 	SDL_UnlockTexture(info->screen.tex);
-	SDL_RenderCopy(info->renderer, info->screen.tex, NULL, NULL);
+	SDL_RenderCopy(info->renderer, info->screen.tex,
+		&info->screen.viewmode.area, &info->screen.viewmode.area);
 	SDL_RenderPresent(info->renderer);
 }
