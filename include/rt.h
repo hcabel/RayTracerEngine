@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 17:54:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:50:53 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,7 @@ t_ray_hit		trace_ray(t_scene *scene, t_vector start_location,
 **	thread_utils.c
 */
 int				all_threads_are_done(t_sampling *sampling);
+void			kill_all_thread(t_sampling *sampling);
 
 /*
 **	raymarching_thread.c

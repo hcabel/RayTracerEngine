@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 11:15:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:24:50 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static int	witch_viewmode_button_hovered(t_vector2d loc,
 	{
 		if (aabb(viewmode->scrollbox.list[i].area, loc) == GOOD)
 		{
-			if (viewmode->scrollbox.list[i].ishover != 1)
+			if (viewmode->scrollbox.list[i].ishover.bool != 1)
 				result = GOOD;
-			viewmode->scrollbox.list[i].ishover = 1;
+			viewmode->scrollbox.list[i].ishover.bool = 1;
 		}
-		else if (viewmode->scrollbox.list[i].ishover == 1)
+		else if (viewmode->scrollbox.list[i].ishover.bool == 1)
 		{
-			viewmode->scrollbox.list[i].ishover = 0;
+			viewmode->scrollbox.list[i].ishover.bool = 0;
 			result = GOOD;
 		}
 		i++;
@@ -50,24 +50,24 @@ static int	witch_details_sector_button_hovered(t_vector2d loc,
 	result = FAILED;
 	if (aabb(selector->b_left.area, loc) == GOOD)
 	{
-		if (selector->b_left.ishover != 1)
+		if (selector->b_left.ishover.bool != 1)
 			result = GOOD;
-		selector->b_left.ishover = 1;
+		selector->b_left.ishover.bool = 1;
 	}
-	else if (selector->b_left.ishover == 1)
+	else if (selector->b_left.ishover.bool == 1)
 	{
-		selector->b_left.ishover = 0;
+		selector->b_left.ishover.bool = 0;
 		result = GOOD;
 	}
 	if (aabb(selector->b_right.area, loc) == GOOD)
 	{
-		if (selector->b_right.ishover != 1)
+		if (selector->b_right.ishover.bool != 1)
 			result = GOOD;
-		selector->b_right.ishover = 1;
+		selector->b_right.ishover.bool = 1;
 	}
-	else if (selector->b_right.ishover == 1)
+	else if (selector->b_right.ishover.bool == 1)
 	{
-		selector->b_right.ishover = 0;
+		selector->b_right.ishover.bool = 0;
 		result = GOOD;
 	}
 	return (result);
@@ -83,13 +83,13 @@ static int	witch_details_button_hovered(t_vector2d loc,
 	result = witch_details_sector_button_hovered(loc, &details->shape_selector);
 	if (aabb(details->addcomponent.area, loc) == GOOD)
 	{
-		if (details->addcomponent.ishover != 1)
+		if (details->addcomponent.ishover.bool != 1)
 			result = GOOD;
-		details->addcomponent.ishover = 1;
+		details->addcomponent.ishover.bool = 1;
 	}
-	else if (details->addcomponent.ishover == 1)
+	else if (details->addcomponent.ishover.bool == 1)
 	{
-		details->addcomponent.ishover = 0;
+		details->addcomponent.ishover.bool = 0;
 		result = GOOD;
 	}
 	return (result);

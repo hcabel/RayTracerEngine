@@ -6,17 +6,38 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:12:01 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 11:59:26 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 13:01:12 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void				*thread_calculs_functions(void *p)
+static void	set_thread_is_finish(t_info *info, t_thread *thread_info)
+{
+	while (pthread_mutex_trylock(&info->screen.viewport.sampling.mutex))
+		;
+	info->screen.viewport.sampling.threads_status |=
+		1 << thread_info->start_index;
+	pthread_mutex_unlock(&info->screen.viewport.sampling.mutex);
+}
+
+static void	calcule_for_each_pixel(t_info *info, t_thread *thread_info,
+				unsigned int i)
+{
+	t_vector2d	coordinates;
+	t_vector	dir;
+
+	coordinates = get_pixel_coordinates(i, info->screen.viewport.image.w);
+	dir = get_ray_direction_from_coordinate(coordinates, &info->scene.cam,
+		info->screen.viewport.image.w, info->screen.viewport.image.h);
+	((unsigned int*)info->screen.viewport.pixels)[(int)coordinates.x +
+		((int)coordinates.y * WIN_WIDTH)] = raymarching(&info->scene, dir);
+}
+
+void		*thread_calculs_functions(void *p)
 {
 	t_thread		*thread_info;
 	t_info			*info;
-	t_vector2d		co;
 	unsigned int	i;
 
 	thread_info = p;
@@ -25,17 +46,16 @@ void				*thread_calculs_functions(void *p)
 	while (i < (unsigned int)info->screen.viewport.image.w *
 		(unsigned int)info->screen.viewport.image.h)
 	{
-		co = get_pixel_coordinates(i, info->screen.viewport.image.w);
-		((unsigned int*)info->screen.viewport.pixels)[(int)co.x +
-			((int)co.y * WIN_WIDTH)] = raymarching(&info->scene,
-			get_ray_direction_from_coordinate(co, &info->scene.cam,
-			info->screen.viewport.image.w, info->screen.viewport.image.h));
+		if (info->screen.viewport.sampling.kill_thread.bool == 1)
+		{
+			set_thread_is_finish(info, thread_info);
+			pthread_exit(NULL);
+			return ((void*)0);
+		}
+		calcule_for_each_pixel(info, thread_info, i);
 		i += RAYMARCHING_THREAD;
 	}
-	while (pthread_mutex_trylock(&info->sampling.mutex))
-		;
-	info->sampling.threads_status |= 1 << thread_info->start_index;
-	pthread_mutex_unlock(&info->sampling.mutex);
+	set_thread_is_finish(info, thread_info);
 	pthread_exit(NULL);
 	return ((void*)0);
 }

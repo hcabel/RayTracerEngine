@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 11:52:54 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 11:51:48 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:23:59 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static unsigned int	get_selector_color(t_vector2d loc, t_selector *selector)
 	loc.x -= selector->area.x;
 	loc.y -= selector->area.y;
 	if (aabb(selector->b_left.area, loc) == GOOD)
-		return (selector->b_left.ishover == 1 ? selector->b_left.hover_color :
-			selector->b_left.color);
+		return (selector->b_left.ishover.bool == 1 ?
+			selector->b_left.hover_color : selector->b_left.color);
 	else if (aabb(selector->b_right.area, loc) == GOOD)
-		return (selector->b_right.ishover == 1 ? selector->b_right.hover_color :
-			selector->b_right.color);
+		return (selector->b_right.ishover .bool== 1 ?
+			selector->b_right.hover_color : selector->b_right.color);
 	else if (aabb(selector->preview_area, loc) == GOOD)
 		return (0);
 	return (0);
@@ -32,7 +32,7 @@ unsigned int		get_pixel_color(t_vector2d loc, t_details_panel *details)
 	if (aabb(details->shape_selector.area, loc) == GOOD)
 		return (get_selector_color(loc, &details->shape_selector));
 	if (aabb(details->addcomponent.area, loc) == GOOD)
-		return (details->addcomponent.ishover == 1 ?
+		return (details->addcomponent.ishover.bool == 1 ?
 			details->addcomponent.hover_color : details->addcomponent.color);
 	return (DETAILS_BACKGROUND_COLOR);
 }

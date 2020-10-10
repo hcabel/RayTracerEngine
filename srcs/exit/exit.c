@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:36:14 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 16:43:17 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 13:21:46 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static void	get_error_info(int code)
 
 int			program_exit(t_info *info, int code)
 {
-	while (all_threads_are_done(&info->sampling) != GOOD)
-		;
+	kill_all_thread(&info->screen.viewport.sampling);
 	if (code != GOOD)
 		get_error_info(code);
 	else

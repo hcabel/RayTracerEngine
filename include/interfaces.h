@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 11:53:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:30:05 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,17 @@
 
 typedef struct s_info	t_info;
 
+typedef struct			s_bool
+{
+	unsigned			bool:1;
+}						t_bool;
+
 typedef struct			s_button
 {
 	SDL_Rect			area;
 	unsigned int		color;
 	unsigned int		hover_color;
-	int					ishover;
-	//t_bool				ishover;
+	t_bool				ishover;
 	int					(*clicked)(t_info*);
 }						t_button;
 
@@ -100,16 +104,5 @@ typedef struct			s_details_panel
 	t_button			addcomponent;
 	void				*pixels;
 }						t_details_panel;
-
-typedef struct			s_viewport_panel
-{
-	SDL_Rect			area;
-	SDL_Rect			image;
-	SDL_Texture			*tex;
-	int					pitch;
-	void				*pixels;
-	unsigned int		resolution;
-}						t_viewport_panel;
-
 
 #endif

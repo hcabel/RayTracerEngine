@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:12:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 11:16:15 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:24:10 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	init_selector(t_selector *selector)
 	selector->b_left.area.y = 0;
 	selector->b_left.color = BUTTON_COLOR;
 	selector->b_left.hover_color = BUTTON_HOVER_COLOR;
-	selector->b_left.ishover = 0;
+	selector->b_left.ishover.bool = 0;
 	selector->b_left.clicked = NULL; // todo
 	selector->b_right.area.w = 20;
 	selector->b_right.area.h = selector->preview_area.h;
@@ -37,7 +37,7 @@ static void	init_selector(t_selector *selector)
 	selector->b_right.area.y = 0;
 	selector->b_right.color = BUTTON_COLOR;
 	selector->b_right.hover_color = BUTTON_HOVER_COLOR;
-	selector->b_right.ishover = 0;
+	selector->b_right.ishover.bool = 0;
 	selector->b_right.clicked = NULL; // todo
 	// draw preview function
 }

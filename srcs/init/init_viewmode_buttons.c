@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:01:00 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 20:06:44 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:24:58 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		viewmode_init_buttons(t_buttons_scrollbox *viewmode)
 		viewmode->list[i].area.y = VIEWMODE_BUTTONS_MARGIN;
 		viewmode->list[i].color = BUTTON_COLOR;
 		viewmode->list[i].hover_color = BUTTON_HOVER_COLOR;
-		viewmode->list[i].ishover = 0;
+		viewmode->list[i].ishover.bool = 0;
 		i++;
 	}
 	set_buttons_action_functions(viewmode->list);

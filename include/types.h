@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 11:50:51 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 13:19:07 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # define WIN_HEIGTH 800
 # define WIN_WIDTH 1180
 
-# define RAY_LOOP 50
-# define CPU_THREAD 20
+# define RAY_LOOP 100
+# define CPU_THREAD 5
 # define FIRST_RESOLUTION 24
-# define VIEW_DISTANCE 50
+# define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
 
 # define DETAILS_AREA_SIZE 200
@@ -33,6 +33,7 @@
 
 /*
 **	Code understanding define
+**	(Please don't touch)
 */
 # define MAX_DRAWCALL 4
 # define RAYMARCHING_THREAD (CPU_THREAD - 1)
@@ -49,10 +50,11 @@
 # define DRAWCALL_DETAILS_PANEL new_details_panel_frame
 # define DRAWCALL_VIEWMODE_PANEL new_viewmode_panel_frame
 
-typedef struct			s_bool
+typedef struct			s_thread
 {
-	unsigned			bool:1;
-}						t_bool;
+	unsigned int		start_index;
+	t_info				*info;
+}						t_thread;
 
 typedef struct			s_object
 {
@@ -90,6 +92,27 @@ typedef struct			s_scene
 	int					target_type;
 }						t_scene;
 
+typedef struct			s_sampling
+{
+	pthread_t			threads[RAYMARCHING_THREAD];
+	t_thread			threads_infos[RAYMARCHING_THREAD];
+	pthread_mutex_t		mutex;
+	long long			threads_status;
+	long long			threads_end_status;
+	t_bool				kill_thread;
+}						t_sampling;
+
+typedef struct			s_viewport_panel
+{
+	SDL_Rect			area;
+	SDL_Rect			image;
+	SDL_Texture			*tex;
+	int					pitch;
+	void				*pixels;
+	unsigned int		resolution;
+	t_sampling			sampling;
+}						t_viewport_panel;
+
 typedef struct			s_screen
 {
 	SDL_Texture			*tex;
@@ -98,20 +121,6 @@ typedef struct			s_screen
 	t_details_panel		details;
 	t_viewmode_panel	viewmode;
 }						t_screen;
-
-typedef struct			s_thread
-{
-	unsigned int		start_index;
-	t_info				*info;
-}						t_thread;
-
-typedef struct			s_sampling
-{
-	pthread_t			threads[RAYMARCHING_THREAD];
-	t_thread			threads_infos[RAYMARCHING_THREAD];
-	pthread_mutex_t		mutex;
-	long long			threads_status;
-}						t_sampling;
 
 typedef struct			s_info
 {
@@ -122,7 +131,6 @@ typedef struct			s_info
 	t_screen			screen;
 	t_scene				scene;
 	pthread_t			hook;
-	t_sampling			sampling;
 }						t_info;
 
 typedef struct			s_parsing

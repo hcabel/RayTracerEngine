@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 12:04:17 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:10:15 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ static int	viewport_clicked(t_vector2d loc, t_info *info)
 	t_vector		dir;
 	t_ray_hit		ray;
 
-	loc.x -= info->screen.viewport.image.x;
-	loc.y -= info->screen.viewport.image.y;
+	loc.x -= info->screen.viewport.area.x;
+	loc.y -= info->screen.viewport.area.y;
+
+	loc.x /= info->screen.viewport.resolution;
+	loc.y /= info->screen.viewport.resolution;
+
 	dir = get_ray_direction_from_coordinate(loc, &info->scene.cam,
 		info->screen.viewport.image.w, info->screen.viewport.image.h);
 	ray = trace_ray(&info->scene, info->scene.cam.location, dir, VIEW_DISTANCE);

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 12:01:51 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 12:50:56 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ static int	init_info_structure(t_info *info)
 	info->update_function_list[0] = DRAWCALL_DETAILS_PANEL;
 	info->update_function_list[1] = DRAWCALL_VIEWMODE_PANEL;
 	info->update_function_list[2] = DRAWCALL_VIEWPORT;
-	pthread_mutex_init(&info->sampling.mutex, NULL);
-	info->sampling.threads_status = powf(2, RAYMARCHING_THREAD) - 1;
+	pthread_mutex_init(&info->screen.viewport.sampling.mutex, NULL);
+	info->screen.viewport.sampling.threads_end_status =
+		powf(2, RAYMARCHING_THREAD) - 1;
+	info->screen.viewport.sampling.threads_status =
+		info->screen.viewport.sampling.threads_end_status;
 	info->screen.viewport.resolution = FIRST_RESOLUTION;
 	info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) *
 		cos(info->scene.cam.rotation.y);
@@ -52,6 +55,7 @@ static int	init_info_structure(t_info *info)
 	info->scene.cam.viewmode = 0;
 	info->scene.target = NULL;
 	info->scene.target_type = 0;
+	info->screen.viewport.sampling.kill_thread.bool = 0;
 	return (GOOD);
 }
 
