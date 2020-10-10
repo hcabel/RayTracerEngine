@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 12:10:15 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 13:57:38 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,34 @@ static int	viewport_clicked(t_vector2d loc, t_info *info)
 	unsigned int	i;
 	t_vector		dir;
 	t_ray_hit		ray;
+	int				result;
 
 	loc.x -= info->screen.viewport.area.x;
 	loc.y -= info->screen.viewport.area.y;
-
 	loc.x /= info->screen.viewport.resolution;
 	loc.y /= info->screen.viewport.resolution;
-
+	result = FAILED;
 	dir = get_ray_direction_from_coordinate(loc, &info->scene.cam,
 		info->screen.viewport.image.w, info->screen.viewport.image.h);
 	ray = trace_ray(&info->scene, info->scene.cam.location, dir, VIEW_DISTANCE);
 	if (ray.hit.bool == 1)
 	{
+		if (ray.hit_object->istarget.bool != 1)
+			result = GOOD;
 		if (info->scene.target != NULL)
 			((t_object*)info->scene.target)->istarget.bool = 0;
 		ray.hit_object->istarget.bool = 1;
 		info->scene.target = ray.hit_object;
 		info->scene.target_type = 1;
-		return (GOOD);
+		return (result);
 	}
+	if (info->scene.target != NULL)
+			result = GOOD;
 	if (info->scene.target != NULL && info->scene.target_type == 1)
 		((t_object*)info->scene.target)->istarget.bool = 0;
 	info->scene.target = NULL;
 	info->scene.target_type = 0;
-	return (GOOD);
+	return (result);
 }
 
 static int	witch_panel_clicked(t_vector2d loc, t_info *info)
