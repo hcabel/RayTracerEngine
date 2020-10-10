@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 13:10:45 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 20:19:09 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # define WIN_HEIGTH 800
 # define WIN_WIDTH 1180
 
-# define RAY_LOOP 100
+# define RAY_LOOP 50
 # define CPU_THREAD 20
 # define FIRST_RESOLUTION 24
-# define VIEW_DISTANCE 200
+# define VIEW_DISTANCE 50
 # define RAY_PRECIS 0.0005
 
 # define DETAILS_AREA_SIZE 200
@@ -34,7 +34,7 @@
 /*
 **	Code understanding define
 */
-# define MAX_DRAWCALL 5
+# define MAX_DRAWCALL 4
 # define RAYMARCHING_THREAD (CPU_THREAD - 1)
 
 # define FAILED -1

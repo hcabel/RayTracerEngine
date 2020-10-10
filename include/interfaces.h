@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 17:37:43 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 11:09:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 
 # define SCROLLBAR_SIZE 5;
 # define SCROLLBAR_COLOR 0x444444FF
-# define PANEL_BACKGROUND_COLOR 0x333333FF
-# define BUTTON_COLOR 0x222222FF
-# define BUTTON_HOVER_COLOR 0xeb374aFF
+# define BUTTON_COLOR 0x063547FF
+# define BUTTON_HOVER_COLOR 0xEC3547FF
 
 # define VIEWMODE_SCROLLBOX_BUTTON_AMOUNT 4
 # define VIEWMODE_BUTTONS_MARGIN 7
+# define VIEWMODE_BACKGROUND_COLOR 0x1C1C22FF
 
+# define DETAILS_BACKGROUND_COLOR 0x24242BFF
 # define DETAILS_SCROLLBOX_BUTTON_AMOUNT 4
 # define DETAILS_BUTTONS_MARGIN 10
 
@@ -45,7 +46,6 @@ typedef struct			s_buttons_scrollbox
 	t_button			*list;
 	unsigned int		amount;
 	unsigned int		current;
-	unsigned int		color;
 	unsigned int		scrollbar_color;
 	SDL_Rect			scrollbar_area;
 	t_button			scrollbar_button;

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:01:00 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 17:38:30 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 20:06:44 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,9 @@ int		viewmode_init_buttons(t_buttons_scrollbox *viewmode)
 		viewmode->list[i].area.x = i * (button_size + VIEWMODE_BUTTONS_MARGIN)
 			+ viewmode->area.x + VIEWMODE_BUTTONS_MARGIN;
 		viewmode->list[i].area.y = VIEWMODE_BUTTONS_MARGIN;
-		color_tmp.x = rand() % 155 + 100;
-		color_tmp.y = rand() % 155 + 100;
-		color_tmp.z = rand() % 155 + 100;
-		viewmode->list[i].color = ((int)color_tmp.x << 24) +
-			((int)color_tmp.y << 16) + ((int)color_tmp.z << 8) + 0xFF;
+		viewmode->list[i].color = BUTTON_COLOR;
 		viewmode->list[i].hover_color = BUTTON_HOVER_COLOR;
-		viewmode->list[i].ishover = 1;
+		viewmode->list[i].ishover = 0;
 		i++;
 	}
 	set_buttons_action_functions(viewmode->list);

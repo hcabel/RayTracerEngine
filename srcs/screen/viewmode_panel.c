@@ -23,16 +23,20 @@ static int	get_pixel_color_from_pixel_index(unsigned int i,
 	while (button_index < scrollbox->amount)
 	{
 		if (aabb(scrollbox->list[button_index].area, coordinates) == GOOD)
-			return (scrollbox->list[button_index].color);
+			return (scrollbox->list[button_index].ishover == 1 ?
+				scrollbox->list[button_index].hover_color :
+				scrollbox->list[button_index].color);
 		button_index++;
 	}
 	if (aabb(scrollbox->scrollbar_area, coordinates) == GOOD)
 	{
 		if (aabb(scrollbox->scrollbar_button.area, coordinates) == GOOD)
-			return (scrollbox->scrollbar_button.color);
+			return (scrollbox->scrollbar_button.ishover ?
+				scrollbox->scrollbar_button.hover_color :
+				scrollbox->scrollbar_button.color);
 		return (scrollbox->scrollbar_color);
 	}
-	return (scrollbox->color);
+	return (VIEWMODE_BACKGROUND_COLOR);
 }
 
 void		new_viewmode_panel_frame(t_info *info)

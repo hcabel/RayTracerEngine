@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:12:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 17:45:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 11:16:15 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static void	init_buttons(t_details_panel *details)
 	details->addcomponent.area.w = details->area.w;
 	details->addcomponent.area.h = 20;
 	details->addcomponent.color = BUTTON_COLOR;
+	details->addcomponent.hover_color = BUTTON_HOVER_COLOR;
 
 }
 

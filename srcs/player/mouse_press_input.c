@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_input.c                                      :+:      :+:    :+:   */
+/*   mouse_press_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 13:15:29 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 18:02:11 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	witch_panel_clicked(t_vector2d loc, t_info *info)
 	return (updateviewport);
 }
 
-void		mouse_input(t_bool *quit, t_info *info, SDL_Event *event)
+void		mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event)
 {
 	int			updateviewport;
 	t_vector2d	mouse_location;

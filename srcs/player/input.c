@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 15:19:18 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/08 14:38:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 18:29:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void	hook_event(t_bool *quit, t_info *info)
 	else if (event.type == SDL_KEYDOWN)
 		keyboard_input(quit, info, &event);
 	else if (event.type == SDL_MOUSEBUTTONDOWN)
-		mouse_input(quit, info, &event);
+		mouse_press_input(quit, info, &event);
+	else if (event.type == SDL_MOUSEMOTION)
+		mouse_move_input(quit, info, &event);
 }

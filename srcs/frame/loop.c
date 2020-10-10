@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 10:30:45 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/06 16:41:51 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 20:51:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		loop(t_info *info)
 		tick = SDL_GetTicks();
 		hook_event(&quit, info);
 		draw_calls_execution(info);
-		SDL_Delay((1000 / (float)60) - (tick - SDL_GetTicks()));
+		SDL_Delay(fmaxf(0, (1000 / 120) - (SDL_GetTicks() - tick)));
 	}
 	return (GOOD);
 }

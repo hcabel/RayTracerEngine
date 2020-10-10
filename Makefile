@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/09 13:24:13 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/09 17:50:48 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS				=	aabb_algo.c					\
 						loop.c						\
 						main.c						\
 						matrix44.c					\
-						mouse_input.c				\
+						mouse_press_input.c			\
+						mouse_move_input.c			\
 						normal_map.c				\
 						parse_camera_parameters.c	\
 						parse_components.c			\

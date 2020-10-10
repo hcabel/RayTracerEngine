@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 13:19:40 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/09 17:54:12 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,14 @@ void			hook_event(t_bool *quit, t_info *info);
 void			keyboard_input(t_bool *quit, t_info *info, SDL_Event *event);
 
 /*
-**	mouse_input.c
+**	mouse_press_input.c
 */
-void			mouse_input(t_bool *quit, t_info *info, SDL_Event *event);
+void			mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event);
+
+/*
+**	mouse_move_input.c
+*/
+void			mouse_move_input(t_bool *quit, t_info *info, SDL_Event *event);
 
 /*
 ********************************************************************************
