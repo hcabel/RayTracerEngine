@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 13:19:07 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 13:51:07 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define WIN_WIDTH 1180
 
 # define RAY_LOOP 100
-# define CPU_THREAD 5
-# define FIRST_RESOLUTION 24
+# define CPU_THREAD 20
+# define FIRST_RESOLUTION 16
 # define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
 

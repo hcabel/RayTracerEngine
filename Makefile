@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/09 17:50:48 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/10 13:37:48 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ SRCS				=	aabb_algo.c					\
 						viewmode_button_clicked.c	\
 						init_viewmode_buttons.c		\
 						viewmode_panel.c			\
-						viewport.c					\
+						viewport_panel.c			\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

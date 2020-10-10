@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:12:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 12:04:11 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/10 13:30:02 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_scrollbar(t_buttons_scrollbox *viewmode)
 	viewmode->scrollbar_button.area.y = VIEWMODE_AREA_SIZE
 		- SCROLLBAR_SIZE;
 	viewmode->scrollbar_button.color = BUTTON_COLOR;
+	viewmode->scrollbar_button.hover_color = BUTTON_HOVER_COLOR;
 }
 
 int			init_viewmode_panel(t_viewmode_panel *viewmode)
