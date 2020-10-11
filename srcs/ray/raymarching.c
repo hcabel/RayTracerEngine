@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/11 12:33:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/11 16:47:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static unsigned int	get_color_from_viewmode(t_scene *scene, t_ray_hit *ray,
 	else if (ray->hit.bool == 1)
 	{
 		intensity = get_light_intensity(scene, ray->location,
-			ray->hit_object, olddir);
+			ray->hit_object, olddir, scene->lights);
 		intensity *= fabs(fmaxf(ray->distance / VIEW_DISTANCE, 0.5)
 			- 1) * (1 / (1 - 0.5));
 		color.x = (ray->hit_object->color.x * intensity);

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/11 12:31:43 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/11 16:47:03 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,7 +315,7 @@ void			mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event);
 **	light_ray.c
 */
 float	get_light_intensity(t_scene *scene, t_vector hit_location,
-			t_object *hit_obj, t_vector olddir);
+			t_object *hit_obj, t_vector olddir, t_light *lights);
 
 /*
 **	raymarching_simplified.c

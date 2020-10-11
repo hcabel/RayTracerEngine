@@ -1,72 +1,72 @@
 [Object:sphere]
-	Location: {2, 20, 2}
-	scale: {1}
+	Location: {20, 20, 25}
+	scale: {5}
 	Color: 0x990066
 [Object:cone]
-	Location: {0, 1, 0}
-	scale: {1}
+	Location: {0, 10, 0}
+	scale: {5}
 	Color: 0xfc9403
 [Object:cube]
-	Location: {0, -1, 0}
-	scale: {1}
+	Location: {0, -10, 0}
+	scale: {5}
 	Color: 0xfc9403
 [Object:sphere]
-	Location: {-2, -2, 2}
-	scale: {1}
+	Location: {-20, -20, 25}
+	scale: {5}
 	Color: 0x990066
 [Object:sphere]
-	Location: {2, -2, 2}
-	scale: {1}
+	Location: {20, -20, 25}
+	scale: {5}
 	Color: 0x990066
 [Object:sphere]
-	Location: {-2, 2, 2}
-	scale: {1}
+	Location: {-20, 20, 25}
+	scale: {5}
 	Color: 0x990066
 [Object:sphere]
-	Location: {2, 2, -2}
-	scale: {1}
+	Location: {20, 20, -25}
+	scale: {5}
 	Color: 0x00FFaa
 [Object:sphere]
-	Location: {-2, -2, -2}
-	scale: {1}
+	Location: {-20, -20, -25}
+	scale: {5}
 	Color: 0x00FFaa
 [Object:sphere]
-	Location: {2, -2, -2}
-	scale: {1}
+	Location: {20, -20, -25}
+	scale: {5}
 	Color: 0x00FFaa
 [Object:sphere]
-	Location: {-2, 2, -2}
-	scale: {1}
+	Location: {-20, 20, -25}
+	scale: {5}
 	Color: 0x00FFaa
 [Object:cylinder]
-	Location: {2, 0, 2}
-	scale: {1, 5, 5}
+	Location: {20, 0, 25}
+	scale: {3, 25, 25}
 	Color: 0xFFFFFF
 [Object:cylinder]
-	Location: {-2, 0, 2}
-	scale: {1, 5, 5}
+	Location: {-20, 0, 25}
+	scale: {3, 25, 25}
 	Color: 0xFFFFFF
 [Object:cylinder]
-	Location: {-2, 0, -2}
-	scale: {1, 5, 5}
+	Location: {-20, 0, -25}
+	scale: {3, 25, 25}
 	Color: 0xFFFFFF
 [Object:cylinder]
-	Location: {2, 0, -2}
-	scale: {1, 5, 5}
+	Location: {20, 0, -25}
+	scale: {3, 25, 25}
 	Color: 0xFFFFFF
 [Object:plane]
-	Location: {0, -2, 0}
+	Location: {0, -20, 0}
+	scale: {500}
+	Color: 0xFF0d35
+[Object:plane]
+	Location: {0, 20, 0}
 	scale: {50}
 	Color: 0xFF0d35
-[Object:plane]
-	Location: {0, 2, 0}
-	scale: {5}
-	Color: 0xFF0d35
 [light:point]
-	Location: {-6, 0, -5}
+	Location: {-60, 0, -50}
 	Intensity: 100
 [light:point]
-	Location: {6, 0, -5}
+	Location: {60, 0, -50}
 	Intensity: 100
 [camera:basic]
-	Location: {0, 0, -5}
+	Location: {0, 0, -50}

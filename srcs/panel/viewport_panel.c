@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:12:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/11 16:25:20 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/11 16:55:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ static void			create_thread_to_calculate_new_frame(t_info *info)
 
 void				new_viewport_frame(t_info *info)
 {
-	kill_all_thread(&info->screen.viewport.sampling);
+	if (info->screen.viewport.sampling.threads_status !=
+		info->screen.viewport.sampling.threads_end_status)
+		kill_all_thread(&info->screen.viewport.sampling);
 	ft_printf("[DrawCall] Viewport (sampling %3d)\n",
 		info->screen.viewport.resolution);
 	info->screen.viewport.sampling.threads_status = 0;
