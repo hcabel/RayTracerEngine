@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 14:31:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/11 11:18:20 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static int	viewport_clicked(t_vector2d loc, t_info *info)
 	ray = trace_ray(&info->scene, info->scene.cam.location, dir, VIEW_DISTANCE);
 	if (ray.hit.bool == 1)
 	{
+		t_vector tmp = get_normal_map(ray.location, &info->scene, NULL);
+		printf("{%.2f, %.2f, %.2f}\n", tmp.x, tmp.y, tmp.z);
 		if (ray.hit_object->istarget.bool != 1)
 			result = GOOD;
 		if (info->scene.target != NULL)

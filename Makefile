@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/10 17:23:48 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/11 11:09:52 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ SRCS				=	aabb_algo.c					\
 						viewport_panel.c			\
 						raymarching_simplified.c	\
 						shape_selector_display.c	\
+						light_ray.c					\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:58:19 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 13:21:26 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/11 16:25:15 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ void	kill_all_thread(t_sampling *sampling)
 {
 	unsigned int	i;
 
-	sampling->kill_thread.bool = 1;
-	i = 0;
-	while (i < RAYMARCHING_THREAD)
+	if (sampling->threads_status != sampling->threads_end_status)
 	{
-		pthread_join(sampling->threads[i], NULL);
-		i++;
+		sampling->kill_thread.bool = 1;
+		i = 0;
+		while (i < RAYMARCHING_THREAD)
+		{
+			pthread_join(sampling->threads[i], NULL);
+			i++;
+		}
+		sampling->kill_thread.bool = 0;
 	}
-	sampling->kill_thread.bool = 0;
 }
