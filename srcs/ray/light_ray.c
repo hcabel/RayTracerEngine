@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 11:03:26 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/11 19:50:14 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/11 20:06:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ float			calcSoftshadow(t_vector p, t_vector dir, t_scene *scene)
 }
 
 float	get_light_intensity(t_scene *scene, t_vector hit_location,
-			t_object *hit_obj, t_vector olddir, t_light *lights)
+			t_object *hit_obj, t_vector olddir, t_light *lights, int amount)
 {
 	float		intensity;
 	float		diffuse;
@@ -70,26 +70,22 @@ float	get_light_intensity(t_scene *scene, t_vector hit_location,
 	t_vector	hal;
 	t_vector	dir;
 	t_vector	normal;
+	int			i;
 
-	int	i;
 	i = 0;
-	while (lights[i].intensity)
-		i++;
-	int j;
-	j = 0;
 	intensity = 0;
-	while (j < i)
+	while (lights + i != NULL && i < amount)
 	{
 		normal = get_normal_map(hit_location, scene, hit_obj);
-		dir = vector_normalize(vector_subtract(lights[j].location,
+		dir = vector_normalize(vector_subtract(lights[i].location,
 			hit_location));
 		hal = vector_normalize(vector_subtract(dir, olddir));
 		diffuse = fmaxf(0, fminf(1, vector_dot(normal, dir)))
 			* calcSoftshadow(hit_location, dir, scene);
 		specular = (powf(fmaxf(0, fminf(1, vector_dot(normal, hal))), 16) * diffuse)
 			* 0.04 + 0.96 * powf(fmaxf(0, fminf(1, 1 - vector_dot(hal, dir))), 5);
-		intensity += (10 * specular + diffuse / 1.7) / i;
-		j++;
+		intensity += (10 * specular + diffuse / 1.7) / amount;
+		i++;
 	}
 	return (fmaxf(0, fminf(1, intensity)));
 }

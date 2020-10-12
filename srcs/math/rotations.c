@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/30 18:13:12 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 14:29:21 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/12 11:34:56 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ static double	deg2rad(double degrees)
 }
 
 t_vector		get_ray_direction(t_vector2d coordinates, t_vector2d rot,
-					SDL_Rect area)
+					float angle, SDL_Rect area)
 {
 	t_vector	dir;
 	t_vector2d	pixel;
-	float		scale = tan(deg2rad(90 * 0.5));
+	float		scale = tan(deg2rad(angle * 0.5));
 	float		ratio = area.w / (float)area.h;
 
 	pixel.x = (2 * ((coordinates.x + 0.5) / area.w) - 1) * scale * ratio;

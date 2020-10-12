@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/11 11:09:52 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/12 11:33:45 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,6 @@ SRCS				=	aabb_algo.c					\
 						init_viewmode_buttons.c		\
 						viewmode_panel.c			\
 						viewport_panel.c			\
-						raymarching_simplified.c	\
 						shape_selector_display.c	\
 						light_ray.c					\
 

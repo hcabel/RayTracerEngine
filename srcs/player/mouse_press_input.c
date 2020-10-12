@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/11 11:18:20 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/12 11:35:59 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	viewport_clicked(t_vector2d loc, t_info *info)
 	loc.x /= info->screen.viewport.resolution;
 	loc.y /= info->screen.viewport.resolution;
 	result = FAILED;
-	dir = get_ray_direction(loc, info->scene.cam.rotation,
+	dir = get_ray_direction(loc, info->scene.cam.rotation, 90,
 		info->screen.viewport.image);
 	ray = trace_ray(&info->scene, info->scene.cam.location, dir, VIEW_DISTANCE);
 	if (ray.hit.bool == 1)

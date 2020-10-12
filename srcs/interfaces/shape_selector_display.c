@@ -6,37 +6,55 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 14:23:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/11 19:54:18 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/12 11:38:42 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
+static int			check_for_hidden_obj(t_light *light, t_vector dir,
+						float prec, t_vector loc)
+{
+	t_vector		tmp;
+
+	tmp = vector_normalize(vector_subtract(light->location,
+		loc));
+	if (tmp.x + prec >= dir.x && tmp.x - prec <= dir.x
+		&& tmp.y + prec >= dir.y && tmp.y - prec <= dir.y
+		&& tmp.z + prec >= dir.z && tmp.z - prec <= dir.z)
+		return (1);
+	return (0);
+}
+
 unsigned int	shape_selector_display(t_vector2d loc, t_info *info)
 {
-	t_ray_hit	ray;
 	t_vector	dir;
-	t_vector	color;
-	float		intensity;
-	t_light		lights[1];
+
+	t_light		lights;
+	t_cam		cam;
+	t_object	obj;
+	t_scene		scene;
 
 	if (info->scene.target == NULL)
-		return (0x0);
-	dir = get_ray_direction(loc, new_vector2d(-1, 0),
+		info->scene.target = &info->scene.shapes[0];
+
+
+	cam.location = new_vector(0, 1.5, -3);
+	cam.rotation = new_vector2d(-0.5, 0);
+	cam.viewmode = 0;
+	scene.cam = cam;
+	scene.light_amount = 1;
+	scene.shapes_amount = 1;
+	obj.location = new_vector(0, 0, 0);
+	obj.sdf = ((t_object*)info->scene.target)->sdf;
+	obj.color = ((t_object*)info->scene.target)->color;
+	obj.scale = new_vector(1,1,1);
+	scene.shapes = &obj;
+	lights.location = new_vector(0, 2, -3);
+	lights.intensity = 100;
+	lights.rotation = new_vector2d(0, 0);
+	scene.lights = &lights;
+	dir = get_ray_direction(loc, cam.rotation, 60,
 		info->screen.details.shape_selector.area);
-	ray = trace_ray_simplified(new_vector(0, 2, -1.5), dir, info->scene.target);
-	color = new_vector(0, 0, 0);
-	if (ray.hit.bool == 1)
-	{
-		lights[0].location = new_vector(-3, 3, -3);
-		lights[0].intensity = 100;
-		lights[0].rotation = new_vector2d(0, 0);
-		intensity = get_light_intensity(&info->scene, ray.location,
-			info->scene.target, dir, lights);
-		color.x = ray.hit_object->color.x * intensity;
-		color.y = ray.hit_object->color.y * intensity;
-		color.z = ray.hit_object->color.z * intensity;
-	}
-	return (((int)color.x << 24) + ((int)color.y << 16) + ((int)color.z << 8)
-		+ 0xFF);
+	return (raymarching(&scene, dir));
 }

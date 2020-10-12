@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/11 16:47:03 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/12 11:35:38 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ t_matrix44f		matrix_mult(t_matrix44f a, t_matrix44f b);
 t_vector		rotate_y(t_vector r, float v);
 t_vector		rotation(t_vector src, t_vector2d f);
 t_vector		get_ray_direction(t_vector2d coordinates, t_vector2d rot,
-					SDL_Rect area);
+					float angle, SDL_Rect area);
 
 /*
 **	vector_2.c
@@ -315,7 +315,7 @@ void			mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event);
 **	light_ray.c
 */
 float	get_light_intensity(t_scene *scene, t_vector hit_location,
-			t_object *hit_obj, t_vector olddir, t_light *lights);
+			t_object *hit_obj, t_vector olddir, t_light *lights, int amount);
 
 /*
 **	raymarching_simplified.c
