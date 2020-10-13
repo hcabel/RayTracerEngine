@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/11 20:05:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/13 13:30:59 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int			check_for_hidden_obj(t_scene *scene, t_vector dir,
 	i = 0;
 	while (i < scene->light_amount)
 	{
-		tmp = vector_normalize(vector_subtract(scene->lights[0].location,
+		tmp = vector_normalize(vector_subtract(scene->lights[i].location,
 			scene->cam.location));
 		if (tmp.x + prec >= dir.x && tmp.x - prec <= dir.x
 			&& tmp.y + prec >= dir.y && tmp.y - prec <= dir.y
@@ -63,11 +63,21 @@ static unsigned int	get_color_from_viewmode(t_scene *scene, t_ray_hit *ray,
 	{
 		intensity = get_light_intensity(scene, ray->location,
 			ray->hit_object, olddir, scene->lights, 2);
+		intensity = intensity / 1.2 + 0.1;
 		intensity *= fabs(fmaxf(ray->distance / VIEW_DISTANCE, 0.5)
 			- 1) * (1 / (1 - 0.5));
-		color.x = (ray->hit_object->color.x * intensity);
-		color.y = (ray->hit_object->color.y * intensity);
-		color.z = (ray->hit_object->color.z * intensity);
+		if (scene->cam.viewmode == 4)
+		{
+			color.x = intensity * 255;
+			color.y = intensity * 255;
+			color.z = intensity * 255;
+		}
+		else
+		{
+			color.x = (ray->hit_object->color.x * intensity);
+			color.y = (ray->hit_object->color.y * intensity);
+			color.z = (ray->hit_object->color.z * intensity);
+		}
 	}
 	return (((int)color.x << 24) + ((int)color.y << 16)
 		+ ((int)color.z << 8) + 0xFF);

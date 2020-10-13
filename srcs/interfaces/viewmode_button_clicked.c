@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:26:50 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 10:31:57 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/12 12:04:45 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ int		set_iteration_viewmode(t_info *info)
 	if (info->scene.cam.viewmode != 3)
 	{
 		info->scene.cam.viewmode = 3;
+		return (GOOD);
+	}
+	return (FAILED);
+}
+
+int		set_light_intensity_viewmode(t_info *info)
+{
+	printf("HERE\n");
+	if (info->scene.cam.viewmode != 4)
+	{
+		info->scene.cam.viewmode = 4;
 		return (GOOD);
 	}
 	return (FAILED);

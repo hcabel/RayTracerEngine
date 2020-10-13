@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/12 11:35:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/12 12:00:21 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int				set_lit_viewmode(t_info *info);
 int				set_unlit_viewmode(t_info *info);
 int				set_iteration_viewmode(t_info *info);
 int				set_normalmap_viewmode(t_info *info);
+int				set_light_intensity_viewmode(t_info *info);
 
 /*
 ********************************************************************************

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 14:34:34 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/12 11:59:11 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define BUTTON_COLOR 0x063547FF
 # define BUTTON_HOVER_COLOR 0xEC3547FF
 
-# define VIEWMODE_SCROLLBOX_BUTTON_AMOUNT 4
+# define VIEWMODE_SCROLLBOX_BUTTON_AMOUNT 5
 # define VIEWMODE_BUTTONS_MARGIN 7
 # define VIEWMODE_BACKGROUND_COLOR 0x1C1C22FF
 

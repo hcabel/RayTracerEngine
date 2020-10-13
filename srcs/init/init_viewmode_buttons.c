@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:01:00 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 12:24:58 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/12 12:04:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	set_buttons_action_functions(t_button *list)
 	list[1].clicked = set_unlit_viewmode;
 	list[2].clicked = set_normalmap_viewmode;
 	list[3].clicked = set_iteration_viewmode;
+	list[4].clicked = set_light_intensity_viewmode;
 }
 
 int		viewmode_init_buttons(t_buttons_scrollbox *viewmode)
