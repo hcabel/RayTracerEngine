@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 14:19:20 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/07 15:29:06 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 15:02:03 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 int		aabb(SDL_Rect r, t_vector2d pixel_location)
 {
-	if (pixel_location.x <= r.x + r.w && pixel_location.x >= r.x
-		&& pixel_location.y <= r.y + r.h && pixel_location.y >= r.y)
+	if (pixel_location.x < r.x + r.w && pixel_location.x > r.x
+		&& pixel_location.y < r.y + r.h && pixel_location.y > r.y)
 		return (GOOD);
 	return (FAILED);
 }

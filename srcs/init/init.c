@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 12:50:56 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 14:05:18 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,11 @@ int			init(t_info *info, char *argv)
 		return (code_error);
 	if ((code_error = init_interfaces(&info->screen)))
 		return (code_error);
+	if (load_interface_images(info->renderer, &info->screen) != GOOD)
+	{
+		ft_printf("{r}ERROR LOAD IMAGE\n{/}");
+	}
 	if ((code_error = parsing(&info->scene, argv)))
 		return (code_error);
-	// DEBUG *****************************************
-	/*for (unsigned int i = 0; i < info->scene.shapes_amount; i++)
-	{
-		ft_printf("{m}[object:sphere]\n");
-		printf("	location: {%.f, %.f, %.f}\n", info->scene.shapes[i].location.x, info->scene.shapes[i].location.y, info->scene.shapes[i].location.z);
-		printf("	rotation: {%.f, %.f}\n", info->scene.shapes[i].rotation.x, info->scene.shapes[i].rotation.y);
-		printf("	color: {%.f, %.f, %.f}\n", info->scene.shapes[i].color.x, info->scene.shapes[i].color.y, info->scene.shapes[i].color.z);
-		printf("	scale: {%.f, %.f, %.f}\n", info->scene.shapes[i].scale.x, info->scene.shapes[i].scale.y, info->scene.shapes[i].scale.z);
-	}
-	for (unsigned int i = 0; i < info->scene.light_amount; i++)
-	{
-		ft_printf("{c}[light:point]\n");
-		printf("	location: {%.f, %.f, %.f}\n", info->scene.lights[i].location.x, info->scene.lights[i].location.y, info->scene.lights[i].location.z);
-		printf("	rotation: {%.f, %.f}\n", info->scene.lights[i].rotation.x, info->scene.lights[i].rotation.y);
-		printf("	intensity: %.f\n", info->scene.lights[i].intensity);
-	}
-	ft_printf("{/}\n");*/
-	// END *******************************************
 	return(GOOD);
 }

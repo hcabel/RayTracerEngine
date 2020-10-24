@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 14:23:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/12 11:38:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/23 11:14:48 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ unsigned int	shape_selector_display(t_vector2d loc, t_info *info)
 	t_scene		scene;
 
 	if (info->scene.target == NULL)
-		info->scene.target = &info->scene.shapes[0];
-
+		return (0);
 
 	cam.location = new_vector(0, 1.5, -3);
 	cam.rotation = new_vector2d(-0.5, 0);

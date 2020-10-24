@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 13:51:07 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 14:42:55 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 **	Modifyable define
 */
 # define WINDOW_NAME "RayTracer Engine"
-# define WIN_HEIGTH 800
-# define WIN_WIDTH 1180
+# define WIN_HEIGTH 900
+# define WIN_WIDTH 1650
+# define DETAILS_AREA_SIZE 200
+# define VIEWMODE_AREA_SIZE 70
 
 # define RAY_LOOP 100
 # define CPU_THREAD 20
-# define FIRST_RESOLUTION 16
+# define FIRST_RESOLUTION 32
 # define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
 
-# define DETAILS_AREA_SIZE 200
-# define VIEWMODE_AREA_SIZE 50
 
 /*
 **	Code understanding define
@@ -44,11 +44,38 @@
 # define MALLOC_ERROR 2
 # define SDL_ERROR 3
 # define O_THREAD_ERROR 4
+# define TGA_PATH_ERROR 5
+# define TGA_HEADER_PARSING_ERROR 6
+# define TGA_CONTENT_PARSING_ERROR 7
+# define TGA_FOOTER_PARSING_ERROR 8
+# define TGA_UNCOPRESSION_ERROR 9
 
 # define DRAWCALL_CHECK_VIEWPORT check_viewport_render
 # define DRAWCALL_VIEWPORT new_viewport_frame
 # define DRAWCALL_DETAILS_PANEL new_details_panel_frame
 # define DRAWCALL_VIEWMODE_PANEL new_viewmode_panel_frame
+
+typedef struct			s_colormap
+{
+	unsigned char		*data;
+	int					entry_index;
+	int					length;
+	int					bpp;
+}						t_colormap;
+
+typedef struct			s_tga
+{
+	t_bool				parsed;
+	unsigned char		*image_id;
+	unsigned char		*image_data;
+	int					id_length;
+	int					datatype;
+	int					compression;
+	t_colormap			colormap;
+	SDL_Rect			area;
+	int					bpp;
+	int					descriptor;
+}						t_tga;
 
 typedef struct			s_thread
 {

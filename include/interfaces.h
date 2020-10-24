@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/12 11:59:11 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 14:08:30 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct			s_selector
 	unsigned int		(*preview)(t_vector2d, t_info*);
 }						t_selector;
 
-
 typedef struct			s_vector_visualizer
 {
 	SDL_Rect			area;
@@ -92,6 +91,7 @@ typedef struct			s_viewmode_panel
 	SDL_Rect			area;
 	t_buttons_scrollbox	scrollbox;
 	void				*pixels;
+	SDL_Texture			*images[VIEWMODE_SCROLLBOX_BUTTON_AMOUNT];
 }						t_viewmode_panel;
 
 typedef struct			s_details_panel

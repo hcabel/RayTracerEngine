@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:12:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 18:02:02 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 13:56:53 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,5 @@ int			init_details_panel(t_details_panel *details)
 	details->area.h = WIN_HEIGTH - details->area.y;
 	init_selector(&details->shape_selector);
 	init_buttons(details);
-	/*if ((error_code = malloc_scrollbox(details,
-		DETAILS_SCROLLBOX_BUTTON_AMOUNT)) != GOOD)
-		return (error_code);
-	details->amount = DETAILS_SCROLLBOX_BUTTON_AMOUNT;
-	details->area.h = WIN_HEIGTH;
-	details->area.w = DETAILS_AREA_SIZE;
-	details->area.x = 0;
-	details->area.y = 0;
-	details->color = DETAILS_BACKGROUND_COLOR;
-	details->scrollbar_area.x = DETAILS_AREA_SIZE - SCROLLBAR_SIZE;
-	details->scrollbar_area.y = 0;
-	details->scrollbar_area.h = WIN_HEIGTH;
-	details->scrollbar_area.w = SCROLLBAR_SIZE;
-	details->scrollbar_color = DETAILS_SCROLLBAR_COLOR;
-	init_scrollbar(details);;*/
 	return (GOOD);
 }

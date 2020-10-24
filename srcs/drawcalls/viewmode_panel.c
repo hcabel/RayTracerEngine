@@ -59,5 +59,6 @@ void		new_viewmode_panel_frame(t_info *info)
 	SDL_UnlockTexture(info->screen.tex);
 	SDL_RenderCopy(info->renderer, info->screen.tex,
 		&info->screen.viewmode.area, &info->screen.viewmode.area);
+	display_viewmode_images(info->renderer, &info->screen.viewmode);
 	SDL_RenderPresent(info->renderer);
 }

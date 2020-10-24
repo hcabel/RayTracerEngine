@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/12 12:00:21 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 14:13:07 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,28 @@
 # include "types.h"
 # include "interfaces.h"
 
+
 /*
 ********************************************************************************
-**	effects Directory
+**	drawcall Directory
 ********************************************************************************
 */
 
 /*
-**	normal_map.c
+**	viewport_panel.c
 */
-t_vector		get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj);
-t_vector		normal_map_to_rgb(t_vector normal);
+void			new_viewport_frame(t_info *info);
+void			check_viewport_render(t_info *info);
+
+/*
+**	details_panel.c
+*/
+void			new_details_panel_frame(t_info *info);
+
+/*
+**	view_mode_panel.c
+*/
+void			new_viewmode_panel_frame(t_info *info);
 
 /*
 ********************************************************************************
@@ -125,6 +136,13 @@ int				init(t_info *info, char *argv);
 **	Interfaces directory
 ********************************************************************************
 */
+
+/*
+**	interface_images.c
+*/
+int				load_interface_images(SDL_Renderer *renderer, t_screen *screen);
+int				display_viewmode_images(SDL_Renderer *renderer,
+					t_viewmode_panel *viewmode);
 
 /*
 **	shape_selector_display.c
@@ -214,28 +232,6 @@ float			vector4d_length(t_vector4d a);
 
 /*
 ********************************************************************************
-**	panel Directory
-********************************************************************************
-*/
-
-/*
-**	viewport_panel.c
-*/
-void			new_viewport_frame(t_info *info);
-void			check_viewport_render(t_info *info);
-
-/*
-**	details_panel.c
-*/
-void			new_details_panel_frame(t_info *info);
-
-/*
-**	view_mode_panel.c
-*/
-void			new_viewmode_panel_frame(t_info *info);
-
-/*
-********************************************************************************
 **	parsing Directory
 ********************************************************************************
 */
@@ -315,14 +311,14 @@ void			mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event);
 /*
 **	light_ray.c
 */
-float	get_light_intensity(t_scene *scene, t_vector hit_location,
-			t_object *hit_obj, t_vector olddir, t_light *lights, int amount);
+float			get_light_intensity(t_scene *scene, t_vector hit_location,
+					t_object *hit_obj, t_vector olddir, t_light *lights, int amount);
 
 /*
-**	raymarching_simplified.c
+**	normal_map.c
 */
-t_ray_hit		trace_ray_simplified(t_vector start, t_vector dir,
-					t_object *obj);
+t_vector		get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj);
+t_vector		normal_map_to_rgb(t_vector normal);
 
 /*
 **	raymarching.c
@@ -337,7 +333,7 @@ t_ray_hit		trace_ray(t_scene *scene, t_vector start_location,
 
 /*
 ********************************************************************************
-**	Signed_Distance_Functions Directory
+**	Signed_Distance_functions Directory
 ********************************************************************************
 */
 
@@ -349,6 +345,32 @@ float			sdf_plane(t_vector p, t_vector obj_scale);
 float			sdf_cylinder(t_vector p, t_vector obj_scale);
 float			sdf_sphere(t_vector p, t_vector obj_scale);
 float			sdf_cone(t_vector p, t_vector obj_scale);
+
+/*
+********************************************************************************
+**	tga Directory
+********************************************************************************
+*/
+
+
+/*
+**	fill_uncompresed_data.c
+*/
+void			fill_uncompresed_data(int *i, int *j, unsigned char *original,
+					unsigned char *new_data, int bpp);
+
+/*
+**	tga_reader.c
+*/
+t_tga			new_tga(char *path);
+int				read_tga(char *path, t_tga *file);
+int				new_Image(SDL_Renderer *renderer, char *path,
+					SDL_Texture **texture);
+
+/*
+**	uncompress_tga.c
+*/
+int				uncompress_tga(t_tga *file);
 
 /*
 ********************************************************************************
