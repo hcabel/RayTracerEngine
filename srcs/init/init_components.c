@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:44:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 10:56:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 15:53:13 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void	initobject(t_object *obj)
 	obj->scale = new_vector(1, 1, 1);
 	obj->color = new_vector(255, 255, 255);
 	obj->istarget.bool = 0;
-	obj->sdf = sdf_sphere;
+	obj->sdf_index = 0;
 }

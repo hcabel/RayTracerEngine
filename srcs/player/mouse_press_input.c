@@ -6,11 +6,26 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/12 11:35:59 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 16:07:03 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static int	witch_detail_button_clicked(t_vector2d loc, t_info *info)
+{
+	loc.x -= info->screen.details.area.x;
+	loc.y -= info->screen.details.area.y;
+	loc.x -= info->screen.details.shape_selector.area.x;
+	loc.y -= info->screen.details.shape_selector.area.y;
+	printf("DETAILS\n");
+	if (aabb(info->screen.details.shape_selector.b_left.area, loc) == GOOD)
+		return (info->screen.details.shape_selector.b_left.clicked(info));
+	if (aabb(info->screen.details.shape_selector.b_right.area, loc) == GOOD)
+		return (info->screen.details.shape_selector.b_right.clicked(info));
+	printf("FAILED\n");
+	return (FAILED);
+}
 
 static int	witch_viewmode_button_clicked(t_vector2d loc, t_info *info)
 {
@@ -46,8 +61,6 @@ static int	viewport_clicked(t_vector2d loc, t_info *info)
 	ray = trace_ray(&info->scene, info->scene.cam.location, dir, VIEW_DISTANCE);
 	if (ray.hit.bool == 1)
 	{
-		t_vector tmp = get_normal_map(ray.location, &info->scene, NULL);
-		printf("{%.2f, %.2f, %.2f}\n", tmp.x, tmp.y, tmp.z);
 		if (ray.hit_object->istarget.bool != 1)
 			result = GOOD;
 		if (info->scene.target != NULL)
@@ -75,6 +88,8 @@ static int	witch_panel_clicked(t_vector2d loc, t_info *info)
 		updateviewport = witch_viewmode_button_clicked(loc, info);
 	else if (aabb(info->screen.viewport.area, loc) == GOOD)
 		updateviewport = viewport_clicked(loc, info);
+	else if (aabb(info->screen.details.area, loc) == GOOD)
+		updateviewport = witch_detail_button_clicked(loc, info);
 	return (updateviewport);
 }
 
@@ -92,5 +107,6 @@ void		mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event)
 	{
 		info->screen.viewport.resolution = FIRST_RESOLUTION;
 		draw_calls_add(info, DRAWCALL_VIEWPORT);
+		draw_calls_add(info, DRAWCALL_DETAILS_PANEL);
 	}
 }

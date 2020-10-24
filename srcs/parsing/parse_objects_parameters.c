@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 09:32:14 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/02 11:24:02 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 16:10:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,15 @@ static void	parse_object_type(t_object *object, char *line,
 				unsigned int line_amount)
 {
 	if (ft_strncmp("sphere]", line, 7) == GOOD)
-		object->sdf = sdf_sphere;
+		object->sdf_index = 0;
 	else if (ft_strncmp("cone]", line, 5) == GOOD)
-		object->sdf = sdf_cone;
+		object->sdf_index = 1;
 	else if (ft_strncmp("cube]", line, 5) == GOOD)
-		object->sdf = sdf_cube;
+		object->sdf_index = 2;
 	else if (ft_strncmp("cylinder]", line, 9) == GOOD)
-		object->sdf = sdf_cylinder;
+		object->sdf_index = 3;
 	else if (ft_strncmp("plane]", line, 6) == GOOD)
-		object->sdf = sdf_plane;
-	else
-		object->sdf = sdf_sphere;
+		object->sdf_index = 4;
 }
 
 void	parse_objects_parameters(t_object *object, char *line,

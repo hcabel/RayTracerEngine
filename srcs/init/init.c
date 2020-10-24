@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 14:05:18 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 16:11:52 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ int			init(t_info *info, char *argv)
 	{
 		ft_printf("{r}ERROR LOAD IMAGE\n{/}");
 	}
+	info->scene.sdf_list[0] = sdf_sphere;
+	info->scene.sdf_list[1] = sdf_cone;
+	info->scene.sdf_list[2] = sdf_cube;
+	info->scene.sdf_list[3] = sdf_cylinder;
+	info->scene.sdf_list[4] = sdf_plane;
 	if ((code_error = parsing(&info->scene, argv)))
 		return (code_error);
 	return(GOOD);

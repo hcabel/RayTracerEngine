@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shape_selector_display.c                           :+:      :+:    :+:   */
+/*   shape_selector.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 14:23:43 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/23 11:14:48 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 16:42:25 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,14 @@ unsigned int	shape_selector_display(t_vector2d loc, t_info *info)
 	scene.cam = cam;
 	scene.light_amount = 1;
 	scene.shapes_amount = 1;
+	scene.sdf_list[0] = info->scene.sdf_list[0];
+	scene.sdf_list[1] = info->scene.sdf_list[1];
+	scene.sdf_list[2] = info->scene.sdf_list[2];
+	scene.sdf_list[3] = info->scene.sdf_list[3];
+	scene.sdf_list[4] = info->scene.sdf_list[4];
 	obj.location = new_vector(0, 0, 0);
-	obj.sdf = ((t_object*)info->scene.target)->sdf;
+	obj.rotation = new_vector2d(0, 0);
+	obj.sdf_index = ((t_object*)info->scene.target)->sdf_index;
 	obj.color = ((t_object*)info->scene.target)->color;
 	obj.scale = new_vector(1,1,1);
 	scene.shapes = &obj;
@@ -56,4 +62,32 @@ unsigned int	shape_selector_display(t_vector2d loc, t_info *info)
 	dir = get_ray_direction(loc, cam.rotation, 60,
 		info->screen.details.shape_selector.area);
 	return (raymarching(&scene, dir));
+}
+
+int		increase_target_shape(t_info *info)
+{
+	unsigned int	tmp;
+
+	if (info->scene.target == NULL)
+		return (FAILED);
+	tmp = ((t_object*)info->scene.target)->sdf_index;
+	if (tmp < 4)
+		((t_object*)info->scene.target)->sdf_index = tmp + 1;
+	else
+		((t_object*)info->scene.target)->sdf_index = 0;
+	return (GOOD);
+}
+
+int		decrease_target_shape(t_info *info)
+{
+	unsigned int	tmp;
+
+	if (info->scene.target == NULL)
+		return (FAILED);
+	tmp = ((t_object*)info->scene.target)->sdf_index;
+	if (tmp > 0)
+		((t_object*)info->scene.target)->sdf_index = tmp - 1;
+	else
+		((t_object*)info->scene.target)->sdf_index = 4;
+	return (GOOD);
 }

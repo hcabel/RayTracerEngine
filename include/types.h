@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 14:42:55 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 16:36:54 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 */
 # define WINDOW_NAME "RayTracer Engine"
 # define WIN_HEIGTH 900
-# define WIN_WIDTH 1650
+# define WIN_WIDTH 1500
 # define DETAILS_AREA_SIZE 200
 # define VIEWMODE_AREA_SIZE 70
 
@@ -89,7 +89,7 @@ typedef struct			s_object
 	t_vector2d			rotation;
 	t_vector			scale;
 	t_vector			color;
-	float				(*sdf)(t_vector, t_vector);
+	unsigned int		sdf_index;
 	t_bool				istarget;
 }						t_object;
 
@@ -117,6 +117,7 @@ typedef struct			s_scene
 	unsigned int		light_amount;
 	void				*target;
 	int					target_type;
+	float				(*sdf_list[5])(t_vector, t_vector);
 }						t_scene;
 
 typedef struct			s_sampling

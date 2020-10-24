@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 11:42:28 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/10 17:47:22 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/24 16:09:19 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static double	get_nearest_surface_distance(t_scene *scene, t_vector p,
 	i = 0;
 	while (i < scene->shapes_amount)
 	{
-		tmp = scene->shapes[i].sdf(vector_subtract(p, scene->shapes[i].location),
+		tmp = scene->sdf_list[scene->shapes[i].sdf_index]
+			(vector_subtract(p, scene->shapes[i].location),
 			scene->shapes[i].scale);
 		if (distance == -1 || distance > tmp)
 		{
