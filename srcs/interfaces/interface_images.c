@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 13:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 15:34:33 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/25 12:29:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static int	load_viewmode_images(SDL_Renderer *renderer,
 				t_viewmode_panel *viewmode)
 {
-	if (new_Image(renderer, "../icon_unlit.tga", &(viewmode->images[0])) != GOOD)
+	if (new_Image(renderer, "assets/icon_unlit.tga", &(viewmode->images[0])) != GOOD)
 		return (FAILED);
-	if (new_Image(renderer, "../icon_normal.tga", &(viewmode->images[1])) != GOOD)
+	if (new_Image(renderer, "assets/icon_normal.tga", &(viewmode->images[1])) != GOOD)
 		return (FAILED);
-	if (new_Image(renderer, "../icon_iterations.tga", &(viewmode->images[2])) != GOOD)
+	if (new_Image(renderer, "assets/icon_iterations.tga", &(viewmode->images[2])) != GOOD)
 		return (FAILED);
 	return (GOOD);
 }

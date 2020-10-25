@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 14:08:30 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/25 12:04:01 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@
 # define BUTTON_HOVER_COLOR 0xEC3547FF
 
 # define VIEWMODE_SCROLLBOX_BUTTON_AMOUNT 5
-# define VIEWMODE_BUTTONS_MARGIN 7
+# define VIEWMODE_BUTTONS_MARGIN 2
 # define VIEWMODE_BACKGROUND_COLOR 0x1C1C22FF
 
 # define DETAILS_BACKGROUND_COLOR 0x24242BFF
-# define DETAILS_SCROLLBOX_BUTTON_AMOUNT 4
-# define DETAILS_BUTTONS_MARGIN 10
+# define DETAILS_BUTTONS_MARGIN 5
 
 typedef struct s_info	t_info;
 

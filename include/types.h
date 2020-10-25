@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 16:36:54 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/25 13:20:59 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # define WIN_HEIGTH 900
 # define WIN_WIDTH 1500
 # define DETAILS_AREA_SIZE 200
-# define VIEWMODE_AREA_SIZE 70
+# define VIEWMODE_AREA_SIZE 50
 
-# define RAY_LOOP 100
+# define RAY_LOOP 75
 # define CPU_THREAD 20
 # define FIRST_RESOLUTION 32
 # define VIEW_DISTANCE 200
@@ -148,6 +148,7 @@ typedef struct			s_screen
 	t_viewport_panel	viewport;
 	t_details_panel		details;
 	t_viewmode_panel	viewmode;
+	SDL_Texture			*font;
 }						t_screen;
 
 typedef struct			s_info

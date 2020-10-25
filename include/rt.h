@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 15:28:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/25 15:41:09 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,12 @@ int				display_viewmode_images(SDL_Renderer *renderer,
 unsigned int	shape_selector_display(t_vector2d loc, t_info *info);
 int				increase_target_shape(t_info *info);
 int				decrease_target_shape(t_info *info);
+
+/*
+**	fonts.c
+*/
+int				put_str_on_screen(SDL_Renderer *renderer, SDL_Texture *font,
+					SDL_Rect *startchar, char *str);
 
 /*
 **	viewmode_button_clicked.c

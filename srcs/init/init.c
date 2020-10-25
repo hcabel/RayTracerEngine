@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 16:11:52 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/25 16:32:21 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static int	init_info_structure(t_info *info)
 	info->scene.light_amount = 0;
 	info->scene.shapes_amount = 0;
 	draw_calls_clear_list(info);
-	info->update_function_list[0] = DRAWCALL_DETAILS_PANEL;
+	info->update_function_list[2] = DRAWCALL_DETAILS_PANEL;
 	info->update_function_list[1] = DRAWCALL_VIEWMODE_PANEL;
-	info->update_function_list[2] = DRAWCALL_VIEWPORT;
+	info->update_function_list[0] = DRAWCALL_VIEWPORT;
 	pthread_mutex_init(&info->screen.viewport.sampling.mutex, NULL);
 	info->screen.viewport.sampling.threads_end_status =
 		powf(2, RAYMARCHING_THREAD) - 1;
@@ -68,7 +68,8 @@ int			init(t_info *info, char *argv)
 		return (code_error);
 	if ((code_error = init_interfaces(&info->screen)))
 		return (code_error);
-	if (load_interface_images(info->renderer, &info->screen) != GOOD)
+	if (new_Image(info->renderer, "assets/font.tga", &info->screen.font) != GOOD
+		|| load_interface_images(info->renderer, &info->screen) != GOOD)
 	{
 		ft_printf("{r}ERROR LOAD IMAGE\n{/}");
 	}
