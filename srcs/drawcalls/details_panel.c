@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 11:52:54 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/25 16:14:02 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/26 11:12:53 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void				new_details_panel_frame(t_info *info)
 	start.y = 50;
 	start.w = 38;
 	start.h = 79;
-	put_str_on_screen(info->renderer, info->screen.font, &start, "Tu : pue SYSy!~{<faut pas oublier JOJO>}");
+	put_str_on_screen(info->renderer, info->screen.font, &start, "OUAAA j'ai un gros penis :0");
 
 	SDL_RenderPresent(info->renderer);
 }

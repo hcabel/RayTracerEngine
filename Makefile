@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/25 13:25:33 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/26 11:25:07 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,8 @@ SRCS				=	aabb_algo.c					\
 						fill_uncompressed_data.c	\
 						interface_images.c			\
 						fonts.c						\
+						fill_argb_data.c			\
+						setup_tga_contents.c		\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

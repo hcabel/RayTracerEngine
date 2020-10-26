@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/25 15:41:09 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/26 11:24:46 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,6 +360,10 @@ float			sdf_cone(t_vector p, t_vector obj_scale);
 ********************************************************************************
 */
 
+/*
+**	fill_argb_data.c
+*/
+int				convert_to_argb(t_tga *file);
 
 /*
 **	fill_uncompresed_data.c
@@ -368,10 +372,14 @@ void			fill_uncompresed_data(int *i, int *j, unsigned char *original,
 					unsigned char *new_data, int bpp);
 
 /*
+**	setup_tga_contents.c
+*/
+int				setup_contents(t_tga *file, int fd);
+int				read_header(t_tga *file, int fd);
+
+/*
 **	tga_reader.c
 */
-t_tga			new_tga(char *path);
-int				read_tga(char *path, t_tga *file);
 int				new_Image(SDL_Renderer *renderer, char *path,
 					SDL_Texture **texture);
 
