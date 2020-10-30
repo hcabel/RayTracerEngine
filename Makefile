@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/26 11:25:07 by hcabel           ###   ########.fr        #
+#    Updated: 2020/10/29 13:18:46 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,57 +20,61 @@ SOURCES_FOLDER		=	srcs
 INCLUDES_FOLDER		=	include
 
 # find srcs -type f | rev | cut -d '/' -f1 | rev | sort -d
-SRCS				=	aabb_algo.c					\
-						coordinates_utils.c			\
-						create_lists.c				\
-						details_panel.c				\
-						draw_call.c					\
-						exit.c						\
-						free.c						\
-						init.c						\
-						init_components.c			\
-						init_interfaces.c			\
-						init_details_panel.c		\
-						init_viewmode_panel.c		\
-						input.c						\
-						keyboard_input.c			\
-						loop.c						\
-						main.c						\
-						matrix44.c					\
-						mouse_press_input.c			\
-						mouse_move_input.c			\
-						normal_map.c				\
-						parse_camera_parameters.c	\
-						parse_components.c			\
-						parse_lights_parameters.c	\
-						parse_objects_parameters.c	\
-						parse_parameter_values.c	\
-						parse_primary_infos.c		\
-						parsing.c					\
-						raymarching.c				\
-						raymarching_thread.c		\
-						rotations.c					\
-						sdf_1.c						\
-						thread_utils.c				\
-						trace_ray.c					\
-						vector_2.c					\
-						vector2d.c					\
-						vector4d.c					\
-						vector.c					\
-						vector_init.c				\
-						viewmode_button_clicked.c	\
-						init_viewmode_buttons.c		\
-						viewmode_panel.c			\
-						viewport_panel.c			\
-						shape_selector.c			\
-						light_ray.c					\
-						uncompress_tga.c			\
-						tga_reader.c				\
-						fill_uncompressed_data.c	\
-						interface_images.c			\
-						fonts.c						\
-						fill_argb_data.c			\
-						setup_tga_contents.c		\
+SRCS				=	aabb_algo.c						\
+						coordinates_utils.c				\
+						create_lists.c					\
+						details_panel.c					\
+						draw_call.c						\
+						exit.c							\
+						free.c							\
+						init.c							\
+						init_components.c				\
+						init_interfaces.c				\
+						init_details_panel.c			\
+						init_viewmode_panel.c			\
+						input.c							\
+						keyboard_input.c				\
+						loop.c							\
+						main.c							\
+						matrix44.c						\
+						mouse_press_input.c				\
+						mouse_move_input.c				\
+						normal_map.c					\
+						parse_camera_parameters.c		\
+						parse_components.c				\
+						parse_lights_parameters.c		\
+						parse_objects_parameters.c		\
+						parse_parameter_values.c		\
+						parse_primary_infos.c			\
+						parsing.c						\
+						raymarching.c					\
+						raymarching_thread.c			\
+						rotations.c						\
+						sdf_1.c							\
+						thread_utils.c					\
+						trace_ray.c						\
+						vector_2.c						\
+						vector2d.c						\
+						vector4d.c						\
+						vector.c						\
+						vector_init.c					\
+						viewmode_button_clicked.c		\
+						init_viewmode_buttons.c			\
+						viewmode_panel.c				\
+						viewport_panel.c				\
+						shape_selector.c				\
+						light_ray.c						\
+						uncompress_tga.c				\
+						tga_reader.c					\
+						fill_uncompressed_data.c		\
+						interface_images.c				\
+						fonts.c							\
+						fill_argb_data.c				\
+						setup_tga_contents.c			\
+						mouse_move_on_details_panel.c	\
+						mouse_move_on_viewmode_panel.c	\
+						mouse_press_on_details_panel.c	\
+						mouse_press_on_viewmode_panel.c	\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

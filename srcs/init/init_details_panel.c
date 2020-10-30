@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:12:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 15:46:50 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/30 10:16:55 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,39 @@ static void	init_buttons(t_details_panel *details)
 
 }
 
+static void	init_triple_switch_axis(t_triple_switch *axis,
+				int previous_panel_y_bottom_coordinate)
+{
+	axis->area.x = DETAILS_AREA_SIZE / 20;
+	axis->area.y = previous_panel_y_bottom_coordinate + DETAILS_BUTTONS_MARGIN;
+	axis->area.w = DETAILS_AREA_SIZE - (DETAILS_AREA_SIZE / 20 * 2);
+	axis->area.h = 30;
+
+	axis->first.area.h = axis->area.h;
+	axis->first.area.w = axis->area.w / 3;
+	axis->first.area.x = 0;
+	axis->first.area.y = 0;
+	axis->first.color = BUTTON_COLOR;
+	axis->first.hover_color = BUTTON_HOVER_COLOR;
+	axis->first.ishover.bool = 0;
+
+	axis->second.area.h = axis->area.h;
+	axis->second.area.w = axis->area.w / 3;
+	axis->second.area.x = axis->first.area.w;
+	axis->second.area.y = 0;
+	axis->second.color = BUTTON_COLOR;
+	axis->second.hover_color = BUTTON_HOVER_COLOR;
+	axis->second.ishover.bool = 0;
+
+	axis->third.area.h = axis->area.h;
+	axis->third.area.w = axis->area.w / 3;
+	axis->third.area.x = axis->first.area.w + axis->second.area.w;
+	axis->third.area.y = 0;
+	axis->third.color = BUTTON_COLOR;
+	axis->third.hover_color = BUTTON_HOVER_COLOR;
+	axis->third.ishover.bool = 0;
+}
+
 int			init_details_panel(t_details_panel *details)
 {
 	int	error_code;
@@ -61,6 +94,14 @@ int			init_details_panel(t_details_panel *details)
 	details->area.w = DETAILS_AREA_SIZE;
 	details->area.h = WIN_HEIGTH - details->area.y;
 	init_selector(&details->shape_selector);
+	init_triple_switch_axis(&details->triple_switch_axis,
+		details->shape_selector.area.h + details->shape_selector.area.y);
+	details->tri_vector_pannel.x = DETAILS_AREA_SIZE / 20;
+	details->tri_vector_pannel.y = + details->triple_switch_axis.area.h
+		+ details->triple_switch_axis.area.y + DETAILS_BUTTONS_MARGIN;
+	details->tri_vector_pannel.w = DETAILS_AREA_SIZE
+		- (DETAILS_AREA_SIZE / 20 * 2);
+	details->tri_vector_pannel.h = 60;
 	init_buttons(details);
 	return (GOOD);
 }

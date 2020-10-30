@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 12:33:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/25 16:34:00 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/30 10:22:13 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,35 @@ static SDL_Rect	get_char_font_location(char c)
 {
 	SDL_Rect	char_font_location;
 
-	char_font_location.w = 29;
-	char_font_location.h = 42;
-	char_font_location.x = ((int)c - 32) % 20 * 39;
-	char_font_location.y = ((int)c - 32) / 20 * 80;
-	char_font_location.x += 9;
-	char_font_location.y += 37;
+	char_font_location.w = 37;
+	char_font_location.h = 58;
+	char_font_location.x = ((int)c - 32) % 20 * 39 + 1;
+	char_font_location.y = ((int)c - 32) / 20 * 80 + 21;
 	return (char_font_location);
 }
 
 int			put_str_on_screen(SDL_Renderer *renderer, SDL_Texture *font,
-				SDL_Rect *startchar, char *str)
+				SDL_Rect *textarea, char *str)
 {
 	unsigned int	i;
 	unsigned int	len;
 	SDL_Rect		font_char_loc;
-	SDL_Rect		new_char_screen_loc;
+	SDL_Rect		char_area;
 
-	new_char_screen_loc.x = startchar->x;
-	new_char_screen_loc.y = startchar->y;
-	new_char_screen_loc.w = startchar->w;
-	new_char_screen_loc.h = startchar->h;
-	i = 0;
 	len  = ft_strlen(str);
+	char_area.x = textarea->x;
+	char_area.y = textarea->y;
+	char_area.h = textarea->h;
+	if (textarea->w / len <= char_area.h / 2)
+		char_area.w = textarea->h / 2;
+	else
+		char_area.w = textarea->w / len;
+	i = 0;
 	while (i < len)
 	{
-		if (str[i] == ' ')
-		{
-			new_char_screen_loc.x += startchar->w / 3;
-			i++;
-		}
 		font_char_loc = get_char_font_location(str[i]);
-		SDL_RenderCopy(renderer, font, &font_char_loc, &new_char_screen_loc);
-		new_char_screen_loc.x += startchar->w;
+		SDL_RenderCopy(renderer, font, &font_char_loc, &char_area);
+		char_area.x += char_area.w;
 		i++;
 	}
 	return (GOOD);

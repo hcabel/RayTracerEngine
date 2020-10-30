@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/26 11:24:46 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/29 13:21:54 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,9 +306,30 @@ void			keyboard_input(t_bool *quit, t_info *info, SDL_Event *event);
 void			mouse_move_input(t_bool *quit, t_info *info, SDL_Event *event);
 
 /*
+**	mouse_move_on_details_panel.c
+*/
+int				move_on_details_panel(t_vector2d loc, t_details_panel *panel);
+
+/*
+**	mouse_move_on_viewmode_panel.c
+*/
+int				move_on_viewmode_panel(t_vector2d loc,
+					t_viewmode_panel *viewmode);
+
+/*
 **	mouse_press_input.c
 */
 void			mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event);
+
+/*
+**	mouse_press_on_details_panel.c
+*/
+int				press_on_details_panel(t_vector2d loc, t_info *info);
+
+/*
+**	mouse_press_on_viewmode_panel.c
+*/
+int				press_on_viewmode_panel(t_vector2d loc, t_info *info);
 
 /*
 ********************************************************************************

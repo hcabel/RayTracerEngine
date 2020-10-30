@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aabb_algo.c                                        :+:      :+:    :+:   */
+/*   mouse_press_on_viewmode_panel.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 14:19:20 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/30 10:08:16 by hcabel           ###   ########.fr       */
+/*   Created: 2020/10/29 13:19:15 by hcabel            #+#    #+#             */
+/*   Updated: 2020/10/29 13:25:55 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-/*
-**	Usefully for colisions between to square (sprites).
-**	I gonna use it to detect if my pixel location is inside a button
-*/
-
-int		aabb(SDL_Rect r, t_vector2d pixel_location)
+int		press_on_viewmode_panel(t_vector2d loc, t_info *info)
 {
-	if (pixel_location.x <= r.x + r.w && pixel_location.x >= r.x
-		&& pixel_location.y <= r.y + r.h && pixel_location.y >= r.y)
-		return (GOOD);
+	unsigned int	i;
+
+	loc.x -= info->screen.viewmode.area.x;
+	loc.y -= info->screen.viewmode.area.y;
+	i = 0;
+	while (i < info->screen.viewmode.scrollbox.amount)
+	{
+		if (aabb(info->screen.viewmode.scrollbox.list[i].area, loc) == GOOD)
+			return (info->screen.viewmode.scrollbox.list[i].clicked(info));
+		else
+			i++;
+	}
 	return (FAILED);
 }

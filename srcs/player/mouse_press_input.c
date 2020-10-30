@@ -6,43 +6,11 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/24 16:07:03 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/29 13:23:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static int	witch_detail_button_clicked(t_vector2d loc, t_info *info)
-{
-	loc.x -= info->screen.details.area.x;
-	loc.y -= info->screen.details.area.y;
-	loc.x -= info->screen.details.shape_selector.area.x;
-	loc.y -= info->screen.details.shape_selector.area.y;
-	printf("DETAILS\n");
-	if (aabb(info->screen.details.shape_selector.b_left.area, loc) == GOOD)
-		return (info->screen.details.shape_selector.b_left.clicked(info));
-	if (aabb(info->screen.details.shape_selector.b_right.area, loc) == GOOD)
-		return (info->screen.details.shape_selector.b_right.clicked(info));
-	printf("FAILED\n");
-	return (FAILED);
-}
-
-static int	witch_viewmode_button_clicked(t_vector2d loc, t_info *info)
-{
-	unsigned int	i;
-
-	loc.x -= info->screen.viewmode.area.x;
-	loc.y -= info->screen.viewmode.area.y;
-	i = 0;
-	while (i < info->screen.viewmode.scrollbox.amount)
-	{
-		if (aabb(info->screen.viewmode.scrollbox.list[i].area, loc) == GOOD)
-			return (info->screen.viewmode.scrollbox.list[i].clicked(info));
-		else
-			i++;
-	}
-	return (FAILED);
-}
 
 static int	viewport_clicked(t_vector2d loc, t_info *info)
 {
@@ -85,11 +53,11 @@ static int	witch_panel_clicked(t_vector2d loc, t_info *info)
 
 	updateviewport = FAILED;
 	if (aabb(info->screen.viewmode.area, loc) == GOOD)
-		updateviewport = witch_viewmode_button_clicked(loc, info);
+		updateviewport = press_on_viewmode_panel(loc, info);
 	else if (aabb(info->screen.viewport.area, loc) == GOOD)
 		updateviewport = viewport_clicked(loc, info);
 	else if (aabb(info->screen.details.area, loc) == GOOD)
-		updateviewport = witch_detail_button_clicked(loc, info);
+		updateviewport = press_on_details_panel(loc, info);
 	return (updateviewport);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/25 12:04:01 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/29 12:49:01 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,9 @@ typedef struct			s_vector_visualizer
 typedef struct			s_triple_switch
 {
 	SDL_Rect			area;
-	unsigned int		activate_color;
-	unsigned int		unactivate_color;
 	t_button			first;
 	t_button			second;
 	t_button			third;
-	int					(*clicked)(t_info*);
 }						t_triple_switch;
 
 typedef struct			s_viewmode_panel
@@ -97,10 +94,8 @@ typedef struct			s_details_panel
 {
 	SDL_Rect			area;
 	t_selector			shape_selector;
-	t_triple_switch		axis;
-	/*t_vector_visualizer	location;
-	t_vector_visualizer	rotation;
-	t_vector_visualizer	scale;*/
+	t_triple_switch		triple_switch_axis;
+	SDL_Rect			tri_vector_pannel;
 	t_button			addcomponent;
 	void				*pixels;
 }						t_details_panel;

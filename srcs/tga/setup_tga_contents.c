@@ -6,11 +6,12 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 11:21:42 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/26 11:24:07 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/10/27 10:08:02 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <unistd.h>
 
 static int	get_image_id_data(t_tga *file, int fd)
 {
