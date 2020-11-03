@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 11:52:54 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/30 10:20:45 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/03 14:50:34 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static unsigned int	get_selector_color(t_vector2d loc, t_selector *selector,
 {
 	loc.x -= selector->area.x;
 	loc.y -= selector->area.y;
-	if (aabb(selector->preview_area, loc) == GOOD)
+	if (info->screen.details.skip_selector_preview.bool == 0
+		&& aabb(selector->preview_area, loc) == GOOD)
 		return (selector->preview(loc, info));
 	else if (aabb(selector->b_left.area, loc) == GOOD)
 		return (selector->b_left.ishover.bool == 1 ?
@@ -34,14 +35,26 @@ static unsigned int	get_triple_switch_axis_color(t_vector2d loc,
 	loc.x -= axis->area.x;
 	loc.y -= axis->area.y;
 	if (aabb(axis->first.area, loc) == GOOD)
+	{
+		if (axis->selected_button == 1)
+			return (axis->selected_color);
 		return (axis->first.ishover.bool ? axis->first.hover_color
 			: axis->first.color);
+	}
 	if (aabb(axis->second.area, loc) == GOOD)
+	{
+		if (axis->selected_button == 2)
+			return (axis->selected_color);
 		return (axis->second.ishover.bool ? axis->second.hover_color
 			: axis->second.color);
+	}
 	if (aabb(axis->third.area, loc) == GOOD)
+	{
+		if (axis->selected_button == 3)
+			return (axis->selected_color);
 		return (axis->third.ishover.bool ? axis->third.hover_color
 			: axis->third.color);
+	}
 	return (0);
 }
 
@@ -100,8 +113,11 @@ void				new_details_panel_frame(t_info *info)
 	{
 		color = get_pixel_color(get_pixel_coordinates(i,
 			info->screen.details.area.w), &info->screen.details, info);
-		((unsigned int*)info->screen.details.pixels)[i % info->screen.details.area.w +
-			(i / info->screen.details.area.w * WIN_WIDTH)] = color;
+		if (color != 0)
+		{
+			((unsigned int*)info->screen.details.pixels)[i % info->screen.details.area.w +
+				(i / info->screen.details.area.w * WIN_WIDTH)] = color;
+		}
 		i++;
 	}
 	SDL_UnlockTexture(info->screen.tex);

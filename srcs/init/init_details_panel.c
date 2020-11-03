@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:12:16 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/30 10:16:55 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/03 14:44:04 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static void	init_triple_switch_axis(t_triple_switch *axis,
 	axis->area.y = previous_panel_y_bottom_coordinate + DETAILS_BUTTONS_MARGIN;
 	axis->area.w = DETAILS_AREA_SIZE - (DETAILS_AREA_SIZE / 20 * 2);
 	axis->area.h = 30;
-
+	axis->selected_button = 0;
+	axis->selected_color = BUTTON_SELECTED_COLOR;
 	axis->first.area.h = axis->area.h;
 	axis->first.area.w = axis->area.w / 3;
 	axis->first.area.x = 0;
@@ -67,7 +68,7 @@ static void	init_triple_switch_axis(t_triple_switch *axis,
 	axis->first.color = BUTTON_COLOR;
 	axis->first.hover_color = BUTTON_HOVER_COLOR;
 	axis->first.ishover.bool = 0;
-
+	axis->first.clicked = set_transphorm_axis_x;
 	axis->second.area.h = axis->area.h;
 	axis->second.area.w = axis->area.w / 3;
 	axis->second.area.x = axis->first.area.w;
@@ -75,7 +76,7 @@ static void	init_triple_switch_axis(t_triple_switch *axis,
 	axis->second.color = BUTTON_COLOR;
 	axis->second.hover_color = BUTTON_HOVER_COLOR;
 	axis->second.ishover.bool = 0;
-
+	axis->second.clicked = set_transphorm_axis_y;
 	axis->third.area.h = axis->area.h;
 	axis->third.area.w = axis->area.w / 3;
 	axis->third.area.x = axis->first.area.w + axis->second.area.w;
@@ -83,12 +84,14 @@ static void	init_triple_switch_axis(t_triple_switch *axis,
 	axis->third.color = BUTTON_COLOR;
 	axis->third.hover_color = BUTTON_HOVER_COLOR;
 	axis->third.ishover.bool = 0;
+	axis->third.clicked = set_transphorm_axis_z;
 }
 
 int			init_details_panel(t_details_panel *details)
 {
 	int	error_code;
 
+	details->skip_selector_preview.bool = 0;
 	details->area.x = 0;
 	details->area.y = VIEWMODE_AREA_SIZE;
 	details->area.w = DETAILS_AREA_SIZE;

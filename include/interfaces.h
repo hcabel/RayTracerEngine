@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/29 12:49:01 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/03 14:45:11 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define SCROLLBAR_COLOR 0x444444FF
 # define BUTTON_COLOR 0x063547FF
 # define BUTTON_HOVER_COLOR 0xEC3547FF
+# define BUTTON_SELECTED_COLOR 0x0D6E94FF
 
 # define VIEWMODE_SCROLLBOX_BUTTON_AMOUNT 5
 # define VIEWMODE_BUTTONS_MARGIN 2
@@ -77,6 +78,8 @@ typedef struct			s_vector_visualizer
 typedef struct			s_triple_switch
 {
 	SDL_Rect			area;
+	unsigned int		selected_color;
+	int					selected_button;
 	t_button			first;
 	t_button			second;
 	t_button			third;
@@ -98,6 +101,7 @@ typedef struct			s_details_panel
 	SDL_Rect			tri_vector_pannel;
 	t_button			addcomponent;
 	void				*pixels;
+	t_bool				skip_selector_preview;
 }						t_details_panel;
 
 #endif

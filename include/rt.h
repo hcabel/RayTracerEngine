@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/29 13:21:54 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/03 12:18:45 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,13 @@ int				decrease_target_shape(t_info *info);
 */
 int				put_str_on_screen(SDL_Renderer *renderer, SDL_Texture *font,
 					SDL_Rect *startchar, char *str);
+
+/*
+**	triple_switch_axis_clicked.c
+*/
+int				set_transphorm_axis_x(t_info *info);
+int				set_transphorm_axis_y(t_info *info);
+int				set_transphorm_axis_z(t_info *info);
 
 /*
 **	viewmode_button_clicked.c

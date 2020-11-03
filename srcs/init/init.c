@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/25 16:32:21 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/03 10:36:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	init_info_structure(t_info *info)
 	info->scene.target = NULL;
 	info->scene.target_type = 0;
 	info->screen.viewport.sampling.kill_thread.bool = 0;
+	info->scene.transphorm_axis = 0;
+	info->scene.transphorm_method = 0;
 	return (GOOD);
 }
 

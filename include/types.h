@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/27 11:21:53 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/03 12:49:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define DETAILS_AREA_SIZE 200
 # define VIEWMODE_AREA_SIZE 50
 
-# define RAY_LOOP 75
+# define RAY_LOOP 100
 # define CPU_THREAD 20
 # define FIRST_RESOLUTION 32
 # define VIEW_DISTANCE 200
@@ -117,6 +117,8 @@ typedef struct			s_scene
 	void				*target;
 	int					target_type;
 	float				(*sdf_list[5])(t_vector, t_vector);
+	int					transphorm_axis;
+	int					transphorm_method;
 }						t_scene;
 
 typedef struct			s_sampling
@@ -150,6 +152,13 @@ typedef struct			s_screen
 	SDL_Texture			*font;
 }						t_screen;
 
+typedef struct			s_mouse
+{
+	t_bool				is_dragged;
+	t_vector2d			startloc;
+	t_vector			target_base_3dvector;
+}						t_mouse;
+
 typedef struct			s_info
 {
 	SDL_Window			*window;
@@ -158,6 +167,7 @@ typedef struct			s_info
 							(t_info *info);
 	t_screen			screen;
 	t_scene				scene;
+	t_mouse				mouse;
 	pthread_t			hook;
 }						t_info;
 

@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/10/29 13:18:46 by hcabel           ###   ########.fr        #
+#    Updated: 2020/11/03 10:37:12 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ SRCS				=	aabb_algo.c						\
 						mouse_move_on_viewmode_panel.c	\
 						mouse_press_on_details_panel.c	\
 						mouse_press_on_viewmode_panel.c	\
+						triple_switch_axis_clicked.c	\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
