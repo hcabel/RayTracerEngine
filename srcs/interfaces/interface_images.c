@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/24 13:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/25 12:29:29 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/05 12:18:33 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int	load_viewmode_images(SDL_Renderer *renderer,
 		return (FAILED);
 	if (new_Image(renderer, "assets/icon_iterations.tga", &(viewmode->images[2])) != GOOD)
 		return (FAILED);
+	viewmode->images[3] = NULL;
+	viewmode->images[4] = NULL;
 	return (GOOD);
 }
 

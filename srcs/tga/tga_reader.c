@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 11:19:44 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/26 11:23:48 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/05 12:22:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,10 @@ int			new_Image(SDL_Renderer *renderer, char *path, SDL_Texture **texture)
 		{
 			*texture = SDL_CreateTextureFromSurface(renderer, surface);
 			SDL_FreeSurface(surface);
+			ft_memdel((void**)&tga.image_data);
 			return (GOOD);
 		}
 	}
+	ft_memdel((void**)&tga.image_data);
 	return (FAILED);
 }
