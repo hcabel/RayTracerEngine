@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2020/11/03 12:49:37 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/12 12:38:52 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # define DETAILS_AREA_SIZE 200
 # define VIEWMODE_AREA_SIZE 50
 
-# define RAY_LOOP 100
 # define CPU_THREAD 20
+# define ONGPU 1
+
+# define RAY_LOOP 100
 # define FIRST_RESOLUTION 32
 # define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
@@ -48,11 +50,21 @@
 # define TGA_CONTENT_PARSING_ERROR 7
 # define TGA_FOOTER_PARSING_ERROR 8
 # define TGA_UNCOPRESSION_ERROR 9
+# define KERNEL_SOURCE_LOAD_ERROR 10
+# define KERNEL_PLATFORM_ERROR 11
+# define KERNEL_CONTEXT_ERROR 12
+# define KERNEL_COMMANDQUEUE_ERROR 13
+# define KERNEL_BUFFER_ERROR 14
+# define KERNEL_BUILD_ERROR 15
+# define KERNEL_CREATION_ERROR 16
+# define KERNER_ENQUEUE_ERROR 17
 
 # define DRAWCALL_CHECK_VIEWPORT check_viewport_render
 # define DRAWCALL_VIEWPORT new_viewport_frame
 # define DRAWCALL_DETAILS_PANEL new_details_panel_frame
 # define DRAWCALL_VIEWMODE_PANEL new_viewmode_panel_frame
+
+# define MAX_SOURCE_SIZE 0x100000
 
 typedef struct			s_colormap
 {
@@ -169,6 +181,7 @@ typedef struct			s_info
 	t_scene				scene;
 	t_mouse				mouse;
 	pthread_t			hook;
+	t_kernel_gpu		kernel;
 }						t_info;
 
 typedef struct			s_parsing

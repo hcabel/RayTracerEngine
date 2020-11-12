@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/11/03 12:18:45 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/06 13:36:59 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /*
 **	Lib includes
 */
+# include <CL/cl.h>
 # include <pthread.h>
 # include <stdlib.h>
 # include "SDL.h"
@@ -24,6 +25,7 @@
 /*
 **	Personal includes
 */
+# include "kernel.h"
 # include "mathematical.h"
 # include "types.h"
 # include "interfaces.h"
@@ -120,6 +122,11 @@ int				malloc_scrollbox(t_buttons_scrollbox *sb, unsigned int amount);
 **	viewmode_init_buttons.c
 */
 int				viewmode_init_buttons(t_buttons_scrollbox *viewmode);
+
+/*
+**	init_kernel.c
+*/
+int				init_kernel(t_info *info);
 
 /*
 **	init_viewmode_panel.c
@@ -421,6 +428,11 @@ int				uncompress_tga(t_tga *file);
 **	threads Directory
 ********************************************************************************
 */
+
+/*
+**	gpu_raymarching.c
+*/
+int				calculate_image_with_cg(t_info *info);
 
 /*
 **	raymarching_thread.c

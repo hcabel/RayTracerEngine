@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/11/03 10:37:12 by hcabel           ###   ########.fr        #
+#    Updated: 2020/11/06 13:36:46 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ SRCS				=	aabb_algo.c						\
 						mouse_press_on_details_panel.c	\
 						mouse_press_on_viewmode_panel.c	\
 						triple_switch_axis_clicked.c	\
+						gpu_raymarching.c				\
+						init_kernel.c					\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
@@ -94,7 +96,7 @@ PATH_SOURCES		=	$(shell find $(SOURCES_FOLDER) -type d )
 
 OBJECTS				=	$(addprefix $(OBJECT_FOLDER)/, $(SRCS:.c=.o))
 
-LIBS				=	$(foreach lib, $(LIB_NAME), -L $(lib) -l$(lib)) -lm -pthread
+LIBS				=	$(foreach lib, $(LIB_NAME), -L $(lib) -l$(lib)) -lm -pthread -l OpenCL
 
 vpath %.c $(foreach dir, $(PATH_SOURCES), $(dir):)
 

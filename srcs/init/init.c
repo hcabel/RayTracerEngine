@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/25 14:42:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/11/03 10:36:29 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/12 14:18:06 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	init_info_structure(t_info *info)
 		powf(2, RAYMARCHING_THREAD) - 1;
 	info->screen.viewport.sampling.threads_status =
 		info->screen.viewport.sampling.threads_end_status;
-	info->screen.viewport.resolution = FIRST_RESOLUTION;
+	info->screen.viewport.resolution = 1;
 	info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) *
 		cos(info->scene.cam.rotation.y);
 	info->scene.cam.forward.y = cos(info->scene.cam.rotation.x) *
@@ -66,6 +66,8 @@ int			init(t_info *info, char *argv)
 	int	code_error;
 
 	init_info_structure(info);
+	if ((code_error = init_kernel(info)) != GOOD)
+		return (code_error);
 	if ((code_error = init_sdl(info)))
 		return (code_error);
 	if ((code_error = init_interfaces(&info->screen)))
@@ -74,6 +76,7 @@ int			init(t_info *info, char *argv)
 		|| load_interface_images(info->renderer, &info->screen) != GOOD)
 	{
 		ft_printf("{r}ERROR LOAD IMAGE\n{/}");
+		return (MALLOC_ERROR);
 	}
 	info->scene.sdf_list[0] = sdf_sphere;
 	info->scene.sdf_list[1] = sdf_cone;

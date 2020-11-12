@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:36:14 by hcabel            #+#    #+#             */
-/*   Updated: 2020/11/05 12:07:05 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/11/06 19:24:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,18 @@ static void	get_error_info(int code)
 
 int			program_exit(t_info *info, int code)
 {
-	kill_all_thread(&info->screen.viewport.sampling);
+	if (!ONGPU)
+		kill_all_thread(&info->screen.viewport.sampling);
 	if (code != GOOD)
 		get_error_info(code);
 	else
 		ft_printf("{g}Thanks for using, have a good day !{r}\n");
+
+	clFlush(info->kernel.command_queue);
+	clFinish(info->kernel.command_queue);
+	clReleaseProgram(info->kernel.program);
+	ft_memdel((void**)&info->kernel.kernel_str);
+
 	free_info_struct(info);
 	SDL_DestroyRenderer(info->renderer);
 	SDL_DestroyWindow(info->window);
