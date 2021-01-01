@@ -6,7 +6,8 @@ I want to any people downloading this repo can easy create realistique images/vi
 
 ## Current look like
 
-![Viewmode0](screen/BasicViewmode)
+![Basic viewmode](screen/basicViewmode.png)
+![Iterations Viewmode](screen/IterationsViewmode.png)
 
 ## Install
   SDL2 Installation
