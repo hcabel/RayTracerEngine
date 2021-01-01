@@ -1,44 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathematical.h                                     :+:      :+:    :+:   */
+/*   init_left_panel.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/25 13:17:59 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 11:04:05 by hcabel           ###   ########.fr       */
+/*   Created: 2020/12/26 16:50:46 by hcabel            #+#    #+#             */
+/*   Updated: 2020/12/29 12:10:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHEMATICAL_H
-# define MATHEMATICAL_H
+#include "rt.h"
 
-# include <math.h>
-
-typedef struct	s_vector2d
+int		init_left_panel(t_left_panel *panel)
 {
-	float		x;
-	float		y;
-}				t_vector2d;
+	panel->area.x = 0;
+	panel->area.y = TOP_PANEL_SIZE;
+	panel->area.w = LEFT_PANEL_SIZE;
+	panel->area.h = WIN_HEIGTH - TOP_PANEL_SIZE;
 
-typedef struct	s_vector
-{
-	float		x;
-	float		y;
-	float		z;
-}				t_vector;
-
-typedef struct	s_vector4d
-{
-	float		x;
-	float		y;
-	float		z;
-	float		w;
-}				t_vector4d;
-
-typedef struct	s_matrix44f
-{
-	float		m[4][4];
-}				t_matrix44f;
-
-#endif
+	return (GOOD);
+}

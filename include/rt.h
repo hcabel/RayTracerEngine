@@ -6,12 +6,15 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/11/06 13:36:59 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/12/31 19:09:35 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
+
+// DEBUG
+#include <stdio.h>
 
 /*
 **	Lib includes
@@ -25,424 +28,262 @@
 /*
 **	Personal includes
 */
+# include "define.h"
+# include "tga.h"
 # include "kernel.h"
-# include "mathematical.h"
-# include "types.h"
 # include "interfaces.h"
-
-
-/*
-********************************************************************************
-**	drawcall Directory
-********************************************************************************
-*/
-
-/*
-**	viewport_panel.c
-*/
-void			new_viewport_frame(t_info *info);
-void			check_viewport_render(t_info *info);
-
-/*
-**	details_panel.c
-*/
-void			new_details_panel_frame(t_info *info);
-
-/*
-**	view_mode_panel.c
-*/
-void			new_viewmode_panel_frame(t_info *info);
+# include "mathematical.h"
+# include "scene.h"
+# include "types.h"
 
 /*
 ********************************************************************************
-**	exit Directory
+**	src
 ********************************************************************************
 */
 
-/*
-**	exit.c
-*/
-int				program_exit(t_info *info, int code);
+void		drawcall_clear(t_info *info);
+void		drawcall_add(t_info *info, int (*new)(t_info *info));
 
+char		*error_to_str(int code);
+int			is_fatal_error(int code);
 
-/*
-**	free.c
-*/
-void			free_info_struct(t_info *info);
+void		kill_all_thread(t_sampling *sampling);
+int			all_threads_are_done(t_sampling *sampling);
+void		*thread_calculs_functions(void *p);
 
-/*
-********************************************************************************
-**	frame Directory
-********************************************************************************
-*/
-
-/*
-**	draw_call.c
-*/
-void			draw_calls_clear_list(t_info *info);
-void			draw_calls_add(t_info *info, void (*new)(t_info *info));
-void			draw_calls_execution(t_info *info);
-
-/*
-**	loop.c
-*/
-int				loop(t_info *info);
+int			calculate_image_with_cg(t_info *info);
 
 /*
 ********************************************************************************
-**	init Directory
+**	src/sdf
 ********************************************************************************
 */
 
-/*
-**	create_lists.c
-*/
-int				create_light_list(t_scene *scene);
-int				create_object_list(t_scene *scene);
-
-/*
-**	init_components.c
-*/
-void			initcam(t_cam *cam);
-void			initlight(t_light *light);
-void			initobject(t_object *obj);
-
-/*
-**	init_details_panel.c
-*/
-int				init_details_panel(t_details_panel *scrollbox);
-
-/*
-**	init_interfaces.c
-*/
-int				init_interfaces(t_screen *screen);
-int				malloc_scrollbox(t_buttons_scrollbox *sb, unsigned int amount);
-
-/*
-**	viewmode_init_buttons.c
-*/
-int				viewmode_init_buttons(t_buttons_scrollbox *viewmode);
-
-/*
-**	init_kernel.c
-*/
-int				init_kernel(t_info *info);
-
-/*
-**	init_viewmode_panel.c
-*/
-int				init_viewmode_panel(t_viewmode_panel *viewmode);
-
-/*
-**	init.c
-*/
-int				init(t_info *info, char *argv);
+float		sdf_primary_cube(t_vector p, t_vector obj_scale);
+float		sdf_primary_plane(t_vector p, t_vector obj_scale);
+float		sdf_primary_cylinder(t_vector p, t_vector obj_scale);
+float		sdf_primary_sphere(t_vector p, t_vector obj_scale);
+float		sdf_primary_cone(t_vector p, t_vector obj_scale);
 
 /*
 ********************************************************************************
-**	Interfaces directory
+**	src/init
 ********************************************************************************
 */
-
-/*
-**	interface_images.c
-*/
-int				load_interface_images(SDL_Renderer *renderer, t_screen *screen);
-int				display_viewmode_images(SDL_Renderer *renderer,
-					t_viewmode_panel *viewmode);
-
-/*
-**	shape_selector.c
-*/
-unsigned int	shape_selector_display(t_vector2d loc, t_info *info);
-int				increase_target_shape(t_info *info);
-int				decrease_target_shape(t_info *info);
-
-/*
-**	fonts.c
-*/
-int				put_str_on_screen(SDL_Renderer *renderer, SDL_Texture *font,
-					SDL_Rect *startchar, char *str);
-
-/*
-**	triple_switch_axis_clicked.c
-*/
-int				set_transphorm_axis_x(t_info *info);
-int				set_transphorm_axis_y(t_info *info);
-int				set_transphorm_axis_z(t_info *info);
-
-/*
-**	viewmode_button_clicked.c
-*/
-int				set_lit_viewmode(t_info *info);
-int				set_unlit_viewmode(t_info *info);
-int				set_iteration_viewmode(t_info *info);
-int				set_normalmap_viewmode(t_info *info);
-int				set_light_intensity_viewmode(t_info *info);
+int			init(t_info *info, char *argv);
 
 /*
 ********************************************************************************
-**	math Directory
+**	src/init/parsing
 ********************************************************************************
 */
 
-/*
-**	aabb_algo.c
-*/
-int				aabb(SDL_Rect r, t_vector2d pixel_location);
+int			parsing(t_scene *scene, char *path);
 
-/*
-**	coordinates_utils.c
-*/
-t_vector2d		get_pixel_coordinates(unsigned int i, unsigned int width);
+int			parsing_header(t_scene *scene, int fd);
 
-/*
-**	matrix44.c
-*/
-t_matrix44f		new_matrix44f(t_vector4d a, t_vector4d b, t_vector4d c,
-					t_vector4d d);
-t_matrix44f		matrix_mult(t_matrix44f a, t_matrix44f b);
-
-/*
-**	rotations.c
-*/
-t_vector		rotate_y(t_vector r, float v);
-t_vector		rotation(t_vector src, t_vector2d f);
-t_vector		get_ray_direction(t_vector2d coordinates, t_vector2d rot,
-					float angle, SDL_Rect area);
-
-/*
-**	vector_2.c
-*/
-t_vector		vector_mult(t_vector v, float mult);
-t_vector		vector_crossproduct(t_vector a, t_vector b);
-
-/*
-**	vector_init.c
-*/
-t_vector		new_vector(float x, float y, float z);
-t_vector2d		new_vector2d(float x, float y);
-t_vector4d		new_vector4d(float x, float y, float z, float w);
-
-/*
-**	vector.c
-*/
-float			vector_dot(t_vector a, t_vector b);
-t_vector		vector_add(t_vector a, t_vector b);
-t_vector		vector_normalize(t_vector a);
-t_vector		vector_subtract(t_vector a, t_vector b);
-float			vector_length(t_vector a);
-
-/*
-**	vector2d.c
-*/
-float			vector2d_dot(t_vector2d a, t_vector2d b);
-t_vector2d		vector2d_add(t_vector2d a, t_vector2d b);
-t_vector2d		vector2d_normalize(t_vector2d a);
-t_vector2d		vector2d_subtract(t_vector2d a, t_vector2d b);
-float			vector2d_length(t_vector2d a);
-
-
-/*
-**	vector4d.c
-*/
-float			vector4d_dot(t_vector4d a, t_vector4d b);
-t_vector4d		vector4d_add(t_vector4d a, t_vector4d b);
-t_vector4d		vector4d_normalize(t_vector4d a);
-t_vector4d		vector4d_subtract(t_vector4d a, t_vector4d b);
-float			vector4d_length(t_vector4d a);
+int			parse_components(t_scene *scene, int fd);
 
 /*
 ********************************************************************************
-**	parsing Directory
+**	src/init/parsing/components
 ********************************************************************************
 */
 
-/*
-**	parse_camera_parameters.c
-*/
-void			parse_camera_parameters(t_cam *cam, char *line,
-					unsigned int line_amount);
+void		parse_camera_parameters(t_cam *cam, char *line,
+				unsigned int line_amount);
 
-/*
-**	parse_components.c.c
-*/
-int				parse_components(t_scene *scene, int fd);
+void		parse_lights_parameters(t_light *light, char *line,
+				unsigned int line_amount);
 
-/*
-**	parse_lights_parameters.c
-*/
-void			parse_lights_parameters(t_light *light, char *line,
-					unsigned int line_amount);
-
-/*
-**	parse_objects_parameters.c
-*/
-void			parse_objects_parameters(t_object *object, char *line,
-					unsigned int line_amount);
-
-/*
-**	parse_parameter_values.c
-*/
-t_vector		parse_vector(char *line, unsigned int line_amount);
-t_vector2d		parse_vector2d(char *line, unsigned int line_amount);
-t_vector		parse_color(char *line, unsigned int line_amount);
-
-/*
-**	parse_primary_infos.c
-*/
-int				parse_component_amount(t_scene *scene, int fd);
-
-/*
-**	parsing.c
-*/
-int				parsing(t_scene *scene, char *path);
+void		parse_objects_parameters(t_object *object, char *line,
+				unsigned int line_amount);
 
 /*
 ********************************************************************************
-**	player Directory
+**	src/init/parsing/structures
 ********************************************************************************
 */
 
-/*
-**	input.c
-*/
-void			hook_event(t_bool *quit, t_info *info);
+t_vector2d	parse_vector2d(char *line, unsigned int line_amount);
+t_vector	parse_vector(char *line, unsigned int line_amount);
 
-/*
-**	keyboard_input.c
-*/
-void			keyboard_input(t_bool *quit, t_info *info, SDL_Event *event);
-
-/*
-**	mouse_move_input.c
-*/
-void			mouse_move_input(t_bool *quit, t_info *info, SDL_Event *event);
-
-/*
-**	mouse_move_on_details_panel.c
-*/
-int				move_on_details_panel(t_vector2d loc, t_details_panel *panel);
-
-/*
-**	mouse_move_on_viewmode_panel.c
-*/
-int				move_on_viewmode_panel(t_vector2d loc,
-					t_viewmode_panel *viewmode);
-
-/*
-**	mouse_press_input.c
-*/
-void			mouse_press_input(t_bool *quit, t_info *info, SDL_Event *event);
-
-/*
-**	mouse_press_on_details_panel.c
-*/
-int				press_on_details_panel(t_vector2d loc, t_info *info);
-
-/*
-**	mouse_press_on_viewmode_panel.c
-*/
-int				press_on_viewmode_panel(t_vector2d loc, t_info *info);
+t_vector	parse_color(char *line, unsigned int line_amount);
 
 /*
 ********************************************************************************
-**	ray Directory
+**	src/init/kernel
 ********************************************************************************
 */
 
+int			init_kernel(t_info *info);
+
 /*
-**	light_ray.c
+********************************************************************************
+**	src/init/interfaces
+********************************************************************************
 */
+
+int			init_interfaces(t_info *info);
+
+int			init_top_panel(t_top_panel *panel);
+int			init_left_panel(t_left_panel *panel);
+
+/*
+********************************************************************************
+**	src/new/scene
+********************************************************************************
+*/
+
+t_cam		new_cam();
+t_light		new_light();
+t_object	new_object();
+
+/*
+********************************************************************************
+**	src/new/math
+********************************************************************************
+*/
+
+t_vector	new_vector(float x, float y, float z);
+t_vector2d	new_vector2d(float x, float y);
+t_vector4d	new_vector4d(float x, float y, float z, float w);
+
+/*
+********************************************************************************
+**	src/math
+********************************************************************************
+*/
+
+t_vector	vector_crossproduct(t_vector a, t_vector b);
+t_vector	vector_mult(t_vector v, float mult);
+
+float		vector_length(t_vector a);
+t_vector	vector_subtract(t_vector a, t_vector b);
+t_vector	vector_normalize(t_vector a);
+t_vector	vector_add(t_vector a, t_vector b);
+float		vector_dot(t_vector a, t_vector b);
+
+float		vector2d_length(t_vector2d a);
+t_vector2d	vector2d_subtract(t_vector2d a, t_vector2d b);
+t_vector2d	vector2d_normalize(t_vector2d a);
+t_vector2d	vector2d_add(t_vector2d a, t_vector2d b);
+float		vector2d_dot(t_vector2d a, t_vector2d b);
+
+float		vector4d_length(t_vector4d a);
+t_vector4d	vector4d_subtract(t_vector4d a, t_vector4d b);
+t_vector4d	vector4d_normalize(t_vector4d a);
+t_vector4d	vector4d_add(t_vector4d a, t_vector4d b);
+float		vector4d_dot(t_vector4d a, t_vector4d b);
+
+t_vector	get_ray_direction(t_vector2d coordinates, t_vector2d rot,
+				float angle, SDL_Rect area);
+t_vector	rotation(t_vector src, t_vector2d f);
+t_vector	rotate_y(t_vector r, float v);
+
+t_matrix44f	matrix_mult(t_matrix44f a, t_matrix44f b);
+t_matrix44f	new_matrix44f(t_vector4d a, t_vector4d b, t_vector4d c,
+				t_vector4d d);
+
+int			aabb(SDL_Rect r, t_vector2d pixel_location);
+
+t_vector2d	get_pixel_coordinates(unsigned int i, unsigned int width);
+
+/*
+********************************************************************************
+**	src/drawcall
+********************************************************************************
+*/
+
+int			drawcall_viewport(t_info *info);
+int			drawcall_check_viewport(t_info *info);
+
+int			drawcall_top_panel(t_info *info);
+
+int			drawcall_left_panel(t_info *info);
+
+/*
+********************************************************************************
+**	src/input
+********************************************************************************
+*/
+
+int			hook_event(int *quit, t_info *info);
+
+void		keyboard_press(int *quit, t_info *info, SDL_Event *event);
+
+/*
+********************************************************************************
+**	src/input/mouse
+********************************************************************************
+*/
+
+void		mouse_wheel(int *quit, t_info *info, SDL_Event *event);
+
+/*
+********************************************************************************
+**	src/input/mouse/press
+********************************************************************************
+*/
+
+void		mouse_press(int *quit, t_info *info, SDL_Event *event);
+int			press_on_top_panel(t_vector2d loc, t_info *info);
+int			press_on_left_panel(t_vector2d loc, t_info *info);
+
+/*
+********************************************************************************
+**	src/input/mouse/move
+********************************************************************************
+*/
+
+void		mouse_move(int *quit, t_info *info, SDL_Event *event);
+int			move_on_top_panel(t_top_panel *viewmode, t_vector2d cursorlocation);
+int			move_on_left_panel(t_vector2d loc, t_left_panel *panel);
+
+/*
+********************************************************************************
+**	src/input/resize
+********************************************************************************
+*/
+
+int			resize_window(int *quit, t_info *info, SDL_Event *event);
+
+/*
+********************************************************************************
+**	src/clicked/top_panel
+********************************************************************************
+*/
+
+int			viewmode_button_1_clicked(t_info *info);
+int			viewmode_button_2_clicked(t_info *info);
+int			viewmode_button_3_clicked(t_info *info);
+int			viewmode_button_4_clicked(t_info *info);
+int			viewmode_button_5_clicked(t_info *info);
+
+/*
+********************************************************************************
+**	src/raymarching
+********************************************************************************
+*/
+
+unsigned int	raymarching(t_scene *scene, t_vector dir);
+t_ray_hit		trace_ray(t_scene *scene, t_vector start_location, t_vector dir,
+					float max_distance);
+t_vector		normal_map_to_rgb(t_vector normal);
+t_vector		get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj);
+float			calcSoftshadow(t_vector p, t_vector dir, t_scene *scene);
 float			get_light_intensity(t_scene *scene, t_vector hit_location,
 					t_object *hit_obj, t_vector olddir, t_light *lights, int amount);
 
 /*
-**	normal_map.c
-*/
-t_vector		get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj);
-t_vector		normal_map_to_rgb(t_vector normal);
-
-/*
-**	raymarching.c
-*/
-unsigned int	raymarching(t_scene *scene, t_vector dir);
-
-/*
-**	trace_ray.c
-*/
-t_ray_hit		trace_ray(t_scene *scene, t_vector start_location,
-					t_vector dir, float max_distance);
-
-/*
 ********************************************************************************
-**	Signed_Distance_functions Directory
+**	src/exit
 ********************************************************************************
 */
 
-/*
-**	sdf_1.c
-*/
-float			sdf_cube(t_vector p, t_vector obj_scale);
-float			sdf_plane(t_vector p, t_vector obj_scale);
-float			sdf_cylinder(t_vector p, t_vector obj_scale);
-float			sdf_sphere(t_vector p, t_vector obj_scale);
-float			sdf_cone(t_vector p, t_vector obj_scale);
+int			program_exit(t_info *info, int code);
 
-/*
-********************************************************************************
-**	tga Directory
-********************************************************************************
-*/
-
-/*
-**	fill_argb_data.c
-*/
-int				convert_to_argb(t_tga *file);
-
-/*
-**	fill_uncompresed_data.c
-*/
-void			fill_uncompresed_data(int *i, int *j, unsigned char *original,
-					unsigned char *new_data, int bpp);
-
-/*
-**	setup_tga_contents.c
-*/
-int				setup_contents(t_tga *file, int fd);
-int				read_header(t_tga *file, int fd);
-
-/*
-**	tga_reader.c
-*/
-int				new_Image(SDL_Renderer *renderer, char *path,
-					SDL_Texture **texture);
-
-/*
-**	uncompress_tga.c
-*/
-int				uncompress_tga(t_tga *file);
-
-/*
-********************************************************************************
-**	threads Directory
-********************************************************************************
-*/
-
-/*
-**	gpu_raymarching.c
-*/
-int				calculate_image_with_cg(t_info *info);
-
-/*
-**	raymarching_thread.c
-*/
-void			*thread_calculs_functions(void *p);
-
-/*
-**	thread_utils.c
-*/
-int				all_threads_are_done(t_sampling *sampling);
-void			kill_all_thread(t_sampling *sampling);
+void		free_info_struct(t_info *info);
 
 #endif

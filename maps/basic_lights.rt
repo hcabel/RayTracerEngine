@@ -1,3 +1,6 @@
+[Header]
+	shapes: 1
+	lights: 1
 [Object:Sphere]
 	Location: {0, 0, 0}
 	scale: {50}

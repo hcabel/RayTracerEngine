@@ -1,3 +1,6 @@
+[Header]
+	shapes: 16
+	lights: 2
 [Object:sphere]
 	Location: {20, 20, 25}
 	scale: {5}

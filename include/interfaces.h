@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/11/03 14:45:11 by hcabel           ###   ########.fr       */
+/*   Updated: 2020/12/31 13:16:54 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,94 +14,86 @@
 # define INTERFACES_H
 
 # include "SDL.h"
+# include "define.h"
 
-# define SCROLLBAR_SIZE 5;
-# define SCROLLBAR_COLOR 0x444444FF
-# define BUTTON_COLOR 0x063547FF
-# define BUTTON_HOVER_COLOR 0xEC3547FF
-# define BUTTON_SELECTED_COLOR 0x0D6E94FF
+typedef struct s_info		t_info;
 
-# define VIEWMODE_SCROLLBOX_BUTTON_AMOUNT 5
-# define VIEWMODE_BUTTONS_MARGIN 2
-# define VIEWMODE_BACKGROUND_COLOR 0x1C1C22FF
-
-# define DETAILS_BACKGROUND_COLOR 0x24242BFF
-# define DETAILS_BUTTONS_MARGIN 5
-
-typedef struct s_info	t_info;
-
-typedef struct			s_bool
+typedef struct				s_button
 {
-	unsigned			bool:1;
-}						t_bool;
+	SDL_Rect				area;
+	unsigned int			color;
+	unsigned int			hover_color;
+	int						ishover;
+	int						(*clicked)(t_info*);
+}							t_button;
 
-typedef struct			s_button
+typedef struct				s_scrollbar
 {
-	SDL_Rect			area;
-	unsigned int		color;
-	unsigned int		hover_color;
-	t_bool				ishover;
-	int					(*clicked)(t_info*);
-}						t_button;
+	unsigned int			enable;
+	unsigned int			max;
+	float					ratio;
+	unsigned int			color;
+	SDL_Rect				area;
+	t_button				button;
 
-typedef struct			s_buttons_scrollbox
-{
-	SDL_Rect			area;
-	t_button			*list;
-	unsigned int		amount;
-	unsigned int		current;
-	unsigned int		scrollbar_color;
-	SDL_Rect			scrollbar_area;
-	t_button			scrollbar_button;
-}						t_buttons_scrollbox;
+}							t_scrollbar;
 
-typedef struct			s_selector
+typedef struct				s_viewmode_scrollbox
 {
-	SDL_Rect			area;
-	unsigned int		max;
-	unsigned int		min;
-	SDL_Rect			preview_area;
-	t_button			b_left;
-	t_button			b_right;
-	unsigned int		(*preview)(t_vector2d, t_info*);
-}						t_selector;
+	SDL_Rect				area;
+	t_button				*viewmode_list;
+	SDL_Texture				*button_images[VIEWMODE_BUTTON_AMOUNT];
+	int						current;
+	t_scrollbar				scrollbar;
+}							t_viewmode_scrollbox;
 
-typedef struct			s_vector_visualizer
+typedef struct				s_selector
 {
-	SDL_Rect			area;
-	SDL_Rect			areax;
-	SDL_Rect			areay;
-	SDL_Rect			areaz;
-	t_vector			*values;
-}						t_vector_visualizer;
+	SDL_Rect				area;
+	unsigned int			max;
+	unsigned int			min;
+	SDL_Rect				preview_area;
+	t_button				b_left;
+	t_button				b_right;
+	unsigned int			(*preview)(t_vector2d, t_info*);
+}							t_selector;
 
-typedef struct			s_triple_switch
+typedef struct				s_vector_visualizer
 {
-	SDL_Rect			area;
-	unsigned int		selected_color;
-	int					selected_button;
-	t_button			first;
-	t_button			second;
-	t_button			third;
-}						t_triple_switch;
+	SDL_Rect				area;
+	SDL_Rect				areax;
+	SDL_Rect				areay;
+	SDL_Rect				areaz;
+	t_vector				*values;
+}							t_vector_visualizer;
 
-typedef struct			s_viewmode_panel
+typedef struct				s_triple_switch
 {
-	SDL_Rect			area;
-	t_buttons_scrollbox	scrollbox;
-	void				*pixels;
-	SDL_Texture			*images[VIEWMODE_SCROLLBOX_BUTTON_AMOUNT];
-}						t_viewmode_panel;
+	SDL_Rect				area;
+	unsigned int			selected_color;
+	int						selected_button;
+	t_button				first;
+	t_button				second;
+	t_button				third;
+}							t_triple_switch;
 
-typedef struct			s_details_panel
+typedef struct				s_top_panel
 {
-	SDL_Rect			area;
-	t_selector			shape_selector;
-	t_triple_switch		triple_switch_axis;
-	SDL_Rect			tri_vector_pannel;
-	t_button			addcomponent;
-	void				*pixels;
-	t_bool				skip_selector_preview;
-}						t_details_panel;
+	SDL_Rect				area;
+	t_button				savemap_button; // TODO
+	t_viewmode_scrollbox	viewmode;
+	void					*pixels;
+}							t_top_panel;
+
+typedef struct				s_left_panel
+{
+	SDL_Rect				area;
+	t_selector				shape_selector;
+	t_triple_switch			triple_switch_axis;
+	SDL_Rect				tri_vector_pannel;
+	t_button				addcomponent;
+	void					*pixels;
+	int						skip_selector_preview;
+}							t_left_panel;
 
 #endif

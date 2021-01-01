@@ -6,78 +6,68 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/11/06 13:36:46 by hcabel           ###   ########.fr        #
+#    Updated: 2020/12/31 14:24:24 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DEBUG				=	yes
 
 NAME				=	rt
-LIB_NAME			=	ftprintf SDL2
+LIB_NAME			=	ftprintf SDL2 OpenCL
 
 OBJECT_FOLDER		=	objects
-SOURCES_FOLDER		=	srcs
+SOURCES_FOLDER		=	src
 INCLUDES_FOLDER		=	include
 
-# find srcs -type f | rev | cut -d '/' -f1 | rev | sort -d
+# find src -type f | rev | cut -d '/' -f1 | rev | sort -d
 SRCS				=	aabb_algo.c						\
 						coordinates_utils.c				\
-						create_lists.c					\
-						details_panel.c					\
-						draw_call.c						\
+						error.c							\
 						exit.c							\
 						free.c							\
 						init.c							\
-						init_components.c				\
-						init_interfaces.c				\
-						init_details_panel.c			\
-						init_viewmode_panel.c			\
 						input.c							\
-						keyboard_input.c				\
-						loop.c							\
+						kernel_init.c					\
+						keyboard.c						\
 						main.c							\
 						matrix44.c						\
-						mouse_press_input.c				\
-						mouse_move_input.c				\
-						normal_map.c					\
-						parse_camera_parameters.c		\
-						parse_components.c				\
-						parse_lights_parameters.c		\
-						parse_objects_parameters.c		\
-						parse_parameter_values.c		\
-						parse_primary_infos.c			\
+						mouse_move.c					\
+						mouse_move_on_left_panel.c		\
+						mouse_move_on_top_panel.c		\
+						mouse_press.c					\
+						mouse_press_on_left_panel.c		\
+						mouse_press_on_top_panel.c		\
+						new_components.c				\
+						new_vector.c					\
 						parsing.c						\
-						raymarching.c					\
-						raymarching_thread.c			\
-						rotations.c						\
-						sdf_1.c							\
-						thread_utils.c					\
-						trace_ray.c						\
+						parsing_camera_component.c		\
+						parsing_color_structures.c		\
+						parsing_header.c				\
+						parsing_light_component.c		\
+						parsing_object_component.c		\
+						parsing_scene.c					\
+						parsing_vector_structures.c		\
+						primary.c						\
+						rotation.c						\
+						threads.c						\
 						vector_2.c						\
 						vector2d.c						\
 						vector4d.c						\
 						vector.c						\
-						vector_init.c					\
-						viewmode_button_clicked.c		\
-						init_viewmode_buttons.c			\
-						viewmode_panel.c				\
+						left_panel.c					\
+						top_panel.c						\
 						viewport_panel.c				\
-						shape_selector.c				\
+						init_interfaces.c				\
+						init_top_panel.c				\
+						init_left_panel.c				\
+						clicked_viewmode.c				\
+						mouse_wheel.c					\
+						resize_window.c					\
+						cpu_render.c					\
+						trace_ray.c						\
+						normal_map.c					\
 						light_ray.c						\
-						uncompress_tga.c				\
-						tga_reader.c					\
-						fill_uncompressed_data.c		\
-						interface_images.c				\
-						fonts.c							\
-						fill_argb_data.c				\
-						setup_tga_contents.c			\
-						mouse_move_on_details_panel.c	\
-						mouse_move_on_viewmode_panel.c	\
-						mouse_press_on_details_panel.c	\
-						mouse_press_on_viewmode_panel.c	\
-						triple_switch_axis_clicked.c	\
-						gpu_raymarching.c				\
-						init_kernel.c					\
+						gpu.c
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
@@ -96,7 +86,10 @@ PATH_SOURCES		=	$(shell find $(SOURCES_FOLDER) -type d )
 
 OBJECTS				=	$(addprefix $(OBJECT_FOLDER)/, $(SRCS:.c=.o))
 
-LIBS				=	$(foreach lib, $(LIB_NAME), -L $(lib) -l$(lib)) -lm -pthread -l OpenCL
+LIBS				=	-lm -pthread									\
+						-L ftprintf -l ftprintf							\
+						-L OpenCL/lib -l OpenCL							\
+						-L SDL2 -lSDL2 -D_GNU_SOURCE=1 -D_REENTRANT -ldl
 
 vpath %.c $(foreach dir, $(PATH_SOURCES), $(dir):)
 
@@ -108,7 +101,7 @@ all: lib $(NAME)
 	echo "[Binary Updated]\n"
 
 lib:
-	$(foreach lib, $(LIB_NAME), make -C $(lib);)
+	#$(foreach lib, $(LIB_NAME), make -C $(lib);)
 
 $(NAME): $(OBJECT_FOLDER) $(OBJECTS)
 	echo "[Create] Binary"

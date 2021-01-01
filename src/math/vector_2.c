@@ -1,44 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathematical.h                                     :+:      :+:    :+:   */
+/*   vector_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/25 13:17:59 by hcabel            #+#    #+#             */
-/*   Updated: 2020/10/09 11:04:05 by hcabel           ###   ########.fr       */
+/*   Created: 2020/09/29 13:50:59 by hcabel            #+#    #+#             */
+/*   Updated: 2020/12/24 12:41:57 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHEMATICAL_H
-# define MATHEMATICAL_H
+#include "rt.h"
 
-# include <math.h>
-
-typedef struct	s_vector2d
+t_vector	vector_mult(t_vector v, float mult)
 {
-	float		x;
-	float		y;
-}				t_vector2d;
+	v.x *= mult;
+	v.y *= mult;
+	v.z *= mult;
+	return (v);
+}
 
-typedef struct	s_vector
+t_vector	vector_crossproduct(t_vector a, t_vector b)
 {
-	float		x;
-	float		y;
-	float		z;
-}				t_vector;
+	t_vector	r;
 
-typedef struct	s_vector4d
-{
-	float		x;
-	float		y;
-	float		z;
-	float		w;
-}				t_vector4d;
-
-typedef struct	s_matrix44f
-{
-	float		m[4][4];
-}				t_matrix44f;
-
-#endif
+	r.x = (a.y - b.z) * (a.z - b.y);
+	r.y = (a.z - b.x) * (a.x - b.z);
+	r.z = (a.x - b.y) * (a.y - b.x);
+	return (r);
+}
