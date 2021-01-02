@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 14:30:02 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 16:40:25 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define KERNELSOURCEFILE "src/raymarching/kernel_render.cl"
 
 # define RAY_LOOP 100
-# define FIRST_RESOLUTION 32
+# define FIRST_RESOLUTION 16
 # define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
 
@@ -86,7 +86,7 @@
 # define DRAWCALL_TOP_PANEL drawcall_top_panel
 # define DRAWCALL_LEFT_PANEL drawcall_left_panel
 
-# define VIEWMODE_BUTTON_AMOUNT 35
+# define VIEWMODE_BUTTON_AMOUNT 5
 # define LAST_VIEWMODE_BUTTON (VIEWMODE_BUTTON_AMOUNT - 1)
 
 // REMOVE

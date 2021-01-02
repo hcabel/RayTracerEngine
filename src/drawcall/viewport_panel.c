@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:09:48 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 12:48:35 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 16:42:20 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int		drawcall_viewport(t_info *info)
 		kill_all_thread(&info->screen.viewport.sampling);
 	info->screen.viewport.sampling.threads_status = 0;
 
-	// info->screen.viewport.resolution = 12;
 	ft_printf("[DrawCall] Viewport (%s sampling %3d)\n",
 		(info->ongpu == 1 ? "GPU" : "CPU"), info->screen.viewport.resolution);
 

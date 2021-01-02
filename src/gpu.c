@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 12:27:10 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/01 16:53:34 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 16:36:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static int	convert_scene_to_kernel_scene(t_kernel_args *kernel_args,
 	kernel_args->scene.cam_rotation = info->scene.cam.rotation;
 	kernel_args->scene.viewmode = info->scene.cam.viewmode;
 	kernel_args->scene.shapes_num = info->scene.shapes_amount;
-	kernel_args->scene.img_x = info->screen.viewport.area.x;
-	kernel_args->scene.img_y = info->screen.viewport.area.y;
-	kernel_args->scene.img_w = info->screen.viewport.area.w;
-	kernel_args->scene.img_h = info->screen.viewport.area.h;
+	kernel_args->scene.img_x = info->screen.viewport.image.x;
+	kernel_args->scene.img_y = info->screen.viewport.image.y;
+	kernel_args->scene.img_w = info->screen.viewport.image.w;
+	kernel_args->scene.img_h = info->screen.viewport.image.h;
 	if (convert_shapes_to_kernel_list(info->scene.shapes,
 		info->scene.shapes_amount, &kernel_args->shapes) != GOOD)
 		return (MALLOC_ERROR);
