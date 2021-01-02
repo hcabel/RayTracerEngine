@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:58:19 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 14:20:08 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 12:48:30 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	kill_all_thread(t_sampling *sampling)
 {
 	unsigned int	i;
 
-	ft_printf("kill_all_thread\n");
 	if (sampling->threads_status != sampling->threads_end_status)
 	{
+		ft_printf("kill_all_thread\n");
 		sampling->kill_thread = 1;
 		i = 0;
 		while (i < RAYMARCHING_THREAD)

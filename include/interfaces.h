@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 13:16:54 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/01 19:26:01 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@ typedef struct				s_scrollbar
 	t_button				button;
 
 }							t_scrollbar;
+
+typedef struct s_switch		t_switch;
+
+struct						s_switch
+{
+	SDL_Rect				area;
+	unsigned int			color_on;
+	unsigned int			color_off;
+	unsigned int			hover_color;
+	int						ishover;
+	int						ison;
+	int						(*clicked)(t_info*, t_switch*);
+};
 
 typedef struct				s_viewmode_scrollbox
 {
@@ -80,8 +93,9 @@ typedef struct				s_triple_switch
 typedef struct				s_top_panel
 {
 	SDL_Rect				area;
-	t_button				savemap_button; // TODO
+	t_button				savemap_button;
 	t_viewmode_scrollbox	viewmode;
+	t_switch				gpu_switch;
 	void					*pixels;
 }							t_top_panel;
 

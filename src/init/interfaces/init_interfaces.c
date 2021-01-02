@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 15:52:31 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/30 17:19:16 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/01 20:59:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			init_interfaces(t_info *info)
 
 	ft_printf("{g}	Interfaces\n{/}");
 
-	if ((code = init_top_panel(&info->screen.top)) != GOOD)
+	if ((code = init_top_panel(&info->screen.top, info->ongpu)) != GOOD)
 		return (code);
 	if ((code = init_left_panel(&info->screen.left)) != GOOD)
 		return (code);

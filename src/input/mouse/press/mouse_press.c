@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 13:51:01 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 13:46:52 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,18 @@ static int	viewport_clicked(t_vector2d loc, t_info *info)
 	return (0);
 }
 
-void		mouse_press(int *quit, t_info *info, SDL_Event *event)
+int			mouse_press(int *quit, t_info *info, SDL_Event *event)
 {
 	int	result;
+	int	tmp;
 
 	result = 0;
-
 	if (aabb(info->screen.top.area, info->mouse.location) == GOOD)
-		result |= press_on_top_panel(info->mouse.location, info);
+	{
+		if ((tmp = press_on_top_panel(info->mouse.location, info)) < 0)
+			return (tmp);
+		result |= tmp;
+	}
 	else if (aabb(info->screen.viewport.area, info->mouse.location) == GOOD)
 		result |= viewport_clicked(info->mouse.location, info);
 	else if (aabb(info->screen.left.area, info->mouse.location) == GOOD)
@@ -74,4 +78,5 @@ void		mouse_press(int *quit, t_info *info, SDL_Event *event)
 		if (((result >> 3) & 1) != 0)
 			drawcall_add(info, DRAWCALL_CHECK_VIEWPORT);
 	}
+	return (GOOD);
 }

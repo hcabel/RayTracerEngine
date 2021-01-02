@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 19:09:35 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/01 20:59:09 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int			init_kernel(t_info *info);
 
 int			init_interfaces(t_info *info);
 
-int			init_top_panel(t_top_panel *panel);
+int			init_top_panel(t_top_panel *panel, int ongpu);
 int			init_left_panel(t_left_panel *panel);
 
 /*
@@ -227,7 +227,7 @@ void		mouse_wheel(int *quit, t_info *info, SDL_Event *event);
 ********************************************************************************
 */
 
-void		mouse_press(int *quit, t_info *info, SDL_Event *event);
+int			mouse_press(int *quit, t_info *info, SDL_Event *event);
 int			press_on_top_panel(t_vector2d loc, t_info *info);
 int			press_on_left_panel(t_vector2d loc, t_info *info);
 
@@ -260,6 +260,8 @@ int			viewmode_button_2_clicked(t_info *info);
 int			viewmode_button_3_clicked(t_info *info);
 int			viewmode_button_4_clicked(t_info *info);
 int			viewmode_button_5_clicked(t_info *info);
+
+int			gpu_switch_clicked(t_info *info, t_switch *button);
 
 /*
 ********************************************************************************

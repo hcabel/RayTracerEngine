@@ -6,24 +6,28 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 14:58:57 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/29 11:34:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/01 20:57:10 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	mouse_event(int *quit, t_info *info, SDL_Event *event)
+static int	mouse_event(int *quit, t_info *info, SDL_Event *event)
 {
+	int	code;
+
 	if (event->type == SDL_MOUSEBUTTONDOWN)
 	{
 		info->mouse.down = 1;
-		mouse_press(quit, info, event);
+		if ((code = mouse_press(quit, info, event)) != GOOD)
+			return (code);
 	}
 	else if (event->type == SDL_MOUSEBUTTONUP)
 	{
-		info->mouse.down = 0;
+		/*info->mouse.down = 0;
 		info->mouse.dragged = 0;
-		mouse_press(quit, info, event);
+		if ((code = mouse_press(quit, info, event)) != GOOD)
+			return (code);*/
 	}
 	else if (event->type == SDL_MOUSEMOTION)
 	{
@@ -38,11 +42,11 @@ static void	mouse_event(int *quit, t_info *info, SDL_Event *event)
 		info->mouse.dragged = 0;
 		mouse_wheel(quit, info, event);
 	}
+	return (GOOD);
 }
 
 int			hook_event(int *quit, t_info *info)
 {
-	int			code;
 	SDL_Event	event;
 
 	// GARBAGE
@@ -59,10 +63,9 @@ int			hook_event(int *quit, t_info *info)
 		keyboard_press(quit, info, &event);
 	else if (event.type == SDL_MOUSEBUTTONUP || event.type == SDL_MOUSEBUTTONDOWN
 		|| event.type == SDL_MOUSEWHEEL || event.type == SDL_MOUSEMOTION)
-		mouse_event(quit, info, &event);
+		return (mouse_event(quit, info, &event));
 	else if (event.type == SDL_WINDOWEVENT
 		&& event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
-		if ((code = resize_window(quit, info, &event)) != GOOD)
-			return (code);
+		return (resize_window(quit, info, &event));
 	return (GOOD);
 }

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 19:17:27 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 14:30:02 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define BUTTON_HOVER_COLOR 0xEC3547FF
 # define BUTTON_SELECTED_COLOR 0x0D6E94FF
 
+# define BUTTON_SWITCH_COLOR_ON 0x54FF7CFF
+# define BUTTON_SWITCH_COLOR_OFF 0xBABABAFF
+
 # define TOP_PANEL_SIZE 50
 # define TOP_PANEL_BUTTONS_MARGIN 4
 # define TOP_PANEL_BACKGROUND_COLOR 0x1C1C22FF
@@ -54,35 +57,36 @@
 # define MAX_DRAWCALL 4
 # define RAYMARCHING_THREAD (CPU_THREAD - 1)
 
-# define FAILED -1
-# define GOOD 0
-# define UNKNOWN_ERROR 1
-# define MALLOC_ERROR 2
-# define SDL_ERROR 3
-# define SDL_TEXTURE_CREATION_ERROR 4
-# define O_THREAD_ERROR 5
-# define TGA_PATH_ERROR 6
-# define TGA_HEADER_PARSING_ERROR 7
-# define TGA_CONTENT_PARSING_ERROR 8
-# define TGA_FOOTER_PARSING_ERROR 9
-# define TGA_UNCOMPRESSION_ERROR 10
-# define KERNEL_SOURCE_LOAD_ERROR 11
-# define KERNEL_PLATFORM_ERROR 12
-# define KERNEL_CONTEXT_ERROR 13
-# define KERNEL_COMMANDQUEUE_ERROR 14
-# define KERNEL_BUFFER_ERROR 15
-# define KERNEL_BUILD_ERROR 16
-# define KERNEL_CREATION_ERROR 17
-# define KERNEL_ENQUEUE_ERROR 18
-# define KERNEL_ITEM_SIZE_ERROR 19
-# define RESIZE_WINDOW_ERROR 20
+# define GOOD						0
+# define FAILED						-1
+# define UNKNOWN_ERROR				-2
+# define MALLOC_ERROR				-3
+# define SDL_ERROR					-4
+# define SDL_TEXTURE_CREATION_ERROR	-5
+# define O_THREAD_ERROR				-6
+# define TGA_PATH_ERROR				-7
+# define TGA_HEADER_PARSING_ERROR	-8
+# define TGA_CONTENT_PARSING_ERROR	-9
+# define TGA_FOOTER_PARSING_ERROR	-10
+# define TGA_UNCOMPRESSION_ERROR	-11
+# define KERNEL_SOURCE_LOAD_ERROR	-12
+# define KERNEL_PLATFORM_ERROR		-13
+# define KERNEL_CONTEXT_ERROR		-14
+# define KERNEL_COMMANDQUEUE_ERROR	-15
+# define KERNEL_BUFFER_ERROR		-16
+# define KERNEL_BUILD_ERROR			-17
+# define KERNEL_CREATION_ERROR		-18
+# define KERNEL_ENQUEUE_ERROR		-19
+# define KERNEL_ITEM_SIZE_ERROR		-20
+# define RESIZE_WINDOW_ERROR		-21
+# define BUTTON_FUNCTION_NOT_SET	-22
 
 # define DRAWCALL_CHECK_VIEWPORT drawcall_check_viewport
 # define DRAWCALL_VIEWPORT drawcall_viewport
 # define DRAWCALL_TOP_PANEL drawcall_top_panel
 # define DRAWCALL_LEFT_PANEL drawcall_left_panel
 
-# define VIEWMODE_BUTTON_AMOUNT 5
+# define VIEWMODE_BUTTON_AMOUNT 35
 # define LAST_VIEWMODE_BUTTON (VIEWMODE_BUTTON_AMOUNT - 1)
 
 // REMOVE

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:48:19 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 19:18:02 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/01 20:50:29 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char		*error_to_str(int code)
 		return ("no thread define in header file");
 	if (code == RESIZE_WINDOW_ERROR)
 		return ("new window size probably too small");
+	if (code == BUTTON_FUNCTION_NOT_SET)
+		return ("button clicked has no clicked function");
 	if ((res = error_tga_to_str(code)) != "")
 		return (res);
 	if ((res = error_kernel_to_str(code)) != "")

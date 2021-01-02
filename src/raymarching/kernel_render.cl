@@ -270,7 +270,7 @@ t_ray_hit		trace_ray(__constant t_kernel_shape *shapes, int shapesnum,
 		result.depth += nearest_surface;
 		result.recursion++;
 	}
-	result.hit = 0;
+	result.hit = (result.depth < 200 ? 1 : 0);
 	result.location = p;
 	return (result);
 }
@@ -374,6 +374,7 @@ __kernel void	gpu_raymarching(__global int *pxl_color,
 	img.y = scene.img_y;
 	img.w = scene.img_w;
 	img.h = scene.img_h;
+
 
 	pxl_index = get_global_id(0);
 	coordinates.x = pxl_index % scene.img_w;

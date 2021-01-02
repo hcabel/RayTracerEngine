@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2020/12/31 14:24:24 by hcabel           ###   ########.fr        #
+#    Updated: 2021/01/01 17:59:58 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ SRCS				=	aabb_algo.c						\
 						trace_ray.c						\
 						normal_map.c					\
 						light_ray.c						\
-						gpu.c
+						gpu.c							\
+						clicked_switch.c
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g

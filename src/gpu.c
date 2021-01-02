@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 12:27:10 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 19:40:57 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/01 16:53:34 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,23 +81,23 @@ static int	execute_kernel(t_kernel_gpu *gpu, unsigned int numpixel)
 {
 	cl_int	ret;
 	size_t	global_item_size;
-	size_t	local_item_size;
+	//size_t	local_item_size;
 	int		i;
 
 	global_item_size = numpixel;
-	local_item_size = 32;
-	/*i = 2;
+	/*local_item_size = 32;
+	i = 2;
 	while (i < numpixel)
 	{
-		if (numpixel % i == 0)
+		if (numpixel % i == 0)		// TODO
 		{
 			local_item_size = i;
 		}
 		i++;
 	}
-	ft_printf("local_item_size = %u    %d\n", local_item_size, numpixel / local_item_size);*/
+	ft_printf("local_item_size = %u    %d\n", local_item_size, numpixel / local_item_size);
 	if (local_item_size <= 0)
-		return (KERNEL_ITEM_SIZE_ERROR);
+		return (KERNEL_ITEM_SIZE_ERROR);*/
 	if (clEnqueueNDRangeKernel(gpu->command_queue, gpu->kernel, 1, NULL,
 			&global_item_size, NULL, 0, NULL, NULL) != CL_SUCCESS)
 		return (KERNEL_ITEM_SIZE_ERROR);
@@ -125,6 +125,9 @@ int			calculate_image_with_cg(t_info *info)
 
 	if ((code_error = execute_kernel(&info->kernel, numpixel)) != GOOD)
 		return (code_error);
+
+	info->kernel.result[numpixel - 1] = 0xFFFFFFFF;
+
 	index = 0;
 	while (index < numpixel)
 	{

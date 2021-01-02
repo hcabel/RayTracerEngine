@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:09:34 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 19:08:47 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/01 17:46:56 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ static int	get_pixel_color_from_pixel_location(t_vector2d coord,
 			panel->savemap_button.hover_color : panel->savemap_button.color);
 	if (aabb(panel->viewmode.area, coord) == GOOD)
 		return (get_pixel_color_from_pixel_location_in_viewmode(panel, coord));
+	if (aabb(panel->gpu_switch.area, coord) == GOOD)
+	{
+		if (panel->gpu_switch.ishover)
+			return (panel->gpu_switch.hover_color);
+		else
+			return (panel->gpu_switch.ison ? panel->gpu_switch.color_on
+				: panel->gpu_switch.color_off);
+	}
 	return (TOP_PANEL_BACKGROUND_COLOR);
 }
 
@@ -70,7 +78,7 @@ int			drawcall_top_panel(t_info *info)
 	{
 		coord = get_pixel_coordinates(i, info->screen.top.area.w);
 		color = get_pixel_color_from_pixel_location(coord, &info->screen.top);
-		((unsigned int*)info->screen.top.pixels)[(int)coord.y
+		((unsigned int*)info->screen.top.pixels)[(int	)coord.y
 			* info->screen.top.area.w + (int)coord.x] = color;
 		i++;
 	}

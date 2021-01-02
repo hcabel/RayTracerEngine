@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 16:49:23 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/29 11:35:45 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/01 21:00:18 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ static int	init_viewmode_scrollbox(t_top_panel *panel)
 	panel->viewmode.area.x = TOP_PANEL_BUTTONS_MARGIN * 2 +
 		panel->savemap_button.area.x + panel->savemap_button.area.w;
 	panel->viewmode.area.y = 0;
-	panel->viewmode.area.w = WIN_WIDTH - panel->viewmode.area.x;
+	panel->viewmode.area.w = WIN_WIDTH - panel->viewmode.area.x
+		- panel->savemap_button.area.w - TOP_PANEL_BUTTONS_MARGIN * 3;
 	panel->viewmode.area.h = TOP_PANEL_SIZE;
 	panel->viewmode.current = 0;
 	init_viewmode_list(&panel->viewmode);
@@ -89,7 +90,7 @@ static int	init_viewmode_scrollbox(t_top_panel *panel)
 	return (GOOD);
 }
 
-int			init_top_panel(t_top_panel *panel)
+int			init_top_panel(t_top_panel *panel, int ongpu)
 {
 	int	code;
 
@@ -110,5 +111,18 @@ int			init_top_panel(t_top_panel *panel)
 
 	if ((code = init_viewmode_scrollbox(panel)) != GOOD)
 		return (code);
+
+	panel->gpu_switch.area.x = panel->viewmode.area.w + panel->viewmode.area.x
+		+ TOP_PANEL_BUTTONS_MARGIN * 2;
+	panel->gpu_switch.area.y = TOP_PANEL_BUTTONS_MARGIN;
+	panel->gpu_switch.area.h = panel->savemap_button.area.h;
+	panel->gpu_switch.area.w = panel->savemap_button.area.w;
+	panel->gpu_switch.color_on = BUTTON_SWITCH_COLOR_ON;
+	panel->gpu_switch.color_off = BUTTON_SWITCH_COLOR_OFF;
+	panel->gpu_switch.hover_color = BUTTON_HOVER_COLOR;
+	panel->gpu_switch.ison = (ongpu == 1 ? 1 : 0);
+	panel->gpu_switch.ishover = 0;
+	panel->gpu_switch.clicked = gpu_switch_clicked;
+
 	return (GOOD);
 }

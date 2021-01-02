@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:19:37 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 12:47:08 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 14:28:58 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int			init(t_info *info, char *argv)
 
 	ft_printf("{g}Init :\n");
 	init_info_structure(info);
-	if ((code_error = init_kernel(info)) != GOOD)
+	if (info->ongpu == 1 && (code_error = init_kernel(info)) != GOOD)
 		return (code_error);
 	if ((code_error = init_sdl(info)) != GOOD)
 	{
