@@ -4,6 +4,8 @@ Extension of a 42 school project, how you should create a basic raytracing rende
 I decide to make more feature like interface, 3D fractals and maps savers.
 I want to any people downloading this repo can easy create realistique images/videos with RayMarching algorithm. 
 
+## Project [road map](https://trello.com/b/o3UnSwg7/ray-tracer-engine) on Trello
+
 ## Current look like
 
 ![Basic viewmode](screen/basicViewmode.png)
