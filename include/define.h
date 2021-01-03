@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/03 10:53:24 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/03 11:48:48 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define RAY_LOOP 100
 # define FIRST_RESOLUTION 32
 # define VIEW_DISTANCE 200
+# define DISTANCE_FOG_COLOR 0x0
 # define RAY_PRECIS 0.0005
 
 /*
@@ -86,9 +87,10 @@
 # define UNLIT_VIEWMODE 2
 # define ITERATION_VIEWMODE 3
 # define NORMAL_VIEWMODE 4
-# define DIRECT_ILLUMINATION_VIEWMOD 5 // TODO
-# define GLOSSY_ILLUMINATION_VIEWMOD 6 // TODO
+# define DIRECT_ILLUMINATION_VIEWMODE 5 // TODO
+# define GLOSSY_ILLUMINATION_VIEWMODE 6 // TODO
 # define GLOBAL_ILLUMINATION_VIEWMODE 7 // TODO
+# define DISTANCE_FOG_VIEWMODE 8
 
 
 # define DRAWCALL_CHECK_VIEWPORT drawcall_check_viewport
@@ -96,7 +98,7 @@
 # define DRAWCALL_TOP_PANEL drawcall_top_panel
 # define DRAWCALL_LEFT_PANEL drawcall_left_panel
 
-# define VIEWMODE_BUTTON_AMOUNT 5
+# define VIEWMODE_BUTTON_AMOUNT 9
 # define LAST_VIEWMODE_BUTTON (VIEWMODE_BUTTON_AMOUNT - 1)
 
 // REMOVE

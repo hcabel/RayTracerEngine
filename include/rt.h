@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 20:39:39 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/03 11:36:21 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,9 @@ int			editor_viewmode_button_clicked(t_info *info);
 int			unlit_viewmode_button_clicked(t_info *info);
 int			iteration_viewmode_button_clicked(t_info *info);
 int			normal_viewmode_button_clicked(t_info *info);
+
+int			distance_fog_viewmode_button_clicked(t_info *info);
+
 
 int			gpu_switch_clicked(t_info *info, t_switch *button);
 

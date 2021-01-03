@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2021/01/01 17:59:58 by hcabel           ###   ########.fr        #
+#    Updated: 2021/01/03 11:37:19 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,7 @@ SRCS				=	aabb_algo.c						\
 						init_top_panel.c				\
 						init_left_panel.c				\
 						clicked_viewmode.c				\
+						clicked_viewmode_2.c			\
 						mouse_wheel.c					\
 						resize_window.c					\
 						cpu_render.c					\
