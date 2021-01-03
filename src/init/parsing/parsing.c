@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:23:15 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/26 16:27:43 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/03 18:25:09 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	create_object_list(t_scene *scene)
 {
 	unsigned int	i;
 
-	scene->shapes = malloc(sizeof(t_object) * (scene->shapes_amount + 1));
+	scene->shapes = malloc(sizeof(t_object) * scene->shapes_amount);
 	if (scene->shapes == NULL)
 		return (MALLOC_ERROR);
 	i = 0;
@@ -34,7 +34,7 @@ static int	create_light_list(t_scene *scene)
 {
 	unsigned int	i;
 
-	scene->lights = malloc(sizeof(t_light) * (scene->light_amount + 1));
+	scene->lights = malloc(sizeof(t_light) * scene->light_amount);
 	if (scene->lights == NULL)
 		return (MALLOC_ERROR);
 	i = 0;
@@ -49,7 +49,23 @@ static int	create_light_list(t_scene *scene)
 static int	create_default_scene(t_scene *scene)
 {
 	ft_printf("{y}		Create default scene\n{/}");
-	// TODO
+	if ((scene->lights = malloc(sizeof(t_light) * 1)) == NULL)
+		return (MALLOC_ERROR);
+	if ((scene->shapes = malloc(sizeof(t_object) * 2)) == NULL)
+		return (MALLOC_ERROR);
+	scene->shapes_amount = 2;
+	scene->light_amount = 1;
+	scene->shapes[0] = new_object();
+	scene->shapes[0].scale = new_vector(10, 10, 10);
+	scene->shapes[0].color = new_vector(50, 200, 200);
+	scene->shapes[1] = new_object();
+	scene->shapes[1].scale = new_vector(500, 500, 500);
+	scene->shapes[1].color = new_vector(200, 50, 200);
+	scene->shapes[1].location = new_vector(0, -50, 0);
+	scene->shapes[1].sdf_index = 4;
+	scene->lights[0].location = new_vector(0, 50, 0);
+	scene->cam.location = new_vector(0, -25, -75);
+	scene->cam.viewmode = GAME_VIEWMODE;
 }
 
 static int	parse_map(t_scene *scene, int fd, char *path)
