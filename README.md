@@ -25,7 +25,7 @@ I want to any people downloading this repo can easy create realistique images/vi
 ```
   $ make && ./rt
 ```
-  If you want to open a map already saved find the .rt file of your map and specified the file in you cmd
+  If you want to open a map already saved find the .rt file of your map and specified the file in your command
 ```
   $ make && ./rt directory/maps.rt
 ```
