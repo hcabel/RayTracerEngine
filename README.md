@@ -4,6 +4,8 @@ Extension of a 42 school project, how you should create a basic raytracing rende
 I decide to make more feature like interface, 3D fractals and maps savers.
 I want to any people downloading this repo can easy create realistique images/videos with RayMarching algorithm. 
 
+## Project [road map](https://trello.com/b/o3UnSwg7) on Trello
+
 ## Current look like
 
 ![Basic viewmode](screen/basicViewmode.png)
@@ -23,7 +25,7 @@ I want to any people downloading this repo can easy create realistique images/vi
 ```
   $ make && ./rt
 ```
-  If you want to open a map already saved find the .rt file of your map and specified the file in you cmd
+  If you want to open a map already saved find the .rt file of your map and specified the file in your command
 ```
   $ make && ./rt directory/maps.rt
 ```
