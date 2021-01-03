@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 16:40:25 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/03 10:53:24 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # define WIN_WIDTH 1200
 
 # define CPU_THREAD 20
-# define ON_GPU 1
+# define ON_GPU 0
 # define KERNELSOURCEFILE "src/raymarching/kernel_render.cl"
 
 # define RAY_LOOP 100
-# define FIRST_RESOLUTION 16
+# define FIRST_RESOLUTION 32
 # define VIEW_DISTANCE 200
 # define RAY_PRECIS 0.0005
 
@@ -57,29 +57,39 @@
 # define MAX_DRAWCALL 4
 # define RAYMARCHING_THREAD (CPU_THREAD - 1)
 
-# define GOOD						0
-# define FAILED						-1
-# define UNKNOWN_ERROR				-2
-# define MALLOC_ERROR				-3
-# define SDL_ERROR					-4
-# define SDL_TEXTURE_CREATION_ERROR	-5
-# define O_THREAD_ERROR				-6
-# define TGA_PATH_ERROR				-7
-# define TGA_HEADER_PARSING_ERROR	-8
-# define TGA_CONTENT_PARSING_ERROR	-9
-# define TGA_FOOTER_PARSING_ERROR	-10
-# define TGA_UNCOMPRESSION_ERROR	-11
-# define KERNEL_SOURCE_LOAD_ERROR	-12
-# define KERNEL_PLATFORM_ERROR		-13
-# define KERNEL_CONTEXT_ERROR		-14
-# define KERNEL_COMMANDQUEUE_ERROR	-15
-# define KERNEL_BUFFER_ERROR		-16
-# define KERNEL_BUILD_ERROR			-17
-# define KERNEL_CREATION_ERROR		-18
-# define KERNEL_ENQUEUE_ERROR		-19
-# define KERNEL_ITEM_SIZE_ERROR		-20
-# define RESIZE_WINDOW_ERROR		-21
-# define BUTTON_FUNCTION_NOT_SET	-22
+# define GOOD 0
+# define FAILED -1
+# define UNKNOWN_ERROR -2
+# define MALLOC_ERROR -3
+# define SDL_ERROR -4
+# define SDL_TEXTURE_CREATION_ERROR -5
+# define O_THREAD_ERROR -6
+# define TGA_PATH_ERROR -7
+# define TGA_HEADER_PARSING_ERROR -8
+# define TGA_CONTENT_PARSING_ERROR -9
+# define TGA_FOOTER_PARSING_ERROR -10
+# define TGA_UNCOMPRESSION_ERROR -11
+# define KERNEL_SOURCE_LOAD_ERROR -12
+# define KERNEL_PLATFORM_ERROR -13
+# define KERNEL_CONTEXT_ERROR -14
+# define KERNEL_COMMANDQUEUE_ERROR -15
+# define KERNEL_BUFFER_ERROR -16
+# define KERNEL_BUILD_ERROR -17
+# define KERNEL_CREATION_ERROR -18
+# define KERNEL_ENQUEUE_ERROR -19
+# define KERNEL_ITEM_SIZE_ERROR -20
+# define RESIZE_WINDOW_ERROR -21
+# define BUTTON_FUNCTION_NOT_SET -22
+
+# define GAME_VIEWMODE 0
+# define EDITOR_VIEWMODE 1
+# define UNLIT_VIEWMODE 2
+# define ITERATION_VIEWMODE 3
+# define NORMAL_VIEWMODE 4
+# define DIRECT_ILLUMINATION_VIEWMOD 5 // TODO
+# define GLOSSY_ILLUMINATION_VIEWMOD 6 // TODO
+# define GLOBAL_ILLUMINATION_VIEWMODE 7 // TODO
+
 
 # define DRAWCALL_CHECK_VIEWPORT drawcall_check_viewport
 # define DRAWCALL_VIEWPORT drawcall_viewport

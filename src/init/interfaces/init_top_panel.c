@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 16:49:23 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/01 21:00:18 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 20:41:09 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ static void	init_viewmode_list(t_viewmode_scrollbox *viewmode)
 		viewmode->viewmode_list[i].ishover = 0;
 		i++;
 	}
-	viewmode->viewmode_list[0].clicked = viewmode_button_1_clicked;
-	viewmode->viewmode_list[1].clicked = viewmode_button_2_clicked;
-	viewmode->viewmode_list[2].clicked = viewmode_button_3_clicked;
-	viewmode->viewmode_list[3].clicked = viewmode_button_4_clicked;
-	viewmode->viewmode_list[4].clicked = viewmode_button_5_clicked;
+	viewmode->viewmode_list[0].clicked = game_viewmode_button_clicked;
+	viewmode->viewmode_list[1].clicked = editor_viewmode_button_clicked;
+	viewmode->viewmode_list[2].clicked = unlit_viewmode_button_clicked;
+	viewmode->viewmode_list[3].clicked = iteration_viewmode_button_clicked;
+	viewmode->viewmode_list[4].clicked = normal_viewmode_button_clicked;
 }
 
 static int	init_viewmode_scrollbox(t_top_panel *panel)

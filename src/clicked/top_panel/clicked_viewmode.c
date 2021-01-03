@@ -6,48 +6,48 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 14:30:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 13:23:46 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 20:42:50 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		viewmode_button_1_clicked(t_info *info)
+int		game_viewmode_button_clicked(t_info *info)
 {
-	if (info->scene.cam.viewmode == 0)
+	if (info->scene.cam.viewmode == GAME_VIEWMODE)
 		return (FAILED);
-	info->scene.cam.viewmode = 0;
+	info->scene.cam.viewmode = GAME_VIEWMODE;
 	return (GOOD);
 }
 
-int		viewmode_button_2_clicked(t_info *info)
+int		editor_viewmode_button_clicked(t_info *info)
 {
-	if (info->scene.cam.viewmode == 1)
+	if (info->scene.cam.viewmode == EDITOR_VIEWMODE)
 		return (FAILED);
-	info->scene.cam.viewmode = 1;
+	info->scene.cam.viewmode = EDITOR_VIEWMODE;
 	return (GOOD);
 }
 
-int		viewmode_button_3_clicked(t_info *info)
+int		unlit_viewmode_button_clicked(t_info *info)
 {
-	if (info->scene.cam.viewmode == 2)
+	if (info->scene.cam.viewmode == UNLIT_VIEWMODE)
 		return (FAILED);
-	info->scene.cam.viewmode = 2;
+	info->scene.cam.viewmode = UNLIT_VIEWMODE;
 	return (GOOD);
 }
 
-int		viewmode_button_4_clicked(t_info *info)
+int		iteration_viewmode_button_clicked(t_info *info)
 {
-	if (info->scene.cam.viewmode == 3)
+	if (info->scene.cam.viewmode == ITERATION_VIEWMODE)
 		return (FAILED);
-	info->scene.cam.viewmode = 3;
+	info->scene.cam.viewmode = ITERATION_VIEWMODE;
 	return (GOOD);
 }
 
-int		viewmode_button_5_clicked(t_info *info)
+int		normal_viewmode_button_clicked(t_info *info)
 {
-	if (info->scene.cam.viewmode == 4)
+	if (info->scene.cam.viewmode == NORMAL_VIEWMODE)
 		return (FAILED);
-	info->scene.cam.viewmode = 4;
+	info->scene.cam.viewmode = NORMAL_VIEWMODE;
 	return (GOOD);
 }

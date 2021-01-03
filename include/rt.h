@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/01 20:59:09 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 20:39:39 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,11 +255,11 @@ int			resize_window(int *quit, t_info *info, SDL_Event *event);
 ********************************************************************************
 */
 
-int			viewmode_button_1_clicked(t_info *info);
-int			viewmode_button_2_clicked(t_info *info);
-int			viewmode_button_3_clicked(t_info *info);
-int			viewmode_button_4_clicked(t_info *info);
-int			viewmode_button_5_clicked(t_info *info);
+int			game_viewmode_button_clicked(t_info *info);
+int			editor_viewmode_button_clicked(t_info *info);
+int			unlit_viewmode_button_clicked(t_info *info);
+int			iteration_viewmode_button_clicked(t_info *info);
+int			normal_viewmode_button_clicked(t_info *info);
 
 int			gpu_switch_clicked(t_info *info, t_switch *button);
 

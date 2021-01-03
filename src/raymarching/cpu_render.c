@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 12:56:52 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/02 20:45:18 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ static unsigned int	get_color_from_viewmode(t_scene *scene, t_ray_hit *ray,
 	color.z = 0;
 	if (ray->hit == 1 && ray->hit_object->istarget == 1)
 		return (0xff5733ff);
-	else if (scene->cam.viewmode == 1 && ray->hit == 1)
+	else if (scene->cam.viewmode == UNLIT_VIEWMODE && ray->hit == 1)
 	{
 		color.x = (ray->hit_object->color.x);
 		color.y = (ray->hit_object->color.y);
 		color.z = (ray->hit_object->color.z);
 	}
-	else if (scene->cam.viewmode == 2 && ray->hit == 1)
+	else if (scene->cam.viewmode == NORMAL_VIEWMODE && ray->hit == 1)
 		color = normal_map_to_rgb(get_normal_map(ray->location, scene,
 			ray->hit_object));
-	else if (scene->cam.viewmode == 3)
+	else if (scene->cam.viewmode == ITERATION_VIEWMODE)
 	{
 		color.x = ray->recursion / (float)RAY_LOOP * (float)255;
 		color.y = ray->recursion / (float)RAY_LOOP * (float)255;
@@ -66,18 +66,9 @@ static unsigned int	get_color_from_viewmode(t_scene *scene, t_ray_hit *ray,
 		intensity = intensity / 1.2 + 0.1;
 		intensity *= fabs(fmaxf(ray->distance / VIEW_DISTANCE, 0.5)
 			- 1) * (1 / (1 - 0.5));
-		if (scene->cam.viewmode == 4)
-		{
-			color.x = intensity * 255;
-			color.y = intensity * 255;
-			color.z = intensity * 255;
-		}
-		else
-		{
-			color.x = (ray->hit_object->color.x * intensity);
-			color.y = (ray->hit_object->color.y * intensity);
-			color.z = (ray->hit_object->color.z * intensity);
-		}
+		color.x = (ray->hit_object->color.x * intensity);
+		color.y = (ray->hit_object->color.y * intensity);
+		color.z = (ray->hit_object->color.z * intensity);
 	}
 	return (((int)color.x << 24) + ((int)color.y << 16)
 		+ ((int)color.z << 8) + 0xFF);
@@ -88,10 +79,13 @@ unsigned int		raymarching(t_scene *scene, t_vector dir)
 	double		depth;
 	t_ray_hit	ray;
 
-	if (check_for_hidden_obj(scene, dir, .01))
+	if (scene->cam.viewmode != GAME_VIEWMODE)
 	{
-		return (((int)255 << 24) + ((int)0 << 16)
-			+ ((int)0 << 8) + 0xFF);
+		if (check_for_hidden_obj(scene, dir, .025))
+		{
+			return (((int)255 << 24) + ((int)0 << 16)
+				+ ((int)0 << 8) + 0xFF);
+		}
 	}
 	ray = trace_ray(scene, scene->cam.location, dir, VIEW_DISTANCE);
 	ray.distance = fminf(VIEW_DISTANCE, fmaxf(0, ray.distance));
