@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 20:15:22 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 12:59:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:23:56 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ int			parsing_header(t_scene *scene, int fd)
 			if (parse_attributes(scene, line + 1) != GOOD)
 				ft_printf("		{y}Error: %d{/}\n", line_amount);
 		}
-		else
+		else if (ft_strncmp("[body]", line, 8) == GOOD)
 			break ;
 		ft_memdel((void**)&line);
 		line_amount++;
 	}
-	if (ret == -1 || (scene->light_amount == 0 && scene->shapes_amount == 0))
+	if (ret != 1 || (scene->light_amount == 0 && scene->shapes_amount == 0))
 		return (FAILED);
 	return (GOOD);
 }

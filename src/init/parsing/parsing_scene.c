@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:03:45 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/30 17:45:22 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:52:42 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ int			parse_components(t_scene *scene, int fd)
 	{
 		line = ft_strtolower(line);
 		parse.line_amount++;
-		if (line && line[0] && line[0] == '[')
-			set_new_component(scene, &parse, line,
-				&component, &component_type_index);
-		if (line && line[0] && (line[0] == '\t' || line[0] == '['))
-			switch_to_parse_parameter_functions(line, parse.line_amount,
-				component, &component_type_index);
+		if (line && line[0] && line[0] == '\t' && line[1])
+		{
+			if (line[1] == '[')
+				set_new_component(scene, &parse, line + 1,
+					&component, &component_type_index);
+			if (line[1] == '\t' || line[1] == '[')
+				switch_to_parse_parameter_functions(line + 1, parse.line_amount,
+					component, &component_type_index);
+		}
 		ft_memdel((void**)&line);
 	}
 	return (ret == -1 ? FAILED : GOOD);

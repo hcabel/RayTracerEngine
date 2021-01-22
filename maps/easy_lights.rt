@@ -1,16 +1,16 @@
 [Header]
 	shapes: 2
 	lights: 1
-[]
-[Object:Sphere]
-	Location: {0, 0, 0}
-	scale: {15}
-	Color: {100, 255, 50}
-[Object:Plane]
-	Location: {0, -25, 0}
-	scale: {100}
-	Color: {100, 50, 255}
-[light:point]
-	Location: {0, 50, 0}
-[camera:basic]
-	Location: {0, -10, -75}
+[Body]
+	[Object:Sphere]
+		Location: {0, 0, 0}
+		scale: {15}
+		Color: {100, 255, 50}
+	[Object:Plane]
+		Location: {0, -25, 0}
+		scale: {100}
+		Color: {100, 50, 255}
+	[light:point]
+		Location: {0, 50, 0}
+	[camera:basic]
+		Location: {0, -10, -75}
