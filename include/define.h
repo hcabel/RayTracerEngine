@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/03 11:48:48 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/14 16:30:04 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define KERNELSOURCEFILE "src/raymarching/kernel_render.cl"
 
 # define RAY_LOOP 100
-# define FIRST_RESOLUTION 32
+# define FIRST_RESOLUTION 16
 # define VIEW_DISTANCE 200
 # define DISTANCE_FOG_COLOR 0x0
 # define RAY_PRECIS 0.0005
@@ -87,7 +87,7 @@
 # define UNLIT_VIEWMODE 2
 # define ITERATION_VIEWMODE 3
 # define NORMAL_VIEWMODE 4
-# define DIRECT_ILLUMINATION_VIEWMODE 5 // TODO
+# define DIRECT_ILLUMINATION_VIEWMODE 5
 # define GLOSSY_ILLUMINATION_VIEWMODE 6 // TODO
 # define GLOBAL_ILLUMINATION_VIEWMODE 7 // TODO
 # define DISTANCE_FOG_VIEWMODE 8

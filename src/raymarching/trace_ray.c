@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 11:42:28 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 12:56:44 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/03 18:00:06 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_ray_hit			trace_ray(t_scene *scene, t_vector start_location,
 	{
 		nearest_surface = get_nearest_surface_distance(scene,
 			vector_add(start_location, vector_mult(dir, depth)), &obj);
-		if (nearest_surface <= RAY_PRECIS)
+		if (nearest_surface < RAY_PRECIS)
 			return (ray_return(depth, loop_index, obj, 1,
 				vector_add(start_location, vector_mult(dir, depth))));
 		depth += nearest_surface;

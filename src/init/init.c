@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:19:37 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 14:28:58 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/03 18:17:04 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	init_info_structure(t_info *info)
 	info->screen.tex = NULL;
 	info->screen.viewport.tex = NULL;
 	info->screen.font = NULL;
-	info->scene.cam.viewmode = 1;
+	info->scene.cam.viewmode = EDITOR_VIEWMODE;
 	init_mouse_structure(&info->mouse);
 	init_scene(info);
 }

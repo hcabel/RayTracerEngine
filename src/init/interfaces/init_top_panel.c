@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 16:49:23 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/03 11:49:26 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/03 17:59:42 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,12 @@ static void	init_viewmode_list(t_viewmode_scrollbox *viewmode)
 	viewmode->viewmode_list[2].clicked = unlit_viewmode_button_clicked;
 	viewmode->viewmode_list[3].clicked = iteration_viewmode_button_clicked;
 	viewmode->viewmode_list[4].clicked = normal_viewmode_button_clicked;
-	viewmode->viewmode_list[5].clicked = NULL; // TODO
-	viewmode->viewmode_list[6].clicked = NULL; // TODO
-	viewmode->viewmode_list[7].clicked = NULL; // TODO
+	viewmode->viewmode_list[5].clicked
+		= direct_illumination_viewmode_button_clicked;
+	viewmode->viewmode_list[6].clicked
+		= NULL; // TODO
+	viewmode->viewmode_list[7].clicked
+		= NULL; // TODO
 	viewmode->viewmode_list[8].clicked = distance_fog_viewmode_button_clicked;
 }
 
