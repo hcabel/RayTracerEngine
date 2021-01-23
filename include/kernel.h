@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:16:00 by hcabel            #+#    #+#             */
-/*   Updated: 2020/11/12 14:53:40 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/23 15:02:39 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct			s_kernel_gpu
 	cl_command_queue	command_queue;
 	cl_mem				pxl_color;
 	cl_mem				shapes;
+	cl_mem				lights;
 	cl_mem				scene;
 	unsigned int		*result;
 	cl_program			program;
@@ -45,9 +46,17 @@ typedef struct			s_kernel_shape
 	int					istarget;
 }						t_kernel_shape;
 
+typedef struct			s_kernel_light
+{
+	t_vector			location;
+	t_vector2d			rotation;
+	float				intensity;
+}						t_kernel_light;
+
 typedef struct			s_kernel_scene
 {
 	int					shapes_num;
+	int					lights_num;
 	t_vector			cam_location;
 	t_vector2d			cam_rotation;
 	int					viewmode;
@@ -60,6 +69,7 @@ typedef struct			s_kernel_scene
 typedef struct			s_kernel_args
 {
 	t_kernel_shape		*shapes;
+	t_kernel_light		*lights;
 	t_kernel_scene		scene;
 }						t_kernel_args;
 

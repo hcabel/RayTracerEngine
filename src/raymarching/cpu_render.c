@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/23 13:39:40 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/23 16:37:40 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int			check_for_hidden_obj(t_scene *scene, t_vector dir,
 	return (0);
 }
 
+#define FOG_START 0.5
+
 static unsigned int	get_color_from_one_ray_viewmode(t_scene *scene,
 						t_ray_hit *ray)
 {
@@ -51,8 +53,8 @@ static unsigned int	get_color_from_one_ray_viewmode(t_scene *scene,
 			0x0 : DISTANCE_FOG_COLOR);
 	if (scene->cam.viewmode == DISTANCE_FOG_VIEWMODE)
 	{
-		tmp = (fabs(fmaxf(ray->distance / VIEW_DISTANCE, 0.5)
-			- 1) * (1 / (1 - 0.5))) * 255;
+		tmp = (fabs(fmaxf(ray->distance / VIEW_DISTANCE, FOG_START)
+			- 1) * (1 / fmaxf(0.0001, 1 - FOG_START))) * 255;
 		color.x = tmp;
 		color.y = tmp;
 		color.z = tmp;
@@ -84,50 +86,6 @@ static unsigned int	get_color_from_one_ray_viewmode(t_scene *scene,
 **	intensity *= fabs(fmaxf(ray->distance / VIEW_DISTANCE, 0.5)
 **		- 1) * (1 / (1 - 0.5));
 */
-
-static float	get_diffuse(t_scene *scene, t_ray_hit *ray)
-{
-	t_vector	normal;
-	float		result;
-	int			i;
-
-	normal = get_normal_map(ray->location, scene, ray->hit_object);
-	result = 0;
-	i = 0;
-	while (i < scene->light_amount)
-	{
-		result += fmaxf(0, vector_dot(normal, vector_normalize(vector_subtract(
-				scene->lights[i].location, ray->location))));
-		i++;
-	}
-	return (result);
-}
-
-static float	get_specular(t_scene *scene, t_ray_hit *ray)
-{
-	t_vector	normal;
-	t_vector	l;
-	t_vector	r;
-	float		tmp;
-	float		result;
-	int			i;
-
-	normal = get_normal_map(ray->location, scene, ray->hit_object);
-	result = 0;
-	i = 0;
-	while (i < scene->light_amount)
-	{
-		l = vector_normalize(vector_subtract(scene->lights[i].location, ray->location));
-		r.x = (2 * vector_dot(normal, l) * normal.x) - l.x;
-		r.y = (2 * vector_dot(normal, l) * normal.y) - l.y;
-		r.z = (2 * vector_dot(normal, l) * normal.x) - l.z;
-		tmp = vector_dot(r, vector_subtract(scene->cam.location, ray->location));
-		if (tmp > 0)
-			result = tmp;
-		i++;
-	}
-	return (result);
-}
 
 #define KS 1.0
 #define KD 0.7
@@ -167,8 +125,6 @@ static float	phong_lighting(t_scene *scene, t_vector oldir, t_ray_hit *ray, int 
 	return (intensity * (KD * dotLN + KS * pow(dotRV, 250)));
 }
 
-#define FOG_START 0.5
-
 static unsigned int	raymarching_light_steps(t_scene *scene, t_vector oldir,
 						t_ray_hit *ray)
 {
@@ -201,7 +157,7 @@ unsigned int		raymarching(t_scene *scene, t_vector dir)
 	if (scene->cam.viewmode != GAME_VIEWMODE
 		&& scene->cam.viewmode != ITERATION_VIEWMODE
 		&& check_for_hidden_obj(scene, dir, .025))
-			return (((int)255 << 24) + ((int)0 << 16) + ((int)0 << 8) + 0xFF);
+			return (0xFF0000FF);
 	ray = trace_ray(scene, scene->cam.location, dir, VIEW_DISTANCE);
 	ray.distance = fminf(VIEW_DISTANCE, fmaxf(0, ray.distance));
 

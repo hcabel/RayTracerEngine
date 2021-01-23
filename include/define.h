@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/14 16:30:04 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/23 14:03:25 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define WIN_WIDTH 1200
 
 # define CPU_THREAD 20
-# define ON_GPU 0
+# define ON_GPU 1
 # define KERNELSOURCEFILE "src/raymarching/kernel_render.cl"
 
 # define RAY_LOOP 100

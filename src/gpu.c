@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 12:27:10 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 16:36:27 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/23 15:59:03 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,24 @@ static int	convert_shapes_to_kernel_list(t_object *list, unsigned int amount,
 	return (GOOD);
 }
 
+static int	convert_light_to_kernel_list(t_light *list, unsigned int amount,
+				t_kernel_light **newlist)
+{
+	unsigned int	index;
+
+	if (!(*newlist = (t_kernel_light*)malloc(sizeof(t_kernel_light) * amount)))
+		return (MALLOC_ERROR);
+	index = 0;
+	while (index < amount)
+	{
+		(*newlist)[index].location = list[index].location;
+		(*newlist)[index].rotation = list[index].rotation;
+		(*newlist)[index].intensity = list[index].intensity;
+		index++;
+	}
+	return (GOOD);
+}
+
 static int	convert_scene_to_kernel_scene(t_kernel_args *kernel_args,
 				t_info *info, unsigned int numpixel)
 {
@@ -40,12 +58,16 @@ static int	convert_scene_to_kernel_scene(t_kernel_args *kernel_args,
 	kernel_args->scene.cam_rotation = info->scene.cam.rotation;
 	kernel_args->scene.viewmode = info->scene.cam.viewmode;
 	kernel_args->scene.shapes_num = info->scene.shapes_amount;
+	kernel_args->scene.lights_num = info->scene.light_amount;
 	kernel_args->scene.img_x = info->screen.viewport.image.x;
 	kernel_args->scene.img_y = info->screen.viewport.image.y;
 	kernel_args->scene.img_w = info->screen.viewport.image.w;
 	kernel_args->scene.img_h = info->screen.viewport.image.h;
 	if (convert_shapes_to_kernel_list(info->scene.shapes,
 		info->scene.shapes_amount, &kernel_args->shapes) != GOOD)
+		return (MALLOC_ERROR);
+	if (convert_light_to_kernel_list(info->scene.lights,
+		info->scene.light_amount, &kernel_args->lights) != GOOD)
 		return (MALLOC_ERROR);
 	return (GOOD);
 }
@@ -63,6 +85,12 @@ static int	create_kernel(t_kernel_gpu *kernel, unsigned int numpixel,
 	ret = clEnqueueWriteBuffer(kernel->command_queue, kernel->shapes,
 		CL_TRUE, 0, sizeof(t_kernel_shape) * kernel_args->scene.shapes_num,
 		kernel_args->shapes, 0, NULL, NULL);
+	kernel->lights = clCreateBuffer(kernel->context,
+		CL_MEM_READ_ONLY, sizeof(t_kernel_light)
+		* kernel_args->scene.lights_num, NULL, &ret);
+	ret = clEnqueueWriteBuffer(kernel->command_queue, kernel->lights,
+		CL_TRUE, 0, sizeof(t_kernel_light) * kernel_args->scene.lights_num,
+		kernel_args->lights, 0, NULL, NULL);
 
 	kernel->kernel = clCreateKernel(kernel->program,
 		"gpu_raymarching", &ret);
@@ -71,7 +99,9 @@ static int	create_kernel(t_kernel_gpu *kernel, unsigned int numpixel,
 		(void*)&kernel->pxl_color);
 	clSetKernelArg(kernel->kernel, 1, sizeof(cl_mem),
 		(void*)&kernel->shapes);
-	clSetKernelArg(kernel->kernel, 2, sizeof(kernel_args->scene),
+	clSetKernelArg(kernel->kernel, 2, sizeof(cl_mem),
+		(void*)&kernel->lights);
+	clSetKernelArg(kernel->kernel, 3, sizeof(kernel_args->scene),
 		(void*)&kernel_args->scene);
 
 	return (GOOD);
@@ -126,8 +156,6 @@ int			calculate_image_with_cg(t_info *info)
 	if ((code_error = execute_kernel(&info->kernel, numpixel)) != GOOD)
 		return (code_error);
 
-	info->kernel.result[numpixel - 1] = 0xFFFFFFFF;
-
 	index = 0;
 	while (index < numpixel)
 	{
@@ -141,5 +169,6 @@ int			calculate_image_with_cg(t_info *info)
 	clReleaseKernel(info->kernel.kernel);
 	ft_memdel((void**)&info->kernel.result);
 	ft_memdel((void**)&kernel_arg.shapes);
+	ft_memdel((void**)&kernel_arg.lights);
 	return (GOOD);
 }
