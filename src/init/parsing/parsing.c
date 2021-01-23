@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:23:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/03 18:25:09 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/22 20:59:38 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static int	create_default_scene(t_scene *scene)
 	scene->shapes[1] = new_object();
 	scene->shapes[1].scale = new_vector(500, 500, 500);
 	scene->shapes[1].color = new_vector(200, 50, 200);
-	scene->shapes[1].location = new_vector(0, -50, 0);
+	scene->shapes[1].location = new_vector(0, -25, 0);
 	scene->shapes[1].sdf_index = 4;
 	scene->lights[0].location = new_vector(0, 50, 0);
-	scene->cam.location = new_vector(0, -25, -75);
+	scene->cam.location = new_vector(0, -10, -75);
 	scene->cam.viewmode = GAME_VIEWMODE;
 }
 
@@ -87,6 +87,7 @@ int			parsing(t_scene *scene, char *path)
 
 	ft_printf("{g}	Parsing\n{/}");
 	scene->cam = new_cam();
+	scene->cam.viewmode = EDITOR_VIEWMODE;
 	if (!path)
 		create_default_scene(scene);
 	else
