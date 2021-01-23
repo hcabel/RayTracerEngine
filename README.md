@@ -8,7 +8,9 @@ I want to any people downloading this repo can easy create realistique images/vi
 
 ## Current look like
 
+Time: ~2s for each images
 ![CPU RENDERING](screen/CPU.png)
+Time: ~0.5s for each images
 ![GPU RENDERING](screen/GPU.png)
 
 ## Install
