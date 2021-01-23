@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/23 14:03:25 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/23 18:19:40 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 # define VIEW_DISTANCE 200
 # define DISTANCE_FOG_COLOR 0x0
 # define RAY_PRECIS 0.0005
+
+# define FOG_START 0.5
+# define KS 1.0
+# define KD 0.7
+# define KA 0.2
 
 /*
 **	Interfaces editable define

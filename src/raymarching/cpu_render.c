@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/23 16:37:40 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/23 18:30:12 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static int			check_for_hidden_obj(t_scene *scene, t_vector dir,
 	}
 	return (0);
 }
-
-#define FOG_START 0.5
 
 static unsigned int	get_color_from_one_ray_viewmode(t_scene *scene,
 						t_ray_hit *ray)
@@ -79,17 +77,6 @@ static unsigned int	get_color_from_one_ray_viewmode(t_scene *scene,
 	return (((int)color.x << 24) + ((int)color.y << 16)
 		+ ((int)color.z << 8) + 0xFF);
 }
-
-/*
-**	DISTANCE FOG
-**
-**	intensity *= fabs(fmaxf(ray->distance / VIEW_DISTANCE, 0.5)
-**		- 1) * (1 / (1 - 0.5));
-*/
-
-#define KS 1.0
-#define KD 0.7
-#define KA 0.2
 
 static float	phong_lighting(t_scene *scene, t_vector oldir, t_ray_hit *ray, int index)
 {

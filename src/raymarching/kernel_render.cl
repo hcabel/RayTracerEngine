@@ -280,7 +280,8 @@ float	get_nearest_surface_distance(	__constant t_kernel_shape *shapes,
 t_ray_hit		trace_ray(	__constant t_kernel_shape *shapes,
 							int shapesnum,
 							t_vector dir,
-							t_vector start_location)
+							t_vector start_location,
+							float maxDistance)
 {
 	t_ray_hit	result;
 	t_vector	p;
@@ -288,7 +289,7 @@ t_ray_hit		trace_ray(	__constant t_kernel_shape *shapes,
 
 	result.recursion = 0;
 	result.depth = 0;
-	while (result.recursion < 100 && result.depth < 200)
+	while (result.recursion < 100 && result.depth < maxDistance)
 	{
 		p = vector_add(start_location, vector_mult(dir, result.depth));
 		nearest_surface = get_nearest_surface_distance(shapes, shapesnum, p, &result.hit_object_index);
@@ -301,7 +302,7 @@ t_ray_hit		trace_ray(	__constant t_kernel_shape *shapes,
 		result.depth += nearest_surface;
 		result.recursion++;
 	}
-	result.hit = (result.depth < 200 ? 1 : 0);
+	result.hit = (result.depth < maxDistance ? 1 : 0);
 	result.location = p;
 	return (result);
 }
@@ -434,8 +435,6 @@ int			check_for_hidden_obj(	__constant t_kernel_light *lights,
 	return (0);
 }
 
-#define FOG_START 0.5
-
 int				is_one_ray_viewmode(int vm)
 {
 	if (vm == UNLIT_VIEWMODE || vm == NORMAL_VIEWMODE | vm == ITERATION_VIEWMODE
@@ -482,10 +481,6 @@ unsigned int	get_color_from_one_ray_viewmode(__constant t_kernel_shape *shapes,
 		+ ((int)color.z << 8) + 0xFF);
 }
 
-#define KS 1.0
-#define KD 0.7
-#define KA 0.2
-
 static float	phong_lighting(	const t_kernel_scene *scene,
 								__constant t_kernel_shape *shapes,
 								__constant t_kernel_light *lights,
@@ -517,7 +512,8 @@ static float	phong_lighting(	const t_kernel_scene *scene,
 
 	dotLN = vector_dot(L, N);
 	dotRV = vector_dot(R, vector_mult(oldir, -1));
-	if (dotLN < 0)
+	if (dotLN < 0 || trace_ray(shapes, scene->shapes_num, L, vector_add(ray->location, N),
+		vector_length(vector_subtract(lights[index].location, ray->location))).hit)
 		return (0);
 	if (dotRV < 0)
 		return (intensity * (KD * dotLN));
@@ -580,7 +576,7 @@ __kernel void	gpu_raymarching(__global int *pxl_color,
 		pxl_color[pxl_index] = 0xFF0000FF;
 		return ;
 	}
-	ray = trace_ray(shapes, scene.shapes_num, dir, scene.cam_location);
+	ray = trace_ray(shapes, scene.shapes_num, dir, scene.cam_location, VIEW_DISTANCE);
 	ray.depth = fmin((float)VIEW_DISTANCE, fmax((float)0.0, ray.depth));
 
 	if (is_one_ray_viewmode(scene.viewmode) == GOOD)
