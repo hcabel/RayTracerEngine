@@ -2,14 +2,14 @@
 
 Extension of a 42 school project, how you should create a basic raytracing renderer.
 I decide to make more feature like interface, 3D fractals and maps savers.
-I want to any people downloading this repo can easy create realistique images/videos with RayMarching algorithm. 
+I want to any people downloading this repo can easy create realistique images/videos with RayMarching algorithm.
 
 ## Project [road map](https://trello.com/b/o3UnSwg7) on Trello
 
 ## Current look like
 
-![Basic viewmode](screen/basicViewmode.png)
-![Iterations Viewmode](screen/IterationsViewmode.png)
+![CPU RENDERING](screen/CPU.png)
+![GPU RENDERING](screen/GPU.png)
 
 ## Install
   SDL2 Installation
