@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 12:27:10 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/23 15:59:03 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/24 13:00:08 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int			calculate_image_with_cg(t_info *info)
 		coordinates = get_pixel_coordinates(index,
 			info->screen.viewport.image.w);
 		((unsigned int*)info->screen.viewport.pixels)[(int)coordinates.x +
-			((int)coordinates.y * WIN_WIDTH)] = info->kernel.result[index];
+			((int)coordinates.y * info->screen.area.w)] = info->kernel.result[index];
 		index++;
 	}
 	clReleaseMemObject(info->kernel.pxl_color);

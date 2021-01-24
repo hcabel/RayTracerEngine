@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:58:19 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 12:48:30 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/24 12:57:08 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ static void	calcule_for_each_pixel(t_info *info, t_thread *thread_info,
 	dir = get_ray_direction(coordinates, info->scene.cam.rotation, 90,
 		info->screen.viewport.image);
 	((unsigned int*)info->screen.viewport.pixels)[(int)coordinates.x +
-		((int)coordinates.y * WIN_WIDTH)] = raymarching(&info->scene, dir);
+		((int)coordinates.y * info->screen.area.w)]
+		= raymarching(&info->scene, dir);
 }
 
 void		*thread_calculs_functions(void *p)

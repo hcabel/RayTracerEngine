@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 18:11:59 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/29 12:23:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/24 13:52:18 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static void	init_viewmode_scrollbar_button(t_viewmode_scrollbox *viewmode)
 	}
 }
 
-
 static void	resize_top_panel(t_vector2d window_size, t_top_panel *panel,
 				SDL_Event *event)
 {
 	unsigned int	max;
 
 	panel->area.w = window_size.x;
-	panel->viewmode.area.w = window_size.x - panel->viewmode.area.x;
+	panel->viewmode.area.w = window_size.x - panel->viewmode.area.x
+		- TOP_PANEL_BUTTONS_MARGIN * 2 - panel->gpu_switch.area.w;
 	panel->viewmode.scrollbar.area.w = panel->viewmode.area.w;
 	panel->viewmode.scrollbar.ratio =
 		(panel->viewmode.scrollbar.area.w / (float)panel->viewmode.scrollbar.max);
@@ -48,6 +48,30 @@ static void	resize_top_panel(t_vector2d window_size, t_top_panel *panel,
 		panel->viewmode.current = max;
 
 	init_viewmode_scrollbar_button(&panel->viewmode);
+
+	panel->gpu_switch.area.x = panel->viewmode.area.w + panel->viewmode.area.x
+		+ TOP_PANEL_BUTTONS_MARGIN;
+}
+
+static int	resize_viewport_panel(t_vector2d window_size, SDL_Event *event,
+				t_viewport_panel *panel, SDL_Renderer *renderer)
+{
+	SDL_DestroyTexture(panel->tex);
+
+	if (!(panel->tex = SDL_CreateTexture(renderer,
+		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
+		window_size.x, window_size.y)))
+		return (SDL_TEXTURE_CREATION_ERROR);
+	panel->area.w = window_size.x - LEFT_PANEL_SIZE;
+	panel->area.h = window_size.y - TOP_PANEL_SIZE;
+}
+
+static void	resize_left_panel(t_vector2d window_size, t_left_panel *panel,
+				SDL_Event *event)
+{
+	unsigned int	max;
+
+	panel->area.h = window_size.y - TOP_PANEL_SIZE;
 }
 
 int			resize_window(int *quit, t_info *info, SDL_Event *event)
@@ -57,7 +81,6 @@ int			resize_window(int *quit, t_info *info, SDL_Event *event)
 	int			y;
 
 	ft_printf("[Event] Resize\n");
-
 	SDL_GetWindowSize(info->window, &x, &y);
 	window_size.x = x;
 	window_size.y = y;
@@ -68,27 +91,23 @@ int			resize_window(int *quit, t_info *info, SDL_Event *event)
 		SDL_SetWindowSize(info->window, LEFT_PANEL_SIZE, window_size.y);
 	else if (window_size.x <= LEFT_PANEL_SIZE)
 		SDL_SetWindowSize(info->window, window_size.x, TOP_PANEL_SIZE);
-
 	if (window_size.x <= LEFT_PANEL_SIZE || window_size.y <= TOP_PANEL_SIZE)
 		return (RESIZE_WINDOW_ERROR);
 
-
 	resize_top_panel(window_size, &info->screen.top, event);
-
-	info->screen.left.area.h = window_size.y - TOP_PANEL_SIZE;
-
+	resize_left_panel(window_size, &info->screen.left, event);
 	SDL_DestroyTexture(info->screen.tex);
-	SDL_DestroyTexture(info->screen.viewport.tex);
-
 	if (!(info->screen.tex = SDL_CreateTexture(info->renderer,
 		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
 		window_size.x, window_size.y)))
 		return (SDL_TEXTURE_CREATION_ERROR);
-	if (!(info->screen.viewport.tex = SDL_CreateTexture(info->renderer,
-		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
-		window_size.x, window_size.y)))
-		return (SDL_TEXTURE_CREATION_ERROR);
+	info->screen.area.w = window_size.x;
+	info->screen.area.h = window_size.y;
 
+	resize_viewport_panel(window_size, event, &info->screen.viewport,
+		info->renderer);
+
+	info->screen.viewport.resolution = FIRST_RESOLUTION;
 	drawcall_add(info, DRAWCALL_VIEWPORT);
 	drawcall_add(info, DRAWCALL_TOP_PANEL);
 	drawcall_add(info, DRAWCALL_LEFT_PANEL);
