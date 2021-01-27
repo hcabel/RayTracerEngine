@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/03 14:12:43 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/27 13:38:20 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define RT_H
 
 // DEBUG
-#include <stdio.h>
+# include <stdio.h>
 
 /*
 **	Lib includes
@@ -42,17 +42,17 @@
 ********************************************************************************
 */
 
-void		drawcall_clear(t_info *info);
-void		drawcall_add(t_info *info, int (*new)(t_info *info));
+void			drawcall_clear(t_info *info);
+void			drawcall_add(t_info *info, int (*new)(t_info *info));
 
-char		*error_to_str(int code);
-int			is_fatal_error(int code);
+char			*error_to_str(int code);
+int				is_fatal_error(int code);
 
-void		kill_all_thread(t_sampling *sampling);
-int			all_threads_are_done(t_sampling *sampling);
-void		*thread_calculs_functions(void *p);
+void			kill_all_thread(t_sampling *sampling);
+int				all_threads_are_done(t_sampling *sampling);
+void			*thread_calculs_functions(void *p);
 
-int			calculate_image_with_cg(t_info *info);
+int				calculate_image_with_cg(t_info *info);
 
 /*
 ********************************************************************************
@@ -60,18 +60,18 @@ int			calculate_image_with_cg(t_info *info);
 ********************************************************************************
 */
 
-float		sdf_primary_cube(t_vector p, t_vector obj_scale);
-float		sdf_primary_plane(t_vector p, t_vector obj_scale);
-float		sdf_primary_cylinder(t_vector p, t_vector obj_scale);
-float		sdf_primary_sphere(t_vector p, t_vector obj_scale);
-float		sdf_primary_cone(t_vector p, t_vector obj_scale);
+float			sdf_primary_cube(t_vector p, t_vector obj_scale);
+float			sdf_primary_plane(t_vector p, t_vector obj_scale);
+float			sdf_primary_cylinder(t_vector p, t_vector obj_scale);
+float			sdf_primary_sphere(t_vector p, t_vector obj_scale);
+float			sdf_primary_cone(t_vector p, t_vector obj_scale);
 
 /*
 ********************************************************************************
 **	src/init
 ********************************************************************************
 */
-int			init(t_info *info, char *argv);
+int				init(t_info *info, char *argv);
 
 /*
 ********************************************************************************
@@ -79,11 +79,11 @@ int			init(t_info *info, char *argv);
 ********************************************************************************
 */
 
-int			parsing(t_scene *scene, char *path);
+int				parsing(t_scene *scene, char *path);
 
-int			parsing_header(t_scene *scene, int fd);
+int				parsing_header(t_scene *scene, int fd);
 
-int			parse_components(t_scene *scene, int fd);
+int				parse_components(t_scene *scene, int fd);
 
 /*
 ********************************************************************************
@@ -91,14 +91,14 @@ int			parse_components(t_scene *scene, int fd);
 ********************************************************************************
 */
 
-void		parse_camera_parameters(t_cam *cam, char *line,
-				unsigned int line_amount);
+void			parse_camera_parameters(t_cam *cam, char *line,
+					unsigned int line_amount);
 
-void		parse_lights_parameters(t_light *light, char *line,
-				unsigned int line_amount);
+void			parse_lights_parameters(t_light *light, char *line,
+					unsigned int line_amount);
 
-void		parse_objects_parameters(t_object *object, char *line,
-				unsigned int line_amount);
+void			parse_objects_parameters(t_object *object, char *line,
+					unsigned int line_amount);
 
 /*
 ********************************************************************************
@@ -106,10 +106,10 @@ void		parse_objects_parameters(t_object *object, char *line,
 ********************************************************************************
 */
 
-t_vector2d	parse_vector2d(char *line, unsigned int line_amount);
-t_vector	parse_vector(char *line, unsigned int line_amount);
+t_vector2d		parse_vector2d(char *line, unsigned int line_amount);
+t_vector		parse_vector(char *line, unsigned int line_amount);
 
-t_vector	parse_color(char *line, unsigned int line_amount);
+t_vector		parse_color(char *line, unsigned int line_amount);
 
 /*
 ********************************************************************************
@@ -117,7 +117,7 @@ t_vector	parse_color(char *line, unsigned int line_amount);
 ********************************************************************************
 */
 
-int			init_kernel(t_info *info);
+int				init_kernel(t_info *info);
 
 /*
 ********************************************************************************
@@ -125,10 +125,13 @@ int			init_kernel(t_info *info);
 ********************************************************************************
 */
 
-int			init_interfaces(t_info *info);
+int				init_interfaces(t_info *info);
+int				init_top_panel_images(SDL_Renderer *renderer,
+					t_top_panel *panel);
 
-int			init_top_panel(t_top_panel *panel, int ongpu);
-int			init_left_panel(t_left_panel *panel);
+int				init_top_panel(SDL_Renderer *renderer, t_top_panel *panel,
+					int ongpu);
+int				init_left_panel(t_left_panel *panel);
 
 /*
 ********************************************************************************
@@ -136,9 +139,9 @@ int			init_left_panel(t_left_panel *panel);
 ********************************************************************************
 */
 
-t_cam		new_cam();
-t_light		new_light();
-t_object	new_object();
+t_cam			new_cam(void);
+t_light			new_light(void);
+t_object		new_object(void);
 
 /*
 ********************************************************************************
@@ -146,9 +149,9 @@ t_object	new_object();
 ********************************************************************************
 */
 
-t_vector	new_vector(float x, float y, float z);
-t_vector2d	new_vector2d(float x, float y);
-t_vector4d	new_vector4d(float x, float y, float z, float w);
+t_vector		new_vector(float x, float y, float z);
+t_vector2d		new_vector2d(float x, float y);
+t_vector4d		new_vector4d(float x, float y, float z, float w);
 
 /*
 ********************************************************************************
@@ -156,39 +159,55 @@ t_vector4d	new_vector4d(float x, float y, float z, float w);
 ********************************************************************************
 */
 
-t_vector	vector_crossproduct(t_vector a, t_vector b);
-t_vector	vector_mult(t_vector v, float mult);
+t_vector		vector_crossproduct(t_vector a, t_vector b);
+t_vector		vector_mult(t_vector v, float mult);
 
-float		vector_length(t_vector a);
-t_vector	vector_subtract(t_vector a, t_vector b);
-t_vector	vector_normalize(t_vector a);
-t_vector	vector_add(t_vector a, t_vector b);
-float		vector_dot(t_vector a, t_vector b);
+float			vector_length(t_vector a);
+t_vector		vector_subtract(t_vector a, t_vector b);
+t_vector		vector_normalize(t_vector a);
+t_vector		vector_add(t_vector a, t_vector b);
+float			vector_dot(t_vector a, t_vector b);
 
-float		vector2d_length(t_vector2d a);
-t_vector2d	vector2d_subtract(t_vector2d a, t_vector2d b);
-t_vector2d	vector2d_normalize(t_vector2d a);
-t_vector2d	vector2d_add(t_vector2d a, t_vector2d b);
-float		vector2d_dot(t_vector2d a, t_vector2d b);
+float			vector2d_length(t_vector2d a);
+t_vector2d		vector2d_subtract(t_vector2d a, t_vector2d b);
+t_vector2d		vector2d_normalize(t_vector2d a);
+t_vector2d		vector2d_add(t_vector2d a, t_vector2d b);
+float			vector2d_dot(t_vector2d a, t_vector2d b);
 
-float		vector4d_length(t_vector4d a);
-t_vector4d	vector4d_subtract(t_vector4d a, t_vector4d b);
-t_vector4d	vector4d_normalize(t_vector4d a);
-t_vector4d	vector4d_add(t_vector4d a, t_vector4d b);
-float		vector4d_dot(t_vector4d a, t_vector4d b);
+float			vector4d_length(t_vector4d a);
+t_vector4d		vector4d_subtract(t_vector4d a, t_vector4d b);
+t_vector4d		vector4d_normalize(t_vector4d a);
+t_vector4d		vector4d_add(t_vector4d a, t_vector4d b);
+float			vector4d_dot(t_vector4d a, t_vector4d b);
 
-t_vector	get_ray_direction(t_vector2d coordinates, t_vector2d rot,
-				float angle, SDL_Rect area);
-t_vector	rotation(t_vector src, t_vector2d f);
-t_vector	rotate_y(t_vector r, float v);
+t_vector		get_ray_direction(t_vector2d coordinates, t_vector2d rot,
+					float angle, SDL_Rect area);
+t_vector		rotation(t_vector src, t_vector2d f);
+t_vector		rotate_y(t_vector r, float v);
 
-t_matrix44f	matrix_mult(t_matrix44f a, t_matrix44f b);
-t_matrix44f	new_matrix44f(t_vector4d a, t_vector4d b, t_vector4d c,
-				t_vector4d d);
+t_matrix44f		matrix_mult(t_matrix44f a, t_matrix44f b);
+t_matrix44f		new_matrix44f(t_vector4d a, t_vector4d b, t_vector4d c,
+					t_vector4d d);
 
-int			aabb(SDL_Rect r, t_vector2d pixel_location);
+int				aabb(SDL_Rect r, t_vector2d pixel_location);
 
-t_vector2d	get_pixel_coordinates(unsigned int i, unsigned int width);
+t_vector2d		get_pixel_coordinates(unsigned int i, unsigned int width);
+
+/*
+********************************************************************************
+**	src/tga
+********************************************************************************
+*/
+
+int				uncompress_tga(t_tga *file);
+int				convert_to_argb(t_tga *file);
+void			fill_uncompresed_data(t_vector2d index, unsigned char *original,
+					unsigned char *new_data, int bpp);
+int				setup_contents(t_tga *file, int fd);
+int				read_header(t_tga *file, int fd);
+int				new_Image(SDL_Renderer *renderer, char *path,
+					SDL_Texture **texture);
+t_tga			new_tga(char *path);
 
 /*
 ********************************************************************************
@@ -196,12 +215,14 @@ t_vector2d	get_pixel_coordinates(unsigned int i, unsigned int width);
 ********************************************************************************
 */
 
-int			drawcall_viewport(t_info *info);
-int			drawcall_check_viewport(t_info *info);
+int				drawcall_viewport(t_info *info);
+int				drawcall_check_viewport(t_info *info);
 
-int			drawcall_top_panel(t_info *info);
+int				drawcall_top_panel(t_info *info);
+int				display_viewmode_images(SDL_Renderer *renderer,
+					t_top_panel *panel);
 
-int			drawcall_left_panel(t_info *info);
+int				drawcall_left_panel(t_info *info);
 
 /*
 ********************************************************************************
@@ -209,9 +230,9 @@ int			drawcall_left_panel(t_info *info);
 ********************************************************************************
 */
 
-int			hook_event(int *quit, t_info *info);
+int				hook_event(int *quit, t_info *info);
 
-void		keyboard_press(int *quit, t_info *info, SDL_Event *event);
+void			keyboard_press(int *quit, t_info *info, SDL_Event *event);
 
 /*
 ********************************************************************************
@@ -219,7 +240,7 @@ void		keyboard_press(int *quit, t_info *info, SDL_Event *event);
 ********************************************************************************
 */
 
-void		mouse_wheel(int *quit, t_info *info, SDL_Event *event);
+void			mouse_wheel(int *quit, t_info *info, SDL_Event *event);
 
 /*
 ********************************************************************************
@@ -227,9 +248,9 @@ void		mouse_wheel(int *quit, t_info *info, SDL_Event *event);
 ********************************************************************************
 */
 
-int			mouse_press(int *quit, t_info *info, SDL_Event *event);
-int			press_on_top_panel(t_vector2d loc, t_info *info);
-int			press_on_left_panel(t_vector2d loc, t_info *info);
+int				mouse_press(int *quit, t_info *info, SDL_Event *event);
+int				press_on_top_panel(t_vector2d loc, t_info *info);
+int				press_on_left_panel(t_vector2d loc, t_info *info);
 
 /*
 ********************************************************************************
@@ -237,9 +258,10 @@ int			press_on_left_panel(t_vector2d loc, t_info *info);
 ********************************************************************************
 */
 
-void		mouse_move(int *quit, t_info *info, SDL_Event *event);
-int			move_on_top_panel(t_top_panel *viewmode, t_vector2d cursorlocation);
-int			move_on_left_panel(t_vector2d loc, t_left_panel *panel);
+void			mouse_move(int *quit, t_info *info, SDL_Event *event);
+int				move_on_top_panel(t_top_panel *viewmode,
+					t_vector2d cursorlocation);
+int				move_on_left_panel(t_vector2d loc, t_left_panel *panel);
 
 /*
 ********************************************************************************
@@ -247,7 +269,7 @@ int			move_on_left_panel(t_vector2d loc, t_left_panel *panel);
 ********************************************************************************
 */
 
-int			resize_window(int *quit, t_info *info, SDL_Event *event);
+int				resize_window(int *quit, t_info *info, SDL_Event *event);
 
 /*
 ********************************************************************************
@@ -255,19 +277,18 @@ int			resize_window(int *quit, t_info *info, SDL_Event *event);
 ********************************************************************************
 */
 
-int			game_viewmode_button_clicked(t_info *info);
-int			editor_viewmode_button_clicked(t_info *info);
-int			unlit_viewmode_button_clicked(t_info *info);
-int			iteration_viewmode_button_clicked(t_info *info);
-int			normal_viewmode_button_clicked(t_info *info);
+int				game_viewmode_button_clicked(t_info *info);
+int				editor_viewmode_button_clicked(t_info *info);
+int				unlit_viewmode_button_clicked(t_info *info);
+int				iteration_viewmode_button_clicked(t_info *info);
+int				normal_viewmode_button_clicked(t_info *info);
 
-int			distance_fog_viewmode_button_clicked(t_info *info);
-int			direct_illumination_viewmode_button_clicked(t_info *info);
-int			global_illumination_viewmode_button_clicked(t_info *info);
-int			glossy_illumination_viewmode_button_clicked(t_info *info);
+int				distance_fog_viewmode_button_clicked(t_info *info);
+int				direct_illumination_viewmode_button_clicked(t_info *info);
+int				global_illumination_viewmode_button_clicked(t_info *info);
+int				glossy_illumination_viewmode_button_clicked(t_info *info);
 
-
-int			gpu_switch_clicked(t_info *info, t_switch *button);
+int				gpu_switch_clicked(t_info *info, t_switch *button);
 
 /*
 ********************************************************************************
@@ -290,8 +311,8 @@ float			get_light_intensity(t_scene *scene, t_vector hit_location,
 ********************************************************************************
 */
 
-int			program_exit(t_info *info, int code);
+int				program_exit(t_info *info, int code);
 
-void		free_info_struct(t_info *info);
+void			free_info_struct(t_info *info);
 
 #endif

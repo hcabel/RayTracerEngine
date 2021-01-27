@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/01 19:26:01 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/26 13:24:18 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 typedef struct s_info		t_info;
 
-typedef struct				s_button
+typedef struct s_button
 {
 	SDL_Rect				area;
 	unsigned int			color;
@@ -27,7 +27,7 @@ typedef struct				s_button
 	int						(*clicked)(t_info*);
 }							t_button;
 
-typedef struct				s_scrollbar
+typedef struct s_scrollbar
 {
 	unsigned int			enable;
 	unsigned int			max;
@@ -51,7 +51,7 @@ struct						s_switch
 	int						(*clicked)(t_info*, t_switch*);
 };
 
-typedef struct				s_viewmode_scrollbox
+typedef struct s_viewmode_scrollbox
 {
 	SDL_Rect				area;
 	t_button				*viewmode_list;
@@ -60,7 +60,7 @@ typedef struct				s_viewmode_scrollbox
 	t_scrollbar				scrollbar;
 }							t_viewmode_scrollbox;
 
-typedef struct				s_selector
+typedef struct s_selector
 {
 	SDL_Rect				area;
 	unsigned int			max;
@@ -68,10 +68,10 @@ typedef struct				s_selector
 	SDL_Rect				preview_area;
 	t_button				b_left;
 	t_button				b_right;
-	unsigned int			(*preview)(t_vector2d, t_info*);
+	unsigned	int			(*preview)(t_vector2d, t_info*);
 }							t_selector;
 
-typedef struct				s_vector_visualizer
+typedef struct s_vector_visualizer
 {
 	SDL_Rect				area;
 	SDL_Rect				areax;
@@ -80,7 +80,7 @@ typedef struct				s_vector_visualizer
 	t_vector				*values;
 }							t_vector_visualizer;
 
-typedef struct				s_triple_switch
+typedef struct s_triple_switch
 {
 	SDL_Rect				area;
 	unsigned int			selected_color;
@@ -90,16 +90,17 @@ typedef struct				s_triple_switch
 	t_button				third;
 }							t_triple_switch;
 
-typedef struct				s_top_panel
+typedef struct s_top_panel
 {
 	SDL_Rect				area;
 	t_button				savemap_button;
 	t_viewmode_scrollbox	viewmode;
 	t_switch				gpu_switch;
+	SDL_Texture				*icon[TOP_PANEL_ICON_AMOUNT];
 	void					*pixels;
 }							t_top_panel;
 
-typedef struct				s_left_panel
+typedef struct s_left_panel
 {
 	SDL_Rect				area;
 	t_selector				shape_selector;

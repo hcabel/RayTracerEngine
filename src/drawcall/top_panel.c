@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:09:34 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/22 21:10:07 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/25 12:56:07 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			drawcall_top_panel(t_info *info)
 	SDL_UnlockTexture(info->screen.tex);
 	SDL_RenderCopy(info->renderer, info->screen.tex,
 		&info->screen.top.area, &info->screen.top.area);
-	//display_viewmode_images(info->renderer, &info->screen.top);
+	display_viewmode_images(info->renderer, &info->screen.top);
 	SDL_RenderPresent(info->renderer);
 	return (GOOD);
 }

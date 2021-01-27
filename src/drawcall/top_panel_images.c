@@ -1,44 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathematical.h                                     :+:      :+:    :+:   */
+/*   top_panel_images.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/25 13:17:59 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/26 13:24:16 by hcabel           ###   ########.fr       */
+/*   Created: 2021/01/25 12:53:24 by hcabel            #+#    #+#             */
+/*   Updated: 2021/01/25 13:42:56 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHEMATICAL_H
-# define MATHEMATICAL_H
+#include "rt.h"
 
-# include <math.h>
-
-typedef struct s_vector2d
+int	display_viewmode_images(SDL_Renderer *renderer, t_top_panel *panel)
 {
-	float		x;
-	float		y;
-}				t_vector2d;
-
-typedef struct s_vector
-{
-	float		x;
-	float		y;
-	float		z;
-}				t_vector;
-
-typedef struct s_vector4d
-{
-	float		x;
-	float		y;
-	float		z;
-	float		w;
-}				t_vector4d;
-
-typedef struct s_matrix44f
-{
-	float		m[4][4];
-}				t_matrix44f;
-
-#endif
+	SDL_RenderCopy(renderer, panel->icon[0], NULL,
+		&panel->gpu_switch.area);
+	SDL_RenderCopy(renderer, panel->icon[1], NULL,
+		&panel->savemap_button.area);
+}

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 16:49:23 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/03 17:59:42 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/25 13:36:32 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ static int	init_viewmode_scrollbox(t_top_panel *panel)
 	return (GOOD);
 }
 
-int			init_top_panel(t_top_panel *panel, int ongpu)
+int			init_top_panel(SDL_Renderer *renderer, t_top_panel *panel,
+				int ongpu)
 {
 	int	code;
 
@@ -130,6 +131,9 @@ int			init_top_panel(t_top_panel *panel, int ongpu)
 	panel->gpu_switch.ison = (ongpu == 1 ? 1 : 0);
 	panel->gpu_switch.ishover = 0;
 	panel->gpu_switch.clicked = gpu_switch_clicked;
+
+	if ((code = init_top_panel_images(renderer, panel)) != GOOD)
+		return (code);
 
 	return (GOOD);
 }

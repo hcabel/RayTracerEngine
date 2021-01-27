@@ -1,44 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mathematical.h                                     :+:      :+:    :+:   */
+/*   init_interfaces_images.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/25 13:17:59 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/26 13:24:16 by hcabel           ###   ########.fr       */
+/*   Created: 2020/12/26 16:49:23 by hcabel            #+#    #+#             */
+/*   Updated: 2021/01/25 13:58:14 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHEMATICAL_H
-# define MATHEMATICAL_H
+#include "rt.h"
 
-# include <math.h>
-
-typedef struct s_vector2d
+int	init_top_panel_images(SDL_Renderer *renderer, t_top_panel *panel)
 {
-	float		x;
-	float		y;
-}				t_vector2d;
+	int	code;
 
-typedef struct s_vector
-{
-	float		x;
-	float		y;
-	float		z;
-}				t_vector;
-
-typedef struct s_vector4d
-{
-	float		x;
-	float		y;
-	float		z;
-	float		w;
-}				t_vector4d;
-
-typedef struct s_matrix44f
-{
-	float		m[4][4];
-}				t_matrix44f;
-
-#endif
+	code = new_Image(renderer, "assets/GPU_icon.tga", &(panel->icon[0]));
+	if (code != GOOD)
+		return (code);
+	code = new_Image(renderer, "assets/Save_icon.tga", &(panel->icon[1]));
+	if (code != GOOD)
+		return (code);
+	return (GOOD);
+}

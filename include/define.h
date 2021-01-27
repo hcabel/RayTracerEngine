@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/23 18:19:40 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/26 13:24:18 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@
 # define GLOBAL_ILLUMINATION_VIEWMODE 7 // TODO
 # define DISTANCE_FOG_VIEWMODE 8
 
-
 # define DRAWCALL_CHECK_VIEWPORT drawcall_check_viewport
 # define DRAWCALL_VIEWPORT drawcall_viewport
 # define DRAWCALL_TOP_PANEL drawcall_top_panel
@@ -105,6 +104,8 @@
 
 # define VIEWMODE_BUTTON_AMOUNT 9
 # define LAST_VIEWMODE_BUTTON (VIEWMODE_BUTTON_AMOUNT - 1)
+
+# define TOP_PANEL_ICON_AMOUNT 2
 
 // REMOVE
 # define MAX_SOURCE_SIZE 0x100000

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:54:57 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 14:18:29 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/26 13:24:14 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "SDL.h"
 
-typedef struct			s_colormap
+typedef struct s_colormap
 {
 	unsigned char		*data;
 	int					entry_index;
@@ -23,7 +23,7 @@ typedef struct			s_colormap
 	int					bpp;
 }						t_colormap;
 
-typedef struct			s_tga
+typedef struct s_tga
 {
 	int					parsed;
 	unsigned char		*image_id;

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:46:53 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/24 12:57:21 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/26 13:24:14 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include "tga.h"
 # include "scene.h"
 
-typedef struct			s_thread
+typedef struct s_thread
 {
 	unsigned int		start_index;
 	t_info				*info;
 }						t_thread;
 
-typedef struct			s_sampling
+typedef struct s_sampling
 {
 	pthread_t			threads[RAYMARCHING_THREAD];
 	t_thread			threads_infos[RAYMARCHING_THREAD];
@@ -34,7 +34,7 @@ typedef struct			s_sampling
 	int					kill_thread;
 }						t_sampling;
 
-typedef struct			s_viewport_panel
+typedef struct s_viewport_panel
 {
 	SDL_Rect			area;
 	SDL_Rect			image;
@@ -45,7 +45,7 @@ typedef struct			s_viewport_panel
 	t_sampling			sampling;
 }						t_viewport_panel;
 
-typedef struct			s_screen
+typedef struct s_screen
 {
 	SDL_Rect			area;
 	SDL_Texture			*tex;
@@ -56,7 +56,7 @@ typedef struct			s_screen
 	SDL_Texture			*font;
 }						t_screen;
 
-typedef struct			s_mouse
+typedef struct s_mouse
 {
 	int					dragged;
 	int					down;
@@ -65,7 +65,7 @@ typedef struct			s_mouse
 	t_vector2d			location;
 }						t_mouse;
 
-typedef struct			s_info
+typedef struct s_info
 {
 	SDL_Window			*window;
 	SDL_Renderer		*renderer;
@@ -79,14 +79,14 @@ typedef struct			s_info
 	int					gpuinitialised;
 }						t_info;
 
-typedef struct			s_parsing
+typedef struct s_parsing
 {
 	unsigned int		line_amount;
 	unsigned int		shapes_index;
 	unsigned int		light_index;
 }						t_parsing;
 
-typedef struct			s_ray_hit
+typedef struct s_ray_hit
 {
 	int					hit;
 	t_vector			location;
