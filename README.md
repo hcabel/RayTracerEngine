@@ -21,8 +21,13 @@ Time: ~0.5s for each image
   $ make
   $ sudo make install
 ```
-  Some error could be happend here SDL need some dependency, maybe I gonna explain all things to do
-  but I currently do not understand every thing so you can search on google :D sry
+  SDL should be installed now, but if you have issue look SDL dependecy at google (Hope you'll find a way)
+  
+  OpenCL Installation
+```
+  $ sudo apt-get install ocl-icd-opencl-dev
+```
+
 ##  Launch
 ```
   $ make && ./rt
