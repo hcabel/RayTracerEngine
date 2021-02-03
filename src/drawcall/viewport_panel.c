@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:09:48 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 16:42:20 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 13:10:40 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void	on_cpu(t_info *info)
 {
 	unsigned int	i;
 
+	return ;
 	SDL_LockTexture(info->screen.viewport.tex, &info->screen.viewport.image,
 		&info->screen.viewport.pixels, &info->screen.pitch);
 	i = 0;
@@ -59,22 +60,19 @@ static void	on_cpu(t_info *info)
 	drawcall_add(info, DRAWCALL_CHECK_VIEWPORT);
 }
 
-int		drawcall_viewport(t_info *info)
+int			drawcall_viewport(t_info *info)
 {
 	int	code;
 
 	if (!info->ongpu)
 		kill_all_thread(&info->screen.viewport.sampling);
 	info->screen.viewport.sampling.threads_status = 0;
-
 	ft_printf("[DrawCall] Viewport (%s sampling %3d)\n",
 		(info->ongpu == 1 ? "GPU" : "CPU"), info->screen.viewport.resolution);
-
 	info->screen.viewport.image.w = info->screen.viewport.area.w
 		/ info->screen.viewport.resolution;
 	info->screen.viewport.image.h = info->screen.viewport.area.h
 		/ info->screen.viewport.resolution;
-
 	if (info->ongpu)
 	{
 		if ((code = on_gpu(info)) != GOOD)
@@ -85,7 +83,7 @@ int		drawcall_viewport(t_info *info)
 	return (GOOD);
 }
 
-int		drawcall_check_viewport(t_info *info)
+int			drawcall_check_viewport(t_info *info)
 {
 	while (pthread_mutex_trylock(&info->screen.viewport.sampling.mutex))
 		;

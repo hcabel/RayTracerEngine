@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:10:49 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/24 12:39:33 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:49:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ float	sdf_primary_cylinder(t_vector p, t_vector obj_scale)
 
 float	sdf_primary_sphere(t_vector p, t_vector obj_scale)
 {
-	return(vector_length(p) - obj_scale.x);
+	return (vector_length(p) - obj_scale.x);
 }
 
 float	sdf_primary_cone(t_vector p, t_vector obj_scale)

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 13:33:03 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/23 22:14:19 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:07:54 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	create_new_str(t_flags flags, t_newvalues *nv, char *str_arg)
 		nv->str_size++;
 	if (!(nv->new_str = (char*)malloc(sizeof(char) * (nv->str_size))))
 		return ;
-	ft_bzero(nv->new_str, nv->str_size + 2);
+	ft_bzero(nv->new_str, nv->str_size);
 }
 
 static void	create_new_arg(char *str_arg, t_flags flags, t_newvalues *nv)
@@ -125,7 +125,7 @@ int			pf_modify_value(void *arg, t_flags flags)
 	create_new_arg(old_arg_str, flags, &nv);
 	write(1, nv.new_str, nv.str_size);
 	if (flags.type != 's')
-		free(old_arg_str);
-	free(nv.new_str);
+		ft_memdel((void**)&old_arg_str);
+	ft_memdel((void**)&nv.new_str);
 	return (nv.str_size);
 }

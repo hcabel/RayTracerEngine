@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 18:18:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/26 13:24:18 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:59:30 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "SDL.h"
 # include "define.h"
+# include "mathematical.h"
 
 typedef struct s_info		t_info;
 
-typedef struct s_button
+typedef struct				s_button
 {
 	SDL_Rect				area;
 	unsigned int			color;
@@ -27,7 +28,7 @@ typedef struct s_button
 	int						(*clicked)(t_info*);
 }							t_button;
 
-typedef struct s_scrollbar
+typedef struct				s_scrollbar
 {
 	unsigned int			enable;
 	unsigned int			max;
@@ -38,9 +39,7 @@ typedef struct s_scrollbar
 
 }							t_scrollbar;
 
-typedef struct s_switch		t_switch;
-
-struct						s_switch
+typedef struct				s_switch
 {
 	SDL_Rect				area;
 	unsigned int			color_on;
@@ -48,19 +47,18 @@ struct						s_switch
 	unsigned int			hover_color;
 	int						ishover;
 	int						ison;
-	int						(*clicked)(t_info*, t_switch*);
-};
+	int						(*clicked)(t_info*, struct s_switch*);
+}							t_switch;
 
-typedef struct s_viewmode_scrollbox
+typedef struct				s_viewmode_scrollbox
 {
 	SDL_Rect				area;
 	t_button				*viewmode_list;
-	SDL_Texture				*button_images[VIEWMODE_BUTTON_AMOUNT];
 	int						current;
 	t_scrollbar				scrollbar;
 }							t_viewmode_scrollbox;
 
-typedef struct s_selector
+typedef struct				s_selector
 {
 	SDL_Rect				area;
 	unsigned int			max;
@@ -68,10 +66,10 @@ typedef struct s_selector
 	SDL_Rect				preview_area;
 	t_button				b_left;
 	t_button				b_right;
-	unsigned	int			(*preview)(t_vector2d, t_info*);
+	unsigned int			(*preview)(struct s_vector2d, t_info*);
 }							t_selector;
 
-typedef struct s_vector_visualizer
+typedef struct				s_vector_visualizer
 {
 	SDL_Rect				area;
 	SDL_Rect				areax;
@@ -80,7 +78,7 @@ typedef struct s_vector_visualizer
 	t_vector				*values;
 }							t_vector_visualizer;
 
-typedef struct s_triple_switch
+typedef struct				s_triple_switch
 {
 	SDL_Rect				area;
 	unsigned int			selected_color;
@@ -90,7 +88,7 @@ typedef struct s_triple_switch
 	t_button				third;
 }							t_triple_switch;
 
-typedef struct s_top_panel
+typedef struct				s_top_panel
 {
 	SDL_Rect				area;
 	t_button				savemap_button;
@@ -100,15 +98,17 @@ typedef struct s_top_panel
 	void					*pixels;
 }							t_top_panel;
 
-typedef struct s_left_panel
+/*
+**	t_selector				shape_selector;
+**	t_triple_switch			triple_switch_axis;
+**	SDL_Rect				tri_vector_pannel;
+*/
+
+typedef struct				s_left_panel
 {
 	SDL_Rect				area;
-	t_selector				shape_selector;
-	t_triple_switch			triple_switch_axis;
-	SDL_Rect				tri_vector_pannel;
 	t_button				addcomponent;
 	void					*pixels;
 	int						skip_selector_preview;
 }							t_left_panel;
-
 #endif

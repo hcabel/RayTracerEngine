@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/26 13:24:18 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 13:34:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define WIN_HEIGTH 900
 # define WIN_WIDTH 1200
 
-# define CPU_THREAD 20
+# define RAYMARCHING_THREAD 1
 # define ON_GPU 1
 # define KERNELSOURCEFILE "src/raymarching/kernel_render.cl"
 
@@ -61,7 +61,6 @@
 **	(Please don't touch)
 */
 # define MAX_DRAWCALL 4
-# define RAYMARCHING_THREAD (CPU_THREAD - 1)
 
 # define GOOD 0
 # define FAILED -1
@@ -103,7 +102,6 @@
 # define DRAWCALL_LEFT_PANEL drawcall_left_panel
 
 # define VIEWMODE_BUTTON_AMOUNT 9
-# define LAST_VIEWMODE_BUTTON (VIEWMODE_BUTTON_AMOUNT - 1)
 
 # define TOP_PANEL_ICON_AMOUNT 2
 

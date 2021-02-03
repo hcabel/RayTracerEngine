@@ -1,6 +1,6 @@
 [Header]
 	shapes: 16
-	lights: 2
+	lights: 3
 [Body]
 	[Object:sphere]
 		Location: {20, 20, 25}
@@ -71,6 +71,9 @@
 		Intensity: 100
 	[light:point]
 		Location: {60, 0, -50}
+		Intensity: 100
+	[light:point]
+		Location: {0, 0, 50}
 		Intensity: 100
 	[camera:basic]
 		Location: {0, 0, -50}

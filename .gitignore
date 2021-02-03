@@ -1,6 +1,10 @@
 rt
+include/define.h
+SDL2/include/SDL_config.h
 libftprintf.a
 *.o
 objects
 libft/objects
 .vscode
+SDL2
+OpenCL

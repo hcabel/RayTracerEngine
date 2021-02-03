@@ -6,13 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 23:04:19 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/30 14:45:58 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/02 15:16:41 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vector	normal_map_to_rgb(t_vector normal)
+t_vector		normal_map_to_rgb(t_vector normal)
 {
 	normal.x = (normal.x + 1) * 127.5;
 	normal.y = (normal.y + 1) * 127.5;
@@ -31,8 +31,9 @@ static double	get_nearest_surface_distance(t_scene *scene, t_vector p,
 	i = 0;
 	while (i < scene->shapes_amount)
 	{
-		tmp = scene->sdf_list[scene->shapes[i].sdf_index]
-			(vector_subtract(p, scene->shapes[i].location), scene->shapes[i].scale);
+		tmp = scene->sdf_list[scene->shapes[i].sdf_index](
+			vector_subtract(p, scene->shapes[i].location),
+			scene->shapes[i].scale);
 		if (distance == -1 || distance > tmp)
 		{
 			if (nearest_obj != NULL && *nearest_obj != NULL)
@@ -44,7 +45,7 @@ static double	get_nearest_surface_distance(t_scene *scene, t_vector p,
 	return (distance);
 }
 
-t_vector	get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj)
+t_vector		get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj)
 {
 	float		tab[4];
 	t_vector	normal;
@@ -60,17 +61,11 @@ t_vector	get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj)
 		new_vector(eps.y, eps.x, eps.y)), NULL);
 	tab[3] = get_nearest_surface_distance(scene, vector_add(p,
 		new_vector(eps.x, eps.x, eps.x)), NULL);
-	normal.x =	eps.x * tab[0] +
-				eps.y * tab[1] +
-				eps.y * tab[2] +
-				eps.x * tab[3];
-	normal.y =	eps.y * tab[0] +
-				eps.y * tab[1] +
-				eps.x * tab[2] +
-				eps.x * tab[3];
-	normal.z =	eps.y * tab[0] +
-				eps.x * tab[1] +
-				eps.y * tab[2] +
-				eps.x * tab[3];
+	normal.x = eps.x * tab[0] + eps.y * tab[1] +
+				eps.y * tab[2] + eps.x * tab[3];
+	normal.y = eps.y * tab[0] + eps.y * tab[1] +
+				eps.x * tab[2] + eps.x * tab[3];
+	normal.z = eps.y * tab[0] + eps.x * tab[1] +
+				eps.y * tab[2] + eps.x * tab[3];
 	return (vector_normalize(normal));
 }

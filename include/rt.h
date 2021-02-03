@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/27 13:38:20 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/02 15:14:41 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 ********************************************************************************
 */
 
+void			set_multiple_drawcall_from_code(int code, t_info *info);
+int				drawcall_execution(t_info *info);
 void			drawcall_clear(t_info *info);
 void			drawcall_add(t_info *info, int (*new)(t_info *info));
 
@@ -53,6 +55,8 @@ int				all_threads_are_done(t_sampling *sampling);
 void			*thread_calculs_functions(void *p);
 
 int				calculate_image_with_cg(t_info *info);
+int				convert_scene_to_kernel_scene(t_kernel_args *kernel_args,
+					t_info *info, unsigned int numpixel);
 
 /*
 ********************************************************************************
@@ -91,14 +95,14 @@ int				parse_components(t_scene *scene, int fd);
 ********************************************************************************
 */
 
-void			parse_camera_parameters(t_cam *cam, char *line,
-					unsigned int line_amount);
+void			parse_camera_parameters(t_cam *cam, const char *line,
+					const unsigned int line_amount);
 
-void			parse_lights_parameters(t_light *light, char *line,
-					unsigned int line_amount);
+void			parse_lights_parameters(t_light *light, const char *line,
+					const unsigned int line_amount);
 
-void			parse_objects_parameters(t_object *object, char *line,
-					unsigned int line_amount);
+void			parse_objects_parameters(t_object *object, const char *line,
+					const unsigned int line_amount);
 
 /*
 ********************************************************************************
@@ -106,10 +110,11 @@ void			parse_objects_parameters(t_object *object, char *line,
 ********************************************************************************
 */
 
-t_vector2d		parse_vector2d(char *line, unsigned int line_amount);
-t_vector		parse_vector(char *line, unsigned int line_amount);
+t_vector2d		parse_vector2d(const char *line,
+					const unsigned int line_amount);
+t_vector		parse_vector(const char *line, const unsigned int line_amount);
 
-t_vector		parse_color(char *line, unsigned int line_amount);
+t_vector		parse_color(const char *line, const unsigned int line_amount);
 
 /*
 ********************************************************************************
@@ -126,11 +131,13 @@ int				init_kernel(t_info *info);
 */
 
 int				init_interfaces(t_info *info);
+
 int				init_top_panel_images(SDL_Renderer *renderer,
 					t_top_panel *panel);
-
 int				init_top_panel(SDL_Renderer *renderer, t_top_panel *panel,
 					int ongpu);
+int				init_viewmode_scrollbox(t_top_panel *panel);
+
 int				init_left_panel(t_left_panel *panel);
 
 /*
@@ -150,6 +157,7 @@ t_object		new_object(void);
 */
 
 t_vector		new_vector(float x, float y, float z);
+t_vector		new_vector_uniform(float x);
 t_vector2d		new_vector2d(float x, float y);
 t_vector4d		new_vector4d(float x, float y, float z, float w);
 
@@ -185,10 +193,6 @@ t_vector		get_ray_direction(t_vector2d coordinates, t_vector2d rot,
 t_vector		rotation(t_vector src, t_vector2d f);
 t_vector		rotate_y(t_vector r, float v);
 
-t_matrix44f		matrix_mult(t_matrix44f a, t_matrix44f b);
-t_matrix44f		new_matrix44f(t_vector4d a, t_vector4d b, t_vector4d c,
-					t_vector4d d);
-
 int				aabb(SDL_Rect r, t_vector2d pixel_location);
 
 t_vector2d		get_pixel_coordinates(unsigned int i, unsigned int width);
@@ -205,7 +209,7 @@ void			fill_uncompresed_data(t_vector2d index, unsigned char *original,
 					unsigned char *new_data, int bpp);
 int				setup_contents(t_tga *file, int fd);
 int				read_header(t_tga *file, int fd);
-int				new_Image(SDL_Renderer *renderer, char *path,
+int				new_image(SDL_Renderer *renderer, char *path,
 					SDL_Texture **texture);
 t_tga			new_tga(char *path);
 
@@ -270,6 +274,8 @@ int				move_on_left_panel(t_vector2d loc, t_left_panel *panel);
 */
 
 int				resize_window(int *quit, t_info *info, SDL_Event *event);
+void			resize_top_panel(t_vector2d window_size, t_top_panel *panel,
+					SDL_Event *event);
 
 /*
 ********************************************************************************
@@ -296,14 +302,13 @@ int				gpu_switch_clicked(t_info *info, t_switch *button);
 ********************************************************************************
 */
 
+float			phong_lighting(t_scene *scene, t_vector oldir,
+					t_ray_hit *ray, int index);
 unsigned int	raymarching(t_scene *scene, t_vector dir);
 t_ray_hit		trace_ray(t_scene *scene, t_vector start_location, t_vector dir,
 					float max_distance);
 t_vector		normal_map_to_rgb(t_vector normal);
 t_vector		get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj);
-float			calcSoftshadow(t_vector p, t_vector dir, t_scene *scene);
-float			get_light_intensity(t_scene *scene, t_vector hit_location,
-					t_object *hit_obj, t_vector olddir, t_light *lights, int amount);
 
 /*
 ********************************************************************************

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 11:18:13 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/27 13:41:21 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:43:32 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	convert_base_colormap_data(t_tga *file,
 static void	convert_base_data(t_tga *file, unsigned char *converted_data)
 {
 	t_vector2d	index;
-	int	j;
+	int			j;
 
 	index.x = 0;
 	index.y = 0;

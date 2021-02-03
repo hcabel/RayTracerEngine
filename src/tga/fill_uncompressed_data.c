@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:54:30 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/27 13:57:28 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:43:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	bpp8(unsigned char *original, unsigned char *new_data,
 	new_data[i + 3] = original[j] & 0x7F;
 }
 
-void	fill_uncompresed_data(t_vector2d index, unsigned char *original,
+void		fill_uncompresed_data(t_vector2d index, unsigned char *original,
 				unsigned char *new_data, int bpp)
 {
 	if (bpp == 32)

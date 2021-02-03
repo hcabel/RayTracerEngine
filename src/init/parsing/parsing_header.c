@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 20:15:22 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/22 20:23:56 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/02 13:34:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,21 @@ int			parsing_header(t_scene *scene, int fd)
 	while ((ret = get_next_line(fd, &line)) == 1)
 	{
 		line = ft_strtolower(line);
-		if (line_amount == 1)
+		if (line_amount == 1 && ft_strncmp("[header]", line, 8) != GOOD)
 		{
-			if (ft_strncmp("[header]", line, 8) != GOOD)
-				return (FAILED);
+			ft_printf("{y}		Error: first line isn't a header node{/}\n");
+			return (FAILED);
 		}
 		else if (line[0] == '\t')
 		{
 			if (parse_attributes(scene, line + 1) != GOOD)
-				ft_printf("		{y}Error: %d{/}\n", line_amount);
+				ft_printf("{y}		Error: %d{/}\n", line_amount);
 		}
 		else if (ft_strncmp("[body]", line, 8) == GOOD)
 			break ;
 		ft_memdel((void**)&line);
 		line_amount++;
 	}
-	if (ret != 1 || (scene->light_amount == 0 && scene->shapes_amount == 0))
-		return (FAILED);
-	return (GOOD);
+	return (ret != 1 || (scene->light_amount == 0 && scene->shapes_amount == 0)
+		? FAILED : GOOD);
 }

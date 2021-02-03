@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/23 18:30:12 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/02 15:15:10 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,88 +47,46 @@ static unsigned int	get_color_from_one_ray_viewmode(t_scene *scene,
 	unsigned int	tmp;
 
 	if (!ray->hit && scene->cam.viewmode != ITERATION_VIEWMODE)
+	{
 		return (scene->cam.viewmode == DISTANCE_FOG_VIEWMODE ?
 			0x0 : DISTANCE_FOG_COLOR);
+	}
 	if (scene->cam.viewmode == DISTANCE_FOG_VIEWMODE)
-	{
-		tmp = (fabs(fmaxf(ray->distance / VIEW_DISTANCE, FOG_START)
-			- 1) * (1 / fmaxf(0.0001, 1 - FOG_START))) * 255;
-		color.x = tmp;
-		color.y = tmp;
-		color.z = tmp;
-	}
+		color = new_vector_uniform(fabs(fmaxf(ray->distance / VIEW_DISTANCE,
+			FOG_START) - 1) * (1 / fmaxf(0.0001, 1 - FOG_START)) * 255);
 	else if (scene->cam.viewmode == UNLIT_VIEWMODE)
-	{
-		color.x = (ray->hit_object->color.x);
-		color.y = (ray->hit_object->color.y);
-		color.z = (ray->hit_object->color.z);
-	}
+		color = new_vector(ray->hit_object->color.x, ray->hit_object->color.y,
+			ray->hit_object->color.z);
 	else if (scene->cam.viewmode == NORMAL_VIEWMODE)
 		color = normal_map_to_rgb(get_normal_map(ray->location, scene,
 			ray->hit_object));
 	else if (scene->cam.viewmode == ITERATION_VIEWMODE)
-	{
-		color.x = ray->recursion / (float)RAY_LOOP * (float)255;
-		color.y = ray->recursion / (float)RAY_LOOP * (float)255;
-		color.z = ray->recursion / (float)RAY_LOOP * (float)255;
-	}
-	else
-		return (0xFF0000FF);
+		color = new_vector(ray->recursion / (float)RAY_LOOP * (float)255,
+			ray->recursion / (float)RAY_LOOP * (float)255,
+			ray->recursion / (float)RAY_LOOP * (float)255);
 	return (((int)color.x << 24) + ((int)color.y << 16)
 		+ ((int)color.z << 8) + 0xFF);
-}
-
-static float	phong_lighting(t_scene *scene, t_vector oldir, t_ray_hit *ray, int index)
-{
-	t_vector	N;
-	t_vector	L;
-	t_vector	R;
-	float		dotLN;
-	float		dotRV;
-	float		intensity;
-
-	N = get_normal_map(ray->location, scene, ray->hit_object);
-	L = vector_subtract(scene->lights[index].location, ray->location);
-
-	if (vector_length(L) >= 100)
-		return (0);
-	intensity = fabs((vector_length(L) - 100) / (float)100);
-
-	L = vector_normalize(L);
-
-	L = vector_mult(L, -1);
-	R.x = L.x - 2 * vector_dot(L, N) * N.x;
-	R.y = L.y - 2 * vector_dot(L, N) * N.y;
-	R.z = L.z - 2 * vector_dot(L, N) * N.z;
-	L = vector_mult(L, -1);
-
-	dotLN = vector_dot(L, N);
-	dotRV = vector_dot(R, vector_mult(oldir, -1));
-	if (dotLN < 0 || trace_ray(scene, vector_add(ray->location, N), L,
-		vector_length(vector_subtract(scene->lights[index].location, ray->location))).hit)
-		return (0);
-	if (dotRV < 0)
-		return (intensity * (KD * dotLN));
-	return (intensity * (KD * dotLN + KS * pow(dotRV, 250)));
 }
 
 static unsigned int	raymarching_light_steps(t_scene *scene, t_vector oldir,
 						t_ray_hit *ray)
 {
-	t_vector	color;
-	float		intensity;
+	t_vector		color;
+	float			intensity;
+	unsigned int	i;
 
 	intensity = 0.1;
-	for (int i = 0; i < scene->light_amount; i++)
-		intensity += fmaxf(0, phong_lighting(scene, oldir, ray, i));
+	i = 0;
+	while (i < scene->light_amount)
+		intensity += fmaxf(0, phong_lighting(scene, oldir, ray, i++));
 	intensity = fminf(1, intensity);
 	intensity *= fabs(fmaxf(ray->distance / VIEW_DISTANCE, FOG_START)
 		- 1) * (1 / fmaxf(0.0001, 1 - FOG_START));
-
 	if (scene->cam.viewmode == DIRECT_ILLUMINATION_VIEWMODE)
+	{
 		return (((int)(intensity * 255) << 24) + ((int)(intensity * 255) << 16)
 			+ (int)(intensity * 0xFF00) + 0xFF);
-
+	}
 	color.x = ray->hit_object->color.x * intensity;
 	color.y = ray->hit_object->color.y * intensity;
 	color.z = ray->hit_object->color.z * intensity;
@@ -144,14 +102,9 @@ unsigned int		raymarching(t_scene *scene, t_vector dir)
 	if (scene->cam.viewmode != GAME_VIEWMODE
 		&& scene->cam.viewmode != ITERATION_VIEWMODE
 		&& check_for_hidden_obj(scene, dir, .025))
-			return (0xFF0000FF);
+		return (0xFF0000FF);
 	ray = trace_ray(scene, scene->cam.location, dir, VIEW_DISTANCE);
 	ray.distance = fminf(VIEW_DISTANCE, fmaxf(0, ray.distance));
-
-	if (scene->cam.viewmode != GAME_VIEWMODE && ray.hit // working on
-		&& ray.hit_object->istarget)
-		return (0xff5733ff);
-
 	if (is_one_ray_viewmode(scene->cam.viewmode) == GOOD)
 		return (get_color_from_one_ray_viewmode(scene, &ray));
 	if (!ray.hit)

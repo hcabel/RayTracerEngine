@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:45:27 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 14:29:37 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 13:42:11 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static int	load_kernel_file(t_kernel_gpu *gpu)
 {
 	FILE	*kernel_fd;
 
-	if (!(kernel_fd = fopen(KERNELSOURCEFILE, "r"))) // REMOVE FOPEN
+	// REMOVE FOPEN
+	if (!(kernel_fd = fopen(KERNELSOURCEFILE, "r")))
 		return (KERNEL_SOURCE_LOAD_ERROR);
 	gpu->kernel_str = (char*)malloc(MAX_SOURCE_SIZE);
 	gpu->kernel_size = fread(gpu->kernel_str, 1, MAX_SOURCE_SIZE, kernel_fd);
@@ -63,12 +64,12 @@ static int	build_kernel(t_kernel_gpu *gpu, cl_program *program)
 	{
 		clGetProgramBuildInfo(*program, gpu->device_id, CL_PROGRAM_BUILD_LOG,
 			0, NULL, &log_size);
-		if (!(log = (char *) malloc(log_size)))
+		if (!(log = (char*)malloc(log_size)))
 			return (KERNEL_BUILD_ERROR);
 		clGetProgramBuildInfo(*program, gpu->device_id, CL_PROGRAM_BUILD_LOG,
 			log_size, log, NULL);
 		ft_printf("{y}		%s{/}", log);
-		free(log);
+		ft_memdel((void**)&log);
 		return (KERNEL_BUILD_ERROR);
 	}
 	return (GOOD);
@@ -87,7 +88,7 @@ static int	kernel_initialisation(t_info *info)
 	return (GOOD);
 }
 
-int		init_kernel(t_info *info)
+int			init_kernel(t_info *info)
 {
 	int	code_error;
 
@@ -97,6 +98,7 @@ int		init_kernel(t_info *info)
 		code_error = kernel_initialisation(info);
 		if (code_error != GOOD)
 		{
+			ft_memdel((void**)&info->kernel.kernel_str);
 			ft_printf("{y}		%s\n{/}", error_to_str(code_error));
 			if (is_fatal_error(code_error) == GOOD)
 				return (code_error);

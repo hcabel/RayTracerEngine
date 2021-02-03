@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:23:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/22 20:59:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 12:44:04 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ static int	create_default_scene(t_scene *scene)
 	scene->lights[0].location = new_vector(0, 50, 0);
 	scene->cam.location = new_vector(0, -10, -75);
 	scene->cam.viewmode = GAME_VIEWMODE;
+	return (GOOD);
 }
 
 static int	parse_map(t_scene *scene, int fd, char *path)
 {
 	if (parsing_header(scene, fd))
 		return (FAILED);
-	if (create_object_list(scene)
-		|| create_light_list(scene))
+	if (create_object_list(scene) || create_light_list(scene))
 		return (MALLOC_ERROR);
 	if (parse_components(scene, fd))
 		return (FAILED);
@@ -89,34 +89,22 @@ int			parsing(t_scene *scene, char *path)
 	scene->cam = new_cam();
 	scene->cam.viewmode = EDITOR_VIEWMODE;
 	if (!path)
-		create_default_scene(scene);
-	else
+		return (create_default_scene(scene));
+	fd = open(path, O_RDONLY);
+	if (fd == -1 || (code = parse_map(scene, fd, path)) != GOOD)
 	{
-		fd = open(path, O_RDONLY);
-		if (fd != -1)
+		if (fd == -1 || code == FAILED)
 		{
-			if ((code = parse_map(scene, fd, path)) != GOOD)
-			{
-				if (code == FAILED)
-				{
-					ft_printf("{y}		Error: file reading failed !\n{/}");
-					create_default_scene(scene);
-				}
-				else
-				{
-					ft_printf("{r}		%s!\n{/}", error_to_str(code));
-					close(fd);
-					return (code);
-				}
-			}
-		}
-		else
-		{
-			ft_printf("{y}		Error file does not exit\n");
+			if (fd == -1)
+				ft_printf("{y}		Error file does not exit\n");
+			else
+				ft_printf("{y}		Error: file reading failed !\n{/}");
 			create_default_scene(scene);
 		}
-		close(fd);
+		else
+			ft_printf("{r}		%s!\n{/}", error_to_str(code));
 	}
+	close(fd);
 	ft_printf("{g}	End\n{/}");
 	return (GOOD);
 }

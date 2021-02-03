@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:19:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/02 13:47:22 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/29 17:17:26 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int		clicked_on_viewmode(t_vector2d loc, t_info *info)
 		{
 			if (info->screen.top.viewmode.viewmode_list[i].clicked == NULL)
 				return (BUTTON_FUNCTION_NOT_SET);
-			if (info->screen.top.viewmode.viewmode_list[i].clicked(info) == GOOD)
+			if (info->screen.top.viewmode.viewmode_list[i].clicked(info)
+				== GOOD)
 				return (1);
 		}
 		i++;

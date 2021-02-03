@@ -6,7 +6,7 @@
 #    By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/23 22:46:07 by hcabel            #+#    #+#              #
-#    Updated: 2021/01/25 13:39:56 by hcabel           ###   ########.fr        #
+#    Updated: 2021/02/03 13:25:57 by hcabel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ SRCS				=	aabb_algo.c					\
 						kernel_init.c				\
 						keyboard.c					\
 						left_panel.c				\
-						light_ray.c					\
 						main.c						\
 						matrix44.c					\
 						mouse_move.c				\
@@ -77,6 +76,11 @@ SRCS				=	aabb_algo.c					\
 						vector4d.c					\
 						vector.c					\
 						viewport_panel.c			\
+						init_top_panel_viewmode.c	\
+						convert_scene.c				\
+						drawcalls.c					\
+						resize_top_panel.c			\
+						lighting.c					\
 
 ifeq ($(DEBUG), yes)
 	FLAGS			=	-g
@@ -110,7 +114,7 @@ all: lib $(NAME)
 	echo "[Binary Updated]\n"
 
 lib:
-	#$(foreach lib, $(LIB_NAME), make -C $(lib);)
+	make -C ftprintf
 
 $(NAME): $(OBJECT_FOLDER) $(OBJECTS)
 	echo "[Create] Binary"

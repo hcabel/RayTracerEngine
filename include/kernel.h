@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 11:16:00 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/26 13:25:26 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/29 14:43:24 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "mathematical.h"
 # include <CL/cl.h>
 
-typedef struct s_kernel_gpu
+typedef struct			s_kernel_gpu
 {
 	cl_kernel			kernel;
 	char				*kernel_str;
@@ -33,10 +33,10 @@ typedef struct s_kernel_gpu
 }						t_kernel_gpu;
 
 /*
-**	Kernel struct ure
+**	Kernel structure
 */
 
-typedef struct s_kernel_shape
+typedef struct			s_kernel_shape
 {
 	t_vector			location;
 	t_vector2d			rotation;
@@ -46,14 +46,14 @@ typedef struct s_kernel_shape
 	int					istarget;
 }						t_kernel_shape;
 
-typedef struct s_kernel_light
+typedef struct			s_kernel_light
 {
 	t_vector			location;
 	t_vector2d			rotation;
 	float				intensity;
 }						t_kernel_light;
 
-typedef struct s_kernel_scene
+typedef struct			s_kernel_scene
 {
 	int					shapes_num;
 	int					lights_num;
@@ -66,7 +66,7 @@ typedef struct s_kernel_scene
 	int					img_h;
 }						t_kernel_scene;
 
-typedef struct s_kernel_args
+typedef struct			s_kernel_args
 {
 	t_kernel_shape		*shapes;
 	t_kernel_light		*lights;

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 15:52:31 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/25 13:37:06 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/29 14:46:30 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int			init_interfaces(t_info *info)
 	int	code;
 
 	ft_printf("{g}	Interfaces\n{/}");
-
 	info->screen.area.x = 0;
 	info->screen.area.y = 0;
 	info->screen.area.w = WIN_WIDTH;
@@ -44,12 +43,6 @@ int			init_interfaces(t_info *info)
 		return (code);
 	if ((code = init_viewport(&info->screen.viewport)) != GOOD)
 		return (code);
-	/* if (new_Image(info->renderer, "assets/font.tga", &info->screen.font) != GOOD
-		|| load_interface_images(info->renderer, &info->screen) != GOOD)
-	{
-		ft_printf("{y}		Error font loading\n{/}");
-		return (MALLOC_ERROR);
-	} */
 	ft_printf("{g}	Good\n{/}");
 	return (GOOD);
 }

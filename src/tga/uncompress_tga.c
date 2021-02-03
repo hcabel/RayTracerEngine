@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:03:56 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/27 14:00:04 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:38:08 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	uncompress(t_tga *file, unsigned char *new_data,
 	return (GOOD);
 }
 
-int	uncompress_tga(t_tga *file)
+int			uncompress_tga(t_tga *file)
 {
 	unsigned char	*uncompressed_data;
 

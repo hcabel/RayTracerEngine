@@ -6,11 +6,25 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:09:34 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/25 12:56:07 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/29 17:43:39 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+static int	get_pixel_color_from_pixel_location_in_scrollbar(t_top_panel *panel,
+				t_vector2d coord)
+{
+	if (!panel->viewmode.scrollbar.enable)
+		return (TOP_PANEL_BACKGROUND_COLOR);
+	if (aabb(panel->viewmode.scrollbar.button.area, coord) == GOOD)
+	{
+		return (panel->viewmode.scrollbar.button.ishover ?
+			panel->viewmode.scrollbar.button.hover_color :
+			panel->viewmode.scrollbar.button.color);
+	}
+	return (SCROLLBAR_COLOR);
+}
 
 static int	get_pixel_color_from_pixel_location_in_viewmode(t_top_panel *panel,
 				t_vector2d coord)
@@ -20,25 +34,18 @@ static int	get_pixel_color_from_pixel_location_in_viewmode(t_top_panel *panel,
 
 	coord.x -= panel->viewmode.area.x;
 	coord.y -= panel->viewmode.area.y;
-	if (panel->viewmode.scrollbar.enable)
 	if (aabb(panel->viewmode.scrollbar.area, coord) == GOOD)
-	{
-		if (!panel->viewmode.scrollbar.enable)
-			return (TOP_PANEL_BACKGROUND_COLOR);
-		if (aabb(panel->viewmode.scrollbar.button.area, coord) == GOOD)
-			return (panel->viewmode.scrollbar.button.ishover ?
-				panel->viewmode.scrollbar.button.hover_color :
-				panel->viewmode.scrollbar.button.color);
-		return (SCROLLBAR_COLOR);
-	}
+		return (get_pixel_color_from_pixel_location_in_scrollbar(panel, coord));
 	coord.x += panel->viewmode.current;
 	i = 0;
 	while (i < VIEWMODE_BUTTON_AMOUNT)
 	{
 		if (aabb(panel->viewmode.viewmode_list[i].area, coord) == GOOD)
+		{
 			return (panel->viewmode.viewmode_list[i].ishover ?
 				panel->viewmode.viewmode_list[i].hover_color :
 				panel->viewmode.viewmode_list[i].color);
+		}
 		i++;
 	}
 	return (TOP_PANEL_BACKGROUND_COLOR);
@@ -48,8 +55,10 @@ static int	get_pixel_color_from_pixel_location(t_vector2d coord,
 				t_top_panel *panel)
 {
 	if (aabb(panel->savemap_button.area, coord) == GOOD)
+	{
 		return (panel->savemap_button.ishover ?
 			panel->savemap_button.hover_color : panel->savemap_button.color);
+	}
 	if (aabb(panel->viewmode.area, coord) == GOOD)
 		return (get_pixel_color_from_pixel_location_in_viewmode(panel, coord));
 	if (aabb(panel->gpu_switch.area, coord) == GOOD)
@@ -72,7 +81,6 @@ int			drawcall_top_panel(t_info *info)
 	ft_printf("[DrawCall] Top panel\n");
 	SDL_LockTexture(info->screen.tex, &info->screen.top.area,
 		&info->screen.top.pixels, &info->screen.pitch);
-
 	i = 0;
 	while (i < info->screen.top.area.w * info->screen.top.area.h)
 	{

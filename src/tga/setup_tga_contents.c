@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 11:21:42 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/27 13:56:39 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 11:44:24 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ static int	get_image_data(t_tga *file, int fd)
 {
 	unsigned int	bpp_size;
 
-	bpp_size =  ((file->bpp >> 3) + (file->compression > 8 ? 1 : 0));
+	bpp_size = ((file->bpp >> 3) + (file->compression > 8 ? 1 : 0));
 	if ((file->image_data = (unsigned char*)malloc(sizeof(unsigned char) *
 		file->area.w * file->area.h * bpp_size)) == NULL)
 		return (MALLOC_ERROR);
 	if (file->compression < 8)
 	{
-		if (read(fd, file->image_data, file->area.w * file->area.h * bpp_size) !=
-			file->area.w * file->area.h * bpp_size)
+		if (read(fd, file->image_data, file->area.w * file->area.h * bpp_size)
+			!= file->area.w * file->area.h * bpp_size)
 			return (TGA_CONTENT_PARSING_ERROR);
 	}
 	else

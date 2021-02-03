@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:19:37 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/22 20:59:01 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 15:04:17 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static int	init_sdl(t_info *info)
 {
-	ft_printf("{g}	SDL\n");
+	ft_printf("{g}	SDL{y}\n");
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_TIMER) != GOOD)
 		return (FAILED);
-	ft_printf("{g}		Create window\n");
+	ft_printf("{g}		Create window{y}\n");
 	if (!(info->window = SDL_CreateWindow(WINDOW_NAME, 0, 0, WIN_WIDTH,
 		WIN_HEIGTH, SDL_WINDOW_RESIZABLE)))
 		return (FAILED);
 	if (!(info->renderer = SDL_CreateRenderer(info->window,
 		-1, SDL_RENDERER_ACCELERATED)))
 		return (FAILED);
-	ft_printf("{g}		Create textures\n");
+	ft_printf("{g}		Create textures{y}\n");
 	if (!(info->screen.tex = SDL_CreateTexture(info->renderer,
 		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
 		WIN_WIDTH, WIN_HEIGTH)))
@@ -33,19 +33,14 @@ static int	init_sdl(t_info *info)
 		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
 		WIN_WIDTH, WIN_HEIGTH)))
 		return (SDL_TEXTURE_CREATION_ERROR);
-	ft_printf("{g}	Good\n");
-	return(GOOD);
+	ft_printf("{g}	Good{y}\n");
+	return (GOOD);
 }
 
 static void	init_scene(t_info *info)
 {
 	info->scene.light_amount = 0;
 	info->scene.shapes_amount = 0;
-	info->scene.cam.forward.x = cos(info->scene.cam.rotation.x) *
-		cos(info->scene.cam.rotation.y);
-	info->scene.cam.forward.y = cos(info->scene.cam.rotation.x) *
-		sin(info->scene.cam.rotation.y);
-	info->scene.cam.forward.z = sin(info->scene.cam.rotation.x);
 	info->scene.cam.viewmode = 0;
 	info->scene.target = NULL;
 	info->scene.target_type = 0;
@@ -64,7 +59,6 @@ static void	init_mouse_structure(t_mouse *mouse)
 	mouse->dragged = 0;
 	mouse->down = 0;
 	mouse->location = new_vector2d(0, 0);
-	// ??
 	mouse->startloc = new_vector2d(0, 0);
 	mouse->target_base_3dvector = new_vector(0, 0, 0);
 }
@@ -108,5 +102,5 @@ int			init(t_info *info, char *argv)
 	if ((code_error = init_interfaces(info)) != GOOD)
 		return (code_error);
 	ft_printf("{g}Good\n{/}");
-	return(GOOD);
+	return (GOOD);
 }

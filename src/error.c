@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:48:19 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/01 20:50:29 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/29 15:33:32 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char		*error_to_str(int code)
 	return ("ERROR CODE UNDEFINED");
 }
 
-int		is_fatal_error(int code)
+int			is_fatal_error(int code)
 {
 	if (code == MALLOC_ERROR
 		|| code == SDL_ERROR

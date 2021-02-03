@@ -6,13 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:58:19 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/24 12:57:08 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 13:08:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		all_threads_are_done(t_sampling *sampling)
+int			all_threads_are_done(t_sampling *sampling)
 {
 	while (pthread_mutex_trylock(&sampling->mutex))
 		;
@@ -25,7 +25,7 @@ int		all_threads_are_done(t_sampling *sampling)
 	return (FAILED);
 }
 
-void	kill_all_thread(t_sampling *sampling)
+void		kill_all_thread(t_sampling *sampling)
 {
 	unsigned int	i;
 
@@ -62,17 +62,17 @@ static void	calcule_for_each_pixel(t_info *info, t_thread *thread_info,
 	dir = get_ray_direction(coordinates, info->scene.cam.rotation, 90,
 		info->screen.viewport.image);
 	((unsigned int*)info->screen.viewport.pixels)[(int)coordinates.x +
-		((int)coordinates.y * info->screen.area.w)]
-		= raymarching(&info->scene, dir);
+		((int)coordinates.y * info->screen.area.w)] =
+		raymarching(&info->scene, dir);
 }
 
 void		*thread_calculs_functions(void *p)
 {
 	t_thread		*thread_info;
 	t_info			*info;
+	t_vector2d		coordinates;
 	unsigned int	i;
 
-	t_vector2d	coordinates;
 	thread_info = p;
 	info = thread_info->info;
 	i = thread_info->start_index;
@@ -92,4 +92,3 @@ void		*thread_calculs_functions(void *p)
 	pthread_exit(NULL);
 	return ((void*)0);
 }
-

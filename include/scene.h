@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:52:21 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/26 13:24:15 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 14:58:42 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "define.h"
 # include "mathematical.h"
 
-typedef struct s_object
+typedef struct			s_object
 {
 	t_vector			location;
 	t_vector2d			rotation;
@@ -26,22 +26,21 @@ typedef struct s_object
 	int					istarget;
 }						t_object;
 
-typedef struct s_light
+typedef struct			s_light
 {
 	t_vector			location;
 	t_vector2d			rotation;
 	float				intensity;
 }						t_light;
 
-typedef struct s_cam
+typedef struct			s_cam
 {
 	t_vector			location;
 	t_vector2d			rotation;
-	t_vector			forward;
 	unsigned int		viewmode;
 }						t_cam;
 
-typedef struct s_scene
+typedef struct			s_scene
 {
 	t_object			*shapes;
 	t_light				*lights;

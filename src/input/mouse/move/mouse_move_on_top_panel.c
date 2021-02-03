@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_move_on_top_panel.c                     :+:      :+:    :+:   */
+/*   mouse_move_on_top_panel.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:16:27 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/26 16:05:54 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/01/29 17:15:13 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int	move_on_viewmode_scrollbox(t_top_panel *panel,
 
 	cursorlocation.x -= panel->viewmode.area.x - panel->viewmode.current;
 	cursorlocation.y -= panel->viewmode.area.y;
-
 	result = 0;
 	i = 0;
 	while (i < VIEWMODE_BUTTON_AMOUNT)
@@ -48,7 +47,7 @@ static int	move_on_viewmode_scrollbox(t_top_panel *panel,
 	return (result);
 }
 
-int		move_on_top_panel(t_top_panel *panel, t_vector2d cursorlocation)
+int			move_on_top_panel(t_top_panel *panel, t_vector2d cursorlocation)
 {
 	int	result;
 

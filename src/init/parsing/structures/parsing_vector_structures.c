@@ -6,13 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:29:00 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/24 12:29:13 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/02 13:21:17 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vector	parse_vector(char *line, unsigned int line_amount)
+t_vector	parse_vector(const char *line, const unsigned int line_amount)
 {
 	t_vector	res;
 	int			index;
@@ -24,11 +24,11 @@ t_vector	parse_vector(char *line, unsigned int line_amount)
 	index = ft_nbrlen(res.x) + (res.x == 0 && line[1] == '-' ? 2 : 1);
 	if (line[index] != '}')
 	{
-		while(line[index] && !ft_isdigit(line[index]) && line[index] != '-')
+		while (line[index] && !ft_isdigit(line[index]) && line[index] != '-')
 			index++;
 		res.y = ft_atoi(line + index);
 		index += ft_nbrlen(res.y) + (res.y == 0 && line[index] == '-' ? 1 : 0);
-		while(line[index] && !ft_isdigit(line[index]) && line[index] != '-')
+		while (line[index] && !ft_isdigit(line[index]) && line[index] != '-')
 			index++;
 		res.z = ft_atoi(line + index);
 		index += ft_nbrlen(res.z) + (res.z == 0 && line[index] == '-' ? 1 : 0);
@@ -41,7 +41,7 @@ t_vector	parse_vector(char *line, unsigned int line_amount)
 	return (res);
 }
 
-t_vector2d	parse_vector2d(char *line, unsigned int line_amount)
+t_vector2d	parse_vector2d(const char *line, const unsigned int line_amount)
 {
 	t_vector2d	result;
 	int			index;
@@ -53,7 +53,7 @@ t_vector2d	parse_vector2d(char *line, unsigned int line_amount)
 	index = ft_nbrlen(result.x) + 2;
 	if (line[index] != '}')
 	{
-		while(line[index] && !ft_isdigit(line[index]) && line[index] != '-')
+		while (line[index] && !ft_isdigit(line[index]) && line[index] != '-')
 			index++;
 		result.y = ft_atoi(line + index);
 		index += ft_nbrlen(result.y);

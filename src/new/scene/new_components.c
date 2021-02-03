@@ -6,34 +6,33 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 20:04:31 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/23 20:51:21 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/02 14:56:30 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_cam		new_cam()
+t_cam		new_cam(void)
 {
 	t_cam	cam;
 
 	cam.viewmode = 0;
-	cam.forward = new_vector(0, 0, 0);
 	cam.location = new_vector(0, 0, 0);
 	cam.rotation = new_vector2d(0, 0);
 	return (cam);
 }
 
-t_light		new_light()
+t_light		new_light(void)
 {
 	t_light	light;
 
 	light.location = new_vector(0, 0, 0);
 	light.rotation = new_vector2d(0, 0);
 	light.intensity = 1;
-	return(light);
+	return (light);
 }
 
-t_object	new_object()
+t_object	new_object(void)
 {
 	t_object	obj;
 

@@ -6,13 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:29:24 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/24 12:30:09 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/02 13:20:02 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vector	parse_color(char *line, unsigned int line_amount)
+t_vector	parse_color(const char *line, const unsigned int line_amount)
 {
 	t_vector	result;
 	int			hexcolor;
