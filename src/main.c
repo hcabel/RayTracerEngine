@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:27:09 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 12:21:54 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 15:14:07 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int			main(int argc, char **argv)
 	code_error = 0;
 	if ((code_error = init(&info, argv[1])) != GOOD)
 		return (program_exit(&info, code_error));
-	return (program_exit(&info, GOOD));
 	if ((code_error = loop(&info)) != GOOD)
 		return (program_exit(&info, code_error));
 	return (program_exit(&info, GOOD));

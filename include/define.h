@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 10:59:14 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 15:32:59 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define KERNELSOURCEFILE "src/raymarching/kernel_render.cl"
 
 # define RAY_LOOP 100
-# define FIRST_RESOLUTION 16
+# define FIRST_RESOLUTION 32
 # define VIEW_DISTANCE 200
 # define DISTANCE_FOG_COLOR 0x0
 # define RAY_PRECIS 0.0005
@@ -34,6 +34,8 @@
 # define KS 1.0
 # define KD 0.7
 # define KA 0.2
+
+# define ABLE_TO_RESIZE 0
 
 /*
 **	Interfaces editable define
@@ -86,6 +88,7 @@
 # define RESIZE_WINDOW_ERROR -21
 # define BUTTON_FUNCTION_NOT_SET -22
 # define PARSING_NO_HEADER -23
+# define RESIZE_NOT_ALLOW -24
 
 # define GAME_VIEWMODE 0
 # define EDITOR_VIEWMODE 1
@@ -93,9 +96,12 @@
 # define ITERATION_VIEWMODE 3
 # define NORMAL_VIEWMODE 4
 # define DIRECT_ILLUMINATION_VIEWMODE 5
-# define GLOSSY_ILLUMINATION_VIEWMODE 6 // TODO
-# define GLOBAL_ILLUMINATION_VIEWMODE 7 // TODO
 # define DISTANCE_FOG_VIEWMODE 8
+/*
+**	TODO
+*/
+# define GLOSSY_ILLUMINATION_VIEWMODE 6
+# define GLOBAL_ILLUMINATION_VIEWMODE 7
 
 # define DRAWCALL_CHECK_VIEWPORT drawcall_check_viewport
 # define DRAWCALL_VIEWPORT drawcall_viewport
@@ -105,8 +111,5 @@
 # define VIEWMODE_BUTTON_AMOUNT 9
 
 # define TOP_PANEL_ICON_AMOUNT 2
-
-// REMOVE
-# define MAX_SOURCE_SIZE 0x100000
 
 #endif

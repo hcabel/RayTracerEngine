@@ -6,18 +6,18 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 22:55:37 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/27 22:55:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 15:02:55 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBft_H
-# define LIBft_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
 # include <string.h>
 
 # define FABS(x) ((double)(x > 0.0 ? x : -x))
 
-# define BUFF_SIZE 40
+# define BUFF_SIZE 90
 # define GNL_ERROR -1
 # define GNL_OK 1
 # define GNL_END 0

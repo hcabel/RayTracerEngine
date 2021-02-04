@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 18:11:59 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 11:31:55 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 14:42:34 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ static int	resize_viewport_panel(t_vector2d window_size,
 				t_viewport_panel *panel, SDL_Renderer *renderer)
 {
 	SDL_DestroyTexture(panel->tex);
-	if (!(panel->tex = SDL_CreateTexture(renderer,
-		SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
-		window_size.x, window_size.y)))
+	panel->tex = NULL;
+	if (renderer != NULL)
+		panel->tex = SDL_CreateTexture(renderer,
+			SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING,
+			window_size.x, window_size.y);
+	if (!panel->tex)
 		return (SDL_TEXTURE_CREATION_ERROR);
 	panel->area.w = window_size.x - LEFT_PANEL_SIZE;
 	panel->area.h = window_size.y - TOP_PANEL_SIZE;
@@ -49,13 +52,13 @@ int			resize_window(t_info *info)
 	int			x;
 	int			y;
 
-	ft_printf("[Event] Resize\n");
-	return (RESIZE_WINDOW_ERROR);
-	if (confirm_window_size(window_size, info) != GOOD)
-		return (RESIZE_WINDOW_ERROR);
+	if (!ABLE_TO_RESIZE)
+		return (RESIZE_NOT_ALLOW);
 	SDL_GetWindowSize(info->window, &x, &y);
 	window_size.x = x;
 	window_size.y = y;
+	if (confirm_window_size(window_size, info) != GOOD)
+		return (RESIZE_WINDOW_ERROR);
 	resize_top_panel(window_size, &info->screen.top);
 	resize_left_panel(window_size, &info->screen.left);
 	SDL_DestroyTexture(info->screen.tex);

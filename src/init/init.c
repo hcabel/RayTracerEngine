@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:19:37 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 12:21:20 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 14:40:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	init_sdl(t_info *info)
 		return (FAILED);
 	ft_printf("{g}		Create window{y}\n");
 	if (!(info->window = SDL_CreateWindow(WINDOW_NAME, 0, 0, WIN_WIDTH,
-		WIN_HEIGTH, SDL_WINDOW_RESIZABLE)))
+		WIN_HEIGTH, (ABLE_TO_RESIZE ? SDL_WINDOW_RESIZABLE : 0))))
 		return (FAILED);
 	if (!(info->renderer = SDL_CreateRenderer(info->window,
 		-1, SDL_RENDERER_ACCELERATED)))

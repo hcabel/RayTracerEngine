@@ -6,21 +6,21 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 20:15:22 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 12:20:36 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 14:45:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static int	parse_attributes(t_scene *scene, char *line)
+static void	parse_attributes(t_scene *scene, char *line,
+				unsigned int line_amount)
 {
 	if (ft_strncmp("shapes: ", line, 8) == GOOD)
 		scene->shapes_amount = ft_atoi(line + 8);
 	else if (ft_strncmp("lights: ", line, 8) == GOOD)
 		scene->light_amount = ft_atoi(line + 8);
 	else
-		return (FAILED);
-	return (GOOD);
+		ft_printf("{y}		Error: %d{/}\n", line_amount);
 }
 
 int			parsing_header(t_scene *scene, int fd)
@@ -39,10 +39,7 @@ int			parsing_header(t_scene *scene, int fd)
 			return (PARSING_NO_HEADER);
 		}
 		else if (line[0] == '\t')
-		{
-			if (parse_attributes(scene, line + 1) != GOOD)
-				ft_printf("{y}		Error: %d{/}\n", line_amount);
-		}
+			parse_attributes(scene, line + 1, line_amount);
 		else if (ft_strncmp("[body]", line, 8) == GOOD)
 			break ;
 		line_amount++;

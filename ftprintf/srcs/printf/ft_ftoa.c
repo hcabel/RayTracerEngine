@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 19:30:09 by hcabel            #+#    #+#             */
-/*   Updated: 2019/10/08 15:44:23 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 15:17:28 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,23 +85,6 @@ static void		decimal(char **str_addr, double deci, int precis, int len)
 	}
 }
 
-static int		count(long int n)
-{
-	int			i;
-	long int	nb;
-
-	i = 0;
-	nb = n;
-	if (nb < 0)
-		i++;
-	while (nb != 0)
-	{
-		i++;
-		nb = nb / 10;
-	}
-	return (i);
-}
-
 static void		ft_itoa_float(char **str_addr, int n, int len)
 {
 	int		sign;
@@ -133,7 +116,7 @@ char			*ft_ftoa(long double n, int precis)
 
 	precis++;
 	whole = (long int)n;
-	len = count(whole);
+	len = ft_nbrlen(whole);
 	if (!(str = (char*)ft_memalloc(sizeof(*str) * (len + precis + 2))))
 		return (NULL);
 	str[len + precis + 1] = '\0';

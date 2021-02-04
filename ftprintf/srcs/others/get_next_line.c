@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 18:17:33 by hcabel            #+#    #+#             */
-/*   Updated: 2020/09/01 17:20:00 by user42           ###   ########.fr       */
+/*   Updated: 2021/02/04 14:58:04 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ static t_gnl	*check_fd(t_gnl *lst, int fd)
 	}
 	return (NULL);
 }
-
-#include <string.h>
 
 static int		check(char *str, char **line)
 {

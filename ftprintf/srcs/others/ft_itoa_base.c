@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 14:47:27 by hcabel            #+#    #+#             */
-/*   Updated: 2019/09/14 14:52:31 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 15:04:13 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char		*ft_itoa_base(long long nbr, int base)
 
 	cast = (base <= 10 && nbr < 0 ? -nbr : nbr);
 	size = ft_baselen(nbr, base);
-	if (!(result = (char*)malloc(sizeof(char) * size)))
+	if (!(result = (char*)malloc(sizeof(char) * (size + 1))))
 		return (NULL);
 	result[size] = '\0';
 	result[0] = (nbr < 0 && base <= 10 ? '-' : '\0');

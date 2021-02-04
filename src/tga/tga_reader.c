@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 11:19:44 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 12:14:03 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 14:44:10 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	read_tga(char *path, t_tga *file)
 	return (GOOD);
 }
 
-t_tga	new_tga(char *path)
+t_tga		new_tga(char *path)
 {
 	int		code_error;
 	t_tga	new_tga;
@@ -77,7 +77,8 @@ t_tga	new_tga(char *path)
 	return (new_tga);
 }
 
-int	new_tga_image(SDL_Renderer *renderer, char *path, SDL_Texture **texture)
+int			new_tga_image(SDL_Renderer *renderer, char *path,
+				SDL_Texture **texture)
 {
 	t_tga		tga;
 	SDL_Surface	*surface;

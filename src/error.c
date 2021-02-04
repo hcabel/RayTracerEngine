@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:48:19 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 11:14:51 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 14:43:40 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static char	*error_kernel_to_str(int code)
 		return ("Enqueue error");
 	if (code == KERNEL_ITEM_SIZE_ERROR)
 		return ("Item size error");
+	if (code == RESIZE_NOT_ALLOW)
+		return ("I'm sorry but your OS do not support resizing");
 	return ("");
 }
 
