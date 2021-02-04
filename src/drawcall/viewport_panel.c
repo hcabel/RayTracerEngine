@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:09:48 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 13:10:40 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 18:59:10 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	on_cpu(t_info *info)
 {
 	unsigned int	i;
 
-	return ;
 	SDL_LockTexture(info->screen.viewport.tex, &info->screen.viewport.image,
 		&info->screen.viewport.pixels, &info->screen.pitch);
 	i = 0;

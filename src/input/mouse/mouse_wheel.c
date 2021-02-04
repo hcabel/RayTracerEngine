@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 12:16:06 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 13:52:51 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:25:15 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ static int	wheel_scroll_right(t_top_panel *panel, int dir)
 {
 	unsigned int	max;
 
-	printf("right\n");
 	max = (panel->viewmode.scrollbar.max) - panel->viewmode.area.w;
-	if (panel->viewmode.current >= max)
+	if ((unsigned int)panel->viewmode.current >= max)
 		return (0);
 	panel->viewmode.current += dir;
-	if (panel->viewmode.current > max)
+	if ((unsigned int)panel->viewmode.current > max)
 		panel->viewmode.current = max;
 	panel->viewmode.scrollbar.button.area.x =
 		round(panel->viewmode.current
@@ -55,7 +54,7 @@ static int	wheel_on_top_panel(t_top_panel *panel, t_vector2d cursorlocation,
 	return (0);
 }
 
-void		mouse_wheel(int *quit, t_info *info, SDL_Event *event)
+void		mouse_wheel(t_info *info, SDL_Event *event)
 {
 	int	result;
 

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:22:52 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 13:26:56 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 19:09:38 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ void		parse_lights_parameters(t_light *light, const char *line,
 	else if (ft_strncmp("intensity: ", line + 1, 11) == GOOD)
 		light->intensity = ft_atoi(line + 12);
 	else
-		ft_printf("Parsing: %u: Light parameter does not exist\n",
+		ft_printf("		%u: Light parameter does not exist\n",
 			line_amount);
 }

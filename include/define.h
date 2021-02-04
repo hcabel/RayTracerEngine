@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 13:34:37 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 10:59:14 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define WIN_WIDTH 1200
 
 # define RAYMARCHING_THREAD 1
-# define ON_GPU 1
+# define ON_GPU 0
 # define KERNELSOURCEFILE "src/raymarching/kernel_render.cl"
 
 # define RAY_LOOP 100
@@ -85,6 +85,7 @@
 # define KERNEL_ITEM_SIZE_ERROR -20
 # define RESIZE_WINDOW_ERROR -21
 # define BUTTON_FUNCTION_NOT_SET -22
+# define PARSING_NO_HEADER -23
 
 # define GAME_VIEWMODE 0
 # define EDITOR_VIEWMODE 1

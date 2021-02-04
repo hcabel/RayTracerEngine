@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/29 12:01:02 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 15:15:10 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:26:50 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static unsigned int	get_color_from_one_ray_viewmode(t_scene *scene,
 						t_ray_hit *ray)
 {
 	t_vector		color;
-	unsigned int	tmp;
 
 	if (!ray->hit && scene->cam.viewmode != ITERATION_VIEWMODE)
 	{
@@ -58,8 +57,7 @@ static unsigned int	get_color_from_one_ray_viewmode(t_scene *scene,
 		color = new_vector(ray->hit_object->color.x, ray->hit_object->color.y,
 			ray->hit_object->color.z);
 	else if (scene->cam.viewmode == NORMAL_VIEWMODE)
-		color = normal_map_to_rgb(get_normal_map(ray->location, scene,
-			ray->hit_object));
+		color = normal_map_to_rgb(get_normal_map(ray->location, scene));
 	else if (scene->cam.viewmode == ITERATION_VIEWMODE)
 		color = new_vector(ray->recursion / (float)RAY_LOOP * (float)255,
 			ray->recursion / (float)RAY_LOOP * (float)255,
@@ -96,7 +94,6 @@ static unsigned int	raymarching_light_steps(t_scene *scene, t_vector oldir,
 
 unsigned int		raymarching(t_scene *scene, t_vector dir)
 {
-	double		depth;
 	t_ray_hit	ray;
 
 	if (scene->cam.viewmode != GAME_VIEWMODE

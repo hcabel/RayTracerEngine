@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 12:53:24 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/29 14:43:39 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:33:07 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ int	display_viewmode_images(SDL_Renderer *renderer, t_top_panel *panel)
 		&panel->gpu_switch.area);
 	SDL_RenderCopy(renderer, panel->icon[1], NULL,
 		&panel->savemap_button.area);
+	return (GOOD);
 }

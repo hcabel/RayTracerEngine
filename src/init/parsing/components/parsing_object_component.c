@@ -6,14 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:25:08 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 13:33:32 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:28:18 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	parse_object_type(t_object *object, const char *line,
-				const unsigned int line_amount)
+static void	parse_object_type(t_object *object, const char *line)
 {
 	if (ft_strncmp("sphere]", line, 7) == GOOD)
 		object->sdf_index = 0;
@@ -31,7 +30,7 @@ void		parse_objects_parameters(t_object *object, const char *line,
 				const unsigned int line_amount)
 {
 	if (line[0] == '[')
-		parse_object_type(object, line + 8, line_amount);
+		parse_object_type(object, line + 8);
 	else if (ft_strncmp("location: {", line + 1, 11) == GOOD)
 		object->location = parse_vector(line + 11, line_amount);
 	else if (ft_strncmp("scale: {", line + 1, 8) == GOOD)
@@ -41,6 +40,6 @@ void		parse_objects_parameters(t_object *object, const char *line,
 	else if (ft_strncmp("color: ", line + 1, 7) == GOOD)
 		object->color = parse_color(line + 8, line_amount);
 	else
-		printf("Parsing: %u: Object parameter does not exist\n",
+		ft_printf("		%u: Object parameter does not exist\n",
 			line_amount);
 }

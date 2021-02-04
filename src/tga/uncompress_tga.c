@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:03:56 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 11:38:08 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:33:20 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,9 @@ static void	fill_data(t_tga *file, unsigned char *new_data, t_vector2d *i)
 static int	uncompress(t_tga *file, unsigned char *new_data,
 		void (*fill)(t_tga*, unsigned char*, t_vector2d*))
 {
-	int			again;
 	int			length;
 	t_vector2d	index;
 
-	again = 0;
 	index.x = 0;
 	index.y = 0;
 	length = file->area.w * file->area.h * 4;

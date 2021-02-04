@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:03:45 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 12:44:03 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 10:55:58 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	switch_to_parse_parameter_functions(const char *line,
 	else if (*component_type_index == 3)
 		parse_camera_parameters(component, line, line_amount);
 	else
-		ft_printf("	%u: Identification of target component failed\n",
+		ft_printf("		%u: Identification of target component failed\n",
 			line_amount);
 }
 
@@ -51,7 +51,8 @@ static int	set_new_component(t_scene *scene, t_parsing *parse,
 	else if (ft_strncmp("\t[camera:", parse->line, 7) == GOOD)
 		component_type_index = set_component_infos(component, 3, &scene->cam);
 	else
-		ft_printf("	%u: Unknown type (can't be parsed)\n", parse->line_amount);
+		ft_printf("		%u: Unknown type (can't be parsed)\n",
+			parse->line_amount);
 	return (component_type_index);
 }
 

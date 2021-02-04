@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:29:24 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 13:20:02 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 19:09:47 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_vector	parse_color(const char *line, const unsigned int line_amount)
 		result.z = hexcolor & 0xFF;
 	}
 	else
-		ft_printf("Parsing: %u: Color parsing failed\n",
+		ft_printf("		%u: Color parsing failed\n",
 			line_amount);
 	return (result);
 }

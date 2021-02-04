@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 23:04:19 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 15:16:41 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:26:27 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static double	get_nearest_surface_distance(t_scene *scene, t_vector p,
 	return (distance);
 }
 
-t_vector		get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj)
+t_vector		get_normal_map(t_vector p, t_scene *scene)
 {
 	float		tab[4];
 	t_vector	normal;

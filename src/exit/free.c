@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:51:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 15:30:18 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 12:24:55 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	free_interface(t_info *info)
 			SDL_DestroyTexture(info->screen.top.icon[i]);
 		i++;
 	}
-	//ft_memdel((void**)&info->screen.top.viewmode.viewmode_list);
+	ft_memdel((void**)&info->screen.top.viewmode.viewmode_list);
 }
 
 void		free_info_struct(t_info *info)

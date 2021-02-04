@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 13:53:03 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:23:36 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 int		viewport_clicked(t_vector2d loc, t_info *info)
 {
+	loc.x -= 0;
+	loc.y -= 0;
+	if (!info)
+		return (0);
 	return (0);
 }
 
-int		mouse_press(int *quit, t_info *info, SDL_Event *event)
+int		mouse_press(t_info *info)
 {
 	int	result;
 	int	tmp;

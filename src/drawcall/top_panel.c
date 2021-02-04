@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:09:34 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/29 17:43:39 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:32:55 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	get_pixel_color_from_pixel_location_in_viewmode(t_top_panel *panel,
 				t_vector2d coord)
 {
 	unsigned int	i;
-	float			ratio;
 
 	coord.x -= panel->viewmode.area.x;
 	coord.y -= panel->viewmode.area.y;
@@ -82,7 +81,8 @@ int			drawcall_top_panel(t_info *info)
 	SDL_LockTexture(info->screen.tex, &info->screen.top.area,
 		&info->screen.top.pixels, &info->screen.pitch);
 	i = 0;
-	while (i < info->screen.top.area.w * info->screen.top.area.h)
+	while (i < (unsigned int)info->screen.top.area.w *
+		(unsigned int)info->screen.top.area.h)
 	{
 		coord = get_pixel_coordinates(i, info->screen.top.area.w);
 		color = get_pixel_color_from_pixel_location(coord, &info->screen.top);

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:48:19 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/29 15:33:32 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:14:51 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static char	*error_tga_to_str(int code)
 		return ("footer parsing failed");
 	if (code == TGA_UNCOMPRESSION_ERROR)
 		return ("file uncompression failed");
+	if (code == PARSING_NO_HEADER)
+		return ("first line isn't a header node");
 	return ("");
 }
 
@@ -72,9 +74,9 @@ char		*error_to_str(int code)
 		return ("new window size probably too small");
 	if (code == BUTTON_FUNCTION_NOT_SET)
 		return ("button clicked has no clicked function");
-	if ((res = error_tga_to_str(code)) != "")
+	if (ft_strlen(res = error_tga_to_str(code)) > 0)
 		return (res);
-	if ((res = error_kernel_to_str(code)) != "")
+	if (ft_strlen(res = error_kernel_to_str(code)) > 0)
 		return (res);
 	return ("ERROR CODE UNDEFINED");
 }

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 19:23:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 12:44:04 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:27:41 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,16 @@ static int	create_default_scene(t_scene *scene)
 	return (GOOD);
 }
 
-static int	parse_map(t_scene *scene, int fd, char *path)
+static int	parse_map(t_scene *scene, int fd)
 {
-	if (parsing_header(scene, fd))
-		return (FAILED);
+	int code;
+
+	if ((code = parsing_header(scene, fd)) != GOOD)
+		return (code);
 	if (create_object_list(scene) || create_light_list(scene))
 		return (MALLOC_ERROR);
-	if (parse_components(scene, fd))
-		return (FAILED);
+	if ((code = parse_components(scene, fd)) != GOOD)
+		return (code);
 	return (GOOD);
 }
 
@@ -91,7 +93,7 @@ int			parsing(t_scene *scene, char *path)
 	if (!path)
 		return (create_default_scene(scene));
 	fd = open(path, O_RDONLY);
-	if (fd == -1 || (code = parse_map(scene, fd, path)) != GOOD)
+	if (fd == -1 || (code = parse_map(scene, fd)) != GOOD)
 	{
 		if (fd == -1 || code == FAILED)
 		{

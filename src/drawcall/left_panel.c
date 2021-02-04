@@ -6,17 +6,11 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 17:01:24 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/29 14:43:38 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:19:28 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static int	get_pixel_color_from_pixel_location(t_vector2d coord,
-				t_left_panel *panel)
-{
-	return (LEFT_PANEL_BACKGROUND_COLOR);
-}
 
 int			drawcall_left_panel(t_info *info)
 {
@@ -28,10 +22,11 @@ int			drawcall_left_panel(t_info *info)
 	SDL_LockTexture(info->screen.tex, &info->screen.left.area,
 		&info->screen.left.pixels, &info->screen.pitch);
 	i = 0;
-	while (i < info->screen.left.area.w * info->screen.left.area.h)
+	while (i < (unsigned int)info->screen.left.area.w
+		* (unsigned int)info->screen.left.area.h)
 	{
 		coord = get_pixel_coordinates(i, info->screen.left.area.w);
-		color = get_pixel_color_from_pixel_location(coord, &info->screen.left);
+		color = LEFT_PANEL_BACKGROUND_COLOR;
 		((unsigned int*)info->screen.left.pixels)[(int)coord.y
 			* info->screen.top.area.w + (int)coord.x] = color;
 		i++;

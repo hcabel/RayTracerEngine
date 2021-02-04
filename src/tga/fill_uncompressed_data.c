@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:54:30 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 11:43:37 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:15:52 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static void	bpp24(unsigned char *original, unsigned char *new_data,
 	new_data[i + 3] = original[j];
 }
 
-static void	bpp16(unsigned char *original, unsigned char *new_data,
-		int i, int j)
+static void	bpp16(unsigned char *new_data, int i, int j)
 {
 	new_data[i] = 255;
 	new_data[i + 1] = ((((new_data[j + 1] & 0x7C) >> 2) * 255) / 31);
@@ -61,7 +60,7 @@ void		fill_uncompresed_data(t_vector2d index, unsigned char *original,
 	else if (bpp == 24)
 		bpp24(original, new_data, (int)index.x, (int)index.y);
 	else if (bpp == 16)
-		bpp16(original, new_data, (int)index.x, (int)index.y);
+		bpp16(original, (int)index.x, (int)index.y);
 	else
 		bpp8(original, new_data, (int)index.x, (int)index.y);
 }

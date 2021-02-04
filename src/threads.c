@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 15:58:19 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 13:08:27 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:32:32 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ static void	set_thread_is_finish(t_info *info, t_thread *thread_info)
 	pthread_mutex_unlock(&info->screen.viewport.sampling.mutex);
 }
 
-static void	calcule_for_each_pixel(t_info *info, t_thread *thread_info,
-				unsigned int i)
+static void	calcule_for_each_pixel(t_info *info, unsigned int i)
 {
 	t_vector2d	coordinates;
 	t_vector	dir;
@@ -70,7 +69,6 @@ void		*thread_calculs_functions(void *p)
 {
 	t_thread		*thread_info;
 	t_info			*info;
-	t_vector2d		coordinates;
 	unsigned int	i;
 
 	thread_info = p;
@@ -85,7 +83,7 @@ void		*thread_calculs_functions(void *p)
 			pthread_exit(NULL);
 			return ((void*)0);
 		}
-		calcule_for_each_pixel(info, thread_info, i);
+		calcule_for_each_pixel(info, i);
 		i += RAYMARCHING_THREAD;
 	}
 	set_thread_is_finish(info, thread_info);

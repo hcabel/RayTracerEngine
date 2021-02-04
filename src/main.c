@@ -6,55 +6,11 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:27:09 by hcabel            #+#    #+#             */
-/*   Updated: 2020/12/31 19:07:32 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 12:21:54 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-static int	drawcall_execution(t_info *info)
-{
-	int	(*current)(t_info *info);
-	int	i;
-	int	code;
-
-	i = 0;
-	while (i < MAX_DRAWCALL)
-	{
-		if (info->drawcall_list[i] != NULL)
-		{
-			current = info->drawcall_list[i];
-			info->drawcall_list[i] = NULL;
-			if ((code = current(info)) != GOOD)
-				return (code);
-		}
-		i++;
-	}
-}
-
-void		drawcall_clear(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	while (i < MAX_DRAWCALL)
-	{
-		info->drawcall_list[i] = NULL;
-		i++;
-	}
-}
-
-void		drawcall_add(t_info *info, int (*new)(t_info *info))
-{
-	if (new == DRAWCALL_CHECK_VIEWPORT)
-		info->drawcall_list[0] = new;
-	else if (new == DRAWCALL_VIEWPORT)
-		info->drawcall_list[1] = new;
-	else if (new == DRAWCALL_LEFT_PANEL)
-		info->drawcall_list[2] = new;
-	else if (new == DRAWCALL_TOP_PANEL)
-		info->drawcall_list[3] = new;
-}
 
 static int	loop(t_info *info)
 {
@@ -90,9 +46,12 @@ int			main(int argc, char **argv)
 	t_info	info;
 	int		code_error;
 
-	(void)argc;
+	if (argc > 2)
+		ft_printf("{y}Too many args only the first will be used{/}\n");
+	code_error = 0;
 	if ((code_error = init(&info, argv[1])) != GOOD)
 		return (program_exit(&info, code_error));
+	return (program_exit(&info, GOOD));
 	if ((code_error = loop(&info)) != GOOD)
 		return (program_exit(&info, code_error));
 	return (program_exit(&info, GOOD));

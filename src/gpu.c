@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 12:27:10 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/29 17:11:31 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:16:13 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	execute_kernel(t_kernel_gpu *gpu, unsigned int numpixel)
 {
 	cl_int	ret;
 	size_t	global_item_size;
-	int		i;
 
 	global_item_size = numpixel;
 	if (clEnqueueNDRangeKernel(gpu->command_queue, gpu->kernel, 1, NULL,
@@ -93,7 +92,7 @@ int			calculate_image_with_cg(t_info *info)
 	int				code_error;
 
 	numpixel = info->screen.viewport.image.w * info->screen.viewport.image.h;
-	if (convert_scene_to_kernel_scene(&kernel_arg, info, numpixel) != GOOD)
+	if (convert_scene_to_kernel_scene(&kernel_arg, info) != GOOD)
 		return (MALLOC_ERROR);
 	create_kernel(&info->kernel, numpixel, &kernel_arg);
 	if ((code_error = execute_kernel(&info->kernel, numpixel)) != GOOD)

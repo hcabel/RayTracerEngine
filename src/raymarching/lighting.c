@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 15:01:19 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 12:38:13 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:27:10 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ float			phong_lighting(t_scene *scene, t_vector oldir,
 	float		dot_rv;
 	float		intensity;
 
-	n = get_normal_map(ray->location, scene, ray->hit_object);
+	n = get_normal_map(ray->location, scene);
 	l = vector_subtract(scene->lights[index].location, ray->location);
 	if (vector_length(l) >= 100)
 		return (0);

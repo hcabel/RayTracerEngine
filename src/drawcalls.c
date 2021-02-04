@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 17:20:32 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 11:50:11 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:13:22 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int		drawcall_execution(t_info *info)
 		}
 		i++;
 	}
+	return (GOOD);
 }
 
 void	drawcall_clear(t_info *info)

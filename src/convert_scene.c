@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 16:58:59 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/29 16:59:11 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:12:28 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	convert_light_to_kernel_list(t_light *list, unsigned int amount,
 }
 
 int			convert_scene_to_kernel_scene(t_kernel_args *kernel_args,
-				t_info *info, unsigned int numpixel)
+				t_info *info)
 {
 	kernel_args->scene.cam_location = info->scene.cam.location;
 	kernel_args->scene.cam_rotation = info->scene.cam.rotation;

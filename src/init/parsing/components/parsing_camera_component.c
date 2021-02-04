@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:25:05 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 13:30:05 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/03 19:09:42 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void		parse_camera_parameters(t_cam *cam, const char *line,
 	else if (ft_strncmp("rotation: {", line + 1, 11) == GOOD)
 		cam->rotation = parse_vector2d(line + 11, line_amount);
 	else
-		ft_printf("Parsing: %u: Object parameter does not exist\n",
+		ft_printf("		%u: Object parameter does not exist\n",
 			line_amount);
 }

@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 13:19:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/29 17:17:26 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:24:37 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int		clicked_on_viewmode(t_vector2d loc, t_info *info)
 
 int		press_on_top_panel(t_vector2d loc, t_info *info)
 {
-	unsigned int	i;
-
 	if (aabb(info->screen.top.gpu_switch.area, loc) == GOOD)
 	{
 		return (info->screen.top.gpu_switch.clicked(info,

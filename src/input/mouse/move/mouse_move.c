@@ -6,13 +6,13 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/08 12:29:51 by hcabel            #+#    #+#             */
-/*   Updated: 2021/01/29 17:24:03 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:21:11 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	mouse_move(int *quit, t_info *info, SDL_Event *event)
+void	mouse_move(t_info *info, SDL_Event *event)
 {
 	int	result;
 

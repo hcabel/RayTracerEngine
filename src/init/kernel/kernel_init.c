@@ -6,23 +6,42 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:45:27 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 13:42:11 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:17:03 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+#include <stdlib.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 static int	load_kernel_file(t_kernel_gpu *gpu)
 {
-	FILE	*kernel_fd;
+	int				fd;
+	char			*line;
+	unsigned int	size;
 
-	// REMOVE FOPEN
-	if (!(kernel_fd = fopen(KERNELSOURCEFILE, "r")))
+	if ((fd = open(KERNELSOURCEFILE, O_RDONLY)) == -1)
 		return (KERNEL_SOURCE_LOAD_ERROR);
-	gpu->kernel_str = (char*)malloc(MAX_SOURCE_SIZE);
-	gpu->kernel_size = fread(gpu->kernel_str, 1, MAX_SOURCE_SIZE, kernel_fd);
-	fclose(kernel_fd);
+	line = 0;
+	while (get_next_line(fd, &line) == 1)
+	{
+		size += ft_strlen(line) + 1;
+		ft_memdel((void**)&line);
+	}
+	close(fd);
+	if ((gpu->kernel_str = malloc(sizeof(char) * size)) == NULL)
+		return (MALLOC_ERROR);
+	if ((fd = open(KERNELSOURCEFILE, O_RDONLY)) == -1)
+		return (KERNEL_SOURCE_LOAD_ERROR);
+	while (get_next_line(fd, &line) == 1)
+	{
+		gpu->kernel_str = ft_strcat(gpu->kernel_str, line);
+		gpu->kernel_str = ft_strcat(gpu->kernel_str, "\n");
+		ft_memdel((void**)&line);
+	}
+	close(fd);
 	return (GOOD);
 }
 
@@ -92,7 +111,7 @@ int			init_kernel(t_info *info)
 {
 	int	code_error;
 
-	if (info->gpuinitialised == 0 && KERNELSOURCEFILE != "")
+	if (info->gpuinitialised == 0 && ft_strlen(KERNELSOURCEFILE) > 0)
 	{
 		ft_printf("{g}	GPU\n{/}");
 		code_error = kernel_initialisation(info);

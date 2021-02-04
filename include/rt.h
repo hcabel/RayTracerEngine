@@ -6,15 +6,12 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 22:45:47 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 15:14:41 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:31:00 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_H
 # define RT_H
-
-// DEBUG
-# include <stdio.h>
 
 /*
 **	Lib includes
@@ -56,7 +53,7 @@ void			*thread_calculs_functions(void *p);
 
 int				calculate_image_with_cg(t_info *info);
 int				convert_scene_to_kernel_scene(t_kernel_args *kernel_args,
-					t_info *info, unsigned int numpixel);
+					t_info *info);
 
 /*
 ********************************************************************************
@@ -209,7 +206,7 @@ void			fill_uncompresed_data(t_vector2d index, unsigned char *original,
 					unsigned char *new_data, int bpp);
 int				setup_contents(t_tga *file, int fd);
 int				read_header(t_tga *file, int fd);
-int				new_image(SDL_Renderer *renderer, char *path,
+int				new_tga_image(SDL_Renderer *renderer, char *path,
 					SDL_Texture **texture);
 t_tga			new_tga(char *path);
 
@@ -244,7 +241,7 @@ void			keyboard_press(int *quit, t_info *info, SDL_Event *event);
 ********************************************************************************
 */
 
-void			mouse_wheel(int *quit, t_info *info, SDL_Event *event);
+void			mouse_wheel(t_info *info, SDL_Event *event);
 
 /*
 ********************************************************************************
@@ -252,7 +249,7 @@ void			mouse_wheel(int *quit, t_info *info, SDL_Event *event);
 ********************************************************************************
 */
 
-int				mouse_press(int *quit, t_info *info, SDL_Event *event);
+int				mouse_press(t_info *info);
 int				press_on_top_panel(t_vector2d loc, t_info *info);
 int				press_on_left_panel(t_vector2d loc, t_info *info);
 
@@ -262,7 +259,7 @@ int				press_on_left_panel(t_vector2d loc, t_info *info);
 ********************************************************************************
 */
 
-void			mouse_move(int *quit, t_info *info, SDL_Event *event);
+void			mouse_move(t_info *info, SDL_Event *event);
 int				move_on_top_panel(t_top_panel *viewmode,
 					t_vector2d cursorlocation);
 int				move_on_left_panel(t_vector2d loc, t_left_panel *panel);
@@ -273,9 +270,8 @@ int				move_on_left_panel(t_vector2d loc, t_left_panel *panel);
 ********************************************************************************
 */
 
-int				resize_window(int *quit, t_info *info, SDL_Event *event);
-void			resize_top_panel(t_vector2d window_size, t_top_panel *panel,
-					SDL_Event *event);
+int				resize_window(t_info *info);
+void			resize_top_panel(t_vector2d window_size, t_top_panel *panel);
 
 /*
 ********************************************************************************
@@ -308,7 +304,7 @@ unsigned int	raymarching(t_scene *scene, t_vector dir);
 t_ray_hit		trace_ray(t_scene *scene, t_vector start_location, t_vector dir,
 					float max_distance);
 t_vector		normal_map_to_rgb(t_vector normal);
-t_vector		get_normal_map(t_vector p, t_scene *scene, t_object *hit_obj);
+t_vector		get_normal_map(t_vector p, t_scene *scene);
 
 /*
 ********************************************************************************

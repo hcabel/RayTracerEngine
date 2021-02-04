@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 20:15:22 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/02 13:34:37 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 12:20:36 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int			parsing_header(t_scene *scene, int fd)
 		line = ft_strtolower(line);
 		if (line_amount == 1 && ft_strncmp("[header]", line, 8) != GOOD)
 		{
-			ft_printf("{y}		Error: first line isn't a header node{/}\n");
-			return (FAILED);
+			ft_memdel((void**)&line);
+			return (PARSING_NO_HEADER);
 		}
 		else if (line[0] == '\t')
 		{
@@ -45,9 +45,10 @@ int			parsing_header(t_scene *scene, int fd)
 		}
 		else if (ft_strncmp("[body]", line, 8) == GOOD)
 			break ;
-		ft_memdel((void**)&line);
 		line_amount++;
+		ft_memdel((void**)&line);
 	}
+	ft_memdel((void**)&line);
 	return (ret != 1 || (scene->light_amount == 0 && scene->shapes_amount == 0)
 		? FAILED : GOOD);
 }

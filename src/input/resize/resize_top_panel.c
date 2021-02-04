@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/02 13:49:11 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/03 13:34:17 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/04 11:28:56 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void	init_viewmode_scrollbar_button(t_viewmode_scrollbox *viewmode)
 	}
 }
 
-void		resize_top_panel(t_vector2d window_size, t_top_panel *panel,
-				SDL_Event *event)
+void		resize_top_panel(t_vector2d window_size, t_top_panel *panel)
 {
 	unsigned int	max;
 
@@ -44,7 +43,7 @@ void		resize_top_panel(t_vector2d window_size, t_top_panel *panel,
 		(panel->viewmode.scrollbar.area.w
 		/ (float)panel->viewmode.scrollbar.max);
 	max = (panel->viewmode.scrollbar.max) - panel->viewmode.area.w;
-	if (panel->viewmode.current > max)
+	if ((unsigned int)panel->viewmode.current > max)
 		panel->viewmode.current = max;
 	init_viewmode_scrollbar_button(&panel->viewmode);
 	panel->gpu_switch.area.x = panel->viewmode.area.w + panel->viewmode.area.x
