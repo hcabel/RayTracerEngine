@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 16:50:40 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 15:32:59 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/05 11:46:17 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define WIN_HEIGTH 900
 # define WIN_WIDTH 1200
 
-# define RAYMARCHING_THREAD 1
+# define RAYMARCHING_THREAD 10
 # define ON_GPU 0
 # define KERNELSOURCEFILE "src/raymarching/kernel_render.cl"
 

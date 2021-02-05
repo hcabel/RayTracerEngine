@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/24 12:51:36 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 11:34:16 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/05 12:02:04 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	free_gpu(t_info *info)
 {
-	printf("Free GPU\n");
 	clFlush(info->kernel.command_queue);
 	clFinish(info->kernel.command_queue);
 	clReleaseProgram(info->kernel.program);
@@ -23,7 +22,6 @@ static void	free_gpu(t_info *info)
 
 static void	free_sdl(t_info *info)
 {
-	printf("Free SDL\n");
 	SDL_DestroyRenderer(info->renderer);
 	SDL_DestroyWindow(info->window);
 	SDL_Quit();

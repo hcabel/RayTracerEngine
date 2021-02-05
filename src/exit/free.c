@@ -6,7 +6,7 @@
 /*   By: hcabel <hcabel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/24 22:51:15 by hcabel            #+#    #+#             */
-/*   Updated: 2021/02/04 12:24:55 by hcabel           ###   ########.fr       */
+/*   Updated: 2021/02/05 12:01:56 by hcabel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	free_scene(t_info *info)
 {
-	printf("Free scene\n");
 	if (info->scene.shapes_amount > 0)
 		ft_memdel((void**)&info->scene.shapes);
 	if (info->scene.light_amount > 0)
@@ -25,7 +24,6 @@ static void	free_interface(t_info *info)
 {
 	unsigned int	i;
 
-	printf("Free interface\n");
 	i = 0;
 	while (i < TOP_PANEL_ICON_AMOUNT)
 	{
@@ -38,10 +36,8 @@ static void	free_interface(t_info *info)
 
 void		free_info_struct(t_info *info)
 {
-	printf("Free info struct\n");
 	free_scene(info);
 	free_interface(info);
-	printf("Free texture\n");
 	if (info->screen.tex)
 		SDL_DestroyTexture(info->screen.tex);
 	if (info->screen.viewport.tex)
